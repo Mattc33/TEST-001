@@ -1,0 +1,9 @@
+ContentType,FieldInternalName,Required,Hidden
+Visualization Page,SVPVisualizationOwner,,
+Visualization Page,SVPVisualizationTechnology,,
+Visualization Page,SVPLastUpdated,,
+Visualization Page,SVPVisualizationDescription,,
+Visualization Page,SVPVisualizationTrainingDocument,,
+Visualization Page,SVPBusinessUnit,,
+Visualization Page,SVPIsFeatured,,
+Visualization Page,SVPCategory,,

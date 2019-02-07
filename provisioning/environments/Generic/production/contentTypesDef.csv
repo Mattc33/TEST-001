@@ -1,0 +1,3 @@
+ContentType,Description,ID,Group,BaseContentType
+Visualization Page,Site Page content type to display a data visualization,0x0101009D1CB255DA76424F860D91F20E6C411800da398ed4e7394ea9a1d4524afae14d90,Viewport Data Visualization,"""Site Page"" base content type"
+Visualization Training Document,Document to provide supporting information about a data visualization,0x010100da398ed4e7394ea9a1d4524afae14d91,Viewport Data Visualization,"""Document"" base content type"
