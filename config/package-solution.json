@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "view-port-client-side-solution",
+    "id": "cbfe925e-b5db-4f9e-84bb-ea6107085440",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/Slalom-ViewPort.sppkg"
+  }
+}
