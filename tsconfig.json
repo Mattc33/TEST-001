@@ -16,12 +16,17 @@
     ],
     "types": [
       "es6-promise",
-      "webpack-env"
+      "webpack-env",
+      "microsoft-ajax",
+      "sharepoint"
     ],
     "lib": [
-      "es5",
       "dom",
-      "es2015.collection"
+      "es5",
+      "es6",
+      "dom.iterable",
+      "es2015.collection",
+      "es2015.iterable"
     ]
   },
   "include": [

@@ -8,18 +8,39 @@ import {
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ReportEditorWebPartStrings';
-import ReportEditor from './components/ReportEditor';
-import { IReportEditorProps } from './components/IReportEditorProps';
+import { ReportEditorProvider, ReportEditorProviderProps } from './ReportEditorProvider';
+
+import { BaseWebpart, IInitConfig } from "../../components/_base";
 
 export interface IReportEditorWebPartProps {
   description: string;
 }
 
-export default class ReportEditorWebPart extends BaseClientSideWebPart<IReportEditorWebPartProps> {
+//********
+//  Following changes will provide
+//  1. Loading CSS from local dev (if configureForWorkbench==true)
+//  2. Loading JSOM libraries (if loadJSOM=true)
+//  3. Setup SP PNP context
+
+//  Change base class from "BaseClientSideWebPart" to "BaseWebpart"
+//  Add constructor func:
+//    constructor() {
+//      super({ 
+//        "configureForWorkbench": true,
+//        "loadJSOM": true 
+//      });
+//    }
+//*******
+
+export default class ReportEditorWebPart extends BaseWebpart<IReportEditorWebPartProps> {
+  constructor() {
+    super({ "loadJSOM": true });
+    
+  }
 
   public render(): void {
-    const element: React.ReactElement<IReportEditorProps > = React.createElement(
-      ReportEditor,
+    const element: React.ReactElement<ReportEditorProviderProps> = React.createElement(
+      ReportEditorProvider,
       {
         description: this.properties.description
       }
