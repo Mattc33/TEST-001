@@ -48,12 +48,17 @@ export class ReportViewerActions {
         // const viewerProps1 = { ...this.getState().reportViewer };
         const countries1 = this.getState().reportViewer.countries.map((obj) => { return {...obj}; });// const countries1 = [ ...viewerProps1.countries ];
         const updates1 = countries1.map((c: ICountry) => {
-            if (c.id === country.id) {
-                c.title = c.title + " - Updated";
-                c.isSaving = false;
-            }
+        // const updates1 = this.getState().reportViewer.countries.map((c: ICountry) => {
+            const o = (c.id === country.id) 
+                ? {...c, ...{ title: `${c.title} - Updated`, isSaving: false } }
+                : c;
+
+            // if (c.id === country.id) {
+            //     c.title = c.title + " - Updated";
+            //     c.isSaving = false;
+            // }
             
-            return c;
+            return o;
         });
 
         window.setTimeout(() => {
