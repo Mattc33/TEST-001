@@ -8,11 +8,9 @@ class ReportEditor extends React.Component<IReportEditorProps, {}> {
 
   public shouldComponentUpdate(nextProps: IReportEditorProps, nextState: any): boolean {
     if (isEqual(nextProps.state, this.props.state)) {
-      console.info("shouldComponentUpdate::false", nextProps.state, this.props.state);
       return false;
     }
 
-    console.info("shouldComponentUpdate::true", nextProps, this.props);
     return true;
   }
 
@@ -22,7 +20,6 @@ class ReportEditor extends React.Component<IReportEditorProps, {}> {
   }
 
   public render(): React.ReactElement<IReportEditorProps> {
-    console.info('ReportEditor', this.props);
     const editorProps = this.props.state; //.reportEditor;
 
     const control = (editorProps.loading) 

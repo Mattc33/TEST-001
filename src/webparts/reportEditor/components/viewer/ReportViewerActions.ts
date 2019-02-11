@@ -1,12 +1,15 @@
-import { IReportEditorState, ICountry } from "../../state/IReportEditorState";
+import { IReportEditorState, ICountry, CountrySchema } from "../../state/IReportEditorState";
 import { MockService, IMockService } from '../../../../services';
+import { normalize } from 'normalizr';
 
 export class ReportViewerActions {
     private api: IMockService;
 
     constructor(
         private getState: () => IReportEditorState,
-        private dispatcher: (state: any) => void) {
+        private dispatcher: (state: any) => void,
+        private dispatcherByPath: (path: string, update: ICountry) => void) 
+    {
             this.api = new MockService();
     }
 
@@ -19,10 +22,13 @@ export class ReportViewerActions {
             this.api.loadBrands(100)
         ]);
 
+        const countriesData = normalize(countries, [CountrySchema]);
+
         const state = { 
             reports,
             countries,
             brands,
+            countryEntities: countriesData.entities.countries,
             loading: false
         };
 
@@ -32,38 +38,27 @@ export class ReportViewerActions {
     }
 
     public saveCountry(country: ICountry) {
-        console.info('saveCountry', country, this.getState());
+        const countryId = country.id;
+        const countryPath = `reportViewer.countryEntities[${countryId}]`;
 
-        //TODO: this.getState() - add param to return item graph with clone
-        const countries = this.getState().reportViewer.countries.map((obj) => { return {...obj}; });
-        const updates = countries.map((c: ICountry) => {
-            if (c.id === country.id) 
-                c.isSaving = true;
-            
-            return c;
-        });
+        //saving....
+        const updates = {...country, ...{ isSaving: true }};
+        this.dispatchByPath(countryPath, updates);
 
-        this.dispatch({ countries: updates });
-
-        // const viewerProps1 = { ...this.getState().reportViewer };
-        const countries1 = this.getState().reportViewer.countries.map((obj) => { return {...obj}; });// const countries1 = [ ...viewerProps1.countries ];
-        const updates1 = countries1.map((c: ICountry) => {
-        // const updates1 = this.getState().reportViewer.countries.map((c: ICountry) => {
-            const o = (c.id === country.id) 
-                ? {...c, ...{ title: `${c.title} - Updated`, isSaving: false } }
-                : c;
-
-            // if (c.id === country.id) {
-            //     c.title = c.title + " - Updated";
-            //     c.isSaving = false;
-            // }
-            
-            return o;
-        });
-
+        //saved
+        const updates1 = {...country, ...{ title: `${country.title} - Updated${countryId}`, isSaving: false }};
         window.setTimeout(() => {
-            this.dispatch({ countries: updates1 });
-        }, 3000);
+            this.dispatchByPath(countryPath, updates1);
+        }, this.getRandomSeconds(10));
+    }
+
+    private getRandomSeconds(max: number) {
+        return ((Math.floor(Math.random() * Math.floor(max))) + 1) * 1000;
+    }
+
+    private async dispatchByPath(path: string, incoming: any) {
+        console.info('dispatchByPath', path);
+        await this.dispatcherByPath(path, incoming);
     }
 
     private async dispatch(incoming: any) {

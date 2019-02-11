@@ -7,15 +7,9 @@ import { ICountry } from '../../state/IReportEditorState';
 class ReportViewer extends React.Component<IReportViewerProps, {}> {
     constructor(props) {
         super(props);
-        this.handleSave = this.handleSave.bind(this);
     }
 
   public shouldComponentUpdate(nextProps: IReportViewerProps, nextState: any): boolean {
-    //   console.info('ReportViewer', nextProps.state, this.props.state);
-    // if (isEqual(nextProps.state, this.props.state)) {
-    //   return false;
-    // }
-
     return true;
   }
 
@@ -25,24 +19,24 @@ class ReportViewer extends React.Component<IReportViewerProps, {}> {
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
-    console.info('ReportViewer', this.props);
     const viewerProps = this.props.state; //.reportEditor;
 
     let items = [<div>Viewer Webpart => { this.props.description }</div>];
     if (!viewerProps.loading && viewerProps.countries && viewerProps.countries.length > 0) {
-        items = viewerProps.countries.map((c: ICountry) => {
-            return (
-                <div key={c.id}>
-                    <div>{c.id} - {c.title}</div>
-                    { !c.isSaving && 
-                        <div><button id={`button_${c.id}`} onClick={(e) => viewerProps.actions.saveCountry(c)}>Save</button></div>
-                    }
-                    { c.isSaving && 
-                        <div>Saving...</div>
-                    }
-                </div>
-            );
-        });
+        items = Object.keys(viewerProps.countryEntities).map((key: string) => {
+          const c: ICountry = viewerProps.countryEntities[key];
+          return (
+              <div key={c.id}>
+                  <div>{c.id} - {c.title}</div>
+                  { !c.isSaving && 
+                      <div><button id={`button_${c.id}`} onClick={(e) => viewerProps.actions.saveCountry(c)}>Save</button></div>
+                  }
+                  { c.isSaving && 
+                      <div>Saving...</div>
+                  }
+              </div>
+          );
+      });
     }
 
     const control = (viewerProps.loading) 
@@ -56,15 +50,6 @@ class ReportViewer extends React.Component<IReportViewerProps, {}> {
         { control }
       </div>
     );
-  }
-
-  private handleSave(e: React.SyntheticEvent<HTMLButtonElement>, country: ICountry) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      console.info(country);
-
-    //this.props.state.actions.saveCountry(country);
   }
 }
 
