@@ -1,1 +1,2 @@
 Execute,Title,Url,Template,OnQuickLaunch,EnableVersioning,EnableContentTypes,ContentType
+Yes,Visualizations,Lists/Visualizations,GenericList,No,Yes,Yes,Visualization
