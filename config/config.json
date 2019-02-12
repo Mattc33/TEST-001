@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/reportEditor/ReportEditorWebPart.manifest.json"
         }
       ]
+    },
+    "report-viewer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/reportViewer/ReportViewerWebPart.js",
+          "manifest": "./src/webparts/reportViewer/ReportViewerWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js"
+    "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js",
+    "ReportViewerWebPartStrings": "lib/webparts/reportViewer/loc/{locale}.js"
   }
 }
