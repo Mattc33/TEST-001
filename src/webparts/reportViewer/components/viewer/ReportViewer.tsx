@@ -16,7 +16,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, {}> {
     return (
       <div className={styles.reportViewer}>
         <Toolbar 
-          types={["sizing"]}
+          types={["sizing", "story", "favorite", "feedback", "fullscreen"]}
           onClick={this.handleToolbarClick}
         />
 
