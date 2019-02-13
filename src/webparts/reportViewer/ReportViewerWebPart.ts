@@ -19,7 +19,7 @@ export interface IReportViewerWebPartProps {
 
 export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPartProps> {
   constructor() {
-    super({ loadJSOM: true });
+    super({ loadJSOM: true, loadTableau: true });
   }
 
   public render(): void {

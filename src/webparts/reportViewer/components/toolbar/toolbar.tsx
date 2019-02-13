@@ -3,7 +3,10 @@ import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/Com
 
 export interface IToolbarProps {
   types: Array<string>;
-  onClick(type: string, args: any): void;
+  height: number;
+  width: number;
+
+  onClick(type: string, args?: any): void;
 }
 
 export interface IToolbarState {
@@ -13,13 +16,19 @@ export interface IToolbarState {
 }
 
 class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
+    private originalHeight: number;
+    private originalWidth: number;
+
     constructor(props) {
         super(props);
 
+        this.originalHeight = this.props.height;
+        this.originalWidth = this.props.width;
+
         this.state = { 
             items:  [],
-            height: 1330,
-            width: 2535 
+            height: this.props.height,
+            width: this.props.width
         };
     }
 
@@ -28,6 +37,8 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
             switch(type.toLowerCase()) {
                 case "sizing":
                     return prev.concat(this.renderSizing());
+                case "savecustom":
+                    return prev.concat(this.renderSaveCusomtView());
                 case "story":
                     return prev.concat(this.renderStory());
                 case "favorite":
@@ -48,28 +59,29 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         );
     }
 
-    private handlerToolbarClick(args: string) {
+    private handlerSizingCommandClick(args: string) {
+        const inc_dcr_value: number = 15;
         let { height, width, items } = this.state;
         switch(args) {
             case "contractVert":
-                height -= 5;
+                height -= inc_dcr_value;
                 break;
 
             case "contractHorz":
-                width -= 5;
+                width -= inc_dcr_value;
                 break;
 
             case "reset":
-                height = 1330;
-                width = 2535;
+                height = this.originalHeight || 600;
+                width = this.originalWidth || 800;
                 break;
 
             case "expandHorz":
-                width += 5;
+                width += inc_dcr_value;
                 break;
 
             case "expandVert":
-                height += 5;
+                height += inc_dcr_value;
                 break;
         }
 
@@ -85,6 +97,10 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         );
     }
 
+    private handleCommandClick(type: string, args?: any) {
+        this.props.onClick(type, args);
+    }
+
     private renderSizing(): Array<ICommandBarItemProps> {
         let { height, width } = this.state;
 
@@ -95,7 +111,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     iconName: 'PaddingBottom'
                 },
                 iconOnly: true,
-                onClick: () => this.handlerToolbarClick('contractVert')
+                onClick: () => this.handlerSizingCommandClick('contractVert')
             }, {
                 key: 'contractHorz',
                 name: 'Contract horizontally',
@@ -103,7 +119,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     iconName: 'PaddingRight'
                 },
                 iconOnly: true,
-                onClick: () => this.handlerToolbarClick('contractHorz')
+                onClick: () => this.handlerSizingCommandClick('contractHorz')
             }, {
                 key: 'reset',
                 name: 'Reset sizes',
@@ -111,7 +127,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     iconName: 'Refresh'
                 },
                 iconOnly: true,
-                onClick: () => this.handlerToolbarClick('reset')
+                onClick: () => this.handlerSizingCommandClick('reset')
             }, {
                 key: 'sizeLabel',
                 name: `${height}px X ${width}px`, // '1445px X 2535px'
@@ -122,7 +138,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     iconName: 'PaddingLeft'
                 },
                 iconOnly: true,
-                onClick: () => this.handlerToolbarClick('expandHorz')
+                onClick: () => this.handlerSizingCommandClick('expandHorz')
             }, {
                 key: 'expandVert',
                 name: 'Expand vertically',
@@ -130,7 +146,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     iconName: 'PaddingTop'
                 },
                 iconOnly: true,
-                onClick: () => this.handlerToolbarClick('expandVert')
+                onClick: () => this.handlerSizingCommandClick('expandVert')
             }
         ];
     }
@@ -142,14 +158,25 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
             iconProps: {
                 iconName: 'BuildQueueNew'
             },
-            onClick: () => this.handlerToolbarClick('addToNewStory')
+            onClick: () => this.handleCommandClick('addToNewStory')
         }, {
             key: 'addToExistingStory',
             name: 'Add to existing story',
             iconProps: {
                 iconName: 'TripleColumnEdit'
             },
-            onClick: () => this.handlerToolbarClick('addToNewStory')
+            onClick: () => this.handleCommandClick('addToNewStory')
+        }];
+    }
+
+    private renderSaveCusomtView(): Array<ICommandBarItemProps> {
+        return [{
+            key: 'savecustom',
+            name: 'Save as custom view',
+            iconProps: {
+                iconName: 'Save'
+            },
+            onClick: () => this.handleCommandClick('savecustom')
         }];
     }
 
@@ -160,7 +187,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
             iconProps: {
                 iconName: 'AddFavorite'
             },
-            onClick: () => this.handlerToolbarClick('addFavorite')
+            onClick: () => this.handleCommandClick('addFavorite')
         }];
     }
 
@@ -171,7 +198,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
             iconProps: {
                 iconName: 'Feedback'
             },
-            onClick: () => this.handlerToolbarClick('sendFeedback')
+            onClick: () => this.handleCommandClick('sendFeedback')
         }];
     }
 
@@ -183,7 +210,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 iconName: 'FullScreen'
             },
             iconOnly: true,
-            onClick: () => this.handlerToolbarClick('sendFeedback')
+            onClick: () => this.handleCommandClick('sendFeedback')
         }];
     }
 }
