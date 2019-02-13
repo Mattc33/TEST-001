@@ -1,25 +1,39 @@
-import * as React from 'react';
-import styles from './ReportViewer.module.scss';
-import { IReportViewerProps } from './IReportViewerProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import * as React from "react";
+import styles from "./ReportViewer.module.scss";
+import { IReportViewerProps } from "./IReportViewerProps";
+import { REPORT_VIEWER_PATH } from "../../state/IReportViewerState";
+import { ConnectByPath } from "../../../../base";
+import { ReportViewerContext } from "../../store/ReportViewerStore";
+import { Toolbar } from "../toolbar/toolbar";
 
-export default class ReportViewer extends React.Component<IReportViewerProps, {}> {
+export class ReportViewer extends React.Component<IReportViewerProps, {}> {
+  public componentDidMount() {
+    const viewerProps = this.props.state;
+    viewerProps.actions.loadReportData();
+  }
+
   public render(): React.ReactElement<IReportViewerProps> {
     return (
-      <div className={ styles.reportViewer }>
-        <div className={ styles.container }>
-          <div className={ styles.row }>
-            <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
-              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
+      <div className={styles.reportViewer}>
+        <Toolbar 
+          types={["sizing"]}
+          onClick={this.handleToolbarClick}
+        />
+
+        {this.props.state.loading && <div>Loading....</div>}
+        {!this.props.state.loading && <div>Completed loading!</div>}
       </div>
     );
   }
+
+  private handleToolbarClick(type: string, args: any) {
+    console.info('handleToolbarClick', type, args);
+  }
 }
+
+const ReportViewerWithState = ConnectByPath(
+  ReportViewerContext,
+  ReportViewer,
+  REPORT_VIEWER_PATH
+);
+export { ReportViewerWithState };

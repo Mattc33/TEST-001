@@ -1,16 +1,19 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { Version } from '@microsoft/sp-core-library';
+import * as React from "react";
+import * as ReactDom from "react-dom";
+import { Version } from "@microsoft/sp-core-library";
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+} from "@microsoft/sp-webpart-base";
 
-import * as strings from 'ReportEditorWebPartStrings';
-import { ReportEditorProvider, ReportEditorProviderProps } from './ReportEditorProvider';
+import * as strings from "ReportEditorWebPartStrings";
+import {
+  ReportEditorProvider,
+  ReportEditorProviderProps
+} from "./ReportEditorProvider";
 
-import { BaseWebpart, IInitConfig } from "../../components/_base";
+import { BaseWebpart, IInitConfig } from "../../base";
 
 export interface IReportEditorWebPartProps {
   description: string;
@@ -25,26 +28,26 @@ export interface IReportEditorWebPartProps {
 //  Change base class from "BaseClientSideWebPart" to "BaseWebpart"
 //  Add constructor func:
 //    constructor() {
-//      super({ 
+//      super({
 //        "configureForWorkbench": true,
-//        "loadJSOM": true 
+//        "loadJSOM": true
 //      });
 //    }
 //*******
 
-export default class ReportEditorWebPart extends BaseWebpart<IReportEditorWebPartProps> {
+export default class ReportEditorWebPart extends BaseWebpart<
+  IReportEditorWebPartProps
+> {
   constructor() {
-    super({ "loadJSOM": true });
-    
+    super({ loadJSOM: true });
   }
 
   public render(): void {
-    const element: React.ReactElement<ReportEditorProviderProps> = React.createElement(
-      ReportEditorProvider,
-      {
-        description: this.properties.description
-      }
-    );
+    const element: React.ReactElement<
+      ReportEditorProviderProps
+    > = React.createElement(ReportEditorProvider, {
+      description: this.properties.description
+    });
 
     ReactDom.render(element, this.domElement);
   }
@@ -54,7 +57,7 @@ export default class ReportEditorWebPart extends BaseWebpart<IReportEditorWebPar
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse("1.0");
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -68,7 +71,7 @@ export default class ReportEditorWebPart extends BaseWebpart<IReportEditorWebPar
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel
                 })
               ]

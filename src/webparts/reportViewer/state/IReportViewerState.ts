@@ -1,13 +1,12 @@
+import { ReportViewerActions } from "../components/viewer/ReportViewActions";
+
+export const REPORT_VIEWER_PATH: string = "reportViewer";
 
 export interface IReportViewerState {
-
+  reportViewer: IReportViewer;
 }
 
 export interface IReportViewer {
-    loading?: boolean;
-    reports?: Array<IReport>;
-    countries?: Array<ICountry>;
-    brands?: Array<IBrand>;
-    actions?: ReportViewerActions;
-    countryEntities?: IEntity<ICountry>;
+  loading?: boolean;
+  actions?: ReportViewerActions;
 }
