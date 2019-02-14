@@ -19,9 +19,9 @@ Visualization,SVPBusinessUnit,,
 Visualization,SVPIsFeatured,,
 Visualization,SVPCategory,,
 
-Visualization Parameters,SVPVisualizationLookup,,
-Visualization Parameters,SVPParameterName,,
-Visualization Parameters,SVPParameterValue,,
+Visualization Parameter,SVPVisualizationLookup,,
+Visualization Parameter,SVPParameterName,,
+Visualization Parameter,SVPParameterValue,,
 
 User Profile,SVPRegion,,
 User Profile,SVPDivision,,

@@ -16,7 +16,7 @@ Parameter Name,Text,SVPParameterName,No,Viewport Data Visualization,,,,,
 Parameter Value,Text,SVPParameterValue,No,Viewport Data Visualization,,,,,
 
 Region,Choice,SVPRegion,No,Viewport Data Visualization,,,,Global|EMEA|NA|LATAM|APAC,
-Division,Test,SVPDivision,No,Viewport Data Visualization,,,,,
+Division,Text,SVPDivision,No,Viewport Data Visualization,,,,,
 Active Country,Text,SVPActiveCountry,No,Viewport Data Visualization,,,,,
 
 Brand,Text,SVPBrand,No,Viewport Data Visualization,,,,,

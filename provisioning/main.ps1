@@ -30,6 +30,7 @@ function Run()
 	Write-Host "Executing base config from $configFile"	
 	. $configFile # note that the initial dot-space is required to execute this properly
 
+	Write-Host "Connecting to site at $SiteUrl"
 	Connect-PnPOnline -Url $SiteUrl -Credentials $Env ##'MyEnv'
 	$web = Get-PnPWeb
 

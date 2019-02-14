@@ -2,6 +2,10 @@ ContentType,Description,ID,Group,BaseContentType
 Visualization Page,Site Page content type to display a data visualization,0x0101009D1CB255DA76424F860D91F20E6C411800da398ed4e7394ea9a1d4524afae14d90,Viewport Data Visualization,"""Site Page"" base content type"
 Visualization Training Document,Document to provide supporting information about a data visualization,0x010100da398ed4e7394ea9a1d4524afae14d91,Viewport Data Visualization,"""Document"" base content type"
 
-Visualization,Represents a single visualization in Viewport,0x010049f01431b7934ebaa699764cf86b6267,Viewport Data Visualization,Item
 Visualization Parameter,A collection of information to configure a visualization's view,0x010035de6af9637a4cc0bc5717e40cb8beb9,Viewport Data Visualization,Item
 User Profile,Additional fields to round out the AD and SharePoint profile fields for Viewport use,0x01004981e0f7bdff435cb1e16181ecd41015, Viewport Data Visualization,Item
+
+Visualization,Represents a single visualization in Viewport,0x010049f01431b7934ebaa699764cf86b6267,Viewport Data Visualization,Item
+Tableau Visualization,Represents a single Tableau visualization in Viewport,0x010049f01431b7934ebaa699764cf86b62670063f73057379e4eb395e5b805c5304670,Viewport Data Visualization,Visualization
+Power BI Visualization,Represents a single Power BI visualization in Viewport,0x010049f01431b7934ebaa699764cf86b626700128b8bea86b14e58b81bf365f2c3a474,Viewport Data Visualization,Visualization
+File Visualization,Represents a single file-based (e.g. PDF or Excel) visualization in Viewport,0x010049f01431b7934ebaa699764cf86b6267007d9a9335e64149aea3c9ae375bbceecd,Viewport Data Visualization,Visualization
