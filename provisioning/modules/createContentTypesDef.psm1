@@ -33,7 +33,7 @@ function Start-ContentTypeDef {
       }
       else {
         Write-Info "Creating content type: $ctName ..."
-        $ct = Add-PnPContentType -ContentTypeId $ctID -Name $ctName -Group $ctGroup
+        $ct = Add-PnPContentType -ContentTypeId $ctID -Name $ctName -Group $ctGroup -Description $ctDesc
       }
   
   }

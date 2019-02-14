@@ -21,3 +21,5 @@ Active Country,Text,SVPActiveCountry,No,Viewport Data Visualization,,,,,
 
 Brand,Text,SVPBrand,No,Viewport Data Visualization,,,,,
 Functional Area,Text,SVPFunctionalArea,No,Viewport Data Visualization,,,,,
+
+Favorite Type,Choice,SVPFavoriteType,No,Viewport Data Visualization,,,,Common|Custom|Double Custom,

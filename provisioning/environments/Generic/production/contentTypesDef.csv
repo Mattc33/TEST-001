@@ -9,3 +9,5 @@ Visualization,Represents a single visualization in Viewport,0x010049f01431b7934e
 Tableau Visualization,Represents a single Tableau visualization in Viewport,0x010049f01431b7934ebaa699764cf86b62670063f73057379e4eb395e5b805c5304670,Viewport Data Visualization,Visualization
 Power BI Visualization,Represents a single Power BI visualization in Viewport,0x010049f01431b7934ebaa699764cf86b626700128b8bea86b14e58b81bf365f2c3a474,Viewport Data Visualization,Visualization
 File Visualization,Represents a single file-based (e.g. PDF or Excel) visualization in Viewport,0x010049f01431b7934ebaa699764cf86b6267007d9a9335e64149aea3c9ae375bbceecd,Viewport Data Visualization,Visualization
+
+Viewport Favorite,Represents a single favorited visualization by a user,0x0100e43267c923f44b70a5b559be201416d8,Viewport Data Visualization,Item
