@@ -13,6 +13,8 @@ export class ReportViewerService implements IReportViewerService {
                 .getByTitle(VizListTitle)
             .items
                 .getById(reportId)
+                .select('*,SVPVisualizationParameters/Id,SVPVisualizationParameters/SVPParameterName,SVPVisualizationParameters/SVPParameterValue,SVPVisualizationOwner/Id,SVPVisualizationOwner/Title,SVPVisualizationOwner/EMail')
+                .expand('SVPVisualizationParameters, SVPVisualizationOwner')
                 .get();
     }
 }

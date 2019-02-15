@@ -1,5 +1,10 @@
 import * as React from 'react';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
+import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
+
 
 export interface IToolbarProps {
   types: Array<string>;
@@ -13,6 +18,8 @@ export interface IToolbarState {
     items: Array<ICommandBarItemProps>;
     height: number;
     width: number;
+
+    showProfileFilter: boolean;
 }
 
 class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
@@ -28,10 +35,12 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         this.state = { 
             items:  [],
             height: this.props.height,
-            width: this.props.width
+            width: this.props.width,
+            showProfileFilter: false
         };
     }
 
+    @autobind
     public render() { 
         const items = this.props.types.reduce<Array<ICommandBarItemProps>>((prev: Array<ICommandBarItemProps>, type: string): Array<ICommandBarItemProps> => {
             switch(type.toLowerCase()) {
@@ -41,8 +50,8 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     return prev.concat(this.renderSaveCusomtView());
                 case "story":
                     return prev.concat(this.renderStory());
-                case "favorite":
-                    return prev.concat(this.renderFavorite());
+                case "profilefilter":
+                    return prev.concat(this.renderProfileFilters());
                 case "feedback":
                     return prev.concat(this.renderFeedback());
                 case "fullscreen":
@@ -53,12 +62,28 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         }, []);
 
         return (  
-            <CommandBar
-                items={items}
-            />
+            <React.Fragment>
+                <CommandBar items={items} />
+                <Panel
+                    isOpen={this.state.showProfileFilter}
+                    type={PanelType.smallFixedFar}
+                    onDismiss={this.closeProfileFilterPane}
+                    headerText="Panel - Small, right-aligned, fixed, with footer"
+                    closeButtonAriaLabel="Close"
+                    onRenderFooterContent={this.renderProfileFilterFooterContent}>
+            
+                    <Checkbox
+                        label="Uncontrolled checkbox with defaultChecked true"
+                        defaultChecked={true}
+                        // onChange={this._onCheckboxChange}
+                        //styles={checkboxStyles}
+                        />
+                </Panel>
+            </React.Fragment>
         );
     }
 
+    @autobind
     private handlerSizingCommandClick(args: string) {
         const inc_dcr_value: number = 15;
         let { height, width, items } = this.state;
@@ -97,10 +122,27 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         );
     }
 
+    @autobind
+    private handlerProfileFilterClick(args: any) {
+        this.toggleProfileFilterPane(true);
+    }
+
+    @autobind
+    private closeProfileFilterPane() {
+        this.toggleProfileFilterPane(false);
+    }
+
+    @autobind
+    private toggleProfileFilterPane(state: boolean) {
+        this.setState({ showProfileFilter: state });
+    }
+
+    @autobind
     private handleCommandClick(type: string, args?: any) {
         this.props.onClick(type, args);
     }
 
+    @autobind
     private renderSizing(): Array<ICommandBarItemProps> {
         let { height, width } = this.state;
 
@@ -151,6 +193,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         ];
     }
 
+    @autobind
     private renderStory(): Array<ICommandBarItemProps> {
         return [{
             key: 'addToNewStory',
@@ -169,17 +212,19 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         }];
     }
 
+    @autobind
     private renderSaveCusomtView(): Array<ICommandBarItemProps> {
         return [{
             key: 'savecustom',
-            name: 'Save as custom view',
+            name: 'Add current view as favorite',
             iconProps: {
-                iconName: 'Save'
+                iconName: 'AddFavorite'
             },
             onClick: () => this.handleCommandClick('savecustom')
         }];
     }
 
+    @autobind
     private renderFavorite(): Array<ICommandBarItemProps> {
         return [{
             key: 'addFavorite',
@@ -191,6 +236,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         }];
     }
 
+    @autobind
     private renderFeedback(): Array<ICommandBarItemProps> {
         return [{
             key: 'sendFeedback',
@@ -202,6 +248,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         }];
     }
 
+    @autobind
     private renderFullScreen(): Array<ICommandBarItemProps> {
         return [{
             key: 'fullScreen',
@@ -212,6 +259,31 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
             iconOnly: true,
             onClick: () => this.handleCommandClick('sendFeedback')
         }];
+    }
+
+    @autobind
+    private renderProfileFilters(): Array<ICommandBarItemProps> {
+        return [{
+            key: 'profilefilter',
+            name: 'Apply profile filters',
+            iconProps: {
+                iconName: 'ProfileSearch'
+            },
+            iconOnly: true,
+            onClick: () => this.handlerProfileFilterClick('profilefilter')
+        }];
+    }
+
+    @autobind
+    private renderProfileFilterFooterContent(): JSX.Element {
+        return (
+            <div>
+                <PrimaryButton onClick={this.closeProfileFilterPane} style={{ marginRight: '8px' }}>
+                    Apply
+                </PrimaryButton>
+                <DefaultButton onClick={this.closeProfileFilterPane}>Cancel</DefaultButton>
+            </div>
+        );
     }
 }
  

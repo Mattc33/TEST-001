@@ -3,8 +3,8 @@ import styles from "./ReportViewer.module.scss";
 import { REPORT_VIEWER_PATH } from "../../state/IReportViewerState";
 import { ConnectByPath } from "../../../../base";
 import { ReportViewerContext } from "../../store/ReportViewerStore";
-import { Toolbar } from "../toolbar/toolbar";
-import { ViewNamePrompt } from "../toolbar/viewNamePrompt";
+import { Toolbar } from "../toolbar/Toolbar";
+import { ViewNamePrompt } from "../toolbar/ViewNamePrompt";
 import { TableauReport } from "../tableauReport/TableauReport";
 import { IReportViewer } from "../../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
@@ -49,7 +49,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
         {!this.props.state.loading && 
           <Toolbar 
-            types={["sizing", "savecustom", "story", "favorite", "feedback", "fullscreen"]}
+            types={["sizing", "savecustom", "story", "feedback", "profilefilter", "fullscreen"]}
             height={this.state.height}
             width={this.state.width}
             onClick={this.handleToolbarClick}

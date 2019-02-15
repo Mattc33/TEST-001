@@ -1,17 +1,29 @@
+
+export interface IReportParameters {
+    Id: number;
+    SVPParameterName: string;
+    SVPParameterValue: string;
+}
+
+export interface IUser {
+    Id: number;
+    Title: string;
+    EMail: string;
+}
+
 export interface IReportItem {
     Id: number;
     Title: string;
     SVPVisualizationAddress: string;
     SVPVisualizationMetadata?: any;
-    SVPVisualizationOwnerId: number;
-    SVPVisualizationOwnerStringId: string;
+    SVPVisualizationOwner: IUser;
     SVPVisualizationTechnology: string;
     SVPLastUpdated?: any;
     SVPVisualizationDescription: string;
     SVPBusinessUnit?: any;
     SVPIsFeatured: boolean;
     SVPCategory: string;
-    SVPVisualizationParametersId?: any;
+    SVPVisualizationParameters?: Array<IReportParameters>;
     SVPHeight: number;
     SVPWidth: number;
     Modified: Date;
