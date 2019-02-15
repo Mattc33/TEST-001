@@ -1,10 +1,13 @@
 import {
   IReportViewerState,
+  IErrorResult,
   REPORT_VIEWER_PATH
 } from "../../state/IReportViewerState";
 import { ReportViewerService, IReportViewerService } from "../../../../services";
 import { normalize } from "normalizr";
 import { BaseAction, IBaseStore } from "../../../../base";
+import { withErrHandler } from "../../../../utils/withErrorHandler";
+import { IReportItem } from "../../../../models";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
   private api: IReportViewerService;
@@ -14,12 +17,32 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.api = new ReportViewerService();
   }
 
-  public async loadReportData(reportId: number) {
+  public async loadReportData(reportId: any) {
     this.dispatch({ loading: true });
 
+    if (!reportId || isNaN(reportId)) {
+      const error: IErrorResult = {
+        errorMessage: `Invalid or missing reportId parameter: ${reportId}`
+      };
+
+      this.dispatch({ loading: false, error });
+      return;
+    }
+    
     //TODO: error check & validation (report exists and its tableau report)
     //TODO: check reportId param is number and not NaN
-    const item = await this.api.loadReportDefinition(reportId);
+    const [item, err] = await withErrHandler<IReportItem>(this.api.loadReportDefinition(parseInt(reportId)));
+    if (err) {
+      const error: IErrorResult = {
+        errorMessage: `Report doesn't exists or you don't have permission to view this report: ${reportId}`,
+        error: err
+      };
+
+      console.error('loadReportData', item, err);
+      this.dispatch({ loading: false, error });
+      return;
+    }
+
     item.SVPHeight = item.SVPHeight || 704;
     item.SVPWidth = item.SVPWidth || 799;
 

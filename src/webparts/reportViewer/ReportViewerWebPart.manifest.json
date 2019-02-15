@@ -14,10 +14,10 @@
   "requiresCustomScript": false,
 
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Other" },
-    "title": { "default": "ReportViewer" },
-    "description": { "default": "ReportViewer description" },
+    "groupId": "c6c75986-a60d-4a47-aafe-e04f3022d951",
+    "group": { "default": "Slalom ViewPort" },
+    "title": { "default": "Report Viewer" },
+    "description": { "default": "Render reports based on report type" },
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "ReportViewer"

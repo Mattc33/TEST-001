@@ -2,14 +2,15 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "report-editor-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/reportEditor/ReportEditorWebPart.js",
-          "manifest": "./src/webparts/reportEditor/ReportEditorWebPart.manifest.json"
-        }
-      ]
-    },
+    // DUMMY WEBPART
+    // "report-editor-web-part": {
+    //   "components": [
+    //     {
+    //       "entrypoint": "./lib/webparts/reportEditor/ReportEditorWebPart.js",
+    //       "manifest": "./src/webparts/reportEditor/ReportEditorWebPart.manifest.json"
+    //     }
+    //   ]
+    // },
     "report-viewer-web-part": {
       "components": [
         {
@@ -21,7 +22,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js",
+    // "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js",
     "ReportViewerWebPartStrings": "lib/webparts/reportViewer/loc/{locale}.js"
   }
 }

@@ -69,12 +69,14 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
         if (this.Viz) {
             this.Viz.dispose();
             this.Viz = null;
+            this.VizWorkbook = null;
+            this.VizSheets = null;
+            this.VizSheet = null;
         }
 
         const vizOptions = {
             hideTabs: true,
             hideToolbar: true,
-            // height: this.VizPlaceholder.offsetHeight,
             height: this.props.height,
             width: this.props.width,
             onFirstInteractive: () => {

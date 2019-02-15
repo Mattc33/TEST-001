@@ -6,7 +6,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "build": "gulp bundle",
+    "build": "gulp clean --ship && gulp build --max_old_space_size=4096 --ship && gulp bundle --max_old_space_size=4096 --ship && gulp package-solution --max_old_space_size=4096 --ship",
     "clean": "gulp clean",
     "test": "gulp test"
   },

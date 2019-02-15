@@ -39,7 +39,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     const reportId = Utils.getParameterByName("reportId");
     const viewerProps = this.props.state;
 
-    viewerProps.actions.loadReportData(parseInt(reportId));
+    viewerProps.actions.loadReportData(reportId);
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
@@ -71,8 +71,12 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             height={this.state.height}
             width={this.state.width}
           />
+        }
 
-          //TODO: render error message (report not exists, "reportId" not in query string, any exception)
+        {!this.props.state.loading && this.props.state.error &&
+          <div>
+            Error occured loading report: {this.props.state.error.errorMessage}
+          </div>
         }
       </div>
     );
