@@ -2,40 +2,30 @@ import {
   IReportViewerState,
   REPORT_VIEWER_PATH
 } from "../../state/IReportViewerState";
-import { MockService, IMockService } from "../../../../services";
+import { ReportViewerService, IReportViewerService } from "../../../../services";
 import { normalize } from "normalizr";
 import { BaseAction, IBaseStore } from "../../../../base";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
-  private api: IMockService;
+  private api: IReportViewerService;
 
   constructor(store: IBaseStore) {
     super(store);
-    this.api = new MockService();
+    this.api = new ReportViewerService();
   }
 
-  public async loadReportData() {
+  public async loadReportData(reportId: number) {
     this.dispatch({ loading: true });
 
-    // const [ reports, countries, brands ] = await Promise.all([
-    //     this.api.loadReports(100),
-    //     this.api.loadCountries(100),
-    //     this.api.loadBrands(100)
-    // ]);
+    //TODO: error check & validation (report exists and its tableau report)
+    //TODO: check reportId param is number and not NaN
+    const item = await this.api.loadReportDefinition(reportId);
+    item.SVPHeight = item.SVPHeight || 704;
+    item.SVPWidth = item.SVPWidth || 799;
 
-    // const countriesData = normalize(countries, [CountrySchema]);
+    console.info('loadReportData', item);
 
-    // const state = {
-    //     reports,
-    //     countries,
-    //     brands,
-    //     countryEntities: countriesData.entities.countries,
-    //     loading: false
-    // };
-
-    window.setTimeout(() => {
-      this.dispatch({ loading: false });
-    }, 3000);
+    this.dispatch({ loading: false, report: item });
   }
 
   private async dispatchByPath(path: string, incoming: any) {

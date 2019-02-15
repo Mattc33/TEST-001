@@ -5,6 +5,7 @@ import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import { Environment, EnvironmentType } from "@microsoft/sp-core-library";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 import { sp } from "@pnp/sp";
+import { initializeIcons } from '@uifabric/icons';
 
 declare var tableau: any;
 
@@ -37,6 +38,8 @@ export abstract class BaseWebpart<T> extends BaseClientSideWebPart<T> {
     if (this.config && this.config.loadTableau)
       await this.loadTableauAPI();
 
+    initializeIcons();
+    
     return super.onInit();
   }
 
