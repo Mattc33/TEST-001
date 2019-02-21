@@ -2,7 +2,9 @@ param(
 	[string]$Env,
 	[string]$RootFolder,
 	[switch]$cleanup,
-	[object]$credential
+	[object]$credential,
+	[boolean]$noDisconnect,
+	[boolean]$useCredentialManager
 )
 
 Remove-Module * -ErrorAction SilentlyContinue
@@ -34,11 +36,15 @@ function Run()
 
 	Write-Host "Connecting to site at $SiteUrl"
 
-	if($null -eq $credential) {
+	if(($null -eq $credential) -and -not $useCredentialManager) {
 		$credential = Get-Credential -Message "Enter user name and password for $SiteUrl"
 	}
 
-	Connect-PnPOnline -Url $SiteUrl -Credentials $credential
+	if($useCredentialManager) {
+		Connect-PnPOnline -Url $SiteUrl
+	} else {
+		Connect-PnPOnline -Url $SiteUrl -Credentials $credential
+	}
 	$web = Get-PnPWeb
 
 	Write-Host "Target Web : $($web.Url)"
@@ -63,7 +69,9 @@ function Run()
 		&$cmd -DeployFolder $deployFolder -File $fileName -Step $step -Cleanup $cleanup -Arg1 $step.Arg1
 	}
 	
-	Disconnect-PnPOnline 
+	if(-not $noDisconnect) {
+		Disconnect-PnPOnline 
+	}
 }
 
 Run

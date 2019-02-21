@@ -14,7 +14,7 @@ function Start-Files {
     $lines = Import-Csv $fullPath
   
     foreach ($line in $lines) {
-        [boolean]$shouldUploadFile = $line.Execute
+        [string]$shouldUploadFile = $line.Execute
         [string]$localFilePath = $line.LocalPathAndFilename
         [string]$folderPath = $line.RemoteFolderSiteRelativePath
         
@@ -22,9 +22,9 @@ function Start-Files {
         Write-Info "Cleanup not implemented ..."
         return
         }
-        
-        if($shouldUploadFile) {
-            Write-Info "Creating new page: $localFilePath"
+
+        if($shouldUploadFile -eq "Yes") {
+            Write-Info "Uploading file: $localFilePath"
             if ([string]::IsNullOrEmpty($folderPath)) {
             #   Add-PnPFile -localFilePath $localFilePath 
                 Write-Warning "$localFilePath does not have a designated folder. Skipping."
