@@ -1,7 +1,8 @@
 param(
 	[string]$Env,
 	[string]$RootFolder,
-  [switch]$cleanup
+	[switch]$cleanup,
+	[object]$credential
 )
 
 Remove-Module * -ErrorAction SilentlyContinue
@@ -17,6 +18,7 @@ Import-Module "$PSScriptRoot\modules\createContentTypesDef.psm1"
 Import-Module "$PSScriptRoot\modules\createContentTypes.psm1" 
 Import-Module "$PSScriptRoot\modules\createLists.psm1" 
 Import-Module "$PSScriptRoot\modules\createPages.psm1" 
+Import-Module "$PSScriptRoot\modules\UploadFiles.psm1"
 
 function Run()
 {
@@ -31,7 +33,12 @@ function Run()
 	. $configFile # note that the initial dot-space is required to execute this properly
 
 	Write-Host "Connecting to site at $SiteUrl"
-	Connect-PnPOnline -Url $SiteUrl -Credentials $Env ##'MyEnv'
+
+	if($null -eq $credential) {
+		$credential = Get-Credential -Message "Enter user name and password for $SiteUrl"
+	}
+
+	Connect-PnPOnline -Url $SiteUrl -Credentials $credential
 	$web = Get-PnPWeb
 
 	Write-Host "Target Web : $($web.Url)"

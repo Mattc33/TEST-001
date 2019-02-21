@@ -32,8 +32,8 @@ function Write-Info {
 		[string] $message
 	)
 
-	Write-Host "$message " #-NoNewline
-	#Write-Host "Info" -BackgroundColor Blue -ForegroundColor White
+	Write-Host "Info" -BackgroundColor Blue -ForegroundColor White -NoNewline
+	Write-Host " $message"
 }
 
 function Write-Success {
@@ -44,8 +44,8 @@ function Write-Success {
 		[string] $message
 	)
 
-	Write-Host "$message " -NoNewline
-	Write-Host "Success" -BackgroundColor Yellow -ForegroundColor Blue
+	Write-Host "Success" -BackgroundColor Yellow -ForegroundColor Blue -NoNewline
+	Write-Host " $message"
 }
 
 function Write-Error {
@@ -56,8 +56,8 @@ function Write-Error {
 		[string] $message
 	)
 
-	Write-Host "$message " -NoNewline
-	Write-Host "Error" -BackgroundColor Red -ForegroundColor Yellow
+	Write-Host "Error" -BackgroundColor Red -ForegroundColor Yellow -NoNewline
+	Write-Host " $message"
 }
 
 function Write-Warning {
@@ -68,8 +68,8 @@ function Write-Warning {
 		[string] $message
 	)
 
-	Write-Host "$message " -NoNewline
-	Write-Host "Warning" -BackgroundColor Gray -ForegroundColor Black
+	Write-Host "Warning" -BackgroundColor Gray -ForegroundColor Black -NoNewline
+	Write-Host " $message"
 }
 
 
