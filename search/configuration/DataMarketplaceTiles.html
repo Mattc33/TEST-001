@@ -1,0 +1,96 @@
+<style>
+    .visualizationTechnologyIcon {
+        height: 24px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .itemLink {
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .itemTitle {
+        font-weight: 700;
+        font-size: larger;
+    }
+
+    .featuredCard {
+        background-color: rgba(173, 216, 230, .2);
+    }
+
+    .likeFaveButtons {
+        position: absolute;
+        right: .5em;
+        bottom: -.25em;
+        margin: 0 .1em;
+    }
+</style>
+<div class="template_root">
+    <div class="template_defaultCard">
+        {{#if showResultsCount}}
+        <div class="template_resultCount">
+            <label class="ms-fontWeight-semibold">{{getCountMessage totalRows keywords}}</label>
+        </div>
+        {{/if}}
+        <div class="ms-Grid">
+            <div class="ms-Grid-row">
+                {{#each items as |item|}}
+                <div class="ms-Grid-col ms-sm12 ms-md6 ms-lg4">
+                    <div class="singleCard">
+                        <div class="previewImg" style="background-image: url('{{RefinableString04}}')">
+                            
+                            {{#compare item.SVPVisualizationTechnology "==" "Tableau"}}
+                            <img class="cardFileIcon visualizationTechnologyIcon" src="{{../webUrl}}/SiteAssets/SlalomViewport/search/datamarketplace/icons/tableau.webp" />
+                            {{/compare}}
+                            {{#compare item.SVPVisualizationTechnology "==" "QlikView"}}
+                            <img class="cardFileIcon visualizationTechnologyIcon" src="{{../webUrl}}/SiteAssets/SlalomViewport/search/datamarketplace/icons/qlik.webp" />
+                            {{/compare}}
+                            {{#compare item.SVPVisualizationTechnology "==" "Power BI"}}
+                            <img class="cardFileIcon visualizationTechnologyIcon" src="{{../webUrl}}/SiteAssets/SlalomViewport/search/datamarketplace/icons/power-bi.webp" />
+                            {{/compare}}
+                            {{#compare item.SVPVisualizationTechnology "==" "Excel"}}
+                            <img class="cardFileIcon visualizationTechnologyIcon" src="{{../webUrl}}/SiteAssets/SlalomViewport/search/datamarketplace/icons/excel.webp" />
+                            {{/compare}}
+                            {{#compare item.SVPVisualizationTechnology "==" "PDF"}}
+                            <img class="cardFileIcon visualizationTechnologyIcon" src="{{../webUrl}}/SiteAssets/SlalomViewport/search/datamarketplace/icons/pdf.webp" />
+                            {{/compare}}
+                            
+
+
+                        </div>
+                        <li class="ms-ListItem ms-ListItem--document" tabindex="0">
+                            <div class="cardInfo {{#if SVPIsFeatured}}featuredCard{{/if}}">
+                                <span class="ms-ListItem-primaryText">
+                                    <a class="itemLink" href="{{SVPVisualizationAddress}}">
+                                        <span class="itemTitle">{{Title}}</span>
+                                    </a>
+                                </span>
+                                <span class="ms-ListItem-secondaryText">{{SVPVisualizationDescription}}</span>
+                                <span class="ms-ListItem-tertiaryText">{{getDate Created "LL"}}</span>
+                                <span class="likeFaveButtons">
+                                    <i class="ms-Icon ms-Icon--Heart" aria-hidden="true"></i>
+                                    &nbsp;
+                                    <i class="ms-Icon ms-Icon--Like" aria-hidden="true"></i>
+                                </span>
+                                <div class="ms-ListItem-selectionTarget"></div>
+
+                                <!-- hiddin paragraph with our 7 custom managed props -->
+                                <p style="display: none; overflow: hidden;">
+                                    00: {{SVPVisualizationDescription}}<br />
+                                    01: {{SVPCategory}}<br />
+                                    02: {{SVPIsFeatured}}<br />
+                                    03: {{SVPVisualizationAddress}}<br />
+                                    04: {{SVPVisualizationImage}}<br />
+                                    05: {{SVPVisualizationOwner}}<br />
+                                    06: {{SVPVisualizationTechnology}}<br />
+                                </p>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
