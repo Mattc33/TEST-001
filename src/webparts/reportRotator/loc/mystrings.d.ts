@@ -2,6 +2,7 @@ declare interface IReportRotatorWebPartStrings {
   ReportOptions: string;
   GeneralGroupName: string;
   EnableNavigation: string;
+  EnableVerticalReport:string
   EnablePagination: string;
   ReportsPerView: string;
   AutoplayGroupName: string;

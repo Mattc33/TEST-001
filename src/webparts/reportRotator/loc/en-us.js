@@ -3,6 +3,7 @@ define([], function() {
     "ReportOptions": "Report Rotator Options",
     "GeneralGroupName": "Rotator Basic Settings",
     "EnableNavigation":"Enable navigation",
+    "EnableVerticalReport":"Show Report Verticle",
     "EnablePagination":"Enable pagination",
     "ReportsPerView": "Reports per view",
     "AutoplayGroupName": "Report Autoplay Settings",

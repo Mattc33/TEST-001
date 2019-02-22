@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './Report.module.scss';
+import styles from './ReportVerticle.module.scss';
 import { IReportItem } from "../../../models/IReportItem";
 
 export interface IReportProps {
@@ -8,11 +8,11 @@ export interface IReportProps {
 }
 
 
-export default class Report extends React.Component<IReportProps, {}> {
+export default class ReportVerticle extends React.Component<IReportProps, {}> {
 
   public render(): React.ReactElement<IReportProps> {
     return (
-      <div className={styles.report}>
+      <div className={styles.reportVerticle}>
         <div className={styles.wrapper}>
           <img src={this.props.reportItem.imageUrl} className={styles.image} />
           <a href="#" className={styles.url} >
