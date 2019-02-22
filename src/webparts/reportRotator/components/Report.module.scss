@@ -1,0 +1,30 @@
+//@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.report {
+
+  .wrapper{
+    border: 1px solid grey;
+    max-width: 300px;
+    height: 400px;
+  }
+
+  .url {
+    text-decoration: none;
+  }
+
+  .image {
+    max-height: 250px;
+    max-width: 300px;
+    width: 250px;
+    height: 200px;
+  }
+
+  .title {
+    height: 50px;
+  }
+
+  .description {
+    height: 250px;
+  }
+
+}

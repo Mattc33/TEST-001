@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/reportEditor/ReportEditorWebPart.manifest.json"
         }
       ]
+    },
+    "report-rotator-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/reportRotator/ReportRotatorWebPart.js",
+          "manifest": "./src/webparts/reportRotator/ReportRotatorWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js"
+    "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js",
+    "ReportRotatorWebPartStrings": "lib/webparts/reportRotator/loc/{locale}.js"
   }
 }
