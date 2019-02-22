@@ -10,6 +10,7 @@ export interface IReportRotatorProviderProps{
   context: WebPartContext;
   enableNavigation: boolean;
   enablePagination: boolean;
+  enableVerticalReport:boolean;
   enableAutoplay: boolean;
   delayAutoplay: number;
   disableAutoplayOnInteraction: boolean;
@@ -45,6 +46,7 @@ export class ReportRotatorProvider extends React.Component<IReportRotatorProvide
         featuredReportService = {this._reportServiceMock}
         isNavigation= {this.props.enableNavigation}
         isPagination ={this.props.enablePagination}
+        isReportVerticle ={this.props.enableVerticalReport}
         isAutoplay= {this.props.enableAutoplay}
         isGrabCursor = {this.props.enableGrabCursor}
         isLoop = {this.props.enableLoop}

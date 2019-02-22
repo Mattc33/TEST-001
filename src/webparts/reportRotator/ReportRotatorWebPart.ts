@@ -14,6 +14,7 @@ import { IReportRotatorProviderProps, ReportRotatorProvider } from './report-rot
 export interface IReportRotatorWebPartProps {
   enableNavigation: boolean;
   enablePagination: boolean;
+  enableVerticalReport:boolean;
   enableAutoplay: boolean;
   delayAutoplay: number;
   disableAutoplayOnInteraction: boolean;
@@ -33,6 +34,7 @@ export default class ReportRotatorWebPart extends BaseClientSideWebPart<IReportR
         context: this.context,
         enableNavigation: this.properties.enableNavigation,
         enablePagination: this.properties.enablePagination,
+        enableVerticalReport:this.properties.enableVerticalReport,
         enableAutoplay: this.properties.enableAutoplay,
         delayAutoplay: this.properties.delayAutoplay,
         disableAutoplayOnInteraction: this.properties.disableAutoplayOnInteraction,
@@ -72,6 +74,10 @@ export default class ReportRotatorWebPart extends BaseClientSideWebPart<IReportR
                 }),
                 PropertyPaneToggle('enablePagination', {
                   label: strings.EnablePagination,
+                  checked: true
+                }),
+                PropertyPaneToggle('enableVerticalReport', {
+                  label: strings.EnableVerticalReport,
                   checked: true
                 }),
                 PropertyPaneTextField('slidesPerView', {

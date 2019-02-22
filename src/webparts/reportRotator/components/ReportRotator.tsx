@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styles from './ReportRotator.module.scss';
-import { escape } from '@microsoft/sp-lodash-subset';
-import Swiper from "swiper/dist/js/swiper";
+import Swiper from 'swiper/dist/js/swiper';
 
 import { IReportItem } from "../../../models/IReportItem";
 import { autobind } from '@uifabric/utilities/lib';
-import Report from "./Report";
+import ReportVerticle from "./ReportVerticle";
+import ReportHorizontal from "./ReportHorizontal";
 import { IReportService } from "../../../services/interfaces/IReportService";
 
 
@@ -13,6 +13,7 @@ export interface IReportRotatorProps {
   featuredReportService: IReportService;
   isNavigation: boolean;
   isPagination: boolean;
+  isReportVerticle:boolean;
   isAutoplay: boolean;
   isGrabCursor: boolean;
   isLoop: boolean;
@@ -44,12 +45,8 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
 
         this.setState({ featuredReportItemsinState: result });
         this.setSwiper();
-
       });
 
-      this.setSwiper();
-
-      
   }
 
   public render(): React.ReactElement<IReportRotatorProps> {
@@ -63,8 +60,11 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
             {this.state.featuredReportItemsinState.length &&
               this.state.featuredReportItemsinState.map((reportItem, i) => {
                 return <div className={`swiper-slide ${styles.slide}`} key={i}>
-
-                  <Report reportItem ={reportItem} key={i} />
+                  {this.props.isReportVerticle 
+                  ? <ReportVerticle reportItem ={reportItem} key={i} /> 
+                  : <ReportHorizontal reportItem ={reportItem} key={i} />
+                  }
+                  
 
                 </div>;
               })}
@@ -87,7 +87,6 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
 
   @autobind
   private setSwiper(): void {
-    //const opts = this.props.swiperOptions;
 
     const options: any = {
       slidesPerView: parseInt(this.props.reportPerView) || 3,
