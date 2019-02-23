@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "096b96cc-8a44-41fa-9b4d-c0ab2ab2a779",
+  "alias": "SearchBoxWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "supportsFullBleed": true,
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
+    "group": { "default": "Slalom ViewPort WebParts" },
+    "title": { "default": "ViewPort Search Box" },
+    "description": { "default": "Allows users to enter query keywords" },
+    "officeFabricIconFontName": "Search",
+    "properties": {
+      "defaultQueryKeywords": ""
+    }
+  }]
+}
