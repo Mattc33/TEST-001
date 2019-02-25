@@ -2,51 +2,30 @@ import * as React from "react";
 import * as ReactDom from "react-dom";
 import { Version } from "@microsoft/sp-core-library";
 import {
-  BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from "@microsoft/sp-webpart-base";
 
-import * as strings from "ReportEditorWebPartStrings";
+import * as strings from "ReportViewerWebPartStrings";
 import {
-  ReportEditorProvider,
-  ReportEditorProviderProps
-} from "./ReportEditorProvider";
-
+  ReportViewerProviderSFC,
+  IReportViewerProviderProps
+} from "./ReportViewerProvider";
 import { BaseWebpart, IInitConfig } from "../../base";
 
-export interface IReportEditorWebPartProps {
+export interface IReportViewerWebPartProps {
   description: string;
 }
 
-//********
-//  Following changes will provide
-//  1. Loading CSS from local dev (if configureForWorkbench==true)
-//  2. Loading JSOM libraries (if loadJSOM=true)
-//  3. Setup SP PNP context
-
-//  Change base class from "BaseClientSideWebPart" to "BaseWebpart"
-//  Add constructor func:
-//    constructor() {
-//      super({
-//        "configureForWorkbench": true,
-//        "loadJSOM": true
-//      });
-//    }
-//*******
-
-export default class ReportEditorWebPart extends BaseWebpart<
-  IReportEditorWebPartProps
-> {
+export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPartProps> {
   constructor() {
-    super({ loadJSOM: true });
+    super({ loadJSOM: true, loadTableau: true });
   }
 
   public render(): void {
-    const element: React.ReactElement<
-      ReportEditorProviderProps
-    > = React.createElement(ReportEditorProvider, {
-      description: this.properties.description
+    const element: React.ReactElement<IReportViewerProviderProps> = React.createElement(
+      ReportViewerProviderSFC, {
+        description: this.properties.description
     });
 
     ReactDom.render(element, this.domElement);

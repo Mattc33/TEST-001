@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "d6197cde-fd36-4890-a3d1-f950809c9fb1",
+  "alias": "ReportViewerWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "c6c75986-a60d-4a47-aafe-e04f3022d951",
+    "group": { "default": "Slalom ViewPort" },
+    "title": { "default": "Report Viewer" },
+    "description": { "default": "Render reports based on report type" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "ReportViewer"
+    }
+  }]
+}
