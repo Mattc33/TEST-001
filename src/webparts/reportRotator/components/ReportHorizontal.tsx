@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styles from './ReportHorizontal.module.scss';
-import { IReportItem } from "../../../models/IReportItem";
+import { IReportBasicItem } from "../../../models/IReportItem";
 
 export interface IReportProps {
   key: number;
-  reportItem: IReportItem;
+  reportItem: IReportBasicItem;
 }
 
 

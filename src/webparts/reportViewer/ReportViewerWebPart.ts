@@ -6,7 +6,10 @@ import {
   PropertyPaneTextField
 } from "@microsoft/sp-webpart-base";
 
-import * as strings from "ReportViewerWebPartStrings";
+//import * as strings from "ReportViewerWebPartStrings";
+
+import * as strings from 'ReportViewerWebPartStrings';
+
 import {
   ReportViewerProviderSFC,
   IReportViewerProviderProps

@@ -1,12 +1,12 @@
-import { IReportItem } from "../models/IReportItem";
+import { IReportBasicItem } from "../models/IReportItem";
 import { IReportService } from "./interfaces/IReportService";
 
 export class ReportServiceMock implements IReportService {
 
-    public getAllFeaturedReports(): Promise<Array<IReportItem>> {
-      return new Promise<Array<IReportItem>>((resolve:any) => {
+    public getAllFeaturedReports(): Promise<Array<IReportBasicItem>> {
+      return new Promise<Array<IReportBasicItem>>((resolve:any) => {
 
-        const fakeData: Array<IReportItem> = [
+        const fakeData: Array<IReportBasicItem> = [
 
             {
                 Id:"1",

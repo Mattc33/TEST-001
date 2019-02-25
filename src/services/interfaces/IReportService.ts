@@ -1,5 +1,5 @@
-import { IReportItem } from "../../models/IReportItem";
+import { IReportBasicItem } from "../../models/IReportItem";
 
 export interface IReportService {
-    getAllFeaturedReports(): Promise<Array<IReportItem>>;
+    getAllFeaturedReports(): Promise<Array<IReportBasicItem>>;
 }
