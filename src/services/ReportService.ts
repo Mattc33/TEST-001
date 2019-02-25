@@ -1,7 +1,7 @@
 import { sp, RenderListDataParameters } from '@pnp/sp';
 import { IWebPartContext } from '@microsoft/sp-webpart-base';
 
-import { IReportItem } from "../models/IReportItem";
+import { IReportBasicItem } from "../models/IReportItem";
 import { IReportService } from "./interfaces/IReportService";
 import { Caml } from "./utils/Caml";
 
@@ -13,7 +13,7 @@ export class ReportService implements IReportService {
     
     }
 
-    public async getAllFeaturedReports(): Promise<Array<IReportItem>> {
+    public async getAllFeaturedReports(): Promise<Array<IReportBasicItem>> {
 
         const query = Caml.getCaml(
             () => this.getVizReportListViewFields().map((field: string): string => {
@@ -41,13 +41,13 @@ export class ReportService implements IReportService {
     }
     
 
-    private processVizReportListResult(result: any): Array<IReportItem> {
+    private processVizReportListResult(result: any): Array<IReportBasicItem> {
 
         if (result && result.Row && !!result.Row.length) {
 
-        const reports: Array<IReportItem> = result.Row.map((r: any): IReportItem => {
+        const reports: Array<IReportBasicItem> = result.Row.map((r: any): IReportBasicItem => {
 
-            const item: IReportItem = {
+            const item: IReportBasicItem = {
                 Id: r.ID,
                 Title: r.Title,
                 SVPVisualizationImage: r.SVPVisualizationImage,

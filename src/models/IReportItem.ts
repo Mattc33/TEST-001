@@ -31,10 +31,10 @@ export interface IReportItem {
     Created: Date;
 }
 
-// export class IReportItem {
+ export interface IReportBasicItem {
 
-//     public Id: string;
-//     public Title: string;
-//     public SVPVisualizationDescription:string;
-//     public SVPVisualizationImage: string;
-// }
+     Id: string;
+     Title: string;
+     SVPVisualizationDescription:string;
+     SVPVisualizationImage: string;
+ }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ReportRotator.module.scss';
 import Swiper from 'swiper/dist/js/swiper';
 
-import { IReportItem } from "../../../models/IReportItem";
+import { IReportBasicItem } from "../../../models/IReportItem";
 import { autobind } from '@uifabric/utilities/lib';
 import ReportVerticle from "./ReportVerticle";
 import ReportHorizontal from "./ReportHorizontal";
@@ -25,7 +25,7 @@ export interface IReportRotatorProps {
 }
 
 export interface IReportRotatorState {
-  featuredReportItemsinState: IReportItem[];
+  featuredReportItemsinState: IReportBasicItem[];
   isReportsLoaded: Boolean;
 }
 
@@ -42,7 +42,7 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
   }
 
   public componentDidMount(): void { 
-      this.props.featuredReportService.getAllFeaturedReports().then((result: Array<IReportItem>) => {
+      this.props.featuredReportService.getAllFeaturedReports().then((result: Array<IReportBasicItem>) => {
 
         this.setState({ featuredReportItemsinState: result, isReportsLoaded: true});
         this.setSwiper();

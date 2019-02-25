@@ -46,7 +46,8 @@
   },
   "externals": {},
   "localizedResources": {
-    //"ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js",
+    "ReportViewerWebPartStrings": "lib/webparts/reportViewer/loc/{locale}.js",
+    "ReportEditorWebPartStrings": "lib/webparts/reportEditor/loc/{locale}.js",
     "ReportRotatorWebPartStrings": "lib/webparts/reportRotator/loc/{locale}.js",
     "SearchBoxWebPartStrings": "lib/webparts/searchBox/loc/{locale}.js",
     "SearchResultsWebPartStrings": "lib/webparts/searchResults/loc/{locale}.js",
