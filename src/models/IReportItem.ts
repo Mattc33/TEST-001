@@ -20,6 +20,7 @@ export interface IReportItem {
     SVPVisualizationTechnology: string;
     SVPLastUpdated?: any;
     SVPVisualizationDescription: string;
+    SVPVisualizationImage?: string;
     SVPBusinessUnit?: any;
     SVPIsFeatured: boolean;
     SVPCategory: string;
@@ -29,3 +30,11 @@ export interface IReportItem {
     Modified: Date;
     Created: Date;
 }
+
+// export class IReportItem {
+
+//     public Id: string;
+//     public Title: string;
+//     public SVPVisualizationDescription:string;
+//     public SVPVisualizationImage: string;
+// }

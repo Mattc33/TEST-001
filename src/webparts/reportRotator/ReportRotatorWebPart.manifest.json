@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "67f17617-2941-47d6-887b-811b7c1a70bd",
+  "alias": "ReportRotatorWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Slalom ViewPort WebParts" },
+    "title": { "default": "Report Rotator" },
+    "description": { "default": "Rotate and Slide Reports" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "Report Rotator"
+    }
+  }]
+}
