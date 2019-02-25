@@ -24,13 +24,13 @@ export default class ReportHorizontal extends React.Component<IReportProps, {}> 
         <div className={styles.wrapper}>
           <div className="row" style={rowStyle}>
             <div className="col-md-6">
-              <img src={this.props.reportItem.imageUrl} className={styles.image} />
+              <img src={this.props.reportItem.SVPVisualizationImage} className={styles.image} />
             </div>
             <div className="col-md-6" style={colStyle}>
               <a href="#" className={styles.url}>
-                <h4 className={styles.title}>{this.props.reportItem.title}</h4>
+                <h4 className={styles.title}>{this.props.reportItem.Title}</h4>
               </a>  
-              <p className={styles.description}>{this.props.reportItem.description}</p>
+              <p className={styles.description}>{this.props.reportItem.SVPVisualizationDescription}</p>
             </div>
           </div>
         </div>

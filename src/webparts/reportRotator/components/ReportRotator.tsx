@@ -7,7 +7,7 @@ import { autobind } from '@uifabric/utilities/lib';
 import ReportVerticle from "./ReportVerticle";
 import ReportHorizontal from "./ReportHorizontal";
 import { IReportService } from "../../../services/interfaces/IReportService";
-
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
 export interface IReportRotatorProps {
   featuredReportService: IReportService;
@@ -26,6 +26,7 @@ export interface IReportRotatorProps {
 
 export interface IReportRotatorState {
   featuredReportItemsinState: IReportItem[];
+  isReportsLoaded: Boolean;
 }
 
 export default class ReportRotator extends React.Component<IReportRotatorProps, IReportRotatorState> {
@@ -34,7 +35,7 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
 
   constructor(props: IReportRotatorProps) {
     super(props);
-    this.state = { featuredReportItemsinState: [] };
+    this.state = { featuredReportItemsinState: [], isReportsLoaded: false};
 
     this.uniqueId = Math.floor(Math.random() * 10000) + 1;
 
@@ -43,7 +44,7 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
   public componentDidMount(): void { 
       this.props.featuredReportService.getAllFeaturedReports().then((result: Array<IReportItem>) => {
 
-        this.setState({ featuredReportItemsinState: result });
+        this.setState({ featuredReportItemsinState: result, isReportsLoaded: true});
         this.setSwiper();
       });
 
@@ -57,7 +58,13 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
 
         <div className={`swiper-container ${styles.container} container-${this.uniqueId}`}>
           <div className='swiper-wrapper'>
-            {this.state.featuredReportItemsinState.length &&
+            {!this.state.isReportsLoaded &&
+              <div className="row">
+                <div className="col-xs-12"><Spinner size={SpinnerSize.large} label="Wait, Pulling Featured Reports..." ariaLive="assertive" /></div>
+              </div>
+              
+            }
+            {this.state.featuredReportItemsinState.length > 0 &&
               this.state.featuredReportItemsinState.map((reportItem, i) => {
                 return <div className={`swiper-slide ${styles.slide}`} key={i}>
                   {this.props.isReportVerticle 
@@ -70,10 +77,10 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
               })}
           </div>
 
-          {this.props.isNavigation &&
+          {this.props.isNavigation && this.state.featuredReportItemsinState.length > 0 &&
             <div className={`swiper-button-next next-${this.uniqueId}`}></div>
           }
-          {this.props.isNavigation &&
+          {this.props.isNavigation && this.state.featuredReportItemsinState.length > 0 &&
             <div className={`swiper-button-prev prev-${this.uniqueId}`}></div>
           }
 

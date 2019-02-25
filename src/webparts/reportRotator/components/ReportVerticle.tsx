@@ -14,11 +14,11 @@ export default class ReportVerticle extends React.Component<IReportProps, {}> {
     return (
       <div className={styles.reportVerticle}>
         <div className={styles.wrapper}>
-          <img src={this.props.reportItem.imageUrl} className={styles.image} />
+          <img src={this.props.reportItem.SVPVisualizationImage} className={styles.image} />
           <a href="#" className={styles.url} >
-            <h4 className={styles.title}>{this.props.reportItem.title}</h4>
+            <h4 className={styles.title}>{this.props.reportItem.Title}</h4>
           </a>
-          <p className={styles.description}>{this.props.reportItem.description}</p>
+          <p className={styles.description}>{this.props.reportItem.SVPVisualizationDescription}</p>
         </div>
       </div>
     );
