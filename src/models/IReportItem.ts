@@ -1,6 +1,7 @@
 export class IReportItem {
 
-    public title: string;
-    public description:string;
-    public imageUrl: string;
+    public Id: string;
+    public Title: string;
+    public SVPVisualizationDescription:string;
+    public SVPVisualizationImage: string;
 }

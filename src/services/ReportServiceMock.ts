@@ -9,124 +9,148 @@ export class ReportServiceMock implements IReportService {
         const fakeData: Array<IReportItem> = [
 
             {
-                title: 'Pharmaceutical Sales Performance',
-                description: 'The General Head of IT Strategy benchmarks business-for-business agilities',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Pharmaceutical Sales Performance',
+                SVPVisualizationDescription: 'The General Head of IT Strategy benchmarks business-for-business agilities',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Corporate Finance Executive Summary',
-                description: 'Whereas synchronized brand values promote strategy formulations',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Corporate Finance Executive Summary',
+                SVPVisualizationDescription: 'Whereas synchronized brand values promote strategy formulations',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Healthcare Product Performance Analysis & Forecast',
-                description: 'The thinkers/planners benchmark a disciplined growth momentum',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Healthcare Product Performance Analysis & Forecast',
+                SVPVisualizationDescription: 'The thinkers/planners benchmark a disciplined growth momentum',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Financial Services Key Risk Indicators',
-                description: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Financial Services Key Risk Indicators',
+                SVPVisualizationDescription: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Retail Field Team Growth Scorecard',
-                description: 'The General Head of IT Strategy benchmarks business-for-business agilities',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Retail Field Team Growth Scorecard',
+                SVPVisualizationDescription: 'The General Head of IT Strategy benchmarks business-for-business agilities',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Public Education Instructor Salaries',
-                description: 'Whereas synchronized brand values promote strategy formulations',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Public Education Instructor Salaries',
+                SVPVisualizationDescription: 'Whereas synchronized brand values promote strategy formulations',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Student Loan Analysis',
-                description: 'The thinkers/planners benchmark a disciplined growth momentum',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Student Loan Analysis',
+                SVPVisualizationDescription: 'The thinkers/planners benchmark a disciplined growth momentum',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Pharmaceutical Sales Performance',
-                description: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Pharmaceutical Sales Performance',
+                SVPVisualizationDescription: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Corporate Finance Executive Summary',
-                description: 'The General Head of IT Strategy benchmarks business-for-business agilities',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Corporate Finance Executive Summary',
+                SVPVisualizationDescription: 'The General Head of IT Strategy benchmarks business-for-business agilities',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Healthcare Product Performance Analysis & Forecast',
-                description: 'Whereas synchronized brand values promote strategy formulations',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Healthcare Product Performance Analysis & Forecast',
+                SVPVisualizationDescription: 'Whereas synchronized brand values promote strategy formulations',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Financial Services Key Risk Indicators',
-                description: 'The thinkers/planners benchmark a disciplined growth momentum',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Financial Services Key Risk Indicators',
+                SVPVisualizationDescription: 'The thinkers/planners benchmark a disciplined growth momentum',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Retail Field Team Growth Scorecard',
-                description: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Retail Field Team Growth Scorecard',
+                SVPVisualizationDescription: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Public Education Instructor Salaries',
-                description: 'The General Head of IT Strategy benchmarks business-for-business agilities',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Public Education Instructor Salaries',
+                SVPVisualizationDescription: 'The General Head of IT Strategy benchmarks business-for-business agilities',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Student Loan Analysis',
-                description: 'Whereas synchronized brand values promote strategy formulations',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Student Loan Analysis',
+                SVPVisualizationDescription: 'Whereas synchronized brand values promote strategy formulations',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Healthcare Product Performance Analysis & Forecast',
-                description: 'The thinkers/planners benchmark a disciplined growth momentum',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Healthcare Product Performance Analysis & Forecast',
+                SVPVisualizationDescription: 'The thinkers/planners benchmark a disciplined growth momentum',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Retail Field Team Growth Scorecard',
-                description: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Retail Field Team Growth Scorecard',
+                SVPVisualizationDescription: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Public Education Instructor Salaries',
-                description: 'The General Head of IT Strategy benchmarks business-for-business agilities',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Public Education Instructor Salaries',
+                SVPVisualizationDescription: 'The General Head of IT Strategy benchmarks business-for-business agilities',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Pharmaceutical Sales Performance',
-                description: 'Whereas synchronized brand values promote strategy formulations',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Pharmaceutical Sales Performance',
+                SVPVisualizationDescription: 'Whereas synchronized brand values promote strategy formulations',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Healthcare Product Performance Analysis & Forecast',
-                description: 'The thinkers/planners benchmark a disciplined growth momentum',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Healthcare Product Performance Analysis & Forecast',
+                SVPVisualizationDescription: 'The thinkers/planners benchmark a disciplined growth momentum',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Corporate Finance Executive Summary',
-                description: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Corporate Finance Executive Summary',
+                SVPVisualizationDescription: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Retail Field Team Growth Scorecard',
-                description: 'The General Head of IT Strategy benchmarks business-for-business agilities',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Retail Field Team Growth Scorecard',
+                SVPVisualizationDescription: 'The General Head of IT Strategy benchmarks business-for-business agilities',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             },
             {
-                title: 'Public Education Instructor Salaries',
-                description: 'Whereas synchronized brand values promote strategy formulations',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Public Education Instructor Salaries',
+                SVPVisualizationDescription: 'Whereas synchronized brand values promote strategy formulations',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Student Loan Analysis',
-                description: 'The thinkers/planners benchmark a disciplined growth momentum',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
+                Id:"1",
+                Title: 'Student Loan Analysis',
+                SVPVisualizationDescription: 'The thinkers/planners benchmark a disciplined growth momentum',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PharmaSalesPerformance.JPG'
             },
             {
-                title: 'Corporate Finance Executive Summary',
-                description: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
-                imageUrl: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
+                Id:"1",
+                Title: 'Corporate Finance Executive Summary',
+                SVPVisualizationDescription: 'We are working hard to reintermediate a competitive advantage, while the gatekeeper straightforwardly identifies barriers to success',
+                SVPVisualizationImage: 'https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/ReportImages/PMPortfolio2.JPG'
             }
         ];
 

@@ -5,6 +5,7 @@ import {
 import ReportRotator from '../reportRotator/components/ReportRotator';
 import { ReportServiceMock } from "../../services/ReportServiceMock";
 import { IReportService } from "../../services/interfaces/IReportService";
+import { ReportService } from "../../services/ReportService";
 
 export interface IReportRotatorProviderProps{
   context: WebPartContext;
@@ -27,12 +28,13 @@ export interface IReportRotatorProviderState{
 
 export class ReportRotatorProvider extends React.Component<IReportRotatorProviderProps, IReportRotatorProviderState> {
 
-  private _reportServiceMock : IReportService;
+  private _reportService : IReportService;
 
   constructor(props: IReportRotatorProviderProps) {
     super(props);
 
-    this._reportServiceMock = new ReportServiceMock();
+    //this._reportService = new ReportServiceMock();
+    this._reportService =  new ReportService(this.props.context);
   }
 
   public async componentDidMount() {
@@ -43,7 +45,7 @@ export class ReportRotatorProvider extends React.Component<IReportRotatorProvide
     return (
       <ReportRotator
         {...this.props}
-        featuredReportService = {this._reportServiceMock}
+        featuredReportService = {this._reportService}
         isNavigation= {this.props.enableNavigation}
         isPagination ={this.props.enablePagination}
         isReportVerticle ={this.props.enableVerticalReport}
