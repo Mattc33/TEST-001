@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
+import { sp } from '@pnp/sp';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
@@ -47,6 +48,20 @@ export default class ReportRotatorWebPart extends BaseClientSideWebPart<IReportR
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  protected async onInit(): Promise<void> {
+    try {
+      sp.setup({
+        spfxContext: this.context
+      });
+
+      return Promise.resolve();
+
+    } catch(err) {
+      return Promise.reject(err);
+    }
+
   }
 
   protected onDispose(): void {
