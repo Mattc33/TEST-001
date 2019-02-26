@@ -24,6 +24,7 @@ export interface IReportRotatorWebPartProps {
   spaceBetweenSlides: string;
   enableGrabCursor: boolean;
   enableLoop: boolean;
+  clientLabel:string;
 }
 
 export default class ReportRotatorWebPart extends BaseClientSideWebPart<IReportRotatorWebPartProps> {
@@ -33,6 +34,7 @@ export default class ReportRotatorWebPart extends BaseClientSideWebPart<IReportR
       ReportRotatorProvider,
       {
         context: this.context,
+        clientLabel:this.properties.clientLabel,
         enableNavigation: this.properties.enableNavigation,
         enablePagination: this.properties.enablePagination,
         enableVerticalReport:this.properties.enableVerticalReport,
@@ -82,8 +84,11 @@ export default class ReportRotatorWebPart extends BaseClientSideWebPart<IReportR
           displayGroupsAsAccordion: true,
           groups: [
             {
-              groupName: strings.GeneralGroupName,
+              groupName: strings.BasicGroupName,
               groupFields: [
+                PropertyPaneTextField('clientLabel', {
+                  label: strings.ClientNameFieldLabel
+                }),
                 PropertyPaneToggle('enableNavigation', {
                   label: strings.EnableNavigation
                 }),

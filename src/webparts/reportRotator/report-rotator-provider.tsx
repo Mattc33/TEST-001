@@ -9,6 +9,7 @@ import { ReportService } from "../../services/ReportService";
 
 export interface IReportRotatorProviderProps{
   context: WebPartContext;
+  clientLabel:string;
   enableNavigation: boolean;
   enablePagination: boolean;
   enableVerticalReport:boolean;

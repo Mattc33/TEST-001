@@ -1,7 +1,7 @@
 define([], function() {
   return {
     "ReportOptions": "Report Rotator Options",
-    "GeneralGroupName": "Rotator Basic Settings",
+    "BasicGroupName": "Rotator Basic Settings",
     "EnableNavigation":"Enable navigation",
     "EnableVerticalReport":"Show Report Vertical",
     "EnablePagination":"Enable pagination",
@@ -17,5 +17,6 @@ define([], function() {
     "InPixels": "In pixels",
     "EnableGrabCursor": "Enable grab cursor",
     "EnableLoop": "Enable loop",
+    "ClientNameFieldLabel": "Client Label",
   }
 });

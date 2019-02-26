@@ -1,6 +1,6 @@
 declare interface IReportRotatorWebPartStrings {
   ReportOptions: string;
-  GeneralGroupName: string;
+  BasicGroupName: string;
   EnableNavigation: string;
   EnableVerticalReport:string
   EnablePagination: string;
@@ -16,6 +16,7 @@ declare interface IReportRotatorWebPartStrings {
   InPixels: string;
   EnableGrabCursor: string;
   EnableLoop: string;
+  ClientNameFieldLabel:string;
 }
 
 declare module 'ReportRotatorWebPartStrings' {
