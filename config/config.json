@@ -33,6 +33,14 @@
           "manifest": "./src/webparts/searchResults/SearchResultsWebPart.manifest.json"
         }
       ]
+    },
+    "report-my-fav-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/reportMyFav/ReportMyFavWebPart.js",
+          "manifest": "./src/webparts/reportMyFav/ReportMyFavWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -43,6 +51,7 @@
     "SearchBoxWebPartStrings": "lib/webparts/searchBox/loc/{locale}.js",
     "SearchResultsWebPartStrings": "lib/webparts/searchResults/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
-    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "ReportMyFavWebPartStrings": "lib/webparts/reportMyFav/loc/{locale}.js"
   }
 }
