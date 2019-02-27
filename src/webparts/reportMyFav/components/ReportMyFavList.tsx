@@ -4,6 +4,8 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import { IReportBasicItem } from "../../../models/IReportItem";
 import { autobind } from '@uifabric/utilities/lib';
 import MyFavHome from "./MyFavHome";
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
+
 
 export interface IReportMyFavProps {
   controlHeaderMessage: string;
@@ -43,7 +45,15 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
               {this.props.controlHeaderMessage}
               </div>
             </div>
-            { this.renderMyFavReports(this.state.myFavReportItemsinState) }
+            {this.state.isReportsLoaded
+            ? this.renderMyFavReports(this.state.myFavReportItemsinState)
+            :
+             ( <div className="row">
+                <div className="col-xs-12"><Spinner size={SpinnerSize.large} label="Wait, Pulling Reports..." ariaLive="assertive" /></div>
+              </div>
+             )
+            }
+            
         </div>
       </div>
     );
@@ -55,7 +65,8 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
     if (favReports && favReports.length > 0) {
       return favReports.map((report: IReportBasicItem) => {
         return (
-          <MyFavHome reportItem ={report} key={report.Id} onView={this.handleClickView}/>
+          <MyFavHome reportItem ={report} key={report.Id} onView={this.handleClickView} 
+          onShare={this.handleClickShare} onRemove={this.handleClickDelete}/>
         );
       });
     }
@@ -68,12 +79,27 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
     }
   }
 
-  private handleClickView(favReportId:string) {
-    console.log("Report ID: ", favReportId);
+  @autobind 
+  private handleClickDelete(e:any) {
+    console.log("Report: ", e);
+    let newFavResults = this.state.myFavReportItemsinState.filter(item => item !== e);
+    this.setState({myFavReportItemsinState: newFavResults});
 
-    const favReportViewUrl = "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SitePages/ViewReport.aspx?reportId=1";
-    //return () => window.location.assign(favReportViewUrl);
-    window.location.hash = favReportViewUrl;
+    //TODO : Call Real API to Remvoe the Item from List.
+  }
+
+  @autobind 
+  private handleClickShare(e:any) {
+    console.log("Report: ", e);
+    alert("Shared Clicked !!!");
+  }
+
+  @autobind 
+  private handleClickView(favReportId:string) {
+    
+    window.location.replace("https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SitePages/ViewReport.aspx?reportId=" + favReportId); 
+    return null;
+
   }
 
 }
