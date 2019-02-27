@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="DataMarketplaceRenderer"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="ccf5b7bf-216a-412b-be64-ca03db63dde8"
+        Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </ClientSideComponentInstance>
+</Elements>
