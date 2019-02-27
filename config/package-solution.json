@@ -5,7 +5,21 @@
     "id": "cbfe925e-b5db-4f9e-84bb-ea6107085440",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
-    "skipFeatureDeployment": true
+    "skipFeatureDeployment": true,
+    "features": [
+      {
+        "title": "Slalom Viewport App Ext Search Result Renderer.",
+        "description": "Deploys Search Result Renderer",
+        "id": "3888c658-79db-4767-81fe-d2f72a469465",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "clientsideinstance.xml"
+          ]
+        }
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/Slalom-ViewPort.sppkg"

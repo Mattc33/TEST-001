@@ -41,6 +41,14 @@
           "manifest": "./src/webparts/reportMyFav/ReportMyFavWebPart.manifest.json"
         }
       ]
+    },
+    "data-marketplace-renderer-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/dataMarketplaceRenderer/DataMarketplaceRendererApplicationCustomizer.js",
+          "manifest": "./src/extensions/dataMarketplaceRenderer/DataMarketplaceRendererApplicationCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -52,6 +60,7 @@
     "SearchResultsWebPartStrings": "lib/webparts/searchResults/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
-    "ReportMyFavWebPartStrings": "lib/webparts/reportMyFav/loc/{locale}.js"
+    "ReportMyFavWebPartStrings": "lib/webparts/reportMyFav/loc/{locale}.js",
+    "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js"
   }
 }
