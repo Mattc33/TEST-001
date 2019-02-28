@@ -1,26 +1,53 @@
 .resultContainer {
+    .visualizationTechnologyIcon {
+        height: 24px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .itemLink {
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .itemTitle {
+        font-weight: 700;
+        font-size: larger;
+    }
+
+    .featuredCard {
+        background-color: rgba(173, 216, 230, .2);
+    }
+
+    .likeFaveButtons {
+        position: absolute;
+        right: .5em;
+        bottom: -.25em;
+        margin: 0 .1em;
+    }
+
     li.resultItem {
         display: block;
-        a {
-            transition: box-shadow 0.467s ease;
-            text-decoration: none;
-            display: flex;
-            padding: 15px 0 0 0;
-            border-top: 1px solid #eaeaea;
+    //     a {
+    //         transition: box-shadow 0.467s ease;
+    //         text-decoration: none;
+    //         display: flex;
+    //         padding: 15px 0 0 0;
+    //         border-top: 1px solid #eaeaea;
             
-            &:focus {
-                box-shadow: 0 0 0 3px #FFBD65;
-                outline: none;            
-            }
+    //         &:focus {
+    //             box-shadow: 0 0 0 3px #FFBD65;
+    //             outline: none;            
+    //         }
             
-            &:hover {
-                box-shadow: 0 8px 10px -2px rgba(0,0,0,.1);
-            }
-            &:before {
-                display: block;
-                content: " ";
-                border-bottom: 1px solid #eaeaea;
-            }
+    //         &:hover {
+    //             box-shadow: 0 8px 10px -2px rgba(0,0,0,.1);
+    //         }
+    //         &:before {
+    //             display: block;
+    //             content: " ";
+    //             border-bottom: 1px solid #eaeaea;
+    //         }
             .imageContainer  {
                 height:100px;
                 width: 78px;
@@ -47,40 +74,40 @@
                 }
                 
             }
-            > article {
-                margin-left: 10px;
-                h3, p, ul {
-                    font-weight: 400;
-                    font-family:"Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-                }
-                p, ul {
-                    font-size: 12px;
-                    color: #666666;
-                }
-                h3 {
-                    color: #106ebe;
-                    text-decoration: none;
-                    margin: 0;
-                    font-size: 17px;
-                }
+    //         > article {
+    //             margin-left: 10px;
+    //             h3, p, ul {
+    //                 font-weight: 400;
+    //                 font-family:"Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    //             }
+    //             p, ul {
+    //                 font-size: 12px;
+    //                 color: #666666;
+    //             }
+    //             h3 {
+    //                 color: #106ebe;
+    //                 text-decoration: none;
+    //                 margin: 0;
+    //                 font-size: 17px;
+    //             }
                 
-                ul {
-                    list-style: none;
-                    padding: 0;
-                    li {
-                        display: inline-block;
-                    }
-                    li:last-child {
-                        &:before {
-                            content: "\2022";
-                            display: inline-block;
-                            margin: 0 .5em;
-                        }
-                    }
+    //             ul {
+    //                 list-style: none;
+    //                 padding: 0;
+    //                 li {
+    //                     display: inline-block;
+    //                 }
+    //                 li:last-child {
+    //                     &:before {
+    //                         content: "\2022";
+    //                         display: inline-block;
+    //                         margin: 0 .5em;
+    //                     }
+    //                 }
                 
-                }
-            }
+    //             }
+    //         }
             
-        }
+    //     }
     }
 }

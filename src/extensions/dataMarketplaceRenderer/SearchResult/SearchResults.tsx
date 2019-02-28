@@ -3,40 +3,33 @@ import ISearchResultProps from './ISearchResultProps';
 import styles from './SearchResult.module.scss';
 import { PersonaCoin } from 'office-ui-fabric-react/lib/PersonaCoin';
 import * as moment from 'moment';
+import { ISearchResult } from '../../../models/ISearchResult';
+import ResultTile from './ResultTile';
 
 export default class SearchResult extends React.Component<ISearchResultProps, {}> {
-    public render() {
-        return (
-            <div className="template_root">
-                <ul className={styles.resultContainer}>
-                    {this.props.searchResults.RelevantResults.map(result => {
-                        const image = result.SiteLogo ?
-                            <div className={styles.imageContainer}><img src={result.SiteLogo}></img></div> :
-                            <PersonaCoin className={styles.coin} text={result.Title} />;
-                        return (
-                            <li className={styles.resultItem}>
-                                <a href={result.Path}>
-                                    {image}
-                                    <article>
-                                        <header>
-                                            <h3>{result.Title}</h3>
-                                            <p>{result[this.props.subheaderFieldName]}</p>
-                                            <ul>
-                                                <li>Oppdatert for {result.Updated ? this.fmtDateString(result.Updated) : this.fmtDateString(result.Created)}</li>
-                                                <li>{result.CreatedBy}</li>
-                                            </ul>
-                                        </header>
-                                    </article>
-                                </a>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-        );
-    }
+  public render() {
 
-    private fmtDateString(utcString) {
-        return moment(utcString).fromNow();
-    }
+    let resultTiles: JSX.Element[] = this.props.searchResults.RelevantResults.map((result: ISearchResult) => {
+      return (
+        <ResultTile result={result} webUrl={this.props.context.pageContext.web.absoluteUrl} />
+      );
+    });
+
+    return (
+      <div className="template_root">
+        <div className="template_defaultCard">
+          <div className="template_resultCount">
+            <label className="ms-fontWeight-semibold">{this.props.searchResults.TotalRows} results</label>
+          </div>
+          <div className="ms-Grid">
+            <div className="ms-Grid-row">
+              <ul className={styles.resultContainer}>
+                {resultTiles}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

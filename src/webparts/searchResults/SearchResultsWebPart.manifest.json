@@ -16,8 +16,9 @@
         "description": { "default": "Displays search results with customizable dynamic refiners" },
         "officeFabricIconFontName": "SearchAndApps",
         "properties": {
+            "defaultSearchQuery": "*",
             "queryKeywords": "",
-            "queryTemplate": "{searchTerms} Path:{Site}",
+            "queryTemplate": "{searchTerms} Path:{Site} ContentTypeID:0x010049f01431b7934ebaa699764cf86b6267*",
             "sortList": [
                 {
                     "sortField": "Created",
@@ -42,14 +43,15 @@
                     "displayValue": "Tags"
                 }
             ],
-            "selectedProperties": "Title,Path,Created,Filename,SiteLogo,PreviewUrl,PictureThumbnailURL,ServerRedirectedPreviewURL,ServerRedirectedURL,HitHighlightedSummary,FileType,contentclass,ServerRedirectedEmbedURL,DefaultEncodingURL,owstaxidmetadataalltagsinfo",
+            "selectedProperties": "Title,Path,Created,Filename,SiteLogo,PreviewUrl,PictureThumbnailURL,ServerRedirectedPreviewURL,ServerRedirectedURL,HitHighlightedSummary,FileType,contentclass,ServerRedirectedEmbedURL,DefaultEncodingURL,RefinableString00,RefinableString01,RefinableString02,RefinableString03,RefinableString04,RefinableString05,RefinableString06,SVPVisualizationDescription,SVPCategory,SVPIsFeatured,SVPVisualizationAddress,SVPVisualizationImage,SVPVisualizationOwner,SVPVisualizationTechnology,owstaxidmetadataalltagsinfo",
             "enableQueryRules": false,
             "maxResultsCount": 10,
-            "showBlank": true,
+            "showBlank": false,
             "showResultsCount": true,
-            "webPartTitle": "",
+            "showPaging": true,
+            "webPartTitle": "Search Results",
             "enableLocalization": true,
-            "useDefaultSearchQuery": false,
+            "useDefaultSearchQuery": true,
             "resultTypes": []
         }
     }
