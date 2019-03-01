@@ -24,24 +24,29 @@ export interface IReportMyFavProviderState {
 
 export class ReportMyFavProvider extends React.Component<IReportMyFavProviderProps,IReportMyFavProviderState> {
     private _IFavReportService: IReportService;
+    private _siteUrl: string;
 
     constructor (props: IReportMyFavProviderProps) {
         super(props);
 
         this._IFavReportService = new ReportServiceMock();
-
     }
 
     public async componentDidMount() {
+
     }
 
     public render() : React.ReactElement<IReportMyFavProviderProps> {
+
+        this._siteUrl = this.props.context.pageContext.site.absoluteUrl;
 
         return (
             <ReportMyFavList
                 {...this.props}
                 controlHeaderMessage = {this.props.headerMessage}
                 myFavReportService = {this._IFavReportService}
+                siteUrl = {this._siteUrl}
+                loggedInUserName = {this.props.context.pageContext.user.displayName}
             />
         );
     }

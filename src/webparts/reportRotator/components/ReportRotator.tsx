@@ -22,6 +22,7 @@ export interface IReportRotatorProps {
   reportPerView: string;
   reportPerGroup: string;
   spaceBetweenReports: string;
+  currentSiteUrl:string;
 }
 
 export interface IReportRotatorState {
@@ -68,8 +69,8 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
               this.state.featuredReportItemsinState.map((reportItem, i) => {
                 return <div className={`swiper-slide ${styles.slide}`} key={i}>
                   {this.props.isReportVerticle 
-                  ? <ReportVerticle reportItem ={reportItem} key={i} /> 
-                  : <ReportHorizontal reportItem ={reportItem} key={i} />
+                  ? <ReportVerticle reportItem ={reportItem} key={i} siteUrl={this.props.currentSiteUrl}/> 
+                  : <ReportHorizontal reportItem ={reportItem} key={i} siteUrl={this.props.currentSiteUrl}/>
                   }
                   
 
