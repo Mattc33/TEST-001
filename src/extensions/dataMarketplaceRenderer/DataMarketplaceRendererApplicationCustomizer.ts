@@ -8,6 +8,7 @@ import { Dialog } from '@microsoft/sp-dialog';
 import * as strings from 'DataMarketplaceRendererApplicationCustomizerStrings';
 
 
+import { sp } from "@pnp/sp";
 import { ResultService, ISearchEvent } from '../../services/ResultService/ResultService';
 import IResultService from '../../services/ResultService/IResultService';
 import SearchResult from './SearchResult/SearchResults';
@@ -29,8 +30,12 @@ export default class DataMarketplaceRendererApplicationCustomizer
   @override
   public onInit(): Promise<void> {
     this._resultService = new ResultService();
-    this._resultService.registerRenderer(this.componentId, 'Data Marketplace Renderer', 'QueryList', 
+    this._resultService.registerRenderer(this.componentId, 'Data Marketplace Renderer', 'QueryList',
       this.onChangeHappened, ['Subheader']);
+    sp.setup({
+      spfxContext: this.context
+    });
+
     return Promise.resolve();
   }
 
@@ -42,7 +47,7 @@ export default class DataMarketplaceRendererApplicationCustomizer
       componentId: e.rendererId,
       subheaderFieldName: subheaderFieldName,
       context: this.context
-        });
+    });
     let node = document.getElementById(e.mountNode);
     if (node) {
       ReactDOM.render(resultDisplay, node);
