@@ -5,13 +5,38 @@ import { PersonaCoin } from 'office-ui-fabric-react/lib/PersonaCoin';
 import * as moment from 'moment';
 import { ISearchResult } from '../../../models/ISearchResult';
 import { autobind } from '@uifabric/utilities';
+import { ReportActionsService } from '../../../services/ReportActionsService/ReportActionsService';
 
-export default class ResultTile extends React.Component<IResultTileProps, {}> {
+export interface IResultTileState {
+  isFavorite?: boolean;
+}
+
+export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
+  private actionsService: ReportActionsService;
+
+  constructor(props: IResultTileProps) {
+    super(props);
+
+    this.state = {
+      isFavorite: false
+    };
+    this.actionsService = new ReportActionsService();
+  }
+
   public render() {
     return this.renderResultItem(this.props.result);
   }
 
   private renderResultItem(result: ISearchResult): JSX.Element {
+
+    let isFavoriteIconElement: JSX.Element = (
+      <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.favorite}></i>
+    );
+
+    let isNotFavoriteIconElement: JSX.Element = (
+      <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.favorite}></i>
+    );
+
     return (
       <li className={styles.resultItem}>
         <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4">
@@ -30,12 +55,12 @@ export default class ResultTile extends React.Component<IResultTileProps, {}> {
                 <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
                 <span className={styles.likeFaveButtons}>
                   <span>
-                    <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.favorite}></i>
+                    {this.state.isFavorite ? isFavoriteIconElement : isNotFavoriteIconElement}
                   </span>
-                  &nbsp;
+                  {/* &nbsp;
                     <span>
                     <i className="ms-Icon ms-Icon--Like" aria-hidden="true" onClick={this.like}></i>
-                  </span>
+                  </span> */}
                 </span>
 
                 <div className="ms-ListItem-selectionTarget"></div>
@@ -79,12 +104,20 @@ export default class ResultTile extends React.Component<IResultTileProps, {}> {
   }
 
   @autobind
-  private favorite() {
-    alert("Favorite!");
+  private async favorite() {
+    let itemId: number = parseInt(this.props.result.ListItemId);
+    let success: boolean = await this.actionsService.FavoriteReport(itemId);
+
+    if (success) {
+      this.setState({
+        isFavorite: true
+      });
+    }
   }
 
   @autobind
   private like() {
-    alert("Like!");
+    let itemId: number = parseInt(this.props.result.ListItemId);
+    this.actionsService.LikeReport(itemId);
   }
 }
