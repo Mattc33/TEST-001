@@ -58,6 +58,7 @@ export class ReportRotatorProvider extends React.Component<IReportRotatorProvide
         reportPerView = {this.props.slidesPerView}
         reportPerGroup = {this.props.slidesPerGroup}
         spaceBetweenReports = {this.props.spaceBetweenSlides}
+        currentSiteUrl = {this.props.context.pageContext.site.absoluteUrl}
       />
     );
 
