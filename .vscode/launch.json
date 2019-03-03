@@ -22,10 +22,10 @@
       ]
     },
     {
-      "name": "Hosted workbench",
+      "name": "Hosted workbench: BA HPDev",
       "type": "chrome",
       "request": "launch",
-      "url": "https://enter-your-SharePoint-site/_layouts/workbench.aspx",
+      "url": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewportHPDev/_layouts/workbench.aspx",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
