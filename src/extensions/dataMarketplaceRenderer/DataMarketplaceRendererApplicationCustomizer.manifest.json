@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json",
 
-  "id": "ccf5b7bf-216a-412b-be64-ca03db63dde8",
+  "id": "4c745113-7612-4aa3-a670-d110298e2fff",
   "alias": "DataMarketplaceRendererApplicationCustom",
   "componentType": "Extension",
   "extensionType": "ApplicationCustomizer",

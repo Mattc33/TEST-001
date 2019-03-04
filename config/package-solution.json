@@ -6,20 +6,18 @@
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
-    "features": [
-      {
-        "title": "Application Extension - Deployment of custom action.",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "cab0b31c-110d-468a-a87b-624f6799c3f7",
-        "version": "1.0.0.0",
-        "assets": {
-          "elementManifests": [
-            "elements.xml",
-            "clientsideinstance.xml"
-          ]
-        }
+    "features": [{
+      "title": "Slalom Viewport App Ext Search Result Renderer.",
+      "description": "Deploys Search Result Renderer",
+      "id": "3888c658-79db-4767-81fe-d2f72a469465",
+      "version": "1.0.0.0",
+      "assets": {
+        "elementManifests": [
+          "elements.xml",
+          "clientsideinstance.xml"
+        ]
       }
-    ]
+    }]
   },
   "paths": {
     "zippedPackage": "solution/Slalom-ViewPort.sppkg"

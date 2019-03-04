@@ -11,7 +11,7 @@
     "default": {
       "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
-        "ccf5b7bf-216a-412b-be64-ca03db63dde8": {
+        "4c745113-7612-4aa3-a670-d110298e2fff": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
             "testMessage": "Test message"
@@ -22,7 +22,7 @@
     "dataMarketplaceRenderer": {
       "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
-        "ccf5b7bf-216a-412b-be64-ca03db63dde8": {
+        "4c745113-7612-4aa3-a670-d110298e2fff": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
             "testMessage": "Test message"

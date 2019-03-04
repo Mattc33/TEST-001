@@ -11,7 +11,7 @@ export default class SearchResult extends React.Component<ISearchResultProps, {}
 
     let resultTiles: JSX.Element[] = this.props.searchResults.RelevantResults.map((result: ISearchResult) => {
       return (
-        <ResultTile result={result} webUrl={this.props.context.pageContext.web.absoluteUrl} />
+        <ResultTile result={result} />
       );
     });
 
