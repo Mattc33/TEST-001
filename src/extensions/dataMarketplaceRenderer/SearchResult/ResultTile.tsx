@@ -23,6 +23,15 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     this.actionsService = new ReportActionsService();
   }
 
+  public async componentDidMount() {
+    let itemId: number = parseInt(this.props.result.ListItemId);
+    let isFavorite: boolean = await this.actionsService.GetFavoriteState(this.props.result.SPWebUrl, itemId);
+
+    this.setState({
+      isFavorite: isFavorite
+    });
+  }
+
   public render() {
     return this.renderResultItem(this.props.result);
   }
@@ -30,7 +39,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private renderResultItem(result: ISearchResult): JSX.Element {
 
     let isFavoriteIconElement: JSX.Element = (
-      <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.favorite}></i>
+      <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.unfavorite}></i>
     );
 
     let isNotFavoriteIconElement: JSX.Element = (
@@ -75,7 +84,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private renderVizIconImage(result: ISearchResult) {
     let toReturn: JSX.Element;
 
-    let imageUrl: string = this.props.webUrl;
+    let imageUrl: string = this.props.result.SPWebUrl;
 
     switch (result.SVPVisualizationTechnology) {
       case "Tableau":
@@ -99,6 +108,15 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     return toReturn;
   }
 
+  private async getFavoriteState() {
+    let itemId: number = parseInt(this.props.result.ListItemId);
+    let isFavorited: boolean = await this.actionsService.GetFavoriteState(this.props.result.SPWebUrl, itemId);
+
+    if (isFavorited) {
+      this.setState({ isFavorite: true });
+    }
+  }
+
   private fmtDateString(utcString) {
     return moment(utcString).fromNow();
   }
@@ -106,12 +124,27 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   @autobind
   private async favorite() {
     let itemId: number = parseInt(this.props.result.ListItemId);
-    let success: boolean = await this.actionsService.FavoriteReport(itemId);
+    let success: boolean = await this.actionsService.FavoriteReport(this.props.result.SPWebUrl, itemId);
 
     if (success) {
       this.setState({
         isFavorite: true
       });
+    }
+  }
+
+  @autobind
+  private async unfavorite() {
+    let itemId: number = parseInt(this.props.result.ListItemId);
+
+    try {
+      await this.actionsService.UnfavoriteReport(this.props.result.SPWebUrl, itemId);
+
+      this.setState({
+        isFavorite: false
+      });
+    } catch (ex) {
+      console.log(`Couldn't unfavorite item ${itemId}.`);
     }
   }
 
