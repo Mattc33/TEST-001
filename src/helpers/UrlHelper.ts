@@ -70,3 +70,9 @@ export enum PageOpenBehavior {
     "Self",
     "NewTab"
 }
+
+export enum ReportFavoriteType {
+    Custom = "Custom",
+    Original = "Original",
+    Parameterized = "Parameterized"
+}

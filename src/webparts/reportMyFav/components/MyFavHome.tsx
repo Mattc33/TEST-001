@@ -1,16 +1,16 @@
 import * as React from 'react';
 import styles from './MyFavHome.module.scss';
-import { IReportBasicItem } from "../../../models/IReportItem";
-import { Link } from 'office-ui-fabric-react/lib/Link';
+import { IReportFavoriteItem } from "../../../models/IReportItem";
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
+import { ReportFavoriteType } from "../../../helpers/UrlHelper";
 
 export interface IReportProps {
   key: string;
-  reportItem: IReportBasicItem;
+  reportItem: IReportFavoriteItem;
 
-  onView(favReportID:string);
-  onShare(favReport:IReportBasicItem);
-  onRemove(favReport:IReportBasicItem);
+  onView(favReport:IReportFavoriteItem);
+  onShare(favReport:IReportFavoriteItem);
+  onRemove(favReport:IReportFavoriteItem);
 }
 
 
@@ -27,18 +27,29 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
       background: '#EEF0F2',
     };
 
+    let reportTitle = this.props.reportItem.SVPVisualizationLookupTitle;
+    if(this.props.reportItem.SVPFavoriteType != ReportFavoriteType.Original) {
+      reportTitle = this.props.reportItem.Title;
+    }
+
+    let reportImageUrl = this.props.reportItem.SVPVisualizationImage;
+    if(this.props.reportItem.SVPFavoriteType != ReportFavoriteType.Original) {
+      //TODO: Get the URL from SVPVisualizationMetadata:
+      reportImageUrl = "";
+    }
+
     return (
       <div className={styles.myFavHome}>
         <div className={styles.wrapper}>
           <div className="row" style={rowStyle}>
             <div className="col-md-6">
-              <img src={this.props.reportItem.SVPVisualizationImage} className={styles.image} />
+              <img src={reportImageUrl} className={styles.image} />
             </div>
             <div className="col-md-6" style={colStyle}>
-                <p className={styles.title}>{this.props.reportItem.Title}</p>
+                <p className={styles.title}>{reportTitle}</p>
                 <p>
                 <PrimaryButton data-automation-id="favReportView" text="View" className={styles.button}
-                  onClick={(e) => this.props.onView(this.props.reportItem.Id)} />
+                  onClick={(e) => this.props.onView(this.props.reportItem)} />
                 <PrimaryButton data-automation-id="favReportView" text="Share" className={styles.button}
                   onClick={(e) => this.props.onShare(this.props.reportItem)} />
                 <PrimaryButton data-automation-id="favReportRemove" text="Remove" className={styles.button}
