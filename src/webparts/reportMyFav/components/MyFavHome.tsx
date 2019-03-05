@@ -27,8 +27,6 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
       background: '#EEF0F2',
     };
 
-    const favReportViewUrl = "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SitePages/ViewReport.aspx?reportId=" + this.props.reportItem.Id;
-
     return (
       <div className={styles.myFavHome}>
         <div className={styles.wrapper}>

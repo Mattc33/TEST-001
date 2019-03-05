@@ -5,11 +5,13 @@ import { IReportBasicItem } from "../../../models/IReportItem";
 import { autobind } from '@uifabric/utilities/lib';
 import MyFavHome from "./MyFavHome";
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
-
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 export interface IReportMyFavProps {
   controlHeaderMessage: string;
   myFavReportService: any;
+  siteUrl: string;
+  loggedInUserName: string;
 }
 
 export interface IReportMyFavState {
@@ -18,11 +20,10 @@ export interface IReportMyFavState {
 }
 
 export default class ReportMyFavList extends React.Component<IReportMyFavProps, IReportMyFavState> {
-
+  
   constructor(props: IReportMyFavProps) {
     super(props);
     this.state = { myFavReportItemsinState: [], isReportsLoaded: false};
-
 
   }
 
@@ -91,13 +92,20 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
   @autobind 
   private handleClickShare(e:any) {
     console.log("Report: ", e);
-    alert("Shared Clicked !!!");
+    console.log("Site URL: " + this.props.siteUrl);
+    //alert("Clicked Share. Report Name: " + e.Title);
+    //TODO: Get the Person Name
+    const personName = this.props.loggedInUserName;
+    const subject = personName + " shared a report: " + e.Title;
+    const reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + e.Id;
+    window.location.href = "mailto:?subject="+subject+"&body=" + reportURL + " %0d%0a%0d%0a" + e.SVPVisualizationDescription;
+
   }
 
   @autobind 
   private handleClickView(favReportId:string) {
     
-    window.location.replace("https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SitePages/ViewReport.aspx?reportId=" + favReportId); 
+    window.location.replace(this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + favReportId); 
     return null;
 
   }
