@@ -1,5 +1,5 @@
-import { IReportBasicItem } from "../models/IReportItem";
-import { IReportService } from "./interfaces/IReportService";
+import { IReportBasicItem } from "../../models/IReportItem";
+import { IReportService } from "../interfaces/IReportService";
 
 export class ReportServiceMock implements IReportService {
 

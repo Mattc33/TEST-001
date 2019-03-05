@@ -38,3 +38,18 @@ export interface IReportItem {
      SVPVisualizationDescription:string;
      SVPVisualizationImage: string;
  }
+
+
+ export interface IReportFavoriteItem {
+
+    Id: string;
+    Title:string;
+    SVPVisualizationDescription:string;
+    SVPFavoriteType:string;
+    SVPVisualizationLookupId?: string;
+    SVPVisualizationLookupTitle?: string;
+    SVPVisualizationImage?: string;
+    SVPVisualizationParameters?: string;
+    SVPVisualizationMetadata?:string;
+
+}

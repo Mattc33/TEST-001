@@ -3,7 +3,7 @@ import {
   WebPartContext
 } from '@microsoft/sp-webpart-base';
 import ReportRotator from '../reportRotator/components/ReportRotator';
-import { ReportServiceMock } from "../../services/ReportServiceMock";
+import { ReportServiceMock } from "../../services/MockServices/ReportServiceMock";
 import { IReportService } from "../../services/interfaces/IReportService";
 import { ReportService } from "../../services/ReportService";
 
