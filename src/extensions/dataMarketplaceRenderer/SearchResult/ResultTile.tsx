@@ -50,7 +50,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       <li className={styles.resultItem}>
         <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4">
           <div className="singleCard">
-            <div className="previewImg" style={{ backgroundImage: `url(${result.RefinableString04})` }}>
+            <div className="previewImg" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
               {this.renderVizIconImage(result)}
             </div>
             <li className="ms-ListItem ms-ListItem--document">
@@ -104,7 +104,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
         break;
     }
 
-    toReturn = <img className="cardFileIcon visualizationTechnologyIcon" src={imageUrl} />;
+    toReturn = <img className={"cardFileIcon" + styles.visualizationTechnologyIcon} src={imageUrl} />;
     return toReturn;
   }
 

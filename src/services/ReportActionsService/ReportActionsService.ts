@@ -47,16 +47,25 @@ export class ReportActionsService {
     }
   }
 
-  public async FavoriteReport(webUrl: string, reportId: number): Promise<boolean> {
+  public async FavoriteReport(webUrl: string, reportId: number, description?: string, favoriteType?: FavoriteType, parametersId?: Array<number>,
+    metadata?: string): Promise<boolean> {
     let web: Web = await new Web(webUrl);
     let report: any = await web.lists.getByTitle("Visualizations").items.getById(reportId).fieldValuesAsText.get();
+    
+    let favoriteObject: any = {
+      Title: report.Title,
+      SVPVisualizationLookupId: reportId,
+      SVPVisualizationDescription: description || report.SVPVisualizationDescription,
+      SVPFavoriteType: favoriteType || FavoriteType.COMMON,
+      SVPVisualizationMetadata: metadata || ""
+    };
+
+    if(parametersId) {
+      favoriteObject.SVPVisualizationParametersId = parametersId;
+    }
+
     let favedInfo: ItemAddResult = await web.lists.getByTitle("Favorites").items
-      .add({
-        Title: report.Title,
-        SVPVisualizationDescription: report.SVPVisualizationDescription,
-        SVPFavoriteType: FavoriteType.COMMON,
-        SVPVisualizationLookupId: reportId
-      });
+      .add(favoriteObject);
 
     if (favedInfo.item) {
       console.log(`Favorited report with id #${reportId}`);
