@@ -45,15 +45,19 @@ export class ReportFavoriteService implements IReportFavoriteService {
         if (result && result.Row && !!result.Row.length) {
 
         const reports: Array<IReportFavoriteItem> = result.Row.map((r: any): IReportFavoriteItem => {
+          
+            const _SVPVisualizationLookupId = this.returnValue(r.SVPVisualizationLookup);
+            const _SVPVisualizationLookupTitle = this.returnValue(r.Visualization_x0020_Lookup_x003a);
+            const _SVPVisualizationImage = this.returnValue(r.Visualization_x0020_Lookup_x003a0);
 
             const item: IReportFavoriteItem = {
                 Id: r.ID,
                 Title: r.Title,
                 SVPVisualizationDescription:r.SVPVisualizationDescription,
                 SVPFavoriteType:r.SVPFavoriteType,
-                SVPVisualizationLookupId: (r.Visualization_x0020_Lookup_x003a.length > 0 ? r.Visualization_x0020_Lookup_x003a[0].lookupId : ""),
-                SVPVisualizationLookupTitle: (r.Visualization_x0020_Lookup_x003a.length > 0 ? r.Visualization_x0020_Lookup_x003a[0].lookupValue : ""),
-                SVPVisualizationImage: (r.Visualization_x0020_Lookup_x003a0.length > 0 ? r.Visualization_x0020_Lookup_x003a0[0].lookupValue : ""),
+                SVPVisualizationLookupId: _SVPVisualizationLookupId,
+                SVPVisualizationLookupTitle: _SVPVisualizationLookupTitle,
+                SVPVisualizationImage: _SVPVisualizationImage,
                 SVPVisualizationMetadata: r.SVPVisualizationMetadata
             };
             return item;
@@ -64,6 +68,18 @@ export class ReportFavoriteService implements IReportFavoriteService {
         }
 
         return [];
+    }
+
+    private returnValue(object:any):string {
+
+        if(Array.isArray(object)) {
+            return (object ? object[0].lookupValue : "");
+        }
+        else {
+            return object;
+        }
+
+
     }
 
 
