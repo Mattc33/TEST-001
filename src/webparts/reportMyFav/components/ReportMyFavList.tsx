@@ -68,6 +68,7 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
   @autobind
   private renderMyFavReports(favReports: Array<IReportFavoriteItem>): Array<JSX.Element> {
+    console.log("favReports: ", favReports);
     if (favReports && favReports.length > 0) {
       return favReports.map((report: IReportFavoriteItem) => {
         return (

@@ -32,10 +32,11 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
       reportTitle = this.props.reportItem.Title;
     }
 
+
     let reportImageUrl = this.props.reportItem.SVPVisualizationImage;
     if(this.props.reportItem.SVPFavoriteType != ReportFavoriteType.Original) {
       //TODO: Get the URL from SVPVisualizationMetadata:
-      reportImageUrl = "";
+      reportImageUrl = "#";
     }
 
     return (
