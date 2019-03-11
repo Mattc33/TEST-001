@@ -37,12 +37,13 @@ export default class AdaptiveCardsImageGallery extends React.Component<IAdaptive
       <div className={styles.reportAdaptiveCard}>
         <div className={styles.container}>
           <div><h4>{this.props.reportItem.Title}</h4></div>
-          <div ref={(n) => { n && n.appendChild(this.renderedCard) }} />
+          
         </div>
       </div>
     );
   }
 
+  //Goes in Line 40: <div ref={(n) => { n && n.appendChild(this.renderedCard) }} />
 
   private createCard():void {
     try{
@@ -93,7 +94,7 @@ export default class AdaptiveCardsImageGallery extends React.Component<IAdaptive
       // Set the adaptive card's event handlers. onExecuteAction is invoked
       // whenever an action is clicked in the card
       
-      adaptiveCard.onExecuteAction = function(action) { 
+      adaptiveCard.onExecuteAction = (action) => { 
         window.location.href = action.iconUrl;
       };
   
