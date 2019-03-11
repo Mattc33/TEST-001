@@ -18,6 +18,8 @@ export interface IReportMyFavWebPartProps {
   headerMessage: string;
   clientLabel:string;
   favReportCount:number;
+  visualizationTitle:string;
+  visualizationImage:string;
 }
 
 export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyFavWebPartProps> {
@@ -29,7 +31,9 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
         context: this.context,
         headerMessage: this.properties.headerMessage,
         clientLabel: this.properties.clientLabel,
-        favReportCount: this.properties.favReportCount
+        favReportCount: this.properties.favReportCount,
+        visualizationTitle: this.properties.visualizationTitle,
+        visualizationImage: this.properties.visualizationImage
       }
     );
 
@@ -84,6 +88,19 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
                   value: 5,
                   showValue: true,
                   step: 5
+                })
+              ]
+            },
+            {
+              groupName: strings.AdvanceGroupName,
+              groupFields: [
+                PropertyPaneTextField('visualizationTitle', {
+                  label: strings.VisualizationTitleFieldLabel,
+                  value: "Visualization_x0020_Lookup_x003A"
+                }),
+                PropertyPaneTextField('visualizationImage', {
+                  label: strings.VisualizationImageFieldLabel,
+                  value: "Visualization_x0020_Lookup_x003A0"
                 })
               ]
             }

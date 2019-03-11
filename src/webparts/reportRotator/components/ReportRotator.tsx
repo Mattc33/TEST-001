@@ -8,6 +8,7 @@ import ReportVerticle from "./ReportVerticle";
 import ReportHorizontal from "./ReportHorizontal";
 import { IReportService } from "../../../services/interfaces/IReportService";
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
+import ReportAdaptiveCard from "./ReportAdaptiveCard";
 
 export interface IReportRotatorProps {
   featuredReportService: IReportService;
@@ -61,7 +62,7 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
           <div className='swiper-wrapper'>
             {!this.state.isReportsLoaded &&
               <div className="row">
-                <div className="col-xs-12"><Spinner size={SpinnerSize.large} label="Wait, Pulling Featured Reports..." ariaLive="assertive" /></div>
+                <div className={`col-xs-12 ${styles.spinner}`}><Spinner size={SpinnerSize.large} label="Wait, Pulling Featured Reports..." ariaLive="assertive" /></div>
               </div>
               
             }
@@ -71,9 +72,9 @@ export default class ReportRotator extends React.Component<IReportRotatorProps, 
                   {this.props.isReportVerticle 
                   ? <ReportVerticle reportItem ={reportItem} key={i} siteUrl={this.props.currentSiteUrl}/> 
                   : <ReportHorizontal reportItem ={reportItem} key={i} siteUrl={this.props.currentSiteUrl}/>
+                  //<ReportAdaptiveCard reportItem ={reportItem} key={i} siteUrl={this.props.currentSiteUrl}/>
                   }
                   
-
                 </div>;
               })}
           </div>

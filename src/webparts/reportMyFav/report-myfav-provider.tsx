@@ -16,6 +16,9 @@ export interface IReportMyFavProviderProps {
     headerMessage:string;
     clientLabel:string;
     favReportCount:number;
+    visualizationTitle:string;
+    visualizationImage:string;
+  
 }
 
 export interface IReportMyFavProviderState {
@@ -57,6 +60,9 @@ export class ReportMyFavProvider extends React.Component<IReportMyFavProviderPro
                 loggedInUserName = {this.props.context.pageContext.user.displayName}
                 myFavReportService = {this._IFavReportService}
                 reportActionService ={this._ReportActionsService}
+                reportCount = {this.props.favReportCount}
+                visualizationTitle = {this.props.visualizationTitle}
+                visualizationImage = {this.props.visualizationImage}
             />
         );
     }
