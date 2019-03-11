@@ -9,11 +9,18 @@ const VIZ_REPORT_LST = "Favorites";
 
 export class ReportFavoriteService implements IReportFavoriteService {
 
+    private _VisualizationTitle:string;
+    private _VisualizationImage:string;
+
     constructor(private context: IWebPartContext) {
     
     }
 
-    public async getMyFavoriteReports():Promise<Array<IReportFavoriteItem>> {
+    public async getMyFavoriteReports(visualizationTitle:string, visualizationImage:string,favReportCounts:number):Promise<Array<IReportFavoriteItem>> {
+        
+        this._VisualizationTitle = visualizationTitle;
+        this._VisualizationImage= visualizationImage;
+        
         const query = Caml.getCaml(
             () => this.getVizReportListViewFields().map((field: string): string => {
                 return `<FieldRef Name="${field}" />`;
@@ -22,7 +29,7 @@ export class ReportFavoriteService implements IReportFavoriteService {
                 () => "<Eq><FieldRef Name='Author' LookupId='TRUE' /><Value Type='Integer'><UserID/></Value></Eq>",
                 () => "<FieldRef Name='Modified' Ascending='FALSE'/>"
             ),
-            100
+            favReportCounts
         );
       
         const parameters: RenderListDataParameters = {
@@ -45,10 +52,10 @@ export class ReportFavoriteService implements IReportFavoriteService {
         if (result && result.Row && !!result.Row.length) {
 
         const reports: Array<IReportFavoriteItem> = result.Row.map((r: any): IReportFavoriteItem => {
-          
+            
             const _SVPVisualizationLookupId = this.returnValue(r.SVPVisualizationLookup);
-            const _SVPVisualizationLookupTitle = this.returnValue(r.Visualization_x0020_Lookup_x003a);
-            const _SVPVisualizationImage = this.returnValue(r.Visualization_x0020_Lookup_x003a0);
+            const _SVPVisualizationLookupTitle = this.returnValue(r["Visualization_x0020_Lookup_x003A"]);
+            const _SVPVisualizationImage = this.returnValue(r["Visualization_x0020_Lookup_x003A0"]);
 
             const item: IReportFavoriteItem = {
                 Id: r.ID,
@@ -90,8 +97,8 @@ export class ReportFavoriteService implements IReportFavoriteService {
             'SVPVisualizationDescription',
             'SVPFavoriteType',
             'SVPVisualizationLookup',
-            'Visualization_x0020_Lookup_x003a',
-            'Visualization_x0020_Lookup_x003a0',
+            'Visualization_x0020_Lookup_x003A',
+            'Visualization_x0020_Lookup_x003A0',
             'SVPVisualizationMetadata'
         ];
     }
