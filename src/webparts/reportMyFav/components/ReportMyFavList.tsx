@@ -124,10 +124,10 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
   @autobind 
   private handleClickView(e:any) {
-    let reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + e.SVPVisualizationLookupId;
+    let reportURL = this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + e.SVPVisualizationLookupId;
 
     if(e.SVPFavoriteType != ReportFavoriteType.Original) {
-      reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/FavReport.aspx?favReportId=" + e.Id;
+      reportURL = this.props.siteUrl + "/SitePages/FavReport.aspx?favReportId=" + e.Id;
     }
     window.location.replace(reportURL); 
     return null;
