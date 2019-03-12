@@ -23,6 +23,13 @@
       "problemMatcher": [
         "$gulp-tsc"
       ]
+    },
+    {
+      "type": "gulp",
+      "task": "serve",
+      "problemMatcher": [
+        "$gulp-tsc"
+      ]
     }
   ]
 }

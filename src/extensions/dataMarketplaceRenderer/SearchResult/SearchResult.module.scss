@@ -16,14 +16,14 @@
   }
 
   .featuredCard {
-    background-color: rgba(173, 216, 230, .2);
+    background-color: rgba(173, 216, 230, 0.2);
   }
 
   .likeFaveButtons {
     position: absolute;
-    right: .5em;
-    bottom: -.25em;
-    margin: 0 .1em;
+    right: 0.5em;
+    bottom: -0.25em;
+    margin: 0 0.1em;
   }
 
   li.resultItem {
@@ -36,13 +36,18 @@
       justify-content: center;
       flex-direction: column;
 
-      >img {
+      > img {
         max-width: 78px;
         max-height: 48px;
         margin: auto 0;
         width: auto;
         height: auto;
       }
+    }
+    
+    .ms-dialogMainOverride {
+      width: 400px;
+      max-width: 1000px;
     }
   }
 }

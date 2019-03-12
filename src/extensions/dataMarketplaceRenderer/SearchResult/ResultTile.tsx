@@ -1,14 +1,17 @@
 import * as React from 'react';
+import * as moment from 'moment';
+import { Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField } from 'office-ui-fabric-react';
+import { Logger, LogLevel } from '@pnp/logging';
+
 import IResultTileProps from './IResultTileProps';
 import styles from './SearchResult.module.scss';
-import { PersonaCoin } from 'office-ui-fabric-react/lib/PersonaCoin';
-import * as moment from 'moment';
 import { ISearchResult } from '../../../models/ISearchResult';
-import { autobind } from '@uifabric/utilities';
 import { ReportActionsService } from '../../../services/ReportActionsService/ReportActionsService';
 
 export interface IResultTileState {
-  isFavorite?: boolean;
+  isFavorite: boolean;
+  favoriteDialogHidden: boolean;
+  favoriteDescription: string;
 }
 
 export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
@@ -18,7 +21,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     super(props);
 
     this.state = {
-      isFavorite: false
+      isFavorite: false,
+      favoriteDialogHidden: true,
+      favoriteDescription: this.props.result.SVPVisualizationDescription
     };
     this.actionsService = new ReportActionsService();
   }
@@ -43,14 +48,14 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     );
 
     let isNotFavoriteIconElement: JSX.Element = (
-      <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.favorite}></i>
+      <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.showFavoriteDialog}></i>
     );
 
     return (
       <li className={styles.resultItem}>
         <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4">
           <div className="singleCard">
-            <div className="previewImg" style={{ backgroundImage: `url(${result.RefinableString04})` }}>
+            <div className="previewImg" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
               {this.renderVizIconImage(result)}
             </div>
             <li className="ms-ListItem ms-ListItem--document">
@@ -66,10 +71,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                   <span>
                     {this.state.isFavorite ? isFavoriteIconElement : isNotFavoriteIconElement}
                   </span>
-                  {/* &nbsp;
-                    <span>
-                    <i className="ms-Icon ms-Icon--Like" aria-hidden="true" onClick={this.like}></i>
-                  </span> */}
                 </span>
 
                 <div className="ms-ListItem-selectionTarget"></div>
@@ -77,6 +78,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             </li>
           </div>
         </div>
+        {this.renderFavoriteDialog()}
       </li>
     );
   }
@@ -104,8 +106,38 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
         break;
     }
 
-    toReturn = <img className="cardFileIcon visualizationTechnologyIcon" src={imageUrl} />;
+    toReturn = <img className={"cardFileIcon" + styles.visualizationTechnologyIcon} src={imageUrl} />;
     return toReturn;
+  }
+
+  private renderFavoriteDialog(): JSX.Element {
+    return (
+      <Dialog
+        hidden={this.state.favoriteDialogHidden}
+        onDismiss={this.favoriteDialogCanceled}
+        dialogContentProps={{
+          type: DialogType.normal,
+          title: 'Save Favorite',
+          subText: 'Enter a custom description. Only you will see this description. Others will see the default description for the visualization.'
+        }}
+        modalProps={{
+          isBlocking: false,
+          containerClassName: 'ms-dialogMainOverride'
+        }}>
+        <TextField placeholder="Enter custom description..."
+          ariaLabel="Please enter text here" multiline rows={4}
+          value={this.state.favoriteDescription} onChanged={this.onFavoriteDescriptionChanged} />
+
+        <DialogFooter>
+          <PrimaryButton onClick={this.favoriteDialogSaved} text="Save" />
+          <DefaultButton onClick={this.favoriteDialogCanceled} text="Cancel" />
+        </DialogFooter>
+      </Dialog>
+    );
+  }
+
+  private fmtDateString(utcString) {
+    return moment(utcString).fromNow();
   }
 
   private async getFavoriteState() {
@@ -117,14 +149,11 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     }
   }
 
-  private fmtDateString(utcString) {
-    return moment(utcString).fromNow();
-  }
-
   @autobind
   private async favorite() {
     let itemId: number = parseInt(this.props.result.ListItemId);
-    let success: boolean = await this.actionsService.FavoriteReport(this.props.result.SPWebUrl, itemId);
+    let success: boolean = await this.actionsService.FavoriteReport(
+      this.props.result.SPWebUrl, itemId, this.state.favoriteDescription || "");
 
     if (success) {
       this.setState({
@@ -149,8 +178,33 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   }
 
   @autobind
-  private like() {
-    let itemId: number = parseInt(this.props.result.ListItemId);
-    this.actionsService.LikeReport(itemId);
+  private showFavoriteDialog() {
+    this.setState({
+      favoriteDialogHidden: false
+    });
+  }
+
+  @autobind
+  private onFavoriteDescriptionChanged(newValue: string) {
+    this.setState({
+      favoriteDescription: newValue || ""
+    });
+  }
+
+  @autobind
+  private async favoriteDialogCanceled() {
+    Logger.write("Closed the favorite dialog.", LogLevel.Verbose);
+    this.setState({
+      favoriteDialogHidden: true
+    });
+  }
+
+  @autobind
+  private async favoriteDialogSaved() {
+    Logger.write(`Saved ${this.state.favoriteDescription} from the favorite dialog.`, LogLevel.Verbose);
+    await this.favorite();
+    this.setState({
+      favoriteDialogHidden: true
+    });
   }
 }
