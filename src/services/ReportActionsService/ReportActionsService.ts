@@ -4,7 +4,7 @@ import { Logger, LogLevel } from '@pnp/logging';
 import { CurrentUser } from '@pnp/sp/src/siteusers';
 
 export class FavoriteType {
-  public static COMMON: string = "Common";
+  public static ORIGINAL: string = "Original";
   public static CUSTOM: string = "Custom";
   public static PARAMETERIZED: string = "Parameterized";
 }
@@ -22,7 +22,7 @@ export class ReportActionsService {
       Title: report.Title,
       SVPVisualizationLookupId: reportId,
       SVPVisualizationDescription: description || report.SVPVisualizationDescription,
-      SVPFavoriteType: favoriteType || FavoriteType.COMMON,
+      SVPFavoriteType: favoriteType || FavoriteType.ORIGINAL,
       SVPVisualizationMetadata: metadata || ""
     };
 
