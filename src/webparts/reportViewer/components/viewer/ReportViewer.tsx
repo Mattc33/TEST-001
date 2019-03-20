@@ -7,6 +7,7 @@ import { Toolbar } from "../toolbar/Toolbar";
 import { ViewNamePrompt } from "../toolbar/ViewNamePrompt";
 import { TableauReport } from "../tableauReport/TableauReport";
 import { IReportViewer } from "../../state/IReportViewerState";
+import { FavoriteDialog, IFavoriteDialogProps } from '../../../controls/Favorite/FavoriteDialog';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../../utils/utils";
 
@@ -49,7 +50,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
         {!this.props.state.loading && 
           <Toolbar 
-            types={["sizing", "savecustom", "story", "feedback", "profilefilter", "fullscreen"]}
+            types={["sizing", "savecustom", "feedback", "profilefilter", "fullscreen"]}
             height={this.state.height}
             width={this.state.width}
             onClick={this.handleToolbarClick}
@@ -57,10 +58,16 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         }
 
         {!this.props.state.loading && this.state.showCustomViewNamePrompt &&
-          <ViewNamePrompt
-            defaultViewName={(this.tableauReportRef) ? this.tableauReportRef.getActiveSheetName() : "Unkown"}
-            onOk={this.saveCustomView}
-            onCancel={this.setCustomViewNamePrompt}
+          // <ViewNamePrompt
+          //   defaultViewName={(this.tableauReportRef) ? this.tableauReportRef.getActiveSheetName() : "Unkown"}
+          //   onOk={this.saveCustomView}
+          //   onCancel={this.setCustomViewNamePrompt}
+          // />
+          <FavoriteDialog
+            title={this.props.state.report.Title}
+            description={this.props.state.report.SVPVisualizationDescription}
+            onSave={this.handleSaveFavorite}
+            onCancel={this.handleCancelFavorite}
           />
         }
 
@@ -91,7 +98,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       case "story":
         return;
       case "savecustom":
-        return this.setCustomViewNamePrompt(true);
+        return this.setCustomViewDialog(true);
       case "favorite":
         return;
       case "feedback":
@@ -102,8 +109,10 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
-  private async saveCustomView(viewName: string) {
-    this.setCustomViewNamePrompt(false);
+  private async handleSaveFavorite(viewName: string, viewDescription: string) {
+    this.setCustomViewDialog(false);
+    console.info('handleSaveCustomView', viewName, viewDescription);
+    
     if (viewName && viewName.length > 0 && this.tableauReportRef)  {
       const viewInfo = await this.tableauReportRef.saveCustomView(viewName);
       console.info('handleSaveCustomView', viewName, viewInfo);
@@ -111,7 +120,12 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
-  private setCustomViewNamePrompt(state: boolean) {
+  private handleCancelFavorite() {
+    this.setCustomViewDialog(false);
+  }
+
+  @autobind
+  private setCustomViewDialog(state: boolean) {
     if (this.state.showCustomViewNamePrompt !== state) {
       this.setState({
         showCustomViewNamePrompt: state
