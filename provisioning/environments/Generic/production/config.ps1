@@ -1,3 +1,3 @@
 
-$SiteUrl = "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport"
+$SiteUrl = "https://twodegrees1.sharepoint.com/teams/SlalomVPDemo"
 $TermSetGroupName = "Site Collection - <site collection>"

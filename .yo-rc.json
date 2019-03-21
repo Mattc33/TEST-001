@@ -6,7 +6,6 @@
     "environment": "spo",
     "packageManager": "npm",
     "isCreatingSolution": false,
-    "componentType": "extension",
-    "extensionType": "ApplicationCustomizer"
+    "componentType": "webpart"
   }
 }

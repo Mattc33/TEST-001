@@ -4,7 +4,8 @@
    * Chrome browser: https://aka.ms/spfx-debugger-extensions
    */
   "version": "0.2.0",
-  "configurations": [{
+  "configurations": [
+    {
       "name": "Local workbench",
       "type": "chrome",
       "request": "launch",
@@ -25,7 +26,7 @@
       "name": "Hosted workbench: BA HPDev",
       "type": "chrome",
       "request": "launch",
-      "url": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewportHPDev/_layouts/workbench.aspx",
+      "url": "https://bigapplesharepoint.sharepoint.com/sites/slalomviewport/_layouts/15/workbench.aspx",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
@@ -38,11 +39,12 @@
         "--remote-debugging-port=9222",
         "-incognito"
       ]
-    }, {
-      "name": "App customizer: BA HPDev",
+    }, 
+    {
+      "name": "App customizer: DataMarket Place Dev",
       "type": "chrome",
       "request": "launch",
-      "url": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewportHPDev/SitePages/DataMarketplace.aspx?debugManifestsFile=https://localhost:4321/temp/manifests.js&loadSPFX=true&customActions={%224c745113-7612-4aa3-a670-d110298e2fff%22:{%22location%22:%22ClientSideExtension.ApplicationCustomizer%22,%22properties%22:{%22testMessage%22:%22Test%20message%22}}}",
+      "url": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SitePages/DataMarketplace.aspx?debugManifestsFile=https://localhost:4321/temp/manifests.js&loadSPFX=true&customActions={%224c745113-7612-4aa3-a670-d110298e2fff%22:{%22location%22:%22ClientSideExtension.ApplicationCustomizer%22,%22properties%22:{%22testMessage%22:%22Test%20message%22}}}",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
