@@ -49,6 +49,14 @@
           "manifest": "./src/extensions/dataMarketplaceRenderer/DataMarketplaceRendererApplicationCustomizer.manifest.json"
         }
       ]
+    },
+    "report-comments-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/reportComments/ReportCommentsWebPart.js",
+          "manifest": "./src/webparts/reportComments/ReportCommentsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -61,6 +69,7 @@
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
     "ReportMyFavWebPartStrings": "lib/webparts/reportMyFav/loc/{locale}.js",
-    "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js"
+    "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js",
+    "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js"
   }
 }
