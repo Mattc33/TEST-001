@@ -1,0 +1,10 @@
+.ms-webpart-titleText {
+
+    @extend .headernorms;
+    border-bottom: 3px solid $teal;
+
+}
+
+.js-webpart-titleCell {
+    width: fit-content !important;
+}

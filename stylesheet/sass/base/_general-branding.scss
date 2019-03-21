@@ -1,0 +1,355 @@
+//GENERAL ELEMENTS
+
+.component__padding {
+    padding: 1.2em !important;
+}
+
+.sub-component__padding {
+  padding:.5em !important;
+}
+
+
+.modal-content {
+  border: 0;
+  border-radius: 0;
+  border-top: 8px solid $brand-primary;
+}
+
+button.btn.btn-primary, 
+.btn-toolbar, 
+button, 
+.modal-title {
+
+    font-family: $headings-font-family;
+    text-transform: $header-text-tranform;
+
+}
+
+input {
+
+  font-family: $font-family-base;
+  
+}
+
+.universal__header {
+
+  @extend .headernorms;
+
+  font-size: 1.2em !important;
+  line-height: .8em !important;
+  width: fit-content;
+
+}
+
+.universal__header--tiny {
+
+  font-size: .8em !important;
+
+}
+
+.universal__header--small {
+
+  font-size: .9em !important;
+
+}
+
+.universal__header--medium {
+
+  font-size: 1em !important;
+
+}
+
+.universal__header--large {
+
+  font-size: 1.8em !important;
+
+}
+
+.bootstrap-div--nopadding {
+  padding: 0 !important;
+}
+
+.bootstrap-div--nopadding-left {
+  padding-left: 0 !important;
+}
+
+.bootstrap-div--nopadding-right {
+  padding-right: 0 !important;
+}
+
+.bootstrap-div--padding-left {
+  padding-left: 2em !important;
+}
+
+.row--padding-top {
+  margin-top: .75em !important;
+}
+
+
+.btn-toolbar {
+    margin-left: 0 !important;
+}
+
+.pull-right {
+  float: right !important;
+ // text-align: right !important;
+  justify-content:flex-end;
+}
+
+.text--small {
+  line-height: 1.1em;
+  letter-spacing: normal !important;
+  font-family: $font-family-base !important;
+  color: $links;
+  font-size:.9em !important;
+}
+
+.text--tiny {
+  line-height: 1em;
+  letter-spacing: normal !important;
+  font-family: $font-family-base !important;
+  color: $links;
+  font-size:.8em !important;
+}
+
+
+//GENERAL DROPDOWN STYLING
+.dropdown {
+  display: inline-flex;
+
+    button {
+      border: 1px solid $formblack;
+      font-size: 1em !important;
+      padding: .3em .5em .3em .5em;
+      margin: 0;
+      text-align:left !important;
+
+          &:hover {
+              background-color: #eee;
+              color: $black;
+          }
+      }
+}
+
+// General link styling
+a {
+  &:link, &:hover, &:visited, &:focus, &:active {
+    color: #222;
+  }
+}
+
+//Underline link elements within content editor web parts
+.ms-rtestate-field a {
+  &:link, &:hover, &:visited, &:focus, &:active {
+    text-decoration: underline;
+  }
+}
+
+
+//MISC
+.col-md-10, #contentRow #contentBox, #mainContent + div .col-fluid-1 {
+    width: 100%;
+    margin:0;
+  }
+  
+  li.static.ms-verticalAlignTop.ms-listMenu-editLink.ms-navedit-editArea, h1#pageTitle, .ms-srch-sb-navImg {
+      display: none;
+  }
+
+  .general__title {
+    line-height: 1em;
+    margin: 0;
+    padding: .45em;
+    word-wrap: break-word;
+    max-width: 60%;
+  }
+  
+  .general__dropdown.my-artists {
+      flex-basis: 100% !important;
+      display: inline-block !important;
+  }
+  
+  .btn.btn-default.dropdown-toggle {
+    text-align: left;
+    border: 1px solid $formblack;
+    background: url("../images/dropdown-caret.png") no-repeat;
+    background-size: 1em;
+    margin-top: 0em;
+    background-position: 98% 50%;
+    height: 40px;
+    width:100%;
+  }
+  
+  .landing-page__top-right {
+      display: inline-flex;
+      width: 100% !important;
+  }
+  
+  .subsection__padding-top {
+    margin-top: 1.5em !important;
+  }
+  
+  .div--flex {
+      display: flex;
+      flex-wrap: wrap;
+      height: auto;
+      justify-content: space-between;
+  }
+  
+  .universal__content--styles {
+    font-family: $font-family-base !important;
+    color: $text-color !important;
+  
+      h1, h2, h3, h4, h5 {
+        font-family: $headings-font-family;
+      }
+  }
+  
+  
+  .div-container--nomargin-left {
+    margin-left: 0 !important;
+  }
+  
+  
+  .dept-select__container {
+    width:100%
+  }
+  
+  
+  // This is to be extra safe because some ms styles were interfering with our header settings 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $headings-font-family;
+    color: $black !important;
+  }
+
+
+//SEARCH BOX
+
+#DeltaPlaceHolderSearchArea {
+    display: inline-block;
+}
+  
+  
+  #SearchBox {
+    margin-bottom: 0;
+  }
+  
+  .ms-srch-sb > input {
+    margin: 0;
+    font-size: .9em;
+    width: 85% !important;
+    color: $brand-header-text !important;
+    font-family: $site-font-light !important;
+  }
+  
+  .ms-srch-sb > .ms-srch-sb-navLink,
+  .ms-srch-sb > .ms-srch-sb-searchLink {
+    vertical-align: middle;
+  }
+  
+  
+  div#searchInputBox {
+      display: flex !important;
+      width:100% !important;
+  }
+
+  .artist-panel__group {
+    &.panel-group {
+        background-color: white;
+        border: 0px;
+    }
+}
+
+.artist-panel__panel {
+    &.panel.panel-default {
+      border: 0px;
+    }
+
+    .panel-collapse {
+      border: 0px;
+    }
+}
+
+.artist-panel__heading {
+    &.panel-heading {
+      border: 0px;
+      background-color: white;
+    }
+}
+
+.artist-panel__body {
+    &.panel-body {
+      border: 0px !important;
+      background-color: white;
+    }
+}
+
+.ms-Dialog-main {
+  width: 75%;
+}
+  
+
+.action-item-accordion__header {
+  padding: .5em 0 !important;
+}
+
+.action-item-accordion__row {
+  margin: .7em 0 !important;
+}
+
+.checkbox-label--indent {
+    margin-left: .5em;
+}
+
+.action-item-accordion__caret {
+    text-decoration:none !important;
+    font-size:1.3em
+}
+
+
+.action-item--height {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    clear: both;
+    height: auto !important;
+}
+
+.other-artists__panel__title--lowercase {
+  text-transform:lowercase 1important;
+}
+
+.loading-overlay {
+
+  position: absolute;
+  left: 0; 
+  top: 0; 
+  right: 0; 
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(255,255,255,0.8);
+
+}
+
+.loading-overlay__content {
+    position: absolute;
+    transform: translateY(-50%);
+     -webkit-transform: translateY(-50%);
+     -ms-transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #555;
+}
+
+.artist-general__title {
+  font-size: 2.5em;
+  margin: 0 .5em 0 0 !important;
+}
+
+.artist-social_tiktok {
+  content: url("../images/icon_tiktok.png");
+  width: 35px;
+  position: absolute;
+  top: -2px;
+}

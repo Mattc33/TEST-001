@@ -8,6 +8,12 @@ const bundleAnalyzer = require('webpack-bundle-analyzer');
 
 build.addSuppression(/^Warning - \[sass\].*$/);
 
+// Build CSS - TODO
+
+// Build MasterPage - TODO
+
+// Build PageLayouts -TODO
+
 /********************************************************************************************
  * Adds an alias for handlebars in order to avoid errors while gulping the project
  * https://github.com/wycats/handlebars.js/issues/1174
@@ -48,4 +54,19 @@ build.configureWebpack.mergeConfig({
   }
 });
 
+
 build.initialize(gulp);
+
+
+/********
+ * BUILD
+ ********/
+
+// CSS BUILD TASKS - TODO
+// MASTER BUILD TASKS - TODO
+
+
+/*********
+ * DEPLOY
+ *********/
+//ALL DEPLOY TASKS. - TODO

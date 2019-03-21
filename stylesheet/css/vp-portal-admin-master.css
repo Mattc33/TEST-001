@@ -1,0 +1,53 @@
+
+
+.search-Tray {
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    top: 150px !important;
+   }
+  
+  
+      #burgerMenuSlide {
+      margin-top: 204px !important;
+    }
+  
+  div#suiteBarTop {
+      position: fixed !important;
+      top: 0px;
+      z-index:99999999999999999;
+  }
+  
+  
+  div#s4-ribbonrow {
+       margin-top:30px;
+       z-index:99999999999999999;
+  }
+  
+  
+    #s4-workspace #s4-bodyContainer {
+      margin: 0px 0px 0px 0px !important;
+    }
+  
+  
+  div#s4-workspace {
+    top: 0px !important;
+  }
+  
+  
+  .ms-cui-topBar2 {
+      
+      z-index: 99999999999999;
+      background-color: white;
+      width: 100%;
+  }
+  
+  
+  @media screen and (max-width: 770px) {
+  
+  div#s4-workspace {
+    top: 30px !important;
+  }
+  
+  }
+  

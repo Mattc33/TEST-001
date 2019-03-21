@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "d88e24fc-b6e0-41b4-9c96-e3489d0bdbd6",
+  "alias": "ReportCommentsWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
+    "group": { "default": "Slalom ViewPort WebParts" },
+    "title": { "default": "Comments on Reports" },
+    "description": { "default": "Add Edit and Remove for comments for Report" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "Comments for Report"
+    }
+  }]
+}

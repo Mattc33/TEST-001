@@ -1,7 +1,7 @@
 Execute,Type,FileName,Arg1,Arg2,Arg3,Arg4,Comments
-No,ContentTypeDef,contentTypesDef.csv,,,,,
-No,List,lookupSpLists.csv,,,,,"Create base list (no content type, needed for lookup site columns)"
-No,SiteColumn,siteColumns.csv,,,,,
-No,ContentType,contentTypes.csv,contentTypesDef.csv,,,,
-No,List,spLists.csv,,,,,Create lists and attach content types
-Yes,Files,files.csv,,,,,Upload files
+Yes,ContentTypeDef,contentTypesDef.csv,,,,,
+Yes,List,lookupSpLists.csv,,,,,"Create base list (no content type, needed for lookup site columns)"
+Yes,SiteColumn,siteColumns.csv,,,,,
+Yes,ContentType,contentTypes.csv,contentTypesDef.csv,,,,
+Yes,List,spLists.csv,,,,,Create lists and attach content types
+No,Files,files.csv,,,,,Upload files

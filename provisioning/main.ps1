@@ -4,7 +4,8 @@ param(
 	[switch]$cleanup,
 	[object]$credential,
 	[boolean]$noDisconnect,
-	[boolean]$useCredentialManager
+	[boolean]$useCredentialManager,
+    [boolean]$useWebLogin
 )
 
 Remove-Module * -ErrorAction SilentlyContinue
@@ -42,9 +43,14 @@ function Run()
 
 	if($useCredentialManager) {
 		Connect-PnPOnline -Url $SiteUrl
-	} else {
-		Connect-PnPOnline -Url $SiteUrl -Credentials $credential
+	} 
+    if ($useWebLogin){
+		Connect-PnPOnline -Url $SiteUrl -UseWebLogin
 	}
+    else
+    {
+        Connect-PnPOnline -Url $SiteUrl -Credentials $credential
+    }
 	$web = Get-PnPWeb
 
 	Write-Host "Target Web : $($web.Url)"

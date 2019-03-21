@@ -10,6 +10,9 @@
     "clean": "gulp clean",
     "serve": "gulp clean && gulp serve --nobrowser --max_old_space_size=4096",
     "build:app": "gulp bundle --max_old_space_size=4096 --ship && gulp package-solution --max_old_space_size=4096 --ship",
+    "deploy:bigapple-dev:css": "gulp deploy-css --env bigapple-dev",
+    "deploy:bigapple-dev:masterpage": "gulp deploy-masterpage --env bigapple-dev",
+    "deploy:bigapple-dev:app": "gulp upload-app-pkg --env bigapple-dev && gulp deploy-app-package --env bigapple-dev",
     "test": "gulp test"
   },
   "dependencies": {
@@ -53,6 +56,7 @@
     "react-custom-scrollbars": "4.2.1",
     "react-dom": "16.3.2",
     "react-js-pagination": "3.0.0",
+    "react-sliding-pane": "^3.1.0",
     "swiper": "4.4.2",
     "ts-dot-prop": "^1.4.0",
     "video.js": "^7.3.0",
