@@ -1,3 +1,6 @@
+import {
+  WebPartContext
+} from '@microsoft/sp-webpart-base';
 import { ReportViewerActions } from "../components/viewer/ReportViewActions";
 import { IReportItem } from "../../../models";
 
@@ -13,7 +16,11 @@ export interface IReportViewerState {
 }
 
 export interface IReportViewer {
+  context: WebPartContext;
+
   loading?: boolean;
+  savingAsFavorite?: boolean;
+
   report?: IReportItem;
   actions?: ReportViewerActions;
 

@@ -2,5 +2,6 @@
 
 export * from "./MockService";
 export * from "./ReportViewerService";
+export * from "./ReportActionsService/ReportActionsService";
 
 export * from "./interfaces";
