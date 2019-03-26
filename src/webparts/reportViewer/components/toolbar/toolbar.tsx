@@ -5,11 +5,54 @@ import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
+export interface IProfileFilter {
+    filterName: string;
+    filterValue: string;
+    disabled: boolean;
+    selected: boolean;
+}
+
+export interface IProfileFilterProps {
+    filters: Array<IProfileFilter>;
+
+    //onChange(e: React.FormEvent<HTMLElement>);
+    onChange: Function;
+}
+
+const checkboxStyles = () => {
+    return {
+        root: {
+            marginTop: '10px'
+        }
+    };
+};
+
+export const ProfileFilters: React.SFC<IProfileFilterProps> = props => {
+    const filters = props.filters.map((f: IProfileFilter, index: number): JSX.Element => {
+        return (
+            <Checkbox
+                label={f.filterName}
+                defaultChecked={f.selected}
+                disabled={f.disabled}
+                onChange={props.onChange(f.filterName)}
+                styles={checkboxStyles}
+            />
+        );
+    });
+
+    return (
+        <React.Fragment>
+            { filters }
+        </React.Fragment>
+    );
+};
 
 export interface IToolbarProps {
   types: Array<string>;
   height: number;
   width: number;
+
+  profileFilters: Array<IProfileFilter>;
 
   onClick(type: string, args?: any): void;
 }
@@ -19,6 +62,7 @@ export interface IToolbarState {
     height: number;
     width: number;
 
+    profileFilters: Array<IProfileFilter>;
     showProfileFilter: boolean;
 }
 
@@ -26,16 +70,18 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
     private originalHeight: number;
     private originalWidth: number;
 
-    constructor(props) {
+    constructor(props: IToolbarProps) {
         super(props);
 
-        this.originalHeight = this.props.height;
-        this.originalWidth = this.props.width;
+        this.originalHeight = props.height;
+        this.originalWidth = props.width;
 
         this.state = { 
             items:  [],
-            height: this.props.height,
-            width: this.props.width,
+            height: props.height,
+            width: props.width,
+
+            profileFilters: props.profileFilters,
             showProfileFilter: false
         };
     }
@@ -68,19 +114,34 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     isOpen={this.state.showProfileFilter}
                     type={PanelType.smallFixedFar}
                     onDismiss={this.closeProfileFilterPane}
-                    headerText="Panel - Small, right-aligned, fixed, with footer"
+                    headerText="Profile Filter"
                     closeButtonAriaLabel="Close"
                     onRenderFooterContent={this.renderProfileFilterFooterContent}>
             
-                    <Checkbox
-                        label="Uncontrolled checkbox with defaultChecked true"
-                        defaultChecked={true}
-                        // onChange={this._onCheckboxChange}
-                        //styles={checkboxStyles}
-                        />
+                    <ProfileFilters 
+                        filters={this.state.profileFilters} 
+                        onChange={this.handleProfileFilterChange} 
+                    />
+
                 </Panel>
             </React.Fragment>
         );
+    }
+
+    @autobind
+    private handleProfileFilterChange(filterName: string) {
+        return (e: React.FormEvent<HTMLElement>, checked: boolean) => {
+            const filters = this.state.profileFilters.map((f: IProfileFilter) => {
+                if (f.filterName === filterName)
+                    f.selected = checked;
+
+                return f;
+            });
+
+            this.setState(state => {
+                return { ...state, ...{ "profileFilters": filters }};
+            });
+        };
     }
 
     @autobind

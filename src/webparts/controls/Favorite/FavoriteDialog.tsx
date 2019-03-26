@@ -61,7 +61,7 @@ export class FavoriteDialog extends React.Component<IFavoriteDialogProps, IFavor
         hidden={this.state.hideDialog}
         onDismiss={this.handleDialogCanceled}
         dialogContentProps={{
-          type: DialogType.normal,
+          type: DialogType.largeHeader,
           title: 'Save Favorite',
           subText: subText
         }}

@@ -7,15 +7,16 @@ import {
   REPORT_VIEWER_PATH
 } from "../../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react';
-import { ReportViewerService, IReportViewerService, ReportActionsService, FavoriteType } from "../../../../services";
+import { ReportViewerService, IReportViewerService, UserProfileService, IUserProfileService, ReportActionsService, FavoriteType } from "../../../../services";
 import { normalize } from "normalizr";
 import { BaseAction, IBaseStore } from "../../../../base";
 import { withErrHandler } from "../../../../utils/withErrorHandler";
-import { IReportItem } from "../../../../models";
+import { IReportItem, IUserProfile, IUserItem } from "../../../../models";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
   private context: WebPartContext;
   private reportViewerApi: IReportViewerService;
+  private userProfileApi: IUserProfileService;
   private favoriteApi: ReportActionsService;
 
   constructor(store: IBaseStore, context: WebPartContext) {
@@ -23,6 +24,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
 
     this.context = context;
     this.reportViewerApi = new ReportViewerService();
+    this.userProfileApi = new UserProfileService();
     this.favoriteApi = new ReportActionsService();
   }
 
@@ -31,29 +33,23 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.dispatch({ loading: true, error: null });
 
     if (!reportId || isNaN(reportId)) {
-      const error: IErrorResult = {
-        errorMessage: `Invalid or missing reportId parameter: ${reportId}`
-      };
-
-      this.dispatch({ loading: false, error });
+      this.dispatchError(`Invalid or missing reportId parameter: ${reportId}`, {}, { loading: false });
       return;
     }
     
-    const [item, err] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinition(parseInt(reportId)));
-    if (err) {
-      const error: IErrorResult = {
-        errorMessage: `Report doesn't exists or you don't have permission to view this report: ${reportId}`,
-        error: err
-      };
-
-      this.dispatch({ loading: false, error });
+    const [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinition(parseInt(reportId)));
+    if (rvErr) {
+      this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
       return;
     }
 
-    item.SVPHeight = item.SVPHeight || 704;
-    item.SVPWidth = item.SVPWidth || 799;
+    //expect null 'userProfile'
+    const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 
-    this.dispatch({ loading: false, report: item });
+    report.SVPHeight = report.SVPHeight || 704;
+    report.SVPWidth = report.SVPWidth || 799;
+
+    this.dispatch({ loading: false, report, userProfile });
   }
 
   @autobind

@@ -6,13 +6,14 @@ import {
 import { REPORT_VIEWER_PATH } from "../../state/IReportViewerState";
 import { ConnectByPath } from "../../../../base";
 import { ReportViewerContext } from "../../store/ReportViewerStore";
-import { Toolbar } from "../toolbar/Toolbar";
+import { Toolbar, IProfileFilter } from "../toolbar/Toolbar";
 import { ViewNamePrompt } from "../toolbar/ViewNamePrompt";
 import { TableauReport } from "../tableauReport/TableauReport";
 import { IReportViewer } from "../../state/IReportViewerState";
 import { FavoriteDialog, IFavoriteDialogProps, SaveStatus } from '../../../controls/Favorite/FavoriteDialog';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../../utils/utils";
+import { IReportParameters } from "../../../../models";
 
 export interface IReportViewerProps {
   description: string;
@@ -28,6 +29,7 @@ export interface IReportViewerState {
 
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
   private tableauReportRef: TableauReport;
+  private imageRef: HTMLImageElement;
   private customViewNameRef: HTMLInputElement;
   private initFavriteDialog: boolean;
 
@@ -51,7 +53,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
-    let saveState: SaveStatus = this.getSaveStatus();
+    const saveState: SaveStatus = this.getSaveStatus();
 
     return (
       <div className={styles.reportViewer}>
@@ -62,6 +64,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             types={["sizing", "savecustom", "feedback", "profilefilter", "fullscreen"]}
             height={this.state.height}
             width={this.state.width}
+            profileFilters={this.getProfileFilter()}
             onClick={this.handleToolbarClick}
           />
         }
@@ -84,6 +87,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             width={this.state.width}
           />
         }
+
+        <img ref={i => this.imageRef = i} src="#" />
 
         {!this.props.state.loading && this.props.state.error &&
           <div>
@@ -114,6 +119,31 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
+  private getProfileFilter(): Array<IProfileFilter> {
+    let profileFilters: Array<IProfileFilter> = [];
+
+    if (this.props.state.loading || 
+        !this.props.state.report || 
+        !this.props.state.userProfile ||
+        !this.props.state.report.SVPVisualizationParameters ||
+        this.props.state.report.SVPVisualizationParameters.length === 0) 
+    {
+      return profileFilters;
+    }
+
+    return this.props.state.report.SVPVisualizationParameters.map((p: IReportParameters): IProfileFilter => {
+      const value = this.props.state.userProfile[p.SVPParameterValue];
+
+      return {
+        filterName: p.SVPParameterName,
+        filterValue: value,
+        disabled: (value) ? false : true,
+        selected: false
+      };
+    });
+  }
+
+  @autobind
   private handleToolbarClick(type: string, args?: any) {
     console.info('handleToolbarClick', type, args);
     switch(type) {
@@ -126,11 +156,24 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         return this.setSaveFavoriteDialog(true);
       case "favorite":
         return;
-      case "feedback":
-        return;
+      case "sendFeedback":
+        return this.imageTest();
       case "fullscreen":
-        return;
+        return this.imageTest();
     }
+  }
+
+  @autobind
+  private imageTest() {
+    console.info('image test starting');
+
+    var image = this.imageRef;
+    var downloadingImage = new Image();
+    downloadingImage.onload = function(){
+      console.info('image downloaded');
+      image.src = (this as any).src;   
+    };
+    downloadingImage.src = "https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance/javeda@slalom.com/PharmaceuticalSalesPerformance10015M.png";
   }
 
   @autobind

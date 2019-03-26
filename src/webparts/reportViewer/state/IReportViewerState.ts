@@ -2,7 +2,7 @@ import {
   WebPartContext
 } from '@microsoft/sp-webpart-base';
 import { ReportViewerActions } from "../components/viewer/ReportViewActions";
-import { IReportItem } from "../../../models";
+import { IReportItem, IUserProfile } from "../../../models";
 
 export const REPORT_VIEWER_PATH: string = "reportViewer";
 
@@ -22,6 +22,8 @@ export interface IReportViewer {
   savingAsFavorite?: boolean;
 
   report?: IReportItem;
+  userProfile?: IUserProfile;
+  
   actions?: ReportViewerActions;
 
   error?: IErrorResult; 
