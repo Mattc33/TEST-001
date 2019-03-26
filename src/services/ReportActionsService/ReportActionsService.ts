@@ -14,12 +14,12 @@ const VISUALIZATIONS_LIST_TITLE: string = "Visualizations";
 
 export class ReportActionsService {
   public async FavoriteReport(webUrl: string, reportId: number, description?: string, favoriteType?: FavoriteType, parametersId?: Array<number>,
-    metadata?: string): Promise<boolean> {
+    metadata?: string, reportTitle?: string): Promise<boolean> {
     let web: Web = await new Web(webUrl);
     let report: any = await web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items.getById(reportId).fieldValuesAsText.get();
 
     let favoriteObject: any = {
-      Title: report.Title,
+      Title: reportTitle || report.Title,
       SVPVisualizationLookupId: reportId,
       SVPVisualizationDescription: description || report.SVPVisualizationDescription,
       SVPFavoriteType: favoriteType || FavoriteType.ORIGINAL,

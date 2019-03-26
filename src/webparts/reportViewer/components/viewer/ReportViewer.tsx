@@ -1,37 +1,47 @@
 import * as React from "react";
 import styles from "./ReportViewer.module.scss";
+import {
+  WebPartContext
+} from '@microsoft/sp-webpart-base';
 import { REPORT_VIEWER_PATH } from "../../state/IReportViewerState";
 import { ConnectByPath } from "../../../../base";
 import { ReportViewerContext } from "../../store/ReportViewerStore";
-import { Toolbar } from "../toolbar/Toolbar";
+import { Toolbar, IProfileFilter } from "../toolbar/Toolbar";
 import { ViewNamePrompt } from "../toolbar/ViewNamePrompt";
 import { TableauReport } from "../tableauReport/TableauReport";
 import { IReportViewer } from "../../state/IReportViewerState";
+import { FavoriteDialog, IFavoriteDialogProps, SaveStatus } from '../../../controls/Favorite/FavoriteDialog';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../../utils/utils";
+import { IReportParameters } from "../../../../models";
 
 export interface IReportViewerProps {
   description: string;
+  context: WebPartContext;
   state: IReportViewer;
 }
 
 export interface IReportViewerState {
   height?: number;
   width?: number;
-  showCustomViewNamePrompt: boolean;
+  showSaveFavoriteDialog: boolean;
 }
 
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
   private tableauReportRef: TableauReport;
+  private imageRef: HTMLImageElement;
   private customViewNameRef: HTMLInputElement;
+  private initFavriteDialog: boolean;
 
   constructor(props: IReportViewerProps) {
     super(props);
 
+    this.initFavriteDialog = false;
+
     this.state = {
       height: (props.state.report) ? props.state.report.SVPHeight || 704 : 704,
       width: (props.state.report) ? props.state.report.SVPWidth || 799 : 799,
-      showCustomViewNamePrompt: false
+      showSaveFavoriteDialog: false
     };
   }
 
@@ -43,24 +53,29 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
+    const saveState: SaveStatus = this.getSaveStatus();
+
     return (
       <div className={styles.reportViewer}>
         {this.props.state.loading && <div>Loading....</div>}
 
         {!this.props.state.loading && 
           <Toolbar 
-            types={["sizing", "savecustom", "story", "feedback", "profilefilter", "fullscreen"]}
+            types={["sizing", "savecustom", "feedback", "profilefilter", "fullscreen"]}
             height={this.state.height}
             width={this.state.width}
+            profileFilters={this.getProfileFilter()}
             onClick={this.handleToolbarClick}
           />
         }
 
-        {!this.props.state.loading && this.state.showCustomViewNamePrompt &&
-          <ViewNamePrompt
-            defaultViewName={(this.tableauReportRef) ? this.tableauReportRef.getActiveSheetName() : "Unkown"}
-            onOk={this.saveCustomView}
-            onCancel={this.setCustomViewNamePrompt}
+        {!this.props.state.loading && this.state.showSaveFavoriteDialog &&
+          <FavoriteDialog
+            saveState={saveState}
+            title={this.props.state.report.Title}
+            description={this.props.state.report.SVPVisualizationDescription}
+            onSave={this.handleSaveFavorite}
+            onCancel={this.handleCancelFavorite}
           />
         }
 
@@ -73,6 +88,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
           />
         }
 
+        <img ref={i => this.imageRef = i} src="#" />
+
         {!this.props.state.loading && this.props.state.error &&
           <div>
             Error occured loading report: {this.props.state.error.errorMessage}
@@ -80,6 +97,50 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         }
       </div>
     );
+  }
+
+  @autobind
+  private getSaveStatus(): SaveStatus {
+    let saveState: SaveStatus = SaveStatus.None;
+
+    if (this.state.showSaveFavoriteDialog) {
+      saveState = SaveStatus.None;
+      if (this.initFavriteDialog) 
+        this.initFavriteDialog = false;
+      else if (this.props.state.savingAsFavorite)
+        saveState = SaveStatus.SaveInProgress;
+      else if (!this.props.state.savingAsFavorite && !this.props.state.error)
+        saveState = SaveStatus.SaveSuccess;
+      else if (!this.props.state.savingAsFavorite && this.props.state.error)
+        saveState = SaveStatus.SaveError;
+    }
+
+    return saveState;
+  }
+
+  @autobind
+  private getProfileFilter(): Array<IProfileFilter> {
+    let profileFilters: Array<IProfileFilter> = [];
+
+    if (this.props.state.loading || 
+        !this.props.state.report || 
+        !this.props.state.userProfile ||
+        !this.props.state.report.SVPVisualizationParameters ||
+        this.props.state.report.SVPVisualizationParameters.length === 0) 
+    {
+      return profileFilters;
+    }
+
+    return this.props.state.report.SVPVisualizationParameters.map((p: IReportParameters): IProfileFilter => {
+      const value = this.props.state.userProfile[p.SVPParameterValue];
+
+      return {
+        filterName: p.SVPParameterName,
+        filterValue: value,
+        disabled: (value) ? false : true,
+        selected: false
+      };
+    });
   }
 
   @autobind
@@ -91,30 +152,50 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       case "story":
         return;
       case "savecustom":
-        return this.setCustomViewNamePrompt(true);
+        this.initFavriteDialog = true;
+        return this.setSaveFavoriteDialog(true);
       case "favorite":
         return;
-      case "feedback":
-        return;
+      case "sendFeedback":
+        return this.imageTest();
       case "fullscreen":
-        return;
+        return this.imageTest();
     }
   }
 
   @autobind
-  private async saveCustomView(viewName: string) {
-    this.setCustomViewNamePrompt(false);
+  private imageTest() {
+    console.info('image test starting');
+
+    var image = this.imageRef;
+    var downloadingImage = new Image();
+    downloadingImage.onload = function(){
+      console.info('image downloaded');
+      image.src = (this as any).src;   
+    };
+    downloadingImage.src = "https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance/javeda@slalom.com/PharmaceuticalSalesPerformance10015M.png";
+  }
+
+  @autobind
+  private async handleSaveFavorite(viewName: string, viewDescription: string) {
     if (viewName && viewName.length > 0 && this.tableauReportRef)  {
+      const reportId = Utils.getParameterByName("reportId");
+
       const viewInfo = await this.tableauReportRef.saveCustomView(viewName);
-      console.info('handleSaveCustomView', viewName, viewInfo);
+      await this.props.state.actions.saveReportAsFavorite(Number.parseInt(reportId), viewName, viewDescription, viewInfo.url);
     }
   }
 
   @autobind
-  private setCustomViewNamePrompt(state: boolean) {
-    if (this.state.showCustomViewNamePrompt !== state) {
+  private handleCancelFavorite() {
+    this.setSaveFavoriteDialog(false);
+  }
+
+  @autobind
+  private setSaveFavoriteDialog(state: boolean) {
+    if (this.state.showSaveFavoriteDialog !== state) {
       this.setState({
-        showCustomViewNamePrompt: state
+        showSaveFavoriteDialog: state
       });
     }
   }

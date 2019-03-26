@@ -26,7 +26,10 @@ export abstract class BaseWebpart<T> extends BaseClientSideWebPart<T> {
 
   protected async onInit(): Promise<void> {
     sp.setup({
-      spfxContext: this.context
+      spfxContext: this.context,
+      defaultCachingStore: "session", // or "local"
+      defaultCachingTimeoutSeconds: 30,
+      globalCacheDisable: false // or true to disable caching in case of debugging/testing
     });
 
     if (this.isRunningInDev()) 

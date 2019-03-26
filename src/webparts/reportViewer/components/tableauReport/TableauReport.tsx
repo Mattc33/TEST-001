@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { autobind } from 'office-ui-fabric-react';
 
 declare var tableau: any;
 
@@ -23,22 +24,26 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
         super(props);
     }
 
+    @autobind
     public componentDidMount() {
         this.initViz();
     }
 
+    @autobind
     public componentWillReceiveProps(nextProps: ITableauReportProps) {
         if (this.Viz && (this.props.height !== nextProps.height || this.props.width !== nextProps.width)) {
             this.Viz.setFrameSize(nextProps.width, nextProps.height);
         }
     }
 
+    @autobind
     public render() { 
         return ( 
             <div id="vizPlaceholder" ref={v => this.VizPlaceholder = v}></div>
          );
     }
 
+    @autobind
     public async saveCustomView(name: string): Promise<any> {
         let viewObj = undefined;
 
@@ -56,6 +61,7 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
         return viewObj;
     }
 
+    @autobind
     public getActiveSheetName() {
         let sheetName = undefined;
 
@@ -65,6 +71,7 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
         return sheetName;
     }
 
+    @autobind
     private initViz() {
         if (this.Viz) {
             this.Viz.dispose();
@@ -83,10 +90,27 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
               this.VizWorkbook = this.Viz.getWorkbook();
               this.VizSheets = this.VizWorkbook.getActiveSheet().getWorksheets();
               this.VizSheet = this.VizWorkbook.getActiveSheet(); //this.VizSheets[0];
+
+              this.initEvents();
             }
         };
 
         this.Viz = new tableau.Viz(this.VizPlaceholder, this.props.reportURL, vizOptions);
+    }
+
+    @autobind
+    private initEvents() {
+        if (this.Viz) {
+            console.info('setting up event', tableau.TableauEventName.FILTER_CHANGE, tableau.TableauEventName.PARAMETER_VALUE_CHANGE);
+            
+            this.Viz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, this.handleFilterChangeEvent);
+            this.Viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, this.handleFilterChangeEvent);
+        }
+    }
+
+    @autobind
+    private handleFilterChangeEvent(evt) { //evt: is of type FilterEvent 
+        console.info('FilterEvent', evt);
     }
 }
  

@@ -28,6 +28,7 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
   public render(): void {
     const element: React.ReactElement<IReportViewerProviderProps> = React.createElement(
       ReportViewerProviderSFC, {
+        context: this.context,
         description: this.properties.description
     });
 

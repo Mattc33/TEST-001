@@ -1,14 +1,19 @@
 import * as React from "react";
 import { ReportViewerStore } from "./store/ReportViewerStore";
 import { ReportViewerWithState } from "./components/viewer/ReportViewer";
+import {
+  WebPartContext
+} from '@microsoft/sp-webpart-base';
 
 export interface IReportViewerProviderProps {
   description: string;
+  context: WebPartContext;
 }
 
 export const ReportViewerProviderSFC: React.SFC<IReportViewerProviderProps> = props => {
+  console.info('ReportViewerProviderSFC', props);
   return (
-    <ReportViewerStore>
+    <ReportViewerStore context={props.context}>
       <ReportViewerWithState {...props} />
     </ReportViewerStore>
   );
