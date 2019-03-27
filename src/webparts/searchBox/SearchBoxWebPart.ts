@@ -303,7 +303,7 @@ export default class SearchBoxWebPart extends BaseClientSideWebPart<ISearchBoxWe
             })
           ],          
           sharedConfiguration: {
-            depth: DynamicDataSharedDepth.Source,
+            depth: DynamicDataSharedDepth.Source as any,
           }
         })
       );

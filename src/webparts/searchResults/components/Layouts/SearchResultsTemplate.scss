@@ -1,9 +1,9 @@
 
 .template_root {
-    @import '~office-ui-fabric/dist/sass/Fabric.scss';
-    @import '~office-ui-fabric/dist/components/Label/Label.scss';
-    @import '~office-ui-fabric/dist/components/List/List.scss';
-    @import '~office-ui-fabric/dist/components/ListItem/ListItem.scss';
+    @import '~office-ui-fabric-core/dist/sass/Fabric.scss';
+    // @import '~office-ui-fabric-core/dist/components/Label/Label.scss';
+    // @import '~office-ui-fabric-core/dist/components/List/List.scss';
+    // @import '~office-ui-fabric-core/dist/components/ListItem/ListItem.scss';
     @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/FabricCore.scss';
     
     .template_defaultList {
