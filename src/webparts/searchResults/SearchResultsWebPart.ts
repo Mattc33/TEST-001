@@ -781,7 +781,7 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
                             })
                         ],
                         sharedConfiguration: {
-                            depth: DynamicDataSharedDepth.Source,
+                            depth: DynamicDataSharedDepth.Source as any,
                         },
                     }),
                 ].concat(defaultSearchQueryFields)
