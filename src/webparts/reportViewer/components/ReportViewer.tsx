@@ -3,17 +3,14 @@ import styles from "./ReportViewer.module.scss";
 import {
   WebPartContext
 } from '@microsoft/sp-webpart-base';
-import { REPORT_VIEWER_PATH } from "../../state/IReportViewerState";
-import { ConnectByPath } from "../../../../base";
-import { ReportViewerContext } from "../../store/ReportViewerStore";
-import { Toolbar, IProfileFilter } from "../toolbar/Toolbar";
-import { ViewNamePrompt } from "../toolbar/ViewNamePrompt";
-import { TableauReport } from "../tableauReport/TableauReport";
-import { IReportViewer } from "../../state/IReportViewerState";
-import { FavoriteDialog, IFavoriteDialogProps, SaveStatus } from '../../../controls/Favorite/FavoriteDialog';
+import { REPORT_VIEWER_PATH } from "../state/IReportViewerState";
+import { ConnectByPath } from "../../../base";
+import { ReportViewerContext } from "../store/ReportViewerStore";
+import { TableauReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialogProps, SaveStatus } from "../../controls";
+import { IReportViewer } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
-import { Utils } from "../../../../utils/utils";
-import { IReportParameters } from "../../../../models";
+import { Utils } from "../../../utils/utils";
+import { IReportParameters } from "../../../models";
 
 export interface IReportViewerProps {
   description: string;
@@ -35,14 +32,27 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   constructor(props: IReportViewerProps) {
     super(props);
+    console.info('ReportViewer:ctor', props);
 
     this.initFavriteDialog = false;
 
     this.state = {
-      height: (props.state.report) ? props.state.report.SVPHeight || 704 : 704,
-      width: (props.state.report) ? props.state.report.SVPWidth || 799 : 799,
+      height: (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SVPDefaultReportHeight || 704 : 704,
+      width: (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SPVDefaultReportWidth || 799 : 799,
       showSaveFavoriteDialog: false
     };
+  }
+
+  public static getDerivedStateFromProps(props: IReportViewerProps, state: IReportViewerState) {
+    if (props.state.tableauReportConfig.SVPDefaultReportHeight !== state.height || 
+        props.state.tableauReportConfig.SPVDefaultReportWidth !== state.width) 
+    {
+      state.height = props.state.tableauReportConfig.SVPDefaultReportHeight;
+      state.width = props.state.tableauReportConfig.SPVDefaultReportWidth;
+      return state;
+    }
+
+    return null;
   }
 
   public componentDidMount() {
@@ -61,7 +71,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
         {!this.props.state.loading && 
           <Toolbar 
-            types={["sizing", "savecustom", "feedback", "profilefilter", "fullscreen"]}
+            types={TableauReport.getToolbar(this.props.state.tableauReportConfig.SVPTableauToolbar)}
             height={this.state.height}
             width={this.state.width}
             profileFilters={this.getProfileFilter()}

@@ -1,8 +1,8 @@
 import {
   WebPartContext
 } from '@microsoft/sp-webpart-base';
-import { ReportViewerActions } from "../components/viewer/ReportViewActions";
-import { IReportItem, IUserProfile } from "../../../models";
+import { ReportViewerActions } from "../action/ReportViewActions";
+import { IReportItem, IUserProfile, ITableauReportViewerConfig } from "../../../models";
 
 export const REPORT_VIEWER_PATH: string = "reportViewer";
 
@@ -24,6 +24,8 @@ export interface IReportViewer {
   report?: IReportItem;
   userProfile?: IUserProfile;
   
+  tableauReportConfig?: ITableauReportViewerConfig;
+
   actions?: ReportViewerActions;
 
   error?: IErrorResult; 
