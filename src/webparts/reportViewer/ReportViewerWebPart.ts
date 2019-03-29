@@ -25,7 +25,6 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
   constructor() {
     super({ loadJSOM: true, loadTableau: true });
 
-    console.info('ReportViewerWebPart:ctor', this.properties);
   }
 
   public render(): void {
