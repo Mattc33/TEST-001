@@ -3,3 +3,4 @@ export * from "./IEntity";
 export * from "./IReportItem";
 export * from "./IUserProfile";
 export * from "./IUserItem";
+export * from "./IReportViewerWebPart";

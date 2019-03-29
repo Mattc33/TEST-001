@@ -86,10 +86,23 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         };
     }
 
+    public static getDerivedStateFromProps(props: IToolbarProps, state: IToolbarState) {
+        if (props.height !== state.height || props.width !== state.width)  
+        {
+          state.height = props.height;
+          state.width = props.width;
+          return state;
+        }
+    
+        return null;
+    }
+
     @autobind
     public render() { 
         const items = this.props.types.reduce<Array<ICommandBarItemProps>>((prev: Array<ICommandBarItemProps>, type: string): Array<ICommandBarItemProps> => {
             switch(type.toLowerCase()) {
+                case "comment":
+                    return prev.concat(this.renderComment());
                 case "sizing":
                     return prev.concat(this.renderSizing());
                 case "savecustom":
@@ -98,6 +111,8 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     return prev.concat(this.renderStory());
                 case "profilefilter":
                     return prev.concat(this.renderProfileFilters());
+                case "share":
+                    return prev.concat(this.renderShare());
                 case "feedback":
                     return prev.concat(this.renderFeedback());
                 case "fullscreen":
@@ -204,6 +219,18 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
     }
 
     @autobind
+    private renderComment(): Array<ICommandBarItemProps> {
+        return [{
+            key: 'comment',
+            name: 'Comment',
+            iconProps: {
+                iconName: 'Comment'
+            },
+            onClick: () => this.handleCommandClick('comment')
+        }];
+    }
+
+    @autobind
     private renderSizing(): Array<ICommandBarItemProps> {
         let { height, width } = this.state;
 
@@ -277,11 +304,23 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
     private renderSaveCusomtView(): Array<ICommandBarItemProps> {
         return [{
             key: 'savecustom',
-            name: 'Add current view as favorite',
+            name: 'Add view as favorite',
             iconProps: {
-                iconName: 'AddFavorite'
+                iconName: 'Heart'
             },
             onClick: () => this.handleCommandClick('savecustom')
+        }];
+    }
+
+    @autobind
+    private renderShare(): Array<ICommandBarItemProps> {
+        return [{
+            key: 'share',
+            name: 'Share',
+            iconProps: {
+                iconName: 'Share'
+            },
+            onClick: () => this.handleCommandClick('share')
         }];
     }
 

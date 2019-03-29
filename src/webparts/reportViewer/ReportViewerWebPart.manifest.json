@@ -20,7 +20,10 @@
     "description": { "default": "Render reports based on report type" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "ReportViewer"
+      "SVPTableauJavaScriptURL": "https://viz.gallery/javascripts/api/tableau-2.2.1.min.js",
+      "SVPTableauToolbar": "comment, sizing, savecustom, feedback, share, fullscreen",
+      "SVPDefaultReportHeight": 600,
+      "SPVDefaultReportWidth": 800
     }
   }]
 }

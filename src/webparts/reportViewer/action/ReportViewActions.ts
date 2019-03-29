@@ -5,13 +5,13 @@ import {
   IReportViewerState,
   IErrorResult,
   REPORT_VIEWER_PATH
-} from "../../state/IReportViewerState";
+} from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react';
-import { ReportViewerService, IReportViewerService, UserProfileService, IUserProfileService, ReportActionsService, FavoriteType } from "../../../../services";
+import { ReportViewerService, IReportViewerService, UserProfileService, IUserProfileService, ReportActionsService, FavoriteType } from "../../../services";
 import { normalize } from "normalizr";
-import { BaseAction, IBaseStore } from "../../../../base";
-import { withErrHandler } from "../../../../utils/withErrorHandler";
-import { IReportItem, IUserProfile, IUserItem } from "../../../../models";
+import { BaseAction, IBaseStore } from "../../../base";
+import { withErrHandler } from "../../../utils/withErrorHandler";
+import { IReportItem, IUserProfile, IUserItem } from "../../../models";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
   private context: WebPartContext;

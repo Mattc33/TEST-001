@@ -6,28 +6,37 @@ import {
 import { BaseStore } from "../../../base";
 import { IContextProps } from "../../../models";
 import { IReportViewerState } from "../state/IReportViewerState";
+import { IReportViewerStoreProps } from "../state/IReportViewerStoreProps";
 
-import { ReportViewerActions } from "../components/viewer/ReportViewActions";
+import { ReportViewerActions } from "../action/ReportViewActions";
 
 export const ReportViewerContext = React.createContext<IContextProps<IReportViewerState>>(undefined);
-export interface IReportViewerStoreProps {
-  context: WebPartContext;
-}
 
 export class ReportViewerStore extends BaseStore<IReportViewerStoreProps, IReportViewerState> {
   constructor(props: IReportViewerStoreProps) {
     super(props);
     console.info('ReportViewerStore:ctor', props);
 
-    const viewerActions = new ReportViewerActions(this, props.context);
+    const viewerActions = new ReportViewerActions(this, props.storeState.context);
 
     this.state = {
-      reportViewer: { actions: viewerActions, loading: false, context: props.context }
+      reportViewer: { ...props.storeState, ...{ actions: viewerActions, loading: false } }
     };
+  }
+
+  public static getDerivedStateFromProps(props: IReportViewerStoreProps, state: IReportViewerState) {
+    if (props.storeState.tableauReportConfig !== state.reportViewer.tableauReportConfig) {
+      //return { ...state, ...state.reportViewer, ...{ reportViewer: { tableauReportConfig: props.storeState.tableauReportConfig } } };
+      state.reportViewer.tableauReportConfig = props.storeState.tableauReportConfig;
+      return state;
+    }
+
+    return null;
   }
 
   public render() {
     const state = this.state;
+    console.info('ReportViewerStore::render', state);
 
     return (
       <ReportViewerContext.Provider value={{ state }}>
