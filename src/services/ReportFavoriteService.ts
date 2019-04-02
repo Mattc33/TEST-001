@@ -9,8 +9,8 @@ const VIZ_REPORT_LST = "Favorites";
 
 export class ReportFavoriteService implements IReportFavoriteService {
 
-    private _VisualizationTitle:string;
-    private _VisualizationImage:string;
+    private _visualizationTitle:string;
+    private _visualizationImage:string;
 
     constructor(private context: IWebPartContext) {
     
@@ -18,8 +18,8 @@ export class ReportFavoriteService implements IReportFavoriteService {
 
     public async getMyFavoriteReports(visualizationTitle:string, visualizationImage:string,favReportCounts:number):Promise<Array<IReportFavoriteItem>> {
         
-        this._VisualizationTitle = visualizationTitle;
-        this._VisualizationImage= visualizationImage;
+        this._visualizationTitle = visualizationTitle;
+        this._visualizationImage= visualizationImage;
         
         const query = Caml.getCaml(
             () => this.getVizReportListViewFields().map((field: string): string => {
@@ -54,8 +54,8 @@ export class ReportFavoriteService implements IReportFavoriteService {
         const reports: Array<IReportFavoriteItem> = result.Row.map((r: any): IReportFavoriteItem => {
             
             const _SVPVisualizationLookupId = this.returnValue(r.SVPVisualizationLookup);
-            const _SVPVisualizationLookupTitle = this.returnValue(r["Visualization_x0020_Lookup_x003A"]);
-            const _SVPVisualizationImage = this.returnValue(r["Visualization_x0020_Lookup_x003A0"]);
+            const _SVPVisualizationLookupTitle = this.returnValue(r[this._visualizationTitle]);
+            const _SVPVisualizationImage = this.returnValue(r[this._visualizationImage]);
 
             const item: IReportFavoriteItem = {
                 Id: r.ID,
@@ -97,8 +97,8 @@ export class ReportFavoriteService implements IReportFavoriteService {
             'SVPVisualizationDescription',
             'SVPFavoriteType',
             'SVPVisualizationLookup',
-            'Visualization_x0020_Lookup_x003A',
-            'Visualization_x0020_Lookup_x003A0',
+            this._visualizationTitle,
+            this._visualizationImage,
             'SVPVisualizationMetadata'
         ];
     }

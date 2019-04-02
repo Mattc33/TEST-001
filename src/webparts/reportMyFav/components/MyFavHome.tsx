@@ -43,10 +43,10 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
       <div className={styles.myFavHome}>
         <div className={styles.wrapper}>
           <div className="row" style={rowStyle}>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <img src={reportImageUrl} className={styles.image} />
             </div>
-            <div className="col-md-6" style={colStyle}>
+            <div className="col-md-8" style={colStyle}>
                 <p className={styles.title}>{reportTitle}</p>
                 <p>
                 <PrimaryButton data-automation-id="favReportView" text="View" className={styles.button}

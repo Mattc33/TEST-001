@@ -10,7 +10,7 @@ module.exports = {
     },
 
     searchCenter: {
-      url: 'https://twodegrees1.sharepoint.com/teams/search - Not Sure On This',
+      url: 'https://twodegrees1.sharepoint.com/teams/search',
       creds: {
         clientId: '3ac93275-5024-4313-8815-426c76410af0',
         clientSecret: '	JZ6r4IEmpa/L2qw4siNqp/VeCihd0GRTBECdSJYzC6o=',
