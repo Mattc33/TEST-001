@@ -2,7 +2,9 @@
 
 export * from "./MockService";
 export * from "./ReportViewerService";
+export * from "./ReportDiscussionService";
 export * from "./UserProfileService";
 export * from "./ReportActionsService/ReportActionsService";
+
 
 export * from "./interfaces";

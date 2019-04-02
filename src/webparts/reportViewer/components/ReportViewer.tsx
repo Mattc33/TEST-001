@@ -6,11 +6,11 @@ import {
 import { REPORT_VIEWER_PATH } from "../state/IReportViewerState";
 import { ConnectByPath } from "../../../base";
 import { ReportViewerContext } from "../store/ReportViewerStore";
-import { TableauReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialogProps, SaveStatus } from "../../controls";
+import { TableauReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialogProps, SaveStatus, ReportDiscussionDialog } from "../../controls";
 import { IReportViewer } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../utils/utils";
-import { IReportParameters } from "../../../models";
+import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
 
 export interface IReportViewerProps {
   description: string;
@@ -22,12 +22,15 @@ export interface IReportViewerState {
   height?: number;
   width?: number;
   showSaveFavoriteDialog: boolean;
+  showReportDiscussionDialog: boolean;
 }
 
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
   private tableauReportRef: TableauReport;
   private imageRef: HTMLImageElement;
   private customViewNameRef: HTMLInputElement;
+  private static lastConfigHeight: number;
+  private static lastConfigWidth: number;
   private initFavriteDialog: boolean;
 
   constructor(props: IReportViewerProps) {
@@ -35,20 +38,28 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     console.info('ReportViewer:ctor', props);
 
     this.initFavriteDialog = false;
+    ReportViewer.lastConfigHeight = (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SVPDefaultReportHeight : undefined;
+    ReportViewer.lastConfigWidth = (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SPVDefaultReportWidth : undefined;
 
-    this.state = {
-      height: (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SVPDefaultReportHeight || 704 : 704,
-      width: (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SPVDefaultReportWidth || 799 : 799,
-      showSaveFavoriteDialog: false
+    this.state = {  
+      height: this.getReportHeight(props.state.report, props.state.tableauReportConfig),
+      width: this.getReportWidth(props.state.report, props.state.tableauReportConfig),
+      showSaveFavoriteDialog: false,
+      showReportDiscussionDialog: false
     };
   }
 
   public static getDerivedStateFromProps(props: IReportViewerProps, state: IReportViewerState) {
-    if (props.state.tableauReportConfig.SVPDefaultReportHeight !== state.height || 
-        props.state.tableauReportConfig.SPVDefaultReportWidth !== state.width) 
+    if ( (props.state.report && 
+           props.state.report.SVPVisualizationTechnology === "Tableau") 
+         && 
+         (props.state.tableauReportConfig.SVPDefaultReportHeight !== ReportViewer.lastConfigHeight || 
+           props.state.tableauReportConfig.SPVDefaultReportWidth !== ReportViewer.lastConfigWidth)
+       )
     {
-      state.height = props.state.tableauReportConfig.SVPDefaultReportHeight;
-      state.width = props.state.tableauReportConfig.SPVDefaultReportWidth;
+      state.height = ReportViewer.lastConfigHeight = props.state.tableauReportConfig.SVPDefaultReportHeight;
+      state.width = ReportViewer.lastConfigWidth = props.state.tableauReportConfig.SPVDefaultReportWidth;
+
       return state;
     }
 
@@ -89,6 +100,12 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
           />
         }
 
+        {!this.props.state.loading && this.state.showReportDiscussionDialog &&
+          <ReportDiscussionDialog
+            onCancel={this.handleCancelReportDiscussion}
+          />
+        }
+
         {!this.props.state.loading && this.props.state.report &&
           <TableauReport
             ref={t => this.tableauReportRef = t}
@@ -107,6 +124,28 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         }
       </div>
     );
+  }
+
+  @autobind
+  private getReportHeight(report: IReportItem, config: ITableauReportViewerConfig): number {
+    if (report && report.SVPReportHeight)
+      return report.SVPReportHeight;
+
+    if (report && report.SVPVisualizationTechnology === "Tableau" && config && config.SVPDefaultReportHeight)
+      return config.SVPDefaultReportHeight;
+
+    return 600;
+  }
+
+  @autobind
+  private getReportWidth(report: IReportItem, config: ITableauReportViewerConfig): number {
+    if (report && report.SVPReportWidth)
+      return report.SVPReportWidth;
+
+    if (report && report.SVPVisualizationTechnology === "Tableau" && config && config.SPVDefaultReportWidth)
+      return config.SPVDefaultReportWidth;
+
+    return 800;
   }
 
   @autobind
@@ -170,6 +209,10 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         return this.imageTest();
       case "fullscreen":
         return this.imageTest();
+      case "comment":
+        return this.setReportDiscussionDialog(true);
+      case "share":
+        return;
     }
   }
 
@@ -211,12 +254,25 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
+  private handleCancelReportDiscussion() {
+    this.setReportDiscussionDialog(false);
+  }
+
+  @autobind
+  private setReportDiscussionDialog(state: boolean) {
+    if (this.state.showReportDiscussionDialog !== state) {
+      this.setState({
+        showReportDiscussionDialog: state
+      });
+    }
+  }
+
+  @autobind
   private handleSizingCommandClick(type: string, args: any) {
     const { height, width } = args;
 
-    this.setState({
-      height,
-      width
+    this.setState(state => {
+      return { ...state, ... { height, width }};
     });
   }
 }

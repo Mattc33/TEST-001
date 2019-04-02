@@ -25,8 +25,10 @@ export interface IReportItem {
     SVPIsFeatured: boolean;
     SVPCategory: string;
     SVPVisualizationParameters?: Array<IReportParameters>;
-    SVPHeight: number;
-    SVPWidth: number;
+    SVPReportHeight?: number;
+    SVPReportWidth?: number;
+    SVPLikes?: string;
+    SVPLikesCount?: number;
     Modified: Date;
     Created: Date;
 }
