@@ -39,7 +39,7 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
   public componentDidMount(): void { 
     
-    this.props.myFavReportService.getMyFavoriteReports("Visualization_x0020_Lookup_x003A","Visualization_x0020_Lookup_x003A0",100).then((result: Array<IReportFavoriteItem>) => {
+    this.props.myFavReportService.getMyFavoriteReports(this.props.visualizationTitle,this.props.visualizationImage,100).then((result: Array<IReportFavoriteItem>) => {
 
       this.setState({ myFavReportItemsinState: result, isReportsLoaded: true});
       

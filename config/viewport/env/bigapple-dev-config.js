@@ -11,7 +11,7 @@ module.exports = {
     },
 
     searchCenter: {
-      url: 'https://bigapplesharepoint.sharepoint.com/sites/searchdev',
+      url: 'https://bigapplesharepoint.sharepoint.com/sites/searchdev Not Share',
       creds: {
         clientId: '0b37d01b-4adb-42b5-943a-c8bbe8fb13b8',
         clientSecret: 'B3+96LbYkRfTWv4qqGmiCrST7aGzNoCDZjNXTdvK3xQ=',
