@@ -3,3 +3,4 @@
 export * from "./IMockService";
 export * from "./IReportViewerService";
 export * from "./IUserProfileService";
+export * from "./IReportDiscussionService";

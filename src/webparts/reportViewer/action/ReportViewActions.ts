@@ -3,7 +3,6 @@ import {
 } from '@microsoft/sp-webpart-base';
 import {
   IReportViewerState,
-  IErrorResult,
   REPORT_VIEWER_PATH
 } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react';
@@ -11,7 +10,7 @@ import { ReportViewerService, IReportViewerService, UserProfileService, IUserPro
 import { normalize } from "normalizr";
 import { BaseAction, IBaseStore } from "../../../base";
 import { withErrHandler } from "../../../utils/withErrorHandler";
-import { IReportItem, IUserProfile, IUserItem } from "../../../models";
+import { IErrorResult, IReportItem, IUserProfile, IUserItem } from "../../../models";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
   private context: WebPartContext;
@@ -45,9 +44,6 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
 
     //expect null 'userProfile'
     const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
-
-    report.SVPHeight = report.SVPHeight || 704;
-    report.SVPWidth = report.SVPWidth || 799;
 
     this.dispatch({ loading: false, report, userProfile });
   }
