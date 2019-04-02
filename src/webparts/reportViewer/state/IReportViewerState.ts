@@ -2,17 +2,14 @@ import {
   WebPartContext
 } from '@microsoft/sp-webpart-base';
 import { ReportViewerActions } from "../action/ReportViewActions";
-import { IReportItem, IUserProfile, ITableauReportViewerConfig } from "../../../models";
+import { IReportDiscussionState } from "../../controls/ReportDiscussion";
+import { IReportItem, IUserProfile, ITableauReportViewerConfig, IErrorResult  } from "../../../models";
 
 export const REPORT_VIEWER_PATH: string = "reportViewer";
 
-export interface IErrorResult {
-  errorMessage: string;
-  error?: Error;
-}
-
 export interface IReportViewerState {
   reportViewer: IReportViewer;
+  reportDiscussion: IReportDiscussionState;
 }
 
 export interface IReportViewer {

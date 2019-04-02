@@ -10,7 +10,7 @@ import { TableauReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialog
 import { IReportViewer } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../utils/utils";
-import { IReportParameters } from "../../../models";
+import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
 
 export interface IReportViewerProps {
   description: string;
@@ -37,15 +37,19 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     this.initFavriteDialog = false;
 
     this.state = {
-      height: (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SVPDefaultReportHeight || 704 : 704,
-      width: (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SPVDefaultReportWidth || 799 : 799,
+      height: this.getReportHeight(props.state.report, props.state.tableauReportConfig),
+      width: this.getReportWidth(props.state.report, props.state.tableauReportConfig),
       showSaveFavoriteDialog: false
     };
   }
 
   public static getDerivedStateFromProps(props: IReportViewerProps, state: IReportViewerState) {
-    if (props.state.tableauReportConfig.SVPDefaultReportHeight !== state.height || 
-        props.state.tableauReportConfig.SPVDefaultReportWidth !== state.width) 
+    if ( (props.state.report && 
+           props.state.report.SVPVisualizationTechnology === "Tableau") 
+         && 
+         (props.state.tableauReportConfig.SVPDefaultReportHeight !== state.height || 
+           props.state.tableauReportConfig.SPVDefaultReportWidth !== state.width)
+       )
     {
       state.height = props.state.tableauReportConfig.SVPDefaultReportHeight;
       state.width = props.state.tableauReportConfig.SPVDefaultReportWidth;
@@ -107,6 +111,28 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         }
       </div>
     );
+  }
+
+  @autobind
+  private getReportHeight(report: IReportItem, config: ITableauReportViewerConfig): number {
+    if (report && report.SVPReportHeight)
+      return report.SVPReportHeight;
+
+    if (report && report.SVPVisualizationTechnology === "Tableau" && config && config.SVPDefaultReportHeight)
+      return config.SVPDefaultReportHeight;
+
+    return 600;
+  }
+
+  @autobind
+  private getReportWidth(report: IReportItem, config: ITableauReportViewerConfig): number {
+    if (report && report.SVPReportWidth)
+      return report.SVPReportWidth;
+
+    if (report && report.SVPVisualizationTechnology === "Tableau" && config && config.SPVDefaultReportWidth)
+      return config.SPVDefaultReportWidth;
+
+    return 800;
   }
 
   @autobind
