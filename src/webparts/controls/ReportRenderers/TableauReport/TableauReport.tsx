@@ -31,7 +31,6 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
         if (!input || input.length === 0)
             return SUPPORTED_TOOLBAR;
 
-        console.info('getToolbar', input);
         return intersection(input.split(","), SUPPORTED_TOOLBAR);
     }
 
