@@ -6,10 +6,10 @@ import {
 import { REPORT_VIEWER_PATH } from "../state/IReportViewerState";
 import { ConnectByPath } from "../../../base";
 import { ReportViewerContext } from "../store/ReportViewerStore";
-import { TableauReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialogProps, SaveStatus, ReportDiscussionDialog } from "../../controls";
+import { TableauReport, OfficeReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialogProps, SaveStatus, ReportDiscussionDialog } from "../../controls";
 import { IReportViewer } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
-import { Utils } from "../../../utils/utils";
+import { Utils } from "../../../services";
 import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
 
 export interface IReportViewerProps {
@@ -19,52 +19,40 @@ export interface IReportViewerProps {
 }
 
 export interface IReportViewerState {
-  height?: number;
-  width?: number;
+  // height?: number;
+  // width?: number;
   showSaveFavoriteDialog: boolean;
   showReportDiscussionDialog: boolean;
 }
 
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
   private tableauReportRef: TableauReport;
-  private imageRef: HTMLImageElement;
-  private customViewNameRef: HTMLInputElement;
-  private static lastConfigHeight: number;
-  private static lastConfigWidth: number;
   private initFavriteDialog: boolean;
 
   constructor(props: IReportViewerProps) {
     super(props);
-    console.info('ReportViewer:ctor', props);
 
     this.initFavriteDialog = false;
-    ReportViewer.lastConfigHeight = (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SVPDefaultReportHeight : undefined;
-    ReportViewer.lastConfigWidth = (props.state.tableauReportConfig) ? props.state.tableauReportConfig.SPVDefaultReportWidth : undefined;
 
     this.state = {  
-      height: this.getReportHeight(props.state.report, props.state.tableauReportConfig),
-      width: this.getReportWidth(props.state.report, props.state.tableauReportConfig),
       showSaveFavoriteDialog: false,
       showReportDiscussionDialog: false
     };
   }
 
-  public static getDerivedStateFromProps(props: IReportViewerProps, state: IReportViewerState) {
-    if ( (props.state.report && 
-           props.state.report.SVPVisualizationTechnology === "Tableau") 
-         && 
-         (props.state.tableauReportConfig.SVPDefaultReportHeight !== ReportViewer.lastConfigHeight || 
-           props.state.tableauReportConfig.SPVDefaultReportWidth !== ReportViewer.lastConfigWidth)
-       )
-    {
-      state.height = ReportViewer.lastConfigHeight = props.state.tableauReportConfig.SVPDefaultReportHeight;
-      state.width = ReportViewer.lastConfigWidth = props.state.tableauReportConfig.SPVDefaultReportWidth;
-
-      return state;
-    }
-
-    return null;
-  }
+  // public static getDerivedStateFromProps(props: IReportViewerProps, state: IReportViewerState) {
+  //   if  (props.state.report &&
+  //         (props.state.report.SVPReportHeight !== state.height || 
+  //          props.state.report.SVPReportWidth !== state.width)
+  //       )
+  //   {
+  //     state.height = props.state.report.SVPReportHeight;
+  //     state.width = props.state.report.SVPReportWidth;
+  //     return state;
+  //   }
+    
+  //   return null;
+  // }
 
   public componentDidMount() {
     const reportId = Utils.getParameterByName("reportId");
@@ -80,11 +68,11 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       <div className={styles.reportViewer}>
         {this.props.state.loading && <div>Loading....</div>}
 
-        {!this.props.state.loading && 
+        {!this.props.state.loading && this.props.state.report &&
           <Toolbar 
-            types={TableauReport.getToolbar(this.props.state.tableauReportConfig.SVPTableauToolbar)}
-            height={this.state.height}
-            width={this.state.width}
+            types={Utils.getToolbar(this.props.state)}
+            height={this.props.state.reportHeight}
+            width={this.props.state.reportWidth}
             profileFilters={this.getProfileFilter()}
             onClick={this.handleToolbarClick}
           />
@@ -96,26 +84,19 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             title={this.props.state.report.Title}
             description={this.props.state.report.SVPVisualizationDescription}
             onSave={this.handleSaveFavorite}
-            onCancel={this.handleCancelFavorite}
+            onCancel={() => this.setSaveFavoriteDialog(false)}
           />
         }
 
         {!this.props.state.loading && this.state.showReportDiscussionDialog &&
           <ReportDiscussionDialog
-            onCancel={this.handleCancelReportDiscussion}
+            onCancel={() => this.setReportDiscussionDialog(false)}
           />
         }
 
         {!this.props.state.loading && this.props.state.report &&
-          <TableauReport
-            ref={t => this.tableauReportRef = t}
-            reportURL={this.props.state.report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
-            height={this.state.height}
-            width={this.state.width}
-          />
+          this.getReportComponent()
         }
-
-        <img ref={i => this.imageRef = i} src="#" />
 
         {!this.props.state.loading && this.props.state.error &&
           <div>
@@ -127,25 +108,29 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
-  private getReportHeight(report: IReportItem, config: ITableauReportViewerConfig): number {
-    if (report && report.SVPReportHeight)
-      return report.SVPReportHeight;
+  private getReportComponent() {
+    const report = this.props.state.report;
+    let reportComponent: JSX.Element = null;
 
-    if (report && report.SVPVisualizationTechnology === "Tableau" && config && config.SVPDefaultReportHeight)
-      return config.SVPDefaultReportHeight;
+    switch(report.SVPVisualizationTechnology) {
+      case "Tableau":
+        reportComponent = <TableauReport
+                            ref={t => this.tableauReportRef = t}
+                            reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
+                            height={this.props.state.reportHeight}
+                            width={this.props.state.reportWidth}
+                          />;
+        break;                          
+      case "Office":
+        reportComponent = <OfficeReport
+                            report={report}
+                            height={this.props.state.reportHeight}
+                            width={this.props.state.reportWidth}
+                          />;
+        break;   
+    }
 
-    return 600;
-  }
-
-  @autobind
-  private getReportWidth(report: IReportItem, config: ITableauReportViewerConfig): number {
-    if (report && report.SVPReportWidth)
-      return report.SVPReportWidth;
-
-    if (report && report.SVPVisualizationTechnology === "Tableau" && config && config.SPVDefaultReportWidth)
-      return config.SPVDefaultReportWidth;
-
-    return 800;
+    return reportComponent;
   }
 
   @autobind
@@ -197,36 +182,27 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     console.info('handleToolbarClick', type, args);
     switch(type) {
       case "sizing":
-        return this.handleSizingCommandClick(type, args);
+        const { height, width } = args;
+        this.props.state.actions.resizeComponent(height, width);
+        break;
       case "story":
-        return;
+        break;
       case "savecustom":
         this.initFavriteDialog = true;
-        return this.setSaveFavoriteDialog(true);
+        this.setSaveFavoriteDialog(true);
+        break;
       case "favorite":
-        return;
+        break;
       case "sendFeedback":
-        return this.imageTest();
+        break;
       case "fullscreen":
-        return this.imageTest();
+        break;
       case "comment":
-        return this.setReportDiscussionDialog(true);
+        this.setReportDiscussionDialog(true);
+        break;
       case "share":
-        return;
+        break;
     }
-  }
-
-  @autobind
-  private imageTest() {
-    console.info('image test starting');
-
-    var image = this.imageRef;
-    var downloadingImage = new Image();
-    downloadingImage.onload = function(){
-      console.info('image downloaded');
-      image.src = (this as any).src;   
-    };
-    downloadingImage.src = "https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance/javeda@slalom.com/PharmaceuticalSalesPerformance10015M.png";
   }
 
   @autobind
@@ -240,22 +216,12 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
-  private handleCancelFavorite() {
-    this.setSaveFavoriteDialog(false);
-  }
-
-  @autobind
   private setSaveFavoriteDialog(state: boolean) {
     if (this.state.showSaveFavoriteDialog !== state) {
       this.setState({
         showSaveFavoriteDialog: state
       });
     }
-  }
-
-  @autobind
-  private handleCancelReportDiscussion() {
-    this.setReportDiscussionDialog(false);
   }
 
   @autobind
@@ -267,14 +233,18 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     }
   }
 
-  @autobind
-  private handleSizingCommandClick(type: string, args: any) {
-    const { height, width } = args;
+  // @autobind
+  // private imageTest() {
+  //   console.info('image test starting');
 
-    this.setState(state => {
-      return { ...state, ... { height, width }};
-    });
-  }
+  //   var image = this.imageRef;
+  //   var downloadingImage = new Image();
+  //   downloadingImage.onload = function(){
+  //     console.info('image downloaded');
+  //     image.src = (this as any).src;   
+  //   };
+  //   downloadingImage.src = "https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance/javeda@slalom.com/PharmaceuticalSalesPerformance10015M.png";
+  // }
 }
 
 const ReportViewerWithState = ConnectByPath(

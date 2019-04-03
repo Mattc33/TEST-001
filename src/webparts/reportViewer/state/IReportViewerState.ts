@@ -20,6 +20,8 @@ export interface IReportViewer {
 
   report?: IReportItem;
   userProfile?: IUserProfile;
+  reportHeight?: number;
+  reportWidth?: number;
   
   tableauReportConfig?: ITableauReportViewerConfig;
 

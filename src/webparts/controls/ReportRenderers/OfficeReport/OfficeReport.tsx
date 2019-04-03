@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react';
+import { IReportItem  } from "../../../../models";
 import { intersection } from "@microsoft/sp-lodash-subset";
 
 declare var tableau: any;
 
-const SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
+export const OFFICE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
 
 export interface IOfficeReportProps {
-    reportURL: string;
+    report: IReportItem;
     height?: number;
     width?: number;
 }
@@ -22,26 +23,15 @@ class OfficeReport extends React.Component<IOfficeReportProps, IOfficeReportStat
         super(props);
     }
 
-    public static getToolbar(input: string): Array<string> {
-        if (!input || input.length === 0)
-            return SUPPORTED_TOOLBAR;
-
-        return intersection(input.split(","), SUPPORTED_TOOLBAR);
-    }
-
-    @autobind
-    public componentDidMount() {
-        
-    }
-
     @autobind
     public render() { 
+        const report = this.props.report;
+        const url = `${report.FileWebUrl}/_layouts/15/Doc.aspx?sourcedoc={${report.UniqueId}}&file=${report.FileLeafRef}&action=embedview`;
+
         return ( 
-            <div id="vizPlaceholder"></div>
+            <iframe src={url} width='100%' height='700px'></iframe>
          );
     }
-
-    
 }
  
 export { OfficeReport };

@@ -86,16 +86,16 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         };
     }
 
-    public static getDerivedStateFromProps(props: IToolbarProps, state: IToolbarState) {
-        if (props.height !== state.height || props.width !== state.width)  
-        {
-          state.height = props.height;
-          state.width = props.width;
-          return state;
-        }
+    // public static getDerivedStateFromProps(props: IToolbarProps, state: IToolbarState) {
+    //     if (props.height !== state.height || props.width !== state.width)  
+    //     {
+    //       state.height = props.height;
+    //       state.width = props.width;
+    //       return state;
+    //     }
     
-        return null;
-    }
+    //     return null;
+    // }
 
     @autobind
     public render() { 
