@@ -1,6 +1,12 @@
 import { intersection } from "@microsoft/sp-lodash-subset";
 import { IReportViewer } from "../../webparts/reportViewer/state/IReportViewerState";
-import { TABLEAU_SUPPORTED_TOOLBAR, OFFICE_SUPPORTED_TOOLBAR } from "../../webparts/controls";
+import { 
+    TABLEAU_SUPPORTED_TOOLBAR, 
+    OFFICE_SUPPORTED_TOOLBAR,
+    PDF_SUPPORTED_TOOLBAR,
+    IMAGE_SUPPORTED_TOOLBAR,
+    UNKNOWN_SUPPORTED_TOOLBAR
+} from "../../webparts/controls";
 
 export class Utils {
     public static getParameterByName(name: string, url?: string) {
@@ -25,9 +31,25 @@ export class Utils {
                 input = viewer.tableauReportConfig.SVPTableauToolbar;
                 supportedToolbar = TABLEAU_SUPPORTED_TOOLBAR;
                 break;
+
             case "Office":
                 input = ''; //TODO: implement webpart props
                 supportedToolbar = OFFICE_SUPPORTED_TOOLBAR;
+                break;
+
+            case "PDF":
+                input = ''; //TODO: implement webpart props
+                supportedToolbar = PDF_SUPPORTED_TOOLBAR;
+                break;
+
+            case "Image":
+                input = ''; //TODO: implement webpart props
+                supportedToolbar = IMAGE_SUPPORTED_TOOLBAR;
+                break;
+
+            default:
+                input = ''; 
+                supportedToolbar = UNKNOWN_SUPPORTED_TOOLBAR;
                 break;
         }
 

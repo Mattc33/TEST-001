@@ -2,14 +2,19 @@ import {
   WebPartContext
 } from '@microsoft/sp-webpart-base';
 import { ReportViewerActions } from "../action/ReportViewActions";
-import { IReportDiscussionState } from "../../controls/ReportDiscussion";
-import { IReportItem, IUserProfile, ITableauReportViewerConfig, IErrorResult  } from "../../../models";
+import { 
+  IReportItem, 
+  IReportDiscussion,
+  IReportDiscussionReply,
+  IUserProfile, 
+  ITableauReportViewerConfig, 
+  IErrorResult 
+} from "../../../models";
 
 export const REPORT_VIEWER_PATH: string = "reportViewer";
 
 export interface IReportViewerState {
   reportViewer: IReportViewer;
-  reportDiscussion: IReportDiscussionState;
 }
 
 export interface IReportViewer {
@@ -18,14 +23,21 @@ export interface IReportViewer {
   loading?: boolean;
   savingAsFavorite?: boolean;
 
+  actions?: ReportViewerActions;
+
+  error?: IErrorResult; 
+
+  //report renderer properties
   report?: IReportItem;
   userProfile?: IUserProfile;
   reportHeight?: number;
   reportWidth?: number;
-  
   tableauReportConfig?: ITableauReportViewerConfig;
 
-  actions?: ReportViewerActions;
-
-  error?: IErrorResult; 
+  //report discussion properties
+  loadingDiscussion?: boolean;
+  busyDiscussionUpdates?: boolean;
+  discussionInitialized?: boolean;
+  discussion?: IReportDiscussion;
+  replies?: Array<IReportDiscussionReply>;
 }

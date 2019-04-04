@@ -9,7 +9,6 @@ import { IReportViewerState } from "../state/IReportViewerState";
 import { IReportViewerStoreProps } from "../state/IReportViewerStoreProps";
 
 import { ReportViewerActions } from "../action/ReportViewActions";
-import { ReportDiscussionActions } from "../../controls/ReportDiscussion";
 
 export const ReportViewerContext = React.createContext<IContextProps<IReportViewerState>>(undefined);
 
@@ -19,22 +18,16 @@ export class ReportViewerStore extends BaseStore<IReportViewerStoreProps, IRepor
     console.info('ReportViewerStore:ctor', props);
 
     const viewerActions = new ReportViewerActions(this, props.storeState.context);
-    const discussionActions = new ReportDiscussionActions(this, props.storeState.context);
 
     this.state = {
-      reportViewer: { ...{ 
+      reportViewer: {
         context: props.storeState.context, 
         tableauReportConfig: props.storeState.tableauReportConfig, 
         actions: viewerActions, 
-        loading: false 
-      } },
-      reportDiscussion: { ...{ 
-        report: null, 
-        replies: [], 
-        context: props.storeState.context, 
-        actions: discussionActions, 
-        loading: false 
-      } }
+        loading: false,
+        loadingDiscussion: false,
+        discussionInitialized: false
+      } 
     };
   }
 

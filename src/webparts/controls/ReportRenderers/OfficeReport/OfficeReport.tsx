@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react';
 import { IReportItem  } from "../../../../models";
-import { intersection } from "@microsoft/sp-lodash-subset";
-
-declare var tableau: any;
 
 export const OFFICE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
 
@@ -29,7 +26,7 @@ class OfficeReport extends React.Component<IOfficeReportProps, IOfficeReportStat
         const url = `${report.FileWebUrl}/_layouts/15/Doc.aspx?sourcedoc={${report.UniqueId}}&file=${report.FileLeafRef}&action=embedview`;
 
         return ( 
-            <iframe src={url} width='100%' height='700px'></iframe>
+            <iframe frameBorder={0} src={url} width='100%' height='700px'></iframe>
          );
     }
 }

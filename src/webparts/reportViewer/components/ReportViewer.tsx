@@ -6,7 +6,18 @@ import {
 import { REPORT_VIEWER_PATH } from "../state/IReportViewerState";
 import { ConnectByPath } from "../../../base";
 import { ReportViewerContext } from "../store/ReportViewerStore";
-import { TableauReport, OfficeReport, Toolbar, IProfileFilter, FavoriteDialog, IFavoriteDialogProps, SaveStatus, ReportDiscussionDialog } from "../../controls";
+import { 
+  TableauReport, 
+  OfficeReport, 
+  PDFReport, 
+  ImageReport, 
+  UnkownReport, 
+  Toolbar, 
+  IProfileFilter, 
+  FavoriteDialog, 
+  SaveStatus, 
+  ReportDiscussionDialog
+} from "../../controls";
 import { IReportViewer } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../services";
@@ -88,8 +99,11 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
           />
         }
 
-        {!this.props.state.loading && this.state.showReportDiscussionDialog &&
+        {!this.props.state.loading && this.props.state.discussionInitialized && this.state.showReportDiscussionDialog &&
           <ReportDiscussionDialog
+            discussion={this.props.state.discussion}
+            replies={this.props.state.replies}
+            action={this.props.state.actions}
             onCancel={() => this.setReportDiscussionDialog(false)}
           />
         }
@@ -120,7 +134,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
                             height={this.props.state.reportHeight}
                             width={this.props.state.reportWidth}
                           />;
-        break;                          
+        break;               
+
       case "Office":
         reportComponent = <OfficeReport
                             report={report}
@@ -128,6 +143,28 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
                             width={this.props.state.reportWidth}
                           />;
         break;   
+
+      case "PDF":
+        reportComponent = <PDFReport
+                            reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
+                            height={this.props.state.reportHeight}
+                            width={this.props.state.reportWidth}
+                          />;
+        break;
+
+      case "Image":
+        reportComponent = <ImageReport
+                            reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
+                            height={this.props.state.reportHeight}
+                            width={this.props.state.reportWidth}
+                          />;
+        break;
+
+      default:
+        reportComponent = <UnkownReport
+                            reportType={report.SVPVisualizationTechnology}
+                          />;
+        break;
     }
 
     return reportComponent;
@@ -198,10 +235,19 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       case "fullscreen":
         break;
       case "comment":
-        this.setReportDiscussionDialog(true);
+        this.handleReportDiscussion();
         break;
       case "share":
         break;
+    }
+  }
+
+  @autobind
+  private handleReportDiscussion() {
+    const report = this.props.state.report;
+    if (report) {
+      this.props.state.actions.loadReportDiscussion(report.Id, report.Title);
+      this.setReportDiscussionDialog(true);
     }
   }
 

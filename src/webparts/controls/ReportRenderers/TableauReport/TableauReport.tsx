@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react';
-import { Utils } from "../../../../services";
 
 declare var tableau: any;
 
