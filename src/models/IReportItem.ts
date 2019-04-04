@@ -31,6 +31,10 @@ export interface IReportItem {
     SVPLikesCount?: number;
     Modified: Date;
     Created: Date;
+
+    FileLeafRef?: string;
+    UniqueId?: string;
+    FileWebUrl?: string;
 }
 
  export interface IReportBasicItem {

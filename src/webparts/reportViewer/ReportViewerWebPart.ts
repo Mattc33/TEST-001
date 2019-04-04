@@ -33,9 +33,7 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
         context: this.context,
         tableauReportConfig: {
           SVPTableauJavaScriptURL: this.properties.SVPTableauJavaScriptURL,
-          SVPTableauToolbar: this.properties.SVPTableauToolbar,
-          SVPDefaultReportHeight: this.properties.SVPDefaultReportHeight,
-          SPVDefaultReportWidth: this.properties.SPVDefaultReportWidth
+          SVPTableauToolbar: this.properties.SVPTableauToolbar
         }
     });
 
@@ -67,22 +65,6 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
                 PropertyPaneTextField("SVPTableauToolbar", {
                   label: "Toolbar Controls for Tableau Report",
                   description: "Comma separated values toolbar buttons. Valid values are [sizing, savecustom, feedback, profilefilter, fullscreen]"
-                }),
-                PropertyPaneSlider('SVPDefaultReportHeight', {
-                  label: "Tableau Report Default Height",
-                  min: 600,
-                  max: 2160,
-                  value: 704,
-                  showValue: true,
-                  step: 5
-                }),
-                PropertyPaneSlider('SPVDefaultReportWidth', {
-                  label: "Tableau Report Default Width",
-                  min: 800,
-                  max: 3840,
-                  value: 799,
-                  showValue: true,
-                  step: 5
                 })
               ]
             },

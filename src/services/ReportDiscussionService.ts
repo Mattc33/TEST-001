@@ -7,7 +7,7 @@ import {
 export class ReportDiscussionService implements IReportDiscussionService {
 
     public loadDiscussion(reportId: number): Promise<IReportDiscussion> {
-        return Promise.resolve({});
+        return Promise.resolve(undefined);
     }
 
     public loadDiscussionReplies(discussion: IReportDiscussion): Promise<Array<IReportDiscussionReply>> {

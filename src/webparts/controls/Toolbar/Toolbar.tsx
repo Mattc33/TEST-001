@@ -86,16 +86,16 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         };
     }
 
-    public static getDerivedStateFromProps(props: IToolbarProps, state: IToolbarState) {
-        if (props.height !== state.height || props.width !== state.width)  
-        {
-          state.height = props.height;
-          state.width = props.width;
-          return state;
-        }
+    // public static getDerivedStateFromProps(props: IToolbarProps, state: IToolbarState) {
+    //     if (props.height !== state.height || props.width !== state.width)  
+    //     {
+    //       state.height = props.height;
+    //       state.width = props.width;
+    //       return state;
+    //     }
     
-        return null;
-    }
+    //     return null;
+    // }
 
     @autobind
     public render() { 
@@ -124,21 +124,26 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
 
         return (  
             <React.Fragment>
-                <CommandBar items={items} />
-                <Panel
-                    isOpen={this.state.showProfileFilter}
-                    type={PanelType.smallFixedFar}
-                    onDismiss={this.closeProfileFilterPane}
-                    headerText="Profile Filter"
-                    closeButtonAriaLabel="Close"
-                    onRenderFooterContent={this.renderProfileFilterFooterContent}>
-            
-                    <ProfileFilters 
-                        filters={this.state.profileFilters} 
-                        onChange={this.handleProfileFilterChange} 
-                    />
+                { items && items.length > 0 && 
+                    <React.Fragment>
+                        <CommandBar items={items} />
+                    
+                        <Panel
+                            isOpen={this.state.showProfileFilter}
+                            type={PanelType.smallFixedFar}
+                            onDismiss={this.closeProfileFilterPane}
+                            headerText="Profile Filter"
+                            closeButtonAriaLabel="Close"
+                            onRenderFooterContent={this.renderProfileFilterFooterContent}>
+                    
+                            <ProfileFilters 
+                                filters={this.state.profileFilters} 
+                                onChange={this.handleProfileFilterChange} 
+                            />
 
-                </Panel>
+                        </Panel>
+                    </React.Fragment>
+                }
             </React.Fragment>
         );
     }
@@ -185,10 +190,6 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 height += inc_dcr_value;
                 break;
         }
-
-        const index = items.findIndex((cmd: ICommandBarItemProps) => {
-            return (cmd.key === "sizeLabel");
-        });
 
         this.setState(state => {
               return { ...state, ...{ height: height, width: width }};

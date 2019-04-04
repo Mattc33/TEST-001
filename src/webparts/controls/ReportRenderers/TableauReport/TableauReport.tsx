@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react';
-import { intersection } from "@microsoft/sp-lodash-subset";
 
 declare var tableau: any;
 
-const SUPPORTED_TOOLBAR = ["comment", "sizing", "savecustom", "feedback", "share", "fullscreen"];
+export const TABLEAU_SUPPORTED_TOOLBAR = ["comment", "sizing", "savecustom", "feedback", "share", "fullscreen"];
 
 export interface ITableauReportProps {
     reportURL: string;
@@ -25,13 +24,6 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
 
     constructor(props: ITableauReportProps) {
         super(props);
-    }
-
-    public static getToolbar(input: string): Array<string> {
-        if (!input || input.length === 0)
-            return SUPPORTED_TOOLBAR;
-
-        return intersection(input.split(","), SUPPORTED_TOOLBAR);
     }
 
     @autobind
