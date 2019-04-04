@@ -12,6 +12,7 @@ Remove-Module * -ErrorAction SilentlyContinue
 
 #Fix for PowerShell Script Not Digitally Signed - Run Following
 #Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+#.\main.ps1 -RootFolder "\environments\Generic\production" -useWebLogin $true
 
 Import-Module SharePointPnPPowerShellOnline
 Import-Module "$PSScriptRoot\modules\common.psm1" 
