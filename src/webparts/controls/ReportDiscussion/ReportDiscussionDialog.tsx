@@ -7,7 +7,6 @@ import { Logger, LogLevel } from '@pnp/logging';
 
 export interface IReportDiscussionDialogProps {
   discussion?: IReportDiscussion;
-  replies?: Array<IReportDiscussionReply>;
   action?: ReportViewerActions;
 
   onCancel(): void;
@@ -34,7 +33,7 @@ export class ReportDiscussionDialog extends React.Component<IReportDiscussionDia
   }
 
   public render(): React.ReactNode {
-    const items = this.props.replies.map((d: IReportDiscussionReply) => {
+    const items = this.props.discussion.replies.map((d: IReportDiscussionReply) => {
       return (
         <div>{d.title}</div>
       );

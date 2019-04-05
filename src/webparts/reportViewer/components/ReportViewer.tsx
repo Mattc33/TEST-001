@@ -102,7 +102,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         {!this.props.state.loading && this.props.state.discussionInitialized && this.state.showReportDiscussionDialog &&
           <ReportDiscussionDialog
             discussion={this.props.state.discussion}
-            replies={this.props.state.replies}
             action={this.props.state.actions}
             onCancel={() => this.setReportDiscussionDialog(false)}
           />

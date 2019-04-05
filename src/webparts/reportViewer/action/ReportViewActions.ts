@@ -91,20 +91,19 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     if (state.discussionInitialized) {
       //get from Cache
       discussion = { ...state.discussion };
-      replies = [ ...state.replies ];
-      console.info('loadReportDiscussion > loading from state', discussion, replies);
+      replies = [ ...state.discussion.replies ];
+      console.info('loadReportDiscussion > loading from state', discussion);
     }
     else {
       //load from SharePoint
-      discussion = { title: reportTitle };
       replies = [ { title: `${reportTitle} reply 1` }, { title: `${reportTitle} reply 2` }, { title: `${reportTitle} reply 3` } ];
+      discussion = { title: reportTitle , replies:replies };
       console.info('loadReportDiscussion > loading from SharePoint', discussion, replies);
     }
 
     this.dispatch({ 
       loadingDiscussion: false,
       discussion,
-      replies,
       discussionInitialized: true 
     });
   }
@@ -114,14 +113,14 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.dispatch({ busyDiscussionUpdates: true, error: null });
 
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
-    const replies: Array<IReportDiscussionReply> = [...state.replies ];
-
+    const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    const discussion:IReportDiscussion = state.discussion;
     const reply: IReportDiscussionReply = { title: message };
     replies.push(reply);
-
+    discussion.replies=replies;
     this.dispatch({ 
       busyDiscussionUpdates: false,
-      replies
+      discussion
     });
   }
 
@@ -130,14 +129,14 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.dispatch({ busyDiscussionUpdates: true, error: null });
 
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
-    const replies: Array<IReportDiscussionReply> = [...state.replies ];
-
+    const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    const discussion:IReportDiscussion = state.discussion;
     const reply: IReportDiscussionReply = { title: message };
     replies[id] = reply;
-
+    discussion.replies=replies;
     this.dispatch({ 
       busyDiscussionUpdates: false,
-      replies
+      discussion
     });
   }
 

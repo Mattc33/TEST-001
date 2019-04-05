@@ -39,5 +39,5 @@ export interface IReportViewer {
   busyDiscussionUpdates?: boolean;
   discussionInitialized?: boolean;
   discussion?: IReportDiscussion;
-  replies?: Array<IReportDiscussionReply>;
+
 }
