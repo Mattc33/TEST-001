@@ -8,10 +8,7 @@ import { ConnectByPath } from "../../../base";
 import { ReportViewerContext } from "../store/ReportViewerStore";
 import { 
   TableauReport, 
-  OfficeReport, 
-  PDFReport, 
-  ImageReport, 
-  UnkownReport, 
+  GenericReport,
   Toolbar, 
   IProfileFilter, 
   FavoriteDialog, 
@@ -81,6 +78,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
         {!this.props.state.loading && this.props.state.report &&
           <Toolbar 
+            context={this.props.state.context}
+            report={this.props.state.report}
             types={Utils.getToolbar(this.props.state)}
             height={this.props.state.reportHeight}
             width={this.props.state.reportWidth}
@@ -136,33 +135,11 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
                           />;
         break;               
 
-      case "Office":
-        reportComponent = <OfficeReport
-                            report={report}
-                            height={this.props.state.reportHeight}
-                            width={this.props.state.reportWidth}
-                          />;
-        break;   
-
-      case "PDF":
-        reportComponent = <PDFReport
-                            reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
-                            height={this.props.state.reportHeight}
-                            width={this.props.state.reportWidth}
-                          />;
-        break;
-
-      case "Image":
-        reportComponent = <ImageReport
-                            reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
-                            height={this.props.state.reportHeight}
-                            width={this.props.state.reportWidth}
-                          />;
-        break;
-
       default:
-        reportComponent = <UnkownReport
-                            reportType={report.SVPVisualizationTechnology}
+        reportComponent = <GenericReport
+                            report={report}  
+                            height={this.props.state.reportHeight}
+                            width={this.props.state.reportWidth}
                           />;
         break;
     }
@@ -230,14 +207,10 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         break;
       case "favorite":
         break;
-      case "sendFeedback":
-        break;
       case "fullscreen":
         break;
       case "comment":
         this.handleReportDiscussion();
-        break;
-      case "share":
         break;
     }
   }
@@ -253,11 +226,25 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   @autobind
   private async handleSaveFavorite(viewName: string, viewDescription: string) {
-    if (viewName && viewName.length > 0 && this.tableauReportRef)  {
-      const reportId = Utils.getParameterByName("reportId");
+    const reportId = Utils.getParameterByName("reportId");
+    const report = this.props.state.report;
 
-      const viewInfo = await this.tableauReportRef.saveCustomView(viewName);
-      await this.props.state.actions.saveReportAsFavorite(Number.parseInt(reportId), viewName, viewDescription, viewInfo.url);
+    if (viewName && viewName.length > 0) {
+      let title = viewName;
+      let desc = viewDescription;
+      let url = report.SVPVisualizationAddress;
+      
+      if (report.SVPVisualizationTechnology === "Tableau" && this.tableauReportRef) {
+        const viewInfo = await this.tableauReportRef.saveCustomView(viewName);
+        url = viewInfo.url;
+      }
+
+      await this.props.state.actions.saveReportAsFavorite(
+        Number.parseInt(reportId),
+        title,
+        desc,
+        url
+      );
     }
   }
 

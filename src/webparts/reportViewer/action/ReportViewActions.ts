@@ -62,13 +62,13 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     //expect null 'userProfile'
     const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 
-    if (SVPVisualizationTechnology === "Office") {
-      [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinitionByUrl(report.SVPVisualizationAddress, report));
-      if (rvErr) {
-        this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
-        return;
-      }
-    }
+    // if (SVPVisualizationTechnology === "Office") {
+    //   [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinitionByUrl(report.SVPVisualizationAddress, report));
+    //   if (rvErr) {
+    //     this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
+    //     return;
+    //   }
+    // }
 
     this.dispatch({ 
       loading: false, 

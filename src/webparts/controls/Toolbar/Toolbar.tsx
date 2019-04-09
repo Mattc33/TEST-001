@@ -1,9 +1,13 @@
 import * as React from 'react';
+import {
+    WebPartContext
+} from '@microsoft/sp-webpart-base';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
+import { IReportItem } from "../../../models";
 
 export interface IProfileFilter {
     filterName: string;
@@ -48,13 +52,15 @@ export const ProfileFilters: React.SFC<IProfileFilterProps> = props => {
 };
 
 export interface IToolbarProps {
-  types: Array<string>;
-  height: number;
-  width: number;
+    context: WebPartContext;
+    report: IReportItem;
+    types: Array<string>;
+    height: number;
+    width: number;
 
-  profileFilters: Array<IProfileFilter>;
+    profileFilters: Array<IProfileFilter>;
 
-  onClick(type: string, args?: any): void;
+    onClick(type: string, args?: any): void;
 }
 
 export interface IToolbarState {
@@ -315,13 +321,19 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
 
     @autobind
     private renderShare(): Array<ICommandBarItemProps> {
+        const { report, context } = this.props;
+
+        const reportUrl = `${context.pageContext.site.absoluteUrl}/SitePages/ViewReport.aspx?reportId=${report.Id}`;
+        const subject = `${context.pageContext.user.displayName} shared a report: ${report.Title}`;
+        const body = `%0d%0a${reportUrl}%0d%0a%0d%0a${report.SVPVisualizationDescription}%0d%0a%0d%0a`;
+
         return [{
             key: 'share',
             name: 'Share',
             iconProps: {
                 iconName: 'Share'
             },
-            onClick: () => this.handleCommandClick('share')
+            href: `mailto:?Subject=${subject}&body=${body}`
         }];
     }
 
@@ -339,13 +351,20 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
 
     @autobind
     private renderFeedback(): Array<ICommandBarItemProps> {
+        const { report, context } = this.props;
+
+        const to = (report.SVPVisualizationOwner) ? report.SVPVisualizationOwner.EMail : '';
+        const reportUrl = `${context.pageContext.site.absoluteUrl}/SitePages/ViewReport.aspx?reportId=${report.Id}`;
+        const subject = `${context.pageContext.user.displayName} sent feedback for report: ${report.Title}`;
+        const body = `%0d%0a${reportUrl}%0d%0a%0d%0aFeedback:%0d%0a%0d%0a`;
+
         return [{
             key: 'sendFeedback',
             name: 'Send feedback',
             iconProps: {
                 iconName: 'Feedback'
             },
-            onClick: () => this.handleCommandClick('sendFeedback')
+            href: `mailto:${to}?subject=${subject}&body=${body}`
         }];
     }
 
