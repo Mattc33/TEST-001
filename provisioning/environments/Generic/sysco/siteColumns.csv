@@ -1,5 +1,5 @@
 FieldLabel,DataType,FieldInternalName,Required,GroupName,Format,Multi,LinkMenu,Choices,Lookup
-Visualization Address,Text,SVPVisualizationAddress,No,Viewport Data Visualization,,,,,
+Visualization Address,Note,SVPVisualizationAddress,No,Viewport Data Visualization,,,,,
 Visualization Image,Text,SVPVisualizationImage,No,Viewport Data Visualization,,,,,
 Visualization Parameters,Lookup,SVPVisualizationParameters,No,Viewport Data Visualization,,,,,Visualization Parameters|ID
 Visualization Metadata,Note,SVPVisualizationMetadata,No,Viewport Data Visualization,,,,,

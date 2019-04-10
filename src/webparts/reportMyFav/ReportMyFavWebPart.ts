@@ -17,6 +17,7 @@ import {IReportMyFavProviderProps, ReportMyFavProvider} from "./report-myfav-pro
 export interface IReportMyFavWebPartProps {
   headerMessage: string;
   clientLabel:string;
+  viewNameLabel:string;
   favReportCount:number;
   visualizationTitle:string;
   visualizationImage:string;
@@ -31,6 +32,7 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
         context: this.context,
         headerMessage: this.properties.headerMessage,
         clientLabel: this.properties.clientLabel,
+        viewNameLabel: this.properties.viewNameLabel,
         favReportCount: this.properties.favReportCount,
         visualizationTitle: this.properties.visualizationTitle,
         visualizationImage: this.properties.visualizationImage
@@ -77,17 +79,20 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
                 PropertyPaneTextField('clientLabel', {
                   label: strings.ClientNameFieldLabel
                 }),
+                PropertyPaneTextField('viewName', {
+                  label: strings.ViewNameFieldLabel
+                }),
                 PropertyPaneTextField('headerMessage', {
                   label: strings.HeaderMessageFieldLabel,
                   value: "See all your most frequent used data in one place."
                 }),
                 PropertyPaneSlider('favReportCount', {
                   label: strings.FavReportsMaxCount,
-                  min: 5,
-                  max: 100,
-                  value: 5,
+                  min: 1,
+                  max: 20,
+                  value: 3,
                   showValue: true,
-                  step: 5
+                  step: 1
                 })
               ]
             },
