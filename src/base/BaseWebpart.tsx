@@ -16,6 +16,8 @@ export interface IInitConfig {
 }
 
 export abstract class BaseWebpart<T> extends BaseClientSideWebPart<T> {
+  private tableauJsApiUrl: string = undefined;
+
   constructor(private config?: IInitConfig) {
     super();
 
@@ -23,6 +25,11 @@ export abstract class BaseWebpart<T> extends BaseClientSideWebPart<T> {
       const { whyDidYouUpdate } = require("why-did-you-update");
       //whyDidYouUpdate(React);
     }
+  }
+
+  //called by ReportViewerWebPart in onInit
+  protected onBeforeInit(tableauJsApiUrl: string) {
+    this.tableauJsApiUrl = tableauJsApiUrl;
   }
 
   protected async onInit(): Promise<void> {
@@ -48,17 +55,21 @@ export abstract class BaseWebpart<T> extends BaseClientSideWebPart<T> {
   }
 
   private setupForWorkbench(): Promise<void> {
-    console.info("BaseWebpart::setupForWorkbench");
-
     return Promise.resolve();
   }
 
   private async loadTableauAPI(): Promise<void> {
     //TODO: make scriptURL webpart property
-    const scriptURL = `https://viz.gallery/javascripts/api/tableau-2.2.1.min.js`;
+    //const scriptURL = `https://viz.gallery/javascripts/api/tableau-2.2.1.min.js`;
     
     if (typeof tableau === "undefined" || (tableau && typeof tableau.Viz === "undefined")) {
-      await SPComponentLoader.loadScript(scriptURL, {
+      if (!this.tableauJsApiUrl) {
+        const err = "BaseWebpart::loadTableauAPI() - Tableau server JavaScript API URL not defined";
+        console.error(err);
+        throw new Error(err);
+      }
+
+      await SPComponentLoader.loadScript(this.tableauJsApiUrl, {
           globalExportsName: "tableau"
         }
       );
@@ -68,7 +79,6 @@ export abstract class BaseWebpart<T> extends BaseClientSideWebPart<T> {
   private async loadJsomAPI(): Promise<void> {
     try {
       const siteColUrl = this.context.pageContext.site.absoluteUrl;
-      console.info("BaseWebpart::loadJSOM", siteColUrl);
 
       if (!(window as any).initJsLoaded) {
         await SPComponentLoader.loadScript(siteColUrl + "/_layouts/15/init.js", {

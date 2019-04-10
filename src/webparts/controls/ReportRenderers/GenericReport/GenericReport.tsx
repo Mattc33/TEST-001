@@ -10,6 +10,7 @@ declare var $: any;
 export const OFFICE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
 export const PDF_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
 export const IMAGE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
+export const OTHER_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
 export const UNKNOWN_SUPPORTED_TOOLBAR = [];
 
 export const OfficeReport: React.FunctionComponent<IReportItem> = report => {
@@ -55,15 +56,19 @@ export const OfficeReport: React.FunctionComponent<IReportItem> = report => {
 
     const r = new RegExp(/([?|&]action=)[^\&]+/i);
     const url = report.SVPVisualizationAddress.replace(r, '$1' + 'embedview');
+    //const height = (report.SVPReportHeight === -1) ? '700px' : `${report.SVPReportHeight}px`;
+    const height = `${report.SVPReportHeight}px`;
     //const url = `${report.FileWebUrl}/_layouts/15/Doc.aspx?sourcedoc={${report.UniqueId}}&file=${report.FileLeafRef}&action=embedview`;
 
     return ( 
-        <iframe onLoad={frameLoaded} id="officeFrame" frameBorder={0} src={url} width='100%' height='700px'></iframe>
+        <iframe onLoad={frameLoaded} id="officeFrame" frameBorder={0} src={url} width='100%' height={height}></iframe>
     );
 };
 
 export const PDFReport: React.FunctionComponent<IReportItem> = report => {
     const pdfStyles = {
+        // height: (report.SVPReportHeight === -1) ? 600 : report.SVPReportHeight,
+        // width: (report.SVPReportWidth === -1) ? '100%' : report.SVPReportWidth
         height: report.SVPReportHeight,
         width: report.SVPReportWidth
     };
@@ -75,14 +80,18 @@ export const PDFReport: React.FunctionComponent<IReportItem> = report => {
 
 export const ImageReport: React.FunctionComponent<IReportItem> = report => {
     const divStyles = {
+        // height: (report.SVPReportHeight === -1) ? 600 : report.SVPReportHeight,
+        // width: (report.SVPReportWidth === -1) ? '100%' : report.SVPReportWidth
         height: report.SVPReportHeight,
         width: report.SVPReportWidth
     };
 
     const imgStyles = {
         display: "block",
-        maxWidth: report.SVPReportWidth,
+        // maxHeight: (report.SVPReportHeight === -1) ? 800 : report.SVPReportHeight,
+        // maxWidth: (report.SVPReportWidth === -1) ? '100%' : report.SVPReportWidth,
         maxHeight: report.SVPReportHeight,
+        maxWidth: report.SVPReportWidth,
         width: "auto",
         height: "auto"
     };

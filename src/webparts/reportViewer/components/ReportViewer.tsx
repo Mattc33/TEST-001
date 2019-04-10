@@ -64,9 +64,14 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   public componentDidMount() {
     const reportId = Utils.getParameterByName("reportId");
+    const favReportId = Utils.getParameterByName("favReportId");
+
     const viewerProps = this.props.state;
 
-    viewerProps.actions.loadReportData(reportId);
+    const viz = document.getElementById('VizContainer');
+    const widht = (viz) ? viz.clientWidth : 900;
+
+    viewerProps.actions.loadReportData(reportId, favReportId, 700, widht);
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
@@ -74,48 +79,50 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
     return (
       <div className={styles.reportViewer}>
-        {this.props.state.loading && <div>Loading....</div>}
+        <div id="VizContainer" className={styles.container}>
+          {this.props.state.loading && <div>Loading....</div>}
 
-        {!this.props.state.loading && this.props.state.report &&
-          <Toolbar 
-            context={this.props.state.context}
-            report={this.props.state.report}
-            types={Utils.getToolbar(this.props.state)}
-            height={this.props.state.reportHeight}
-            width={this.props.state.reportWidth}
-            profileFilters={this.getProfileFilter()}
-            onClick={this.handleToolbarClick}
-          />
-        }
+          {!this.props.state.loading && this.props.state.report &&
+            <Toolbar 
+              context={this.props.state.context}
+              report={this.props.state.report}
+              types={Utils.getToolbar(this.props.state)}
+              height={this.props.state.reportHeight}
+              width={this.props.state.reportWidth}
+              profileFilters={this.getProfileFilter()}
+              onClick={this.handleToolbarClick}
+            />
+          }
 
-        {!this.props.state.loading && this.state.showSaveFavoriteDialog &&
-          <FavoriteDialog
-            saveState={saveState}
-            title={this.props.state.report.Title}
-            description={this.props.state.report.SVPVisualizationDescription}
-            onSave={this.handleSaveFavorite}
-            onCancel={() => this.setSaveFavoriteDialog(false)}
-          />
-        }
+          {!this.props.state.loading && this.state.showSaveFavoriteDialog &&
+            <FavoriteDialog
+              saveState={saveState}
+              title={this.props.state.report.Title}
+              description={this.props.state.report.SVPVisualizationDescription}
+              onSave={this.handleSaveFavorite}
+              onCancel={() => this.setSaveFavoriteDialog(false)}
+            />
+          }
 
-        {!this.props.state.loading && this.props.state.discussionInitialized && this.state.showReportDiscussionDialog &&
-          <ReportDiscussionDialog
-            discussion={this.props.state.discussion}
-            replies={this.props.state.replies}
-            action={this.props.state.actions}
-            onCancel={() => this.setReportDiscussionDialog(false)}
-          />
-        }
+          {!this.props.state.loading && this.props.state.discussionInitialized && this.state.showReportDiscussionDialog &&
+            <ReportDiscussionDialog
+              discussion={this.props.state.discussion}
+              replies={this.props.state.replies}
+              action={this.props.state.actions}
+              onCancel={() => this.setReportDiscussionDialog(false)}
+            />
+          }
 
-        {!this.props.state.loading && this.props.state.report &&
-          this.getReportComponent()
-        }
+          {!this.props.state.loading && this.props.state.report &&
+            this.getReportComponent()
+          }
 
-        {!this.props.state.loading && this.props.state.error &&
-          <div>
-            Error occured loading report: {this.props.state.error.errorMessage}
-          </div>
-        }
+          {!this.props.state.loading && this.props.state.error &&
+            <div>
+              Error occured loading report: {this.props.state.error.errorMessage}
+            </div>
+          }
+        </div>
       </div>
     );
   }
@@ -226,7 +233,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   @autobind
   private async handleSaveFavorite(viewName: string, viewDescription: string) {
-    const reportId = Utils.getParameterByName("reportId");
+    const reportIdStr = Utils.getParameterByName("reportId");
     const report = this.props.state.report;
 
     if (viewName && viewName.length > 0) {
@@ -239,8 +246,11 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         url = viewInfo.url;
       }
 
+      //in case of favorite report, reportIdStr would be null
+      const reportId = (reportIdStr) ? Number.parseInt(reportIdStr) : report.Id;
+
       await this.props.state.actions.saveReportAsFavorite(
-        Number.parseInt(reportId),
+        reportId,
         title,
         desc,
         url

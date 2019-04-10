@@ -22,7 +22,8 @@ import {
   IReportItem, 
   IUserProfile, 
   IReportDiscussion,
-  IReportDiscussionReply 
+  IReportDiscussionReply, 
+  IFavoriteReport
 } from "../../../models";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
@@ -41,39 +42,47 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   }
 
   @autobind
-  public async loadReportData(reportId: any) {
+  public async loadReportData(reportId: any, favReportId: any, defaultHeight?: number, defaultWidth?: number) {
     this.dispatch({ loading: true, error: null });
 
-    if (!reportId || isNaN(reportId)) {
-      this.dispatchError(`Invalid or missing reportId parameter: ${reportId}`, {}, { loading: false });
-      return;
+    if ((!reportId || isNaN(reportId)) && (!favReportId || isNaN(favReportId))) 
+      return this.dispatchError(`Invalid or missing parameters. reportId: ${reportId}, favReportId: ${favReportId}`, {}, { loading: false });
+
+    let favorite: IFavoriteReport = undefined,
+        fvErr: any = undefined;
+
+    if (favReportId) {
+      [favorite, fvErr] = await withErrHandler<IFavoriteReport>(this.reportViewerApi.loadFavorite(parseInt(favReportId)));
+      if (fvErr) 
+        return this.dispatchError(`Invalid or missing favorite report. ${favReportId}`, fvErr, { loading: false});
+
+      if (favorite)
+        reportId = favorite.reportId;
     }
     
+    //check again, in case invalid favReportId is provided
+    if (!reportId || isNaN(reportId))  
+      return this.dispatchError(`Invalid or missing parameters. reportId: ${reportId}`, {}, { loading: false });
+
     let [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinition(parseInt(reportId)));
-    if (rvErr) {
-      this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
-      return;
-    }
+    if (rvErr) 
+      return this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
 
     const { SVPReportHeight, SVPReportWidth, SVPVisualizationTechnology } = report;
-    const reportHeight = SVPReportHeight || 600;
-    const reportWidth = SVPReportWidth || 800;
+    const reportHeight = SVPReportHeight || defaultHeight || 700;
+    const reportWidth = SVPReportWidth || defaultWidth || 800;
 
-    //expect null 'userProfile'
-    const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
+    //if loading Tableau favorite, use URL stored in favorite metadata
+    if (SVPVisualizationTechnology === "Tableau" && favorite)
+      report.SVPVisualizationAddress = favorite.favoriteReportUrl;
 
-    // if (SVPVisualizationTechnology === "Office") {
-    //   [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinitionByUrl(report.SVPVisualizationAddress, report));
-    //   if (rvErr) {
-    //     this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
-    //     return;
-    //   }
-    // }
+    //expect null 'userProfile' (Profile filtering not used by Sysco)
+    //const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 
     this.dispatch({ 
       loading: false, 
       report, 
-      userProfile, 
+      userProfile: undefined, 
       reportHeight, 
       reportWidth 
     });
