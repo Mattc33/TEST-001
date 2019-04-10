@@ -1,14 +1,13 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-.MyFavHome {
+.MyFavAllWithImage {
 
   .wrapper{
     border: 1px solid grey;
-    max-width: 400px;
+    max-width: 350px;
     //height: 150px;
     display: inline-flex;
-    width: 400px;
-    
+    width: 350px;
   }
 
   .url {

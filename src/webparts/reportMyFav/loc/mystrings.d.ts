@@ -4,6 +4,7 @@ declare interface IReportMyFavWebPartStrings {
   AdvanceGroupName: string;
   HeaderMessageFieldLabel: string;
   ClientNameFieldLabel: string;
+  ViewNameFieldLabel: string;
   FavReportsMaxCount: string;
   VisualizationTitleFieldLabel:string;
   VisualizationImageFieldLabel:string;

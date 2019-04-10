@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './MyFavHome.module.scss';
+import styles from './MyFavAllWithImage.module.scss';
 import { IReportFavoriteItem } from "../../../models/IReportItem";
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { ReportFavoriteType } from "../../../helpers/UrlHelper";
@@ -14,7 +14,7 @@ export interface IReportProps {
 }
 
 
-export default class MyFavHome extends React.Component<IReportProps, {}> {
+export default class MyFavAllWithImage extends React.Component<IReportProps, {}> {
 
   
 
@@ -27,9 +27,7 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
       background: '#EEF0F2',
     };
 
-    console.log("reportItem: ", this.props.reportItem);
-    let reportTitle = this.props.reportItem.Title;
-    const reportDesc = this.props.reportItem.SVPVisualizationDescription;
+    let reportTitle = this.props.reportItem.SVPVisualizationLookupTitle;
     if(this.props.reportItem.SVPFavoriteType != ReportFavoriteType.Original) {
       reportTitle = this.props.reportItem.Title;
     }
@@ -42,13 +40,14 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
     }
 
     return (
-      <div className={styles.MyFavHome}>
+      <div className={styles.MyFavAllWithImage}>
         <div className={styles.wrapper}>
           <div className="row" style={rowStyle}>
-            <div className="col-md-6">
-            <p className={styles.title}>{reportTitle}</p>
+            <div className="col-md-4">
+              <img src={reportImageUrl} className={styles.image} />
             </div>
-            <div className="col-md-6" >
+            <div className="col-md-8" style={colStyle}>
+                <p className={styles.title}>{reportTitle}</p>
                 <p>
                 <PrimaryButton data-automation-id="favReportView" text="View" className={styles.button}
                   onClick={(e) => this.props.onView(this.props.reportItem)} />
@@ -58,9 +57,7 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
                   onClick={(e) => this.props.onRemove(this.props.reportItem)} />
                   </p>
             </div>
-            
           </div>
-     
         </div>
       </div>
     );
