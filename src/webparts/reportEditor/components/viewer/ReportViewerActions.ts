@@ -57,7 +57,6 @@ export class ReportViewerActions {
     }
 
     private async dispatchByPath(path: string, incoming: any) {
-        console.info('dispatchByPath', path);
         await this.dispatcherByPath(path, incoming);
     }
 

@@ -1,43 +1,51 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-.MyFavHome {
+.MyFavAllWithImage {
 
   .wrapper{
     border: 1px solid grey;
-    //max-width: 400px;
+    max-width: 350px;
     //height: 150px;
-   //display: inline-flex;
-    //width: 400px;
-    
+    display: inline-flex;
+    width: 350px;
+  }
+
+  .url {
+    text-decoration: none;
+  }
+
+  .image {
+    max-width: 100px;
+    max-height: 80px;
+    width: 100px;
+    height: 80px;
+    margin-left: 10px;
+    margin-top: 5px
   }
 
   .title {
-    //height: 50px;
+    height: 50px;
     //width: 188px;
     align-content: flex-start;
     text-align:start;
     margin-left: 10px;
     text-decoration: black;
     font-weight: bold;
-    //margin-top: 1px;
+    margin-top: 1px;
   }
 
   .description {
+    height: 50px;
     align-content: flex-start;
     text-align:start;
     margin-left: 10px;
-    margin-top: -30px;
-    margin-right: 10px;
-  }
- 
-  .likeFaveButtons {
-    position: absolute;
-    right: 0.5em;
-    bottom: -0.25em;
-    margin: 0 0.1em;
-    display: inline-block;
+    margin-top: -10px;
   }
 
+  .colStyle {
+    background-color: '#EEF0F2';
+  }
+ 
   .button {
     // Our button
     text-decoration: none;

@@ -59,3 +59,8 @@ export interface IReportItem {
     SVPVisualizationMetadata?:string;
 
 }
+
+export interface IFavoriteReport {
+    favoriteReportUrl: string;
+    reportId: number;
+}

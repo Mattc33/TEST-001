@@ -1,8 +1,9 @@
 import { sp, ItemUpdateResult, FileAddResult, Field, Folder, WebEnsureUserResult, Web } from '@pnp/sp';
 import { IReportViewerService } from ".";
-import { IReportItem } from "../models";
+import { IReportItem, IReportFavoriteItem, IFavoriteReport } from "../models";
 
 const VizListTitle = "Visualizations";
+const FavoriteListTitle = "Favorites";
 
 const VizListFields = [
     "Id",
@@ -28,6 +29,14 @@ const VizListFields = [
     "SVPVisualizationOwner/EMail"
 ];
 
+const FavoriteListFields = [
+    "Id",
+    "Title",
+    "SVPVisualizationLookupId",
+    "SVPVisualizationMetadata"
+];
+
+
 export class ReportViewerService implements IReportViewerService {
 
     public async loadReportDefinition(reportId: number): Promise<IReportItem> {
@@ -42,6 +51,31 @@ export class ReportViewerService implements IReportViewerService {
                 .select(selectFields)
                 .expand('SVPVisualizationParameters, SVPVisualizationOwner')
                 .get();
+    }
+
+    public async loadFavorite(favoriteId: number): Promise<IFavoriteReport> {
+        const selectFields = FavoriteListFields.join(",");
+
+        const favorite = await sp
+            .web
+            .lists
+                .getByTitle(FavoriteListTitle)
+            .items
+                .getById(favoriteId)
+                .select(selectFields)
+                .get<IReportFavoriteItem>();
+
+        let favoriteReport: IFavoriteReport = undefined;
+
+        if (favorite) {
+            const metadata: any = JSON.parse(favorite.SVPVisualizationMetadata);
+            favoriteReport = {
+                favoriteReportUrl: metadata.ViewUrl,
+                reportId: Number.parseInt(favorite.SVPVisualizationLookupId)
+            };
+        }
+
+        return favoriteReport;
     }
 
     public async loadReportDefinitionByUrl(reportUrl: string, reportItem: IReportItem): Promise<IReportItem> {

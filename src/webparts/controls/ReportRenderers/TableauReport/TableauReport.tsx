@@ -35,6 +35,11 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
     public componentWillReceiveProps(nextProps: ITableauReportProps) {
         if (this.Viz && (this.props.height !== nextProps.height || this.props.width !== nextProps.width)) {
             this.Viz.setFrameSize(nextProps.width, nextProps.height);
+
+            // this code re-size frame and reload report within new size...
+            // const sheet = this.Viz.getWorkbook().getActiveSheet();
+            // sheet.changeSizeAsync({"behavior": "EXACTLY", "maxSize": { "height": nextProps.height, "width": nextProps.width }})
+            //     .then(this.Viz.setFrameSize(nextProps.width, nextProps.height));
         }
     }
 
@@ -88,12 +93,17 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
             hideToolbar: true,
             height: this.props.height,
             width: this.props.width,
-            onFirstInteractive: () => {
-              this.VizWorkbook = this.Viz.getWorkbook();
-              this.VizSheets = this.VizWorkbook.getActiveSheet().getWorksheets();
-              this.VizSheet = this.VizWorkbook.getActiveSheet(); //this.VizSheets[0];
+            onFirstInteractive: (e) => {
+                this.VizWorkbook = this.Viz.getWorkbook();
+                this.VizSheets = this.VizWorkbook.getActiveSheet().getWorksheets();
+                this.VizSheet = this.VizWorkbook.getActiveSheet(); //this.VizSheets[0];
 
-              this.initEvents();
+                this.initEvents();
+
+                //this.VizSheet.changeSizeAsync({"behavior": "EXACTLY", "maxSize": { "height": this.props.height, "width": this.props.width }});
+            },
+            onFirstVizSizeKnown: (e) => {
+                
             }
         };
 
@@ -103,8 +113,6 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
     @autobind
     private initEvents() {
         if (this.Viz) {
-            console.info('setting up event', tableau.TableauEventName.FILTER_CHANGE, tableau.TableauEventName.PARAMETER_VALUE_CHANGE);
-            
             this.Viz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, this.handleFilterChangeEvent);
             this.Viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, this.handleFilterChangeEvent);
         }
@@ -112,7 +120,7 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
 
     @autobind
     private handleFilterChangeEvent(evt) { //evt: is of type FilterEvent 
-        console.info('FilterEvent', evt);
+
     }
 }
  

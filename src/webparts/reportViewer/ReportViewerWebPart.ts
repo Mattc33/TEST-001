@@ -40,6 +40,11 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
     ReactDom.render(element, this.domElement);
   }
 
+  protected async onInit() {
+    super.onBeforeInit(this.properties.SVPTableauJavaScriptURL);
+    return super.onInit();
+  }
+
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
   }

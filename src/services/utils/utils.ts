@@ -5,12 +5,16 @@ import {
     OFFICE_SUPPORTED_TOOLBAR,
     PDF_SUPPORTED_TOOLBAR,
     IMAGE_SUPPORTED_TOOLBAR,
+    OTHER_SUPPORTED_TOOLBAR,
     UNKNOWN_SUPPORTED_TOOLBAR
 } from "../../webparts/controls";
 
 export class Utils {
     public static getParameterByName(name: string, url?: string) {
         if (!url) url = window.location.search;
+        url = url.toLowerCase();
+        name = name.toLowerCase();
+
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
             results = regex.exec(url);
@@ -45,6 +49,11 @@ export class Utils {
             case "Image":
                 input = ''; //TODO: implement webpart props
                 supportedToolbar = IMAGE_SUPPORTED_TOOLBAR;
+                break;
+
+            case "Other":
+                input = ''; //TODO: implement webpart props
+                supportedToolbar = OTHER_SUPPORTED_TOOLBAR;
                 break;
 
             default:

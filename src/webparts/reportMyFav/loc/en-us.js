@@ -5,6 +5,7 @@ define([], function() {
     "AdvanceGroupName":"Fav Report Advance Settings",
     "HeaderMessageFieldLabel": "Header Message",
     "ClientNameFieldLabel": "Client Label",
+    "ViewNameFieldLabel":"View Name",
     "FavReportsMaxCount": "Select Max Reports",
     "VisualizationTitleFieldLabel":"Visualization Title Internal Name",
     "VisualizationImageFieldLabel":"Visualization Image Internal Name"

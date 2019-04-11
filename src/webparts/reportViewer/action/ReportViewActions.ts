@@ -8,11 +8,15 @@ import {
 } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react';
 import { 
+  TableauReport 
+} from "../../controls";
+import { 
   ReportViewerService, 
   IReportViewerService, 
   UserProfileService, 
   IUserProfileService, 
   ReportActionsService, 
+  ReportDiscussionService,
   FavoriteType, 
   withErrHandler } from "../../../services";
 import { normalize } from "normalizr";
@@ -22,7 +26,8 @@ import {
   IReportItem, 
   IUserProfile, 
   IReportDiscussion,
-  IReportDiscussionReply 
+  IReportDiscussionReply, 
+  IFavoriteReport
 } from "../../../models";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
@@ -30,7 +35,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   private reportViewerApi: IReportViewerService;
   private userProfileApi: IUserProfileService;
   private favoriteApi: ReportActionsService;
-
+  private discussionApi:ReportDiscussionService;
   constructor(store: IBaseStore, context: WebPartContext) {
     super(store);
 
@@ -38,42 +43,51 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.reportViewerApi = new ReportViewerService();
     this.userProfileApi = new UserProfileService();
     this.favoriteApi = new ReportActionsService();
+    this.discussionApi= new ReportDiscussionService();
   }
 
   @autobind
-  public async loadReportData(reportId: any) {
+  public async loadReportData(reportId: any, favReportId: any, defaultHeight?: number, defaultWidth?: number) {
     this.dispatch({ loading: true, error: null });
 
-    if (!reportId || isNaN(reportId)) {
-      this.dispatchError(`Invalid or missing reportId parameter: ${reportId}`, {}, { loading: false });
-      return;
+    if ((!reportId || isNaN(reportId)) && (!favReportId || isNaN(favReportId))) 
+      return this.dispatchError(`Invalid or missing parameters. reportId: ${reportId}, favReportId: ${favReportId}`, {}, { loading: false });
+
+    let favorite: IFavoriteReport = undefined,
+        fvErr: any = undefined;
+
+    if (favReportId) {
+      [favorite, fvErr] = await withErrHandler<IFavoriteReport>(this.reportViewerApi.loadFavorite(parseInt(favReportId)));
+      if (fvErr) 
+        return this.dispatchError(`Invalid or missing favorite report. ${favReportId}`, fvErr, { loading: false});
+
+      if (favorite)
+        reportId = favorite.reportId;
     }
     
+    //check again, in case invalid favReportId is provided
+    if (!reportId || isNaN(reportId))  
+      return this.dispatchError(`Invalid or missing parameters. reportId: ${reportId}`, {}, { loading: false });
+
     let [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinition(parseInt(reportId)));
-    if (rvErr) {
-      this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
-      return;
-    }
+    if (rvErr) 
+      return this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
 
     const { SVPReportHeight, SVPReportWidth, SVPVisualizationTechnology } = report;
-    const reportHeight = SVPReportHeight || 600;
-    const reportWidth = SVPReportWidth || 800;
+    const reportHeight = SVPReportHeight || defaultHeight || 700;
+    const reportWidth = SVPReportWidth || defaultWidth || 800;
 
-    //expect null 'userProfile'
-    const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
+    //if loading Tableau favorite, use URL stored in favorite metadata
+    if (SVPVisualizationTechnology === "Tableau" && favorite)
+      report.SVPVisualizationAddress = favorite.favoriteReportUrl;
 
-    if (SVPVisualizationTechnology === "Office") {
-      [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinitionByUrl(report.SVPVisualizationAddress, report));
-      if (rvErr) {
-        this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
-        return;
-      }
-    }
+    //expect null 'userProfile' (Profile filtering not used by Sysco)
+    //const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 
     this.dispatch({ 
       loading: false, 
       report, 
-      userProfile, 
+      userProfile: undefined, 
       reportHeight, 
       reportWidth 
     });
@@ -82,10 +96,9 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   @autobind
   public async loadReportDiscussion(reportId: number, reportTitle: string) {
     this.dispatch({ loadingDiscussion: true, error: null });
-
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
 
-    let discussion: IReportDiscussion = undefined;
+    let discussion: IReportDiscussion;
     let replies: Array<IReportDiscussionReply> = undefined;
 
     if (state.discussionInitialized) {
@@ -95,10 +108,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
       console.info('loadReportDiscussion > loading from state', discussion);
     }
     else {
-      //load from SharePoint
-      replies = [ { title: `${reportTitle} reply 1` }, { title: `${reportTitle} reply 2` }, { title: `${reportTitle} reply 3` } ];
-      discussion = { title: reportTitle , replies:replies };
-      console.info('loadReportDiscussion > loading from SharePoint', discussion, replies);
+     discussion= await this.discussionApi.loadDiscussion(this.context.pageContext.web.absoluteUrl,this.context.pageContext.web.serverRelativeUrl,reportId,reportTitle);
     }
 
     this.dispatch({ 
@@ -108,14 +118,15 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     });
   }
 
+  
   @autobind
   public async addReportDiscussionReply(message: string) {
     this.dispatch({ busyDiscussionUpdates: true, error: null });
-
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
     const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
     const discussion:IReportDiscussion = state.discussion;
-    const reply: IReportDiscussionReply = { title: message };
+    const postMessage:IReportDiscussionReply={title:discussion.title,replyBody:message,parentReplyId:null};
+    let reply: IReportDiscussionReply= await this.discussionApi.postReply(this.context.pageContext.web.absoluteUrl,this.context.pageContext.web.serverRelativeUrl,discussion.reportFolderId,postMessage);
     replies.push(reply);
     discussion.replies=replies;
     this.dispatch({ 
@@ -141,19 +152,24 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   }
 
   @autobind
-  public async saveReportAsFavorite(reportId: number, name: string, description: string, viewUrl: string) {
+  public async saveReportAsFavorite(reportId: number, name: string, description: string, viewUrl: string, tableauReportRef?: TableauReport) {
     this.dispatch({ savingAsFavorite: true, error: null });
+
+    if (tableauReportRef) {
+      const viewInfo = await tableauReportRef.saveCustomView(name);
+      viewUrl = viewInfo.url;
+    }
 
     const reportMetadata: any = { 
       "ViewUrl": viewUrl, 
       "ImageUrl": "" 
     };
-
+    
     const [success, err] = await withErrHandler<Boolean>(this.favoriteApi.FavoriteReport(
       this.context.pageContext.web.absoluteUrl, 
       reportId, 
       description, 
-      FavoriteType.CUSTOM, 
+      (tableauReportRef) ? FavoriteType.CUSTOM : FavoriteType.ORIGINAL, 
       undefined, 
       JSON.stringify(reportMetadata),
       name

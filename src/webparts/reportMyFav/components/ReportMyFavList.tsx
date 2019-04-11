@@ -14,6 +14,7 @@ export interface IReportMyFavProps {
   controlHeaderMessage: string;
   siteUrl: string;
   loggedInUserName: string;
+  viewName:string;
 
   myFavReportService: any;
   reportActionService:any;
@@ -53,15 +54,15 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
       <div className={styles.container}>
         <div className={styles.reportMyFavList}>
             <div className={"row " + styles.rowHeader}>
-              <div className="col-md-6">
-              {this.props.controlHeaderMessage}
+              <div className="col-md-12">
+                <div dangerouslySetInnerHTML={{ __html: this.props.controlHeaderMessage }} />
               </div>
             </div>
             {this.state.isReportsLoaded
             ? this.renderMyFavReports(this.state.myFavReportItemsinState)
             :
              ( <div className="row">
-                <div className="col-xs-12"><Spinner size={SpinnerSize.large} label="Wait, Pulling Reports..." ariaLive="assertive" /></div>
+                <div className="col-md-12"><Spinner size={SpinnerSize.large} label="Wait, Pulling Reports..." ariaLive="assertive" /></div>
               </div>
              )
             }
@@ -106,14 +107,14 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
   @autobind 
   private handleClickShare(e:any) {
-    console.log("Report: ", e);
     //alert("Clicked Share. Report Name: " + e.Title);
     let reportTitle = e.SVPVisualizationLookupTitle;
-    let reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + e.SVPVisualizationLookupId;
+    //let reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + e.SVPVisualizationLookupId;
+    const reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/ViewReport.aspx?favReportId=" + e.Id;
 
     if(e.SVPFavoriteType != ReportFavoriteType.Original) {
       reportTitle = e.Title;
-      reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/FavReport.aspx?favReportId=" + e.Id;
+      //reportURL = "Report URL: " + this.props.siteUrl + "/SitePages/ViewReport.aspx?favReportId=" + e.Id;
     }
 
     const personName = this.props.loggedInUserName;
@@ -124,11 +125,8 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
   @autobind 
   private handleClickView(e:any) {
-    let reportURL = this.props.siteUrl + "/SitePages/ViewReport.aspx?reportId=" + e.SVPVisualizationLookupId;
+    let reportURL = this.props.siteUrl + "/SitePages/ViewReport.aspx?favReportId=" + e.Id;
 
-    if(e.SVPFavoriteType != ReportFavoriteType.Original) {
-      reportURL = this.props.siteUrl + "/SitePages/FavReport.aspx?favReportId=" + e.Id;
-    }
     window.location.replace(reportURL); 
     return null;
 

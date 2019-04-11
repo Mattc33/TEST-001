@@ -10,8 +10,6 @@ import {
 } from "./state/IReportViewerProviderProps";
 
 export const ReportViewerProviderSFC: React.FunctionComponent<IReportViewerProviderProps> = props => {
-  console.info('ReportViewerProviderSFC', props);
-  
   return (
     <ReportViewerStore storeState={props}>
       <ReportViewerWithState />
