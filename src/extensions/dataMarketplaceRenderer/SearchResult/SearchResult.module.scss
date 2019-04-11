@@ -26,6 +26,20 @@
     margin: 0 0.1em;
   }
 
+  .linkItem {
+    cursor: pointer;
+  }
+
+  .likeFavContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
   li.resultItem {
     display: block;
 
