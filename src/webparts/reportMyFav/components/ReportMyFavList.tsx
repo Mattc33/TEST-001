@@ -55,7 +55,7 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
         <div className={styles.reportMyFavList}>
             <div className={"row " + styles.rowHeader}>
               <div className="col-md-12">
-              {this.props.controlHeaderMessage}
+                <div dangerouslySetInnerHTML={{ __html: this.props.controlHeaderMessage }} />
               </div>
             </div>
             {this.state.isReportsLoaded

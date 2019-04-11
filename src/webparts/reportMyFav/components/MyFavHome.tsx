@@ -26,7 +26,7 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
     };
 
     const colStyle = {
-      width: '80%',
+      width: '70%',
     };
 
     console.log("reportItem: ", this.props.reportItem);
