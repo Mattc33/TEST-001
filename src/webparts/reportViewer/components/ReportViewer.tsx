@@ -200,7 +200,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   @autobind
   private handleToolbarClick(type: string, args?: any) {
-    console.info('handleToolbarClick', type, args);
     switch(type) {
       case "sizing":
         const { height, width } = args;
@@ -241,10 +240,10 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       let desc = viewDescription;
       let url = report.SVPVisualizationAddress;
       
-      if (report.SVPVisualizationTechnology === "Tableau" && this.tableauReportRef) {
-        const viewInfo = await this.tableauReportRef.saveCustomView(viewName);
-        url = viewInfo.url;
-      }
+      // if (report.SVPVisualizationTechnology === "Tableau" && this.tableauReportRef) {
+      //   const viewInfo = await this.tableauReportRef.saveCustomView(viewName);
+      //   url = viewInfo.url;
+      // }
 
       //in case of favorite report, reportIdStr would be null
       const reportId = (reportIdStr) ? Number.parseInt(reportIdStr) : report.Id;
@@ -253,7 +252,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         reportId,
         title,
         desc,
-        url
+        url,
+        (report.SVPVisualizationTechnology === "Tableau") ? this.tableauReportRef : undefined
       );
     }
   }
@@ -278,12 +278,10 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   // @autobind
   // private imageTest() {
-  //   console.info('image test starting');
 
   //   var image = this.imageRef;
   //   var downloadingImage = new Image();
   //   downloadingImage.onload = function(){
-  //     console.info('image downloaded');
   //     image.src = (this as any).src;   
   //   };
   //   downloadingImage.src = "https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance/javeda@slalom.com/PharmaceuticalSalesPerformance10015M.png";
