@@ -4,6 +4,6 @@ import {
 } from "../../models";
 
 export interface IReportDiscussionService {
-    loadDiscussion(reportId: number): Promise<IReportDiscussion>;
-    loadDiscussionReplies(discussion: IReportDiscussion): Promise<Array<IReportDiscussionReply>>;
+    loadDiscussion(webUrl: string,serverRelativeUrl:string, reportId: number, reportTitle:string): Promise<IReportDiscussion>;
+    postReply(webUrl: string,serverRelativeUrl:string,reportId:number,discussion: IReportDiscussionReply): Promise<IReportDiscussionReply>;
 }

@@ -16,6 +16,7 @@ import {
   UserProfileService, 
   IUserProfileService, 
   ReportActionsService, 
+  ReportDiscussionService,
   FavoriteType, 
   withErrHandler } from "../../../services";
 import { normalize } from "normalizr";
@@ -34,7 +35,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   private reportViewerApi: IReportViewerService;
   private userProfileApi: IUserProfileService;
   private favoriteApi: ReportActionsService;
-
+  private discussionApi:ReportDiscussionService;
   constructor(store: IBaseStore, context: WebPartContext) {
     super(store);
 
@@ -42,6 +43,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.reportViewerApi = new ReportViewerService();
     this.userProfileApi = new UserProfileService();
     this.favoriteApi = new ReportActionsService();
+    this.discussionApi= new ReportDiscussionService();
   }
 
   @autobind
@@ -94,46 +96,42 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   @autobind
   public async loadReportDiscussion(reportId: number, reportTitle: string) {
     this.dispatch({ loadingDiscussion: true, error: null });
-
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
 
-    let discussion: IReportDiscussion = undefined;
+    let discussion: IReportDiscussion;
     let replies: Array<IReportDiscussionReply> = undefined;
 
     if (state.discussionInitialized) {
       //get from Cache
       discussion = { ...state.discussion };
-      replies = [ ...state.replies ];
-      console.info('loadReportDiscussion > loading from state', discussion, replies);
+      replies = [ ...state.discussion.replies ];
+      console.info('loadReportDiscussion > loading from state', discussion);
     }
     else {
-      //load from SharePoint
-      discussion = { title: reportTitle };
-      replies = [ { title: `${reportTitle} reply 1` }, { title: `${reportTitle} reply 2` }, { title: `${reportTitle} reply 3` } ];
-      console.info('loadReportDiscussion > loading from SharePoint', discussion, replies);
+     discussion= await this.discussionApi.loadDiscussion(this.context.pageContext.web.absoluteUrl,this.context.pageContext.web.serverRelativeUrl,reportId,reportTitle);
     }
 
     this.dispatch({ 
       loadingDiscussion: false,
       discussion,
-      replies,
       discussionInitialized: true 
     });
   }
 
+  
   @autobind
   public async addReportDiscussionReply(message: string) {
     this.dispatch({ busyDiscussionUpdates: true, error: null });
-
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
-    const replies: Array<IReportDiscussionReply> = [...state.replies ];
-
-    const reply: IReportDiscussionReply = { title: message };
+    const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    const discussion:IReportDiscussion = state.discussion;
+    const postMessage:IReportDiscussionReply={title:discussion.title,replyBody:message,parentReplyId:null};
+    let reply: IReportDiscussionReply= await this.discussionApi.postReply(this.context.pageContext.web.absoluteUrl,this.context.pageContext.web.serverRelativeUrl,discussion.reportFolderId,postMessage);
     replies.push(reply);
-
+    discussion.replies=replies;
     this.dispatch({ 
       busyDiscussionUpdates: false,
-      replies
+      discussion
     });
   }
 
@@ -142,14 +140,14 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.dispatch({ busyDiscussionUpdates: true, error: null });
 
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
-    const replies: Array<IReportDiscussionReply> = [...state.replies ];
-
+    const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    const discussion:IReportDiscussion = state.discussion;
     const reply: IReportDiscussionReply = { title: message };
     replies[id] = reply;
-
+    discussion.replies=replies;
     this.dispatch({ 
       busyDiscussionUpdates: false,
-      replies
+      discussion
     });
   }
 
