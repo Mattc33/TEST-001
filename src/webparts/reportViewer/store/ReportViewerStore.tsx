@@ -15,7 +15,6 @@ export const ReportViewerContext = React.createContext<IContextProps<IReportView
 export class ReportViewerStore extends BaseStore<IReportViewerStoreProps, IReportViewerState> {
   constructor(props: IReportViewerStoreProps) {
     super(props);
-    console.info('ReportViewerStore:ctor', props);
 
     const viewerActions = new ReportViewerActions(this, props.storeState.context);
 
@@ -42,7 +41,6 @@ export class ReportViewerStore extends BaseStore<IReportViewerStoreProps, IRepor
 
   public render() {
     const state = this.state;
-    console.info('ReportViewerStore::render', state);
 
     return (
       <ReportViewerContext.Provider value={{ state }}>

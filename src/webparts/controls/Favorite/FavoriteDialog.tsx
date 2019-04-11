@@ -41,7 +41,6 @@ export class FavoriteDialog extends React.Component<IFavoriteDialogProps, IFavor
   }
 
   public static getDerivedStateFromProps(newProps: IFavoriteDialogProps, state: IFavoriteDialogState) {
-    console.info('FavoriteDialog::getDerivedStateFromProps', newProps, state);
     if (state.saveState !== newProps.saveState) {
       return {
         saveState: newProps.saveState

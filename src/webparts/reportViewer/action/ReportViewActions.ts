@@ -8,6 +8,9 @@ import {
 } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react';
 import { 
+  TableauReport 
+} from "../../controls";
+import { 
   ReportViewerService, 
   IReportViewerService, 
   UserProfileService, 
@@ -151,19 +154,24 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   }
 
   @autobind
-  public async saveReportAsFavorite(reportId: number, name: string, description: string, viewUrl: string) {
+  public async saveReportAsFavorite(reportId: number, name: string, description: string, viewUrl: string, tableauReportRef?: TableauReport) {
     this.dispatch({ savingAsFavorite: true, error: null });
+
+    if (tableauReportRef) {
+      const viewInfo = await tableauReportRef.saveCustomView(name);
+      viewUrl = viewInfo.url;
+    }
 
     const reportMetadata: any = { 
       "ViewUrl": viewUrl, 
       "ImageUrl": "" 
     };
-
+    
     const [success, err] = await withErrHandler<Boolean>(this.favoriteApi.FavoriteReport(
       this.context.pageContext.web.absoluteUrl, 
       reportId, 
       description, 
-      FavoriteType.CUSTOM, 
+      (tableauReportRef) ? FavoriteType.CUSTOM : FavoriteType.ORIGINAL, 
       undefined, 
       JSON.stringify(reportMetadata),
       name

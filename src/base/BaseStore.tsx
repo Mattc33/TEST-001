@@ -14,7 +14,6 @@ export abstract class BaseStore<P = {}, S = {}> extends React.Component<P, S>
   }
 
   public dispatcher(incomingState: any): Promise<void> {
-    console.info("BaseStore::dispatcher", incomingState);
     return new Promise((resolve, reject) => {
       const newState = { ...(this.state as any), ...incomingState };
       this.setState(newState, () => {
@@ -24,7 +23,6 @@ export abstract class BaseStore<P = {}, S = {}> extends React.Component<P, S>
   }
 
   public dispatcherByPath(path: string, update: any): Promise<void> {
-    console.info("BaseStore::dispatcherByPath", path, update);
     return new Promise((resolve, reject) => {
       this.setState(
         state => {
