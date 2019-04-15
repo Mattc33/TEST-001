@@ -1,4 +1,4 @@
-import { sp, ItemAddResult, Item, Web, Items } from '@pnp/sp';
+import { sp, ItemAddResult, ItemUpdateResult, Item, Web, Items } from '@pnp/sp';
 import { Logger, LogLevel } from '@pnp/logging';
 
 import { CurrentUser } from '@pnp/sp/src/siteusers';
@@ -66,5 +66,63 @@ export class ReportActionsService {
     if (favoriteItem && (favoriteItem.length > 0)) {
       await web.lists.getByTitle(FAVORITES_LIST_TITLE).items.getById(favoriteItem[0].Id).delete();
     }
+  }
+
+  public async GetLikeState(webUrl: string, reportId: number, userId: number): Promise<boolean> {
+    const userIdStr = userId.toString();
+    const likes = await this.getLikes(webUrl, reportId);
+    if (likes && likes.length > 0) {
+      return (likes
+        .split(",")
+        .findIndex((s: string) => s === userIdStr) !== -1);
+    }
+
+    return false;
+  }
+
+  public async AddLike(webUrl: string, reportId: number, userId: number): Promise<boolean> {
+    const rawLikes = await this.getLikes(webUrl, reportId);
+    const likes = rawLikes
+      .split(",")
+      .concat(userId.toString())
+      .join(",");
+
+    const result = await this.saveLikes(webUrl, reportId, likes);
+
+    return (result.item) ? true : false;
+  }
+
+  public async RemoveLike(webUrl: string, reportId: number, userId: number): Promise<boolean> {
+    const userIdStr = userId.toString();
+    const rawLikes = await this.getLikes(webUrl, reportId);
+    const likes = rawLikes
+      .split(",")
+      .filter((s: string) => s !== userIdStr)
+      .join(",");
+    
+    const result = await this.saveLikes(webUrl, reportId, likes);
+
+    return (result.item) ? true : false;
+  }
+
+  private async saveLikes(webUrl: string, reportId: number, likes: string): Promise<ItemUpdateResult> {
+    let web: Web = await new Web(webUrl);
+    return web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items
+      .getById(reportId)
+      .update({
+        "SVPLikes": likes
+      });
+  }
+
+  private async getLikes(webUrl, reportId: number): Promise<string> {
+    let web: Web = await new Web(webUrl);
+    let reportItem: Item = await web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items
+      .getById(reportId)
+      .select("SVPLikes")
+      .get();
+
+    return (reportItem && reportItem["SVPLikes"])
+      ? (reportItem["SVPLikes"] as string)
+      : '';
   }
 }

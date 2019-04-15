@@ -15,6 +15,7 @@ import SearchResult from './SearchResult/SearchResults';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { autobind } from '@uifabric/utilities';
+import { SiteUserProps } from '@pnp/sp/src/siteusers';
 
 const LOG_SOURCE: string = 'DataMarketplaceRendererApplicationCustomizer';
 
@@ -26,15 +27,18 @@ export default class DataMarketplaceRendererApplicationCustomizer
   extends BaseApplicationCustomizer<IDataMarketplaceRendererApplicationCustomizerProperties> {
 
   private _resultService: IResultService;
+  private _currentUser: SiteUserProps;
 
   @override
-  public onInit(): Promise<void> {
+  public async onInit(): Promise<void> {
     this._resultService = new ResultService();
     this._resultService.registerRenderer(this.componentId, 'Data Marketplace Renderer', 'QueryList',
       this.onChangeHappened, ['Subheader']);
     sp.setup({
       spfxContext: this.context
     });
+
+    this._currentUser = await sp.web.currentUser.get<SiteUserProps>();
 
     return Promise.resolve();
   }
@@ -46,7 +50,8 @@ export default class DataMarketplaceRendererApplicationCustomizer
       searchResults: e.results,
       componentId: e.rendererId,
       subheaderFieldName: subheaderFieldName,
-      context: this.context
+      context: this.context,
+      currentUser: this._currentUser
     });
     let node = document.getElementById(e.mountNode);
     if (node) {
