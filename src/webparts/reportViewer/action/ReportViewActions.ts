@@ -120,12 +120,12 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
 
   
   @autobind
-  public async addReportDiscussionReply(message: string) {
+  public async addReportDiscussionReply(message: string, parentReplyId:number) {
     this.dispatch({ busyDiscussionUpdates: true, error: null });
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
     const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
     const discussion:IReportDiscussion = state.discussion;
-    const postMessage:IReportDiscussionReply={title:discussion.title,replyBody:message,parentReplyId:null};
+    const postMessage:IReportDiscussionReply={title:discussion.title,replyBody:message,parentReplyId};
     let reply: IReportDiscussionReply= await this.discussionApi.postReply(this.context.pageContext.web.absoluteUrl,this.context.pageContext.web.serverRelativeUrl,discussion.reportFolderId,postMessage);
     replies.push(reply);
     discussion.replies=replies;
@@ -136,19 +136,73 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   }
 
   @autobind
-  public async updateReportDiscussionReply(id: number, message: string) {
+  public async updateReportDiscussionReply(message: string,replyId: number) {
     this.dispatch({ busyDiscussionUpdates: true, error: null });
 
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
-    const replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    let replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
     const discussion:IReportDiscussion = state.discussion;
-    const reply: IReportDiscussionReply = { title: message };
-    replies[id] = reply;
+    const postMessage:IReportDiscussionReply={title:discussion.title,replyBody:message,replyId};
+    let reply: IReportDiscussionReply= await this.discussionApi.updateReply(this.context.pageContext.web.absoluteUrl,postMessage);
+    replies.forEach((r, i) => { if (r.replyId===replyId)
+      {
+        replies[i].replyBody = reply.replyBody;
+        replies[i].createdDate= reply.createdDate;
+      } 
+    });
     discussion.replies=replies;
     this.dispatch({ 
       busyDiscussionUpdates: false,
       discussion
     });
+  }
+
+  @autobind
+  public async deleteReportDiscussionReply(discussionReply:IReportDiscussionReply) {
+    this.dispatch({ busyDiscussionUpdates: true, error: null });
+    const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
+    let replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    const discussion:IReportDiscussion = state.discussion;
+    let operation:any= await this.discussionApi.deleteReply(this.context.pageContext.web.absoluteUrl,discussionReply);
+    let remainingReplies:Array<IReportDiscussionReply>;
+    if(discussionReply.parentReplyId===null)
+    {
+    remainingReplies = replies.filter(
+        r=>
+        {
+          if (r.replyId!==discussionReply.replyId &&
+          r.parentReplyId!==discussionReply.replyId)
+          return r;
+        }
+          
+      );
+      
+    }
+    else
+    {
+      remainingReplies = replies.filter(
+        r=>
+        {
+          if (r.replyId!==discussionReply.replyId )
+          return r;
+        }
+          
+      );
+      
+    }
+    discussion.replies=remainingReplies;
+    this.dispatch({ 
+      busyDiscussionUpdates: false,
+      discussion
+    });
+  }
+
+  @autobind
+  public async getCurrentUserId()
+  {
+    // Need to check the dispatch for state CurrentUserId
+    const id= await this.discussionApi.getCurrentUserId(this.context.pageContext.web.absoluteUrl);
+    return id;
   }
 
   @autobind
