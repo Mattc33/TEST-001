@@ -9,3 +9,22 @@
 {
     font-weight: 600;
 }
+
+.linkButton
+{
+ font-size: 12px;
+ color:darkblue;
+}
+
+.parentReply
+{
+    color:darkblue;
+}
+.Active
+{
+    color: darkred !important;
+}
+.inActive
+{
+    color:darkblue !important;
+}

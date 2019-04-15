@@ -6,6 +6,7 @@ export interface IReportDiscussion {
 
 export interface IReportDiscussionReply {
     title: string;
+    replyId?:number;
     replyBody?:string;
     createdBy?:string;
     createdById?:number;
