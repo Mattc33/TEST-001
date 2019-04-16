@@ -57,6 +57,14 @@
           "manifest": "./src/webparts/reportComments/ReportCommentsWebPart.manifest.json"
         }
       ]
+    },
+    "sysco-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/sysco/SyscoApplicationCustomizer.js",
+          "manifest": "./src/extensions/sysco/SyscoApplicationCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -70,6 +78,7 @@
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
     "ReportMyFavWebPartStrings": "lib/webparts/reportMyFav/loc/{locale}.js",
     "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js",
-    "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js"
+    "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js",
+    "SyscoApplicationCustomizerStrings": "lib/extensions/sysco/loc/{locale}.js"
   }
 }

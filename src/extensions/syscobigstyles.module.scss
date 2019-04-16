@@ -1,0 +1,47 @@
+.CanvasZoneContainer:first-child {
+    background-color: #e5e5e5;
+}
+
+@font-face {
+    font-family: 'DidotLTStd-Roman';
+    src: url(fonts/DidotLTStd-Roman.eot);
+    src: url(fonts/DidotLTStd-Roman.eot?#iefix) format("embedded-opentype"),url(fonts/DidotLTStd-Roman.woff) format("woff"),url(fonts/DidotLTStd-Roman.ttf) format("truetype"),url(fonts/DidotLTStd-Roman.svg#DidotLTStd-Roman) format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+$header-fontface: 'DidotLTStd-Roman';
+
+body, a {
+    font-family:'DidotLTStd-Roman' !important;
+}
+
+.CanvasZoneContainer:first-child {
+    background-color: #e5e5e5;
+}
+
+
+
+@font-face {
+    font-family: 'Gotham Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book'), url('fonts/gothambook.woff') format('woff');
+    }
+
+
+[role="heading"] {
+    font-family: $header-fontface;
+}
+
+
+div {
+    font-family: $header-fontface;
+}
+
+
+  .firstclass{
+    display: inline-block;
+    color: navy;
+}
