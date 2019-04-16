@@ -50,6 +50,6 @@ export default class SyscoApplicationCustomizer
         </div>`;
     }
 
-    return Promise.resolve<void>();
+    return Promise.resolve();
   }
 }
