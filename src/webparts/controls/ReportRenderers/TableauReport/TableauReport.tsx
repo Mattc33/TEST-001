@@ -90,7 +90,7 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
 
         const vizOptions = {
             hideTabs: true,
-            hideToolbar: true,
+            hideToolbar: false,
             height: this.props.height,
             width: this.props.width,
             onFirstInteractive: (e) => {
