@@ -58,6 +58,14 @@
         }
       ]
     },
+    "featured-reports-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/featuredReports/FeaturedReportsWebPart.js",
+          "manifest": "./src/webparts/featuredReports/FeaturedReportsWebPart.manifest.json"
+        }
+      ]
+    },
     "sysco-application-customizer": {
       "components": [
         {
@@ -79,6 +87,7 @@
     "ReportMyFavWebPartStrings": "lib/webparts/reportMyFav/loc/{locale}.js",
     "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js",
     "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js",
+    "FeaturedReportsWebPartStrings": "lib/webparts/featuredReports/loc/{locale}.js",
     "SyscoApplicationCustomizerStrings": "lib/extensions/sysco/loc/{locale}.js"
   }
 }
