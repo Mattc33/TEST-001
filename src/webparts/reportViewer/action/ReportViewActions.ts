@@ -206,6 +206,26 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   }
 
   @autobind
+  public async likeComment(currentUserId:number,replyId:number)
+  {
+    this.dispatch({ busyDiscussionUpdates: true, error: null });
+    const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
+    let replies: Array<IReportDiscussionReply> = [...state.discussion.replies ];
+    const discussion:IReportDiscussion = state.discussion;
+    let likes:number[]= await this.discussionApi.likeComment(this.context.pageContext.web.absoluteUrl,currentUserId,replyId);
+    replies.forEach((r, i) => { if (r.replyId===replyId)
+      {
+        replies[i].likes=likes;
+      } 
+    });
+    discussion.replies=replies;
+    this.dispatch({ 
+      busyDiscussionUpdates: false,
+      discussion
+    });
+  }
+
+  @autobind
   public async saveReportAsFavorite(reportId: number, name: string, description: string, viewUrl: string, tableauReportRef?: TableauReport) {
     this.dispatch({ savingAsFavorite: true, error: null });
 

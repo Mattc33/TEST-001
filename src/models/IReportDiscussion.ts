@@ -12,4 +12,5 @@ export interface IReportDiscussionReply {
     createdById?:number;
     createdDate?:Date;
     parentReplyId?: number;
+    likes?:number[];
 }
