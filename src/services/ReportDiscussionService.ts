@@ -90,6 +90,7 @@ export class ReportDiscussionService implements IReportDiscussionService {
             reply.createdBy = result.Title;
             reply.createdById = item.data.AuthorId;
             reply.replyId = item.data.Id;
+            reply.likes=[];
 
             web
               .getFileByServerRelativeUrl(`${listUri}/${item.data.Id}_.000`)

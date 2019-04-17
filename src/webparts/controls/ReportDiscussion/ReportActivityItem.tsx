@@ -35,6 +35,7 @@ export class ReportActivityItem extends React.Component<IReportActivityItemProps
 
   public render(): React.ReactNode {
     const reply = this.props.reply;
+    const index= reply.likes.indexOf(this.props.currentUserId);
     const replyHTML =
     {
       key: reply.replyId,
@@ -55,10 +56,11 @@ export class ReportActivityItem extends React.Component<IReportActivityItemProps
       <div style={{ marginBottom: '7px' }}>
         <ActivityItem  {...replyHTML} style={{ marginBottom: '2px' }} />
         <div style={{ marginLeft: '22px' }}>
-          <span><Icon onClick={() => this.likeClicked(reply)} style={{ cursor: 'pointer' }}
-            iconName={reply.likes.indexOf(this.props.currentUserId) !== -1 ? 'LikeSolid' : 'Like'} />
-            {reply.likes.length > 0 ? ' ' + reply.likes.length : ''}{' | '} </span>
-
+          <span>
+            <Icon onClick={() => this.likeClicked(reply)} style={{ cursor: 'pointer' }}
+            iconName={index !== -1 ? 'LikeSolid' : 'Like'} />
+            <span style={{color:'darkred',fontWeight:600}}>{reply.likes.length > 0 ? ' ' + reply.likes.length : ''}{'   '} </span>
+          </span>
           {(reply.parentReplyId === null) &&
             <span><Link className='linkButton' onClick={() => this.onClicked('Reply', '')} >Reply</Link>{' | '}</span>
           }
