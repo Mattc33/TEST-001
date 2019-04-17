@@ -68,3 +68,10 @@ export interface IFavoriteReport {
     favoriteReportUrl: string;
     reportId: number;
 }
+
+export enum ReportFavoriteType {
+    Custom = "Custom",
+    Original = "Original",
+    Parameterized = "Parameterized"
+  }
+  

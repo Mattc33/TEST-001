@@ -10,9 +10,13 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Slalom ViewPort WebParts" },
-    "title": { "default": "ViewPort Search Box" },
-    "description": { "default": "Allows users to enter query keywords" },
+    "group": { 
+      "default": "PnP" 
+    },
+    "title": { 
+      "default": "Search Box" , "fr-fr": "Boîte de recherche"
+    },
+    "description": { "default": "Allows users to enter query keywords", "fr-fr": "Permets aux utilisateurs d'entrer des mots clÃ©s de recherche." },
     "officeFabricIconFontName": "Search",
     "properties": {
       "defaultQueryKeywords": ""

@@ -19,7 +19,7 @@ export default class SearchResult extends React.Component<ISearchResultProps, {}
       <div className="template_root">
         <div className="template_defaultCard">
           <div className="template_resultCount">
-            <label className="ms-fontWeight-semibold">{this.props.searchResults.TotalRows} results</label>
+            <label className="ms-fontWeight-semibold">{this.props.searchResults.PaginationInformation.TotalRows} results</label>
           </div>
           <div className="ms-Grid">
             <div className="ms-Grid-row">
