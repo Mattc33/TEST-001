@@ -9,7 +9,7 @@
   },
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "pageUrl": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/home.aspx",
       "customActions": {
         "4c745113-7612-4aa3-a670-d110298e2fff": {
           "location": "ClientSideExtension.ApplicationCustomizer",
@@ -20,7 +20,7 @@
       }
     },
     "dataMarketplaceRenderer": {
-      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "pageUrl": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/home.aspx",
       "customActions": {
         "4c745113-7612-4aa3-a670-d110298e2fff": {
           "location": "ClientSideExtension.ApplicationCustomizer",
