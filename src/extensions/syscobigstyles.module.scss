@@ -2,33 +2,50 @@
     background-color: #e5e5e5;
 }
 
-@font-face {
-    font-family: 'DidotLTStd-Roman';
-    src: url(fonts/DidotLTStd-Roman.eot);
-    src: url(fonts/DidotLTStd-Roman.eot?#iefix) format("embedded-opentype"),url(fonts/DidotLTStd-Roman.woff) format("woff"),url(fonts/DidotLTStd-Roman.ttf) format("truetype"),url(fonts/DidotLTStd-Roman.svg#DidotLTStd-Roman) format("svg");
-    font-weight: 400;
+
+
+  @font-face {
+    font-family: 'open_sansregular';
     font-style: normal;
-}
+    font-weight: normal;
+    src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+    }
 
 
-$header-fontface: 'DidotLTStd-Roman';
+    @font-face {
+      font-family: 'open_sanslight';
+      font-style: normal;
+      font-weight: normal;
+      src: local('open_sanslight'), url('fonts/opensans-light-webfont.woff') format("woff");
+      }
+
+
+      @font-face {
+        font-family: 'open_sansbold';
+        font-style: normal;
+        font-weight: normal;
+        src: local('open_sansbold'), url('fonts/opensans-bold-webfont.woff') format("woff");
+        }
+
+  @font-face {
+    font-family: 'open_sansregular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+    }
+
+
+
+
+$header-fontface: 'open_sansregular';
 
 body, a {
-    font-family:'DidotLTStd-Roman' !important;
+    font-family:'open_sansregular' !important;
 }
 
 .CanvasZoneContainer:first-child {
     background-color: #e5e5e5;
 }
-
-
-
-@font-face {
-    font-family: 'Gotham Book';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Gotham Book'), url('fonts/gothambook.woff') format('woff');
-    }
 
 
 [role="heading"] {

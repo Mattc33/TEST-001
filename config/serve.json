@@ -29,6 +29,17 @@
           }
         }
       }
+    },
+    "sysco": {
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "customActions": {
+        "c1362c3b-6bf1-481d-b644-ff11910d59b2": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
     }
   }
 }

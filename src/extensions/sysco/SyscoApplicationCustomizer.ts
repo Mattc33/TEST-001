@@ -46,7 +46,7 @@ export default class SyscoApplicationCustomizer
         
         this.headerplaceholder.domElement.innerHTML = `
         <div class="${styles.firstclass}">
-        test
+        
         </div>`;
     }
 

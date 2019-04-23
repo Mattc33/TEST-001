@@ -2,4 +2,8 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <ClientSideComponentInstance Title="DataMarketplaceRenderer" Location="ClientSideExtension.ApplicationCustomizer" ComponentId="4c745113-7612-4aa3-a670-d110298e2fff" Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
     </ClientSideComponentInstance>
+
+    <ClientSideComponentInstance Title="sysco" Location="ClientSideExtension.ApplicationCustomizer" ComponentId="c1362c3b-6bf1-481d-b644-ff11910d59b2" Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </ClientSideComponentInstance>
+
 </Elements>
