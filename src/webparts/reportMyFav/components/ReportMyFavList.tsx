@@ -7,6 +7,7 @@ import MyFavHome from "./MyFavHome";
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 import { ReportFavoriteType } from "../../../helpers/UrlHelper";
+import MyFavAllWithImage from "./MyFavAllWithImage";
 
 
 
@@ -40,7 +41,7 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
   public componentDidMount(): void { 
     
-    this.props.myFavReportService.getMyFavoriteReports(this.props.visualizationTitle,this.props.visualizationImage,100).then((result: Array<IReportFavoriteItem>) => {
+    this.props.myFavReportService.getMyFavoriteReports(this.props.visualizationTitle,this.props.visualizationImage,this.props.reportCount).then((result: Array<IReportFavoriteItem>) => {
 
       this.setState({ myFavReportItemsinState: result, isReportsLoaded: true});
       
@@ -76,13 +77,25 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
   @autobind
   private renderMyFavReports(favReports: Array<IReportFavoriteItem>): Array<JSX.Element> {
     console.log("favReports: ", favReports);
+    console.log("ViewName: ",this.props.viewName);
     if (favReports && favReports.length > 0) {
-      return favReports.map((report: IReportFavoriteItem) => {
-        return (
-          <MyFavHome reportItem ={report} key={report.Id} onView={this.handleClickView} 
-          onShare={this.handleClickShare} onRemove={this.handleClickDelete}/>
-        );
-      });
+      if(this.props.viewName == "MyFavAllWithImage") {
+        return favReports.map((report: IReportFavoriteItem) => {
+          return (
+            <MyFavAllWithImage reportItem ={report} key={report.Id} siteURL = {this.props.siteUrl} onView={this.handleClickView} 
+            onShare={this.handleClickShare} onRemove={this.handleClickDelete}/>
+          );
+        });
+      }
+      else
+      {
+        return favReports.map((report: IReportFavoriteItem) => {
+          return (
+            <MyFavHome reportItem ={report} key={report.Id} siteURL = {this.props.siteUrl} onView={this.handleClickView} 
+            onShare={this.handleClickShare} onRemove={this.handleClickDelete}/>
+          );
+        });
+      }
     }
     else {
       return ([
