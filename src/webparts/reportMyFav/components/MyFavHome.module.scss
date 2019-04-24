@@ -3,7 +3,11 @@
 .MyFavHome {
 
   .wrapper{
-    border: 1px solid grey;
+    border: .5px solid #e4e5e6;
+    -webkit-box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
+-moz-box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
+box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
+
   }
 
   .title {
@@ -14,9 +18,19 @@
     font-weight: bold !important;
   }
 
+
+  .FavReportTitle, .FavReportTitle a {
+    font-weight: 400 !important;
+    color: #444 !important;
+    font-size: 1.05em !important;
+    text-decoration:none;
+  }
+
   .description {
     align-content: flex-start;
     text-align:start;
+    font-size: .95em !important;
+    color: #666 !important;
     //margin-left: 20px;
     //margin-top: -10px;
   }
@@ -24,7 +38,50 @@
   .socialIcons {
     margin-left: -5px;
     margin-top: -10px;
+    color: #398bcc;
+
+       > .ms-Button {
+         height:1.5em;
+       }
+
+  }
+
+  .ms-Button-flexContainer > i {
+    font-size: .95em; 
+    color: #398bcc;
+  
   }
 
 
+span.socialIcons, span.socialIcons i {
+  color: #398bcc;
+  line-height: .5em;
+  font-size: .95em;
 }
+
+span.socialIcons > button:not(:first-child) {
+  margin-left: 1em;
+}
+
+.wrapper > div:first-child {
+  padding:1em .3em 0 .3em !important;
+}
+
+
+.wrapper > div:nth-child(2) {
+    padding:0 .3em .3em .3em !important;
+    margin-top: -.5em;
+
+}
+
+
+
+.wrapper > div:nth-child(3) {
+    padding:.3em .3em .5em .2em !important;
+    margin-top: -.5em;
+
+}
+
+}
+
+
