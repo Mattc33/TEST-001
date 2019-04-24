@@ -8,6 +8,7 @@ import {
   IReportDiscussionReply
 } from "../models";
 import { SPUser } from "@microsoft/sp-page-context";
+import { number } from "prop-types";
 
 const VISUALIZATION_DISCUSSION_LIST_TITLE: string = "Visualization Discussion";
 const VISUALIZATION_DISCUSSION_LIST_URL:string="/Lists/VisualizationDiscussion/";
@@ -63,6 +64,7 @@ export class ReportDiscussionService implements IReportDiscussionService {
       reply.createdBy = discussionReply.Author.Title;
       reply.createdById = discussionReply.AuthorId;
       reply.createdDate = discussionReply.Created;
+      reply.likes=(discussionReply.SVPLikes===null || discussionReply.SVPLikes==='')?[]:JSON.parse(discussionReply.SVPLikes);
       replies.push(reply);
     });
     return replies;
@@ -88,6 +90,7 @@ export class ReportDiscussionService implements IReportDiscussionService {
             reply.createdBy = result.Title;
             reply.createdById = item.data.AuthorId;
             reply.replyId = item.data.Id;
+            reply.likes=[];
 
             web
               .getFileByServerRelativeUrl(`${listUri}/${item.data.Id}_.000`)
@@ -163,4 +166,40 @@ export class ReportDiscussionService implements IReportDiscussionService {
     });
     return p1;
   }
+
+  public async likeComment(webUrl: string,currentUserId:number,replyId):Promise<number[]>
+  {
+    let web: Web = await new Web(webUrl);
+    let likes:number[]=[];
+    const promiseRoot = new Promise<number[]>((resolve, reject) => {
+      let list = web.lists.getByTitle(VISUALIZATION_DISCUSSION_LIST_TITLE);
+      list.items.getById(replyId).get().then((result)=>
+      {
+            likes=(result.SVPLikes===null || result.SVPLikes==='')?[]:JSON.parse(result.SVPLikes);
+            if(likes.indexOf(currentUserId)!==-1)
+            {
+              var index = likes.indexOf(currentUserId);
+              likes.splice(index,1);
+            }
+            else
+            {
+              likes.push(currentUserId);
+            }
+            var likesString=JSON.stringify(likes);
+            list.items.getById(replyId).update(
+              {
+                SVPLikes:likesString
+              }
+            ).then(()=>
+            {
+              resolve(likes);
+            }
+            ).catch((error) => {
+              reject(error);
+            });
+      });
+    });
+    return promiseRoot;
+  }
+
 }
