@@ -2,11 +2,12 @@ import * as React from 'react';
 import styles from './MyFavHome.module.scss';
 import { IReportFavoriteItem } from "../../../models/IReportItem";
 import { IconButton } from 'office-ui-fabric-react/lib/Button';
-
+import { Link } from 'office-ui-fabric-react/lib/Link';
 
 export interface IReportProps {
   key: string;
   reportItem: IReportFavoriteItem;
+  siteURL:string;
 
   onView(favReport:IReportFavoriteItem);
   onShare(favReport:IReportFavoriteItem);
@@ -26,38 +27,44 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
     };
 
     const colStyle = {
-      width: '70%',
+      'width': '90%',
+      'margin-bottom': '5px',
+      'margin-top': '10px',
+      'margin-left': '20px',
     };
 
     console.log("reportItem: ", this.props.reportItem);
     let reportTitle = this.props.reportItem.Title;
     const reportDesc = this.props.reportItem.SVPVisualizationDescription;
+    const favReportViewUrl = this.props.siteURL + "/SitePages/ViewReport.aspx?favReportId=" + this.props.reportItem.Id;
 
     return (
       <div className={styles.MyFavHome}>
         <div className={styles.wrapper}>
-          <div className="row" style={rowStyle}>
-            <div className="col-sm-8" style={colStyle}>
-              <p className={styles.title}>{reportTitle}</p>
+          <div className="row">
+            <div className="col-sm-12" style={colStyle}>
+              <Link className={styles.title} href={ favReportViewUrl } target="_blank">{reportTitle}</Link>
             </div>
-            <div className="col-sm-4" >
-                <p>
-                  <IconButton iconProps={{ iconName: 'AreaChart' }} title="View Report" ariaLabel="View Report" onClick={(e) => this.props.onView(this.props.reportItem)}/>
+          </div>
+          <div className="row" >
+            <div className="col-sm-12" style={colStyle}>
+              <span className={styles.description}>{reportDesc}</span>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12" style={colStyle}>
+              <span className={styles.socialIcons}> 
+                  <IconButton iconProps={{ iconName: 'HeartFill' }} title="Remove Report" ariaLabel="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)}/>
                   <IconButton iconProps={{ iconName: 'Share' }} title="Share Report" ariaLabel="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)}/>
-                  <IconButton iconProps={{ iconName: 'Cut' }} title="Remove Report" ariaLabel="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)}/>
-                </p>
+              </span>
             </div>
           </div>
-          <div className="row" style={rowStyle}>
-            <div className="col-sm-12">
-              <p className={styles.description}>{reportDesc}</p>
-            </div>
-          </div>
-      </div>
+        </div>
       </div>
     );
   }
 //TODO
+//<IconButton iconProps={{ iconName: 'AreaChart' }} title="View Report" ariaLabel="View Report" onClick={(e) => this.props.onView(this.props.reportItem)}/>
 //<p className={styles.description}>{this.props.reportItem.SVPVisualizationDescription}</p>
 ////<button className={styles.button} type="button" onClick={(e) => this.props.onView(this.props.reportItem.Id)}>View</button>
 //<Link  className={styles.button} href={ favReportViewUrl } target="_self">View </Link>

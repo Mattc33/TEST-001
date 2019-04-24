@@ -79,7 +79,7 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
                 PropertyPaneTextField('clientLabel', {
                   label: strings.ClientNameFieldLabel
                 }),
-                PropertyPaneTextField('viewName', {
+                PropertyPaneTextField('viewNameLabel', {
                   label: strings.ViewNameFieldLabel
                 }),
                 PropertyPaneTextField('headerMessage', {
@@ -89,7 +89,7 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
                 PropertyPaneSlider('favReportCount', {
                   label: strings.FavReportsMaxCount,
                   min: 1,
-                  max: 20,
+                  max: 50,
                   value: 3,
                   showValue: true,
                   step: 1

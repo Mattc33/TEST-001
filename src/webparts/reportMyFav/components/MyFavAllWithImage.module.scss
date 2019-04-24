@@ -2,83 +2,69 @@
 
 .MyFavAllWithImage {
 
-  .wrapper{
-    border: 1px solid grey;
-    max-width: 350px;
-    //height: 150px;
-    display: inline-flex;
-    width: 350px;
-  }
-
-  .url {
-    text-decoration: none;
-  }
-
-  .image {
-    max-width: 100px;
-    max-height: 80px;
-    width: 100px;
-    height: 80px;
-    margin-left: 10px;
-    margin-top: 5px
-  }
-
-  .title {
-    height: 50px;
-    //width: 188px;
-    align-content: flex-start;
-    text-align:start;
-    margin-left: 10px;
-    text-decoration: black;
-    font-weight: bold;
-    margin-top: 1px;
-  }
-
-  .description {
-    height: 50px;
-    align-content: flex-start;
-    text-align:start;
-    margin-left: 10px;
-    margin-top: -10px;
-  }
-
-  .colStyle {
-    background-color: '#EEF0F2';
-  }
- 
-  .button {
-    // Our button
-    text-decoration: none;
-
-    // Primary Button
-    min-width: 50px;
-    background-color: $ms-color-themePrimary;
-    border-color: $ms-color-themePrimary;
-    color: $ms-color-white;
-
-    // Basic Button
-    //outline: transparent;
-    //position: relative;
-    //font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
-    //-webkit-font-smoothing: antialiased;
-    //font-size: $ms-font-size-m;
-    //font-weight: $ms-font-weight-regular;
-    //border-width: 2px;
-    text-align: center;
-    cursor: pointer;
+  .visualizationTechnologyIcon {
+    height: 24px;
     display: inline-block;
-    padding: 2px;
-    margin-left: 8px;
-    
+    vertical-align: middle;
+  }
 
-    .label {
-      font-weight: $ms-font-weight-semibold;
-      font-size: $ms-font-size-m;
-      height: 32px;
-      line-height: 32px;
-      margin: 0 4px;
-      vertical-align: top;
-      display: inline-block;
+  .itemLink {
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .itemTitle {
+    font-weight: 700;
+    font-size: larger;
+  }
+
+  .featuredCard {
+    background-color: rgba(173, 216, 230, 0.2);
+  }
+
+  .likeFaveButtons {
+    position: absolute;
+    right: 0.5em;
+    bottom: -0.25em;
+    margin: 0 0.1em;
+  }
+
+  .linkItem {
+    cursor: pointer;
+  }
+
+  .likeFavContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  li.resultItem {
+    display: block;
+
+    .imageContainer {
+      height: 100px;
+      width: 78px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      > img {
+        max-width: 78px;
+        max-height: 48px;
+        margin: auto 0;
+        width: auto;
+        height: auto;
+      }
+    }
+    
+    .ms-dialogMainOverride {
+      width: 400px;
+      max-width: 1000px;
     }
   }
 
