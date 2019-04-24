@@ -50,6 +50,17 @@ export default class SyscoApplicationCustomizer
         </div>`;
     }
 
+
+    let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
+    if (bottomPlaceholder) {
+      bottomPlaceholder.domElement.innerHTML = `<div class="${styles.foot}">
+                  <div class="ms-bgColor-themeDark ms-fontColor-white ${styles.white}">
+                    <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i>&nbsp; icon placeholder
+                  </div>
+                </div>`;
+    }
+
+
     return Promise.resolve();
   }
 }
