@@ -39,11 +39,13 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
     const favReportViewUrl = this.props.siteURL + "/SitePages/ViewReport.aspx?favReportId=" + this.props.reportItem.Id;
 
     return (
+      
       <div className={styles.MyFavHome}>
         <div className={styles.wrapper}>
+       
           <div className="row">
             <div className="col-sm-12" style={colStyle}>
-              <Link className={styles.title} href={ favReportViewUrl } target="_blank">{reportTitle}</Link>
+              <Link className={styles.FavReportTitle} href={ favReportViewUrl } target="_blank">{reportTitle}</Link>
             </div>
           </div>
           <div className="row" >
@@ -54,8 +56,8 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
           <div className="row">
             <div className="col-sm-12" style={colStyle}>
               <span className={styles.socialIcons}> 
-                  <IconButton iconProps={{ iconName: 'HeartFill' }} title="Remove Report" ariaLabel="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)}/>
-                  <IconButton iconProps={{ iconName: 'Share' }} title="Share Report" ariaLabel="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)}/>
+                  <IconButton iconProps={{ iconName: 'HeartFill' }} title="Remove Report" ariaLabel="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)}/>Favorite
+                  <IconButton iconProps={{ iconName: 'Share' }} title="Share Report" ariaLabel="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)}/>Share
               </span>
             </div>
           </div>
