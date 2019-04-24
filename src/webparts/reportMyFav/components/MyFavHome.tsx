@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './MyFavHome.module.scss';
 import { IReportFavoriteItem } from "../../../models/IReportItem";
-import { IconButton } from 'office-ui-fabric-react/lib/Button';
+import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 
 export interface IReportProps {
@@ -56,8 +56,8 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
           <div className="row">
             <div className="col-sm-12" style={colStyle}>
               <span className={styles.socialIcons}> 
-                  <IconButton iconProps={{ iconName: 'HeartFill' }} title="Remove Report" ariaLabel="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)}/>Favorite
-                  <IconButton iconProps={{ iconName: 'Share' }} title="Share Report" ariaLabel="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)}/>Share
+                  <ActionButton data-automation-id="HeartFill" iconProps={{ iconName: 'HeartFill' }} allowDisabledFocus={true} title="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)} >Favorite</ActionButton>
+                  <ActionButton data-automation-id="Share" iconProps={{ iconName: 'Share' }} allowDisabledFocus={true} title="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)} >Share</ActionButton>
               </span>
             </div>
           </div>
