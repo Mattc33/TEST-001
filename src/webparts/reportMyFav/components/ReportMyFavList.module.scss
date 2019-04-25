@@ -20,8 +20,8 @@
     @include ms-Grid-row;
     //@include ms-fontColor-white;
     //background-color: $ms-color-themeDark;
-    padding: 10px;
-    margin: 1px 1px;
+   // padding: 10px;
+  // margin: 1px 1px;
   }
 
   .column {
@@ -44,9 +44,9 @@
 
 
   .myFavReportList {
-    max-width: 360px;
+   // max-width: 360px;
     max-height: 400px;
-    width: 360px;
+    //width: 360px;
     height: 400px !important;
     overflow-x: hidden;
     overflow-y: scroll;
