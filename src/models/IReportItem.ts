@@ -34,7 +34,6 @@ export interface IReportItem {
     FileWebUrl?: string;
 
     SVPLikesCount?: number;
-    SVPBusinessUnit?: any;
     SVPIsFeatured: boolean;
     SVPCategory: string;
     SVPVisualizationParameters?: Array<IReportParameters>;
