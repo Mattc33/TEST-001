@@ -35,10 +35,11 @@ box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
     //margin-top: -10px;
   }
 
-  .socialIcons {
-    margin-left: -5px;
-    margin-top: -10px;
-    color: #398bcc;
+  .socialIcons, .socialIcons i {
+    //margin-left: -5px;
+    //margin-top: -10px;
+    color: #398bcc !important;
+    font-size: .9em !important;
 
        > .ms-Button {
          height:1.5em;
@@ -46,19 +47,11 @@ box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
 
   }
 
-  .ms-Button-flexContainer > i {
-    font-size: .95em; 
-    color: #398bcc;
-  
+  .socialIcons div {
+    color: #398bcc !important;
   }
 
-
-span.socialIcons, span.socialIcons i {
-  color: #398bcc;
-  line-height: .5em;
-  font-size: .95em;
-}
-
+  
 span.socialIcons > button:not(:first-child) {
   margin-left: 1em;
 }
@@ -75,12 +68,18 @@ span.socialIcons > button:not(:first-child) {
 }
 
 
-
 .wrapper > div:nth-child(3) {
     padding:.3em .3em .5em .2em !important;
     margin-top: -.5em;
 
 }
+
+.ms-Button-textContainer, .ms-Button-textContainer a {
+  font-size: .9em !important;
+  text-indent: -.2em;
+}
+
+
 
 }
 
