@@ -14,7 +14,6 @@ const VizListFields = [
     "SVPLastUpdated",
     "SVPVisualizationDescription",
     "SVPVisualizationImage",
-    "SVPBusinessUnit",
     "SVPIsFeatured",
     "SVPCategory",
     "SVPReportHeight",
