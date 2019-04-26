@@ -44,8 +44,9 @@
 
   li.resultItem {
     display: block;
+    list-style: none;
 
-    .imageContainer {
+    /*.imageContainer {
       height: 100px;
       width: 78px;
       display: flex;
@@ -58,7 +59,7 @@
         margin: auto 0;
         width: auto;
         height: auto;
-      }
+      }*/
 
       .tile-class {
         display: flex;
