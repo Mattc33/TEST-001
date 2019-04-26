@@ -76,3 +76,11 @@ div[class^="feedback_"]{
 div[class^="footerBar_"]{
   display: none !important;
 }
+
+
+div[class^="pageTitle_"]{
+  div[class^="contentBox"]{
+    min-height:auto;
+    padding-top: 12px !important;
+  }
+}
