@@ -72,7 +72,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
     return (
       <li className={styles.resultItem}>
-        <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4">
+        <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
           <div className="singleCard">
             <div className="previewImg" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
               &nbsp;

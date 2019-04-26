@@ -1,4 +1,6 @@
 .resultContainer {
+    padding: 0 !important;
+
   .visualizationTechnologyIcon {
     height: 24px;
     display: inline-block;
@@ -16,7 +18,7 @@
   }
 
   .featuredCard {
-    background-color: rgba(173, 216, 230, 0.2);
+   // background-color: rgba(173, 216, 230, 0.2);
   }
 
   .likeFaveButtons {
@@ -57,6 +59,12 @@
         width: auto;
         height: auto;
       }
+
+      .tile-class {
+        display: flex;
+        height: 160px;
+        margin-bottom:1em;
+      }
     }
     
     .ms-dialogMainOverride {
@@ -64,4 +72,8 @@
       max-width: 1000px;
     }
   }
+
+  li.ms-ListItem.ms-ListItem--document {
+    list-style: none;
+}
 }
