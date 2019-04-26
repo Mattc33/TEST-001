@@ -3,5 +3,5 @@ No,ContentTypeDef,contentTypesDef.csv,,,,,
 No,List,lookupSpLists.csv,,,,,"Create base list (no content type, needed for lookup site columns)"
 Yes,SiteColumn,siteColumns.csv,,,,,
 Yes,ContentType,contentTypes.csv,contentTypesDef.csv,,,,
-No,List,spLists.csv,,,,,Create lists and attach content types
+Yes,List,spLists.csv,,,,,Create lists and attach content types
 No,Files,files.csv,,,,,Upload files
