@@ -41,18 +41,19 @@
             min-height: 170px;
             display: flex;
             .previewImg {
-                width: 100%;
+                width: 30%;
                 //height: 111px;
                 //background-size: cover;
                 position: relative;
-                border-bottom: 1px solid #eaeaea;
+                //border-bottom: 1px solid #eaeaea;
                 background-repeat: no-repeat;
-                background-size: 16em 100%;
-                border:1px solid #ddd;
-                width: 12em;
-                max-height:auto;
-                background-position:center;
+                background-size: contain;
+                //border:1px solid #ddd;
+                //width: 12em;
+                height: -webkit-fill-available;
+                background-position: top;
                 //display: flex;
+                //margin: 1em;
             }
             .cardInfo {
                 padding-left: 10px;
@@ -74,4 +75,15 @@
         padding-left: 10px;
         margin-bottom: 10px;
     }
+
+    .datamkt-right {
+        width: 40% !important;
+        margin: 1em !important;
+      }
+      
+      .datamkt-sub {
+        margin: 1em !important;
+        display: flex !important;
+      } 
+      
 }

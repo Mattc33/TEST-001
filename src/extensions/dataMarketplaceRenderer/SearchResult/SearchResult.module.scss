@@ -12,9 +12,12 @@
     display: inline-block;
   }
 
-  .itemTitle {
-    font-weight: 700;
-    font-size: larger;
+  .itemTitle, .itemTitle a {
+    font-weight: 400;
+    font-size: 1.2em;
+    color: #666;
+    margin: 1em 1em 0 1em;
+    display:block;  
   }
 
   .featuredCard {
@@ -66,8 +69,9 @@
         height: 160px;
         margin-bottom:1em;
       }
-    }
-    
+ 
+  }
+
     .ms-dialogMainOverride {
       width: 400px;
       max-width: 1000px;
@@ -77,5 +81,6 @@
   li.ms-ListItem.ms-ListItem--document {
     list-style: none;
 }
+
 
 }

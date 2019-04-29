@@ -74,9 +74,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       <li className={styles.resultItem}>
         <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
           <div className="singleCard">
-            <div className="previewImg" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-              &nbsp;
-            </div>
+            
             <li className="ms-ListItem ms-ListItem--document">
               <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
                 <span className="ms-ListItem-primaryText">
@@ -84,8 +82,18 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                     <span className={styles.itemTitle}>{result.Title}</span>
                   </a>
                 </span>
+
+                <div className="datamkt-sub">
+                  <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
+                  &nbsp;
+                  </div>
+
+                  <div className="datamkt-right">
                 <span className="ms-ListItem-secondaryText">{result.SVPVisualizationDescription}</span>
                 <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
+                </div>
+                </div>
+               
                 <span className={styles.likeFaveButtons}>
                   <div className={styles.likeFavContainer}>
                     <span>
