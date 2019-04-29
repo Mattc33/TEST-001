@@ -36,24 +36,18 @@
     
     .template_defaultCard {
         .singleCard {
-            //margin: 10px;
             border: 1px solid #eaeaea;
-            min-height: 170px;
+            min-height: 210px;
             display: flex;
+            margin-bottom:1.5em;
             .previewImg {
-                width: 30%;
-                //height: 111px;
-                //background-size: cover;
+                width: 20%;
                 position: relative;
-                //border-bottom: 1px solid #eaeaea;
                 background-repeat: no-repeat;
                 background-size: contain;
-                //border:1px solid #ddd;
-                //width: 12em;
-                height: -webkit-fill-available;
+                height: auto;
                 background-position: top;
-                //display: flex;
-                //margin: 1em;
+                margin: 0 0 0 1em;
             }
             .cardInfo {
                 padding-left: 10px;
@@ -77,13 +71,31 @@
     }
 
     .datamkt-right {
-        width: 40% !important;
-        margin: 1em !important;
+        width: 80% !important;
+        margin: 0 1em !important;
+        line-height:20px;
+        max-height:80px;
+        //overflow:hidden;
       }
       
       .datamkt-sub {
         margin: 1em !important;
         display: flex !important;
       } 
+
+      span.ms-ListItem-secondaryText {
+        font-size: .9em;
+        color: #666;
+        line-height:20px;
+     
+      }
+      
+      span.ms-ListItem-tertiaryText {
+        display: Block;
+        font-size: .8em;
+        line-height: 24px;
+        font-style: italic;
+        text-align: right;
+      }
       
 }
