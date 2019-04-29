@@ -36,7 +36,7 @@ export default class SyscoApplicationCustomizer
     Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
 
     console.log("Available Placeholders: ", this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(","));
-
+/*
     if(!this.headerplaceholder){
       this.headerplaceholder =
       this.context.placeholderProvider.tryCreateContent(
@@ -59,7 +59,7 @@ export default class SyscoApplicationCustomizer
                   </div>
                 </div>`;
     }
-
+*/
 
     return Promise.resolve();
   }
