@@ -1,38 +1,38 @@
 .CanvasZoneContainer:first-child {
-    background-color: #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 
 
+@font-face {
+  font-family: 'open_sansregular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+  }
+
+
   @font-face {
-    font-family: 'open_sansregular';
+    font-family: 'open_sanslight';
     font-style: normal;
     font-weight: normal;
-    src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+    src: local('open_sanslight'), url('fonts/opensans-light-webfont.woff') format("woff");
     }
 
 
     @font-face {
-      font-family: 'open_sanslight';
+      font-family: 'open_sansbold';
       font-style: normal;
       font-weight: normal;
-      src: local('open_sanslight'), url('fonts/opensans-light-webfont.woff') format("woff");
+      src: local('open_sansbold'), url('fonts/opensans-bold-webfont.woff') format("woff");
       }
 
-
-      @font-face {
-        font-family: 'open_sansbold';
-        font-style: normal;
-        font-weight: normal;
-        src: local('open_sansbold'), url('fonts/opensans-bold-webfont.woff') format("woff");
-        }
-
-  @font-face {
-    font-family: 'open_sansregular';
-    font-style: normal;
-    font-weight: normal;
-    src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
-    }
+@font-face {
+  font-family: 'open_sansregular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+  }
 
 
 
@@ -40,42 +40,51 @@
 $header-fontface: 'open_sansregular';
 
 body, a {
-    font-family:'open_sansregular' !important;
+  font-family:'open_sansregular' !important;
 }
 
 .CanvasZoneContainer:first-child {
-    background-color: #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 
 [role="heading"] {
-    font-family: $header-fontface;
+  font-family: $header-fontface;
 }
 
 
 div {
-    font-family: $header-fontface;
+  font-family: $header-fontface;
 }
 
 
-  .firstclass{
-    display: inline-block;
-    color: navy;
+.firstclass{
+  display: inline-block;
+  color: navy;
 }
 
 
 
 .white{
-  color: white;
-  padding: 2em;
+color: white;
+padding: 2em;
 }
 
 div[class^="feedback_"]{
-  display: none !important;
+display: none !important;
 }
 div[class^="footerBar_"]{
-  display: none !important;
+display: none !important;
 }
+
+
+div[class^="pageTitle_"]{
+div[class^="contentBox"]{
+  min-height:auto;
+  padding-top: 12px !important;
+}
+<<<<<<< HEAD
+=======
 
 
 div[class^="pageTitle_"]{
@@ -83,4 +92,5 @@ div[class^="pageTitle_"]{
     min-height:auto;
     padding-top: 12px !important;
   }
+>>>>>>> master
 }

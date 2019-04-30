@@ -58,8 +58,13 @@ export default class SyscoApplicationCustomizer
                     <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i>&nbsp; icon placeholder
                   </div>
                 </div>`;
+<<<<<<< HEAD
+    }
+*/
+=======
     }*/
 
+>>>>>>> master
 
     return Promise.resolve();
   }

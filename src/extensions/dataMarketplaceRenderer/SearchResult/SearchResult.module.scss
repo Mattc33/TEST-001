@@ -1,4 +1,6 @@
 .resultContainer {
+    padding: 0 !important;
+
   .visualizationTechnologyIcon {
     height: 24px;
     display: inline-block;
@@ -10,20 +12,27 @@
     display: inline-block;
   }
 
-  .itemTitle {
-    font-weight: 700;
-    font-size: larger;
+  .itemTitle, .itemTitle a {
+    font-weight: 400;
+    font-size: 1.3em;
+    color: #666;
+    margin: 1em 1em 0 1em;
+    display:block;  
+    line-height:24px;
+    height:48px;
+    overflow:hidden;
   }
 
   .featuredCard {
-    background-color: rgba(173, 216, 230, 0.2);
+   background-color: rgba(255, 255, 255, 1);
   }
 
   .likeFaveButtons {
-    position: absolute;
-    right: 0.5em;
-    bottom: -0.25em;
-    margin: 0 0.1em;
+    //position: absolute;
+    //right: 0.5em;
+    //bottom: -0.25em;
+    //margin: 0 0.1em;
+    margin: 0 0em 0 1.5em;
   }
 
   .linkItem {
@@ -38,12 +47,14 @@
     height: auto;
     box-sizing: border-box;
     align-items: center;
+    font-size:.9em;
   }
 
   li.resultItem {
     display: block;
+    list-style: none;
 
-    .imageContainer {
+    /*.imageContainer {
       height: 100px;
       width: 78px;
       display: flex;
@@ -56,12 +67,24 @@
         margin: auto 0;
         width: auto;
         height: auto;
+      }*/
+
+      .tile-class {
+        display: flex;
+        height: 160px;
+        margin-bottom:1em;
       }
-    }
-    
+ 
+  }
+
     .ms-dialogMainOverride {
       width: 400px;
       max-width: 1000px;
     }
-  }
+
+
+  li.ms-ListItem.ms-ListItem--document {
+    list-style: none;
+}
+
 }
