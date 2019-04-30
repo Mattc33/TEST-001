@@ -73,6 +73,14 @@
           "manifest": "./src/extensions/sysco/SyscoApplicationCustomizer.manifest.json"
         }
       ]
+    },
+    "news-rotator-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/newsRotator/NewsRotatorWebPart.js",
+          "manifest": "./src/webparts/newsRotator/NewsRotatorWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -88,6 +96,7 @@
     "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js",
     "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js",
     "FeaturedReportsWebPartStrings": "lib/webparts/featuredReports/loc/{locale}.js",
-    "SyscoApplicationCustomizerStrings": "lib/extensions/sysco/loc/{locale}.js"
+    "SyscoApplicationCustomizerStrings": "lib/extensions/sysco/loc/{locale}.js",
+    "NewsRotatorWebPartStrings": "lib/webparts/newsRotator/loc/{locale}.js"
   }
 }
