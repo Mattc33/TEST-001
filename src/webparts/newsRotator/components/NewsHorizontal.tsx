@@ -35,6 +35,9 @@ export default class NewsHorizontal extends React.Component<INewsProps, {}> {
                     <div>
                       <p className={styles.subTitle}>{this.props.newsItem.SVPNewsSubTitle}</p>
                     </div>
+                    <div>
+                      <p className={styles.button}>READ MORE</p>
+                    </div>
                     
                   </a>  
                 </div>

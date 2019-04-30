@@ -1,4 +1,4 @@
-//@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .newsHorizontal {
 
@@ -36,19 +36,42 @@
     text-align:start;
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: -75px;
+    margin-top: -275px;
+    text-align: center;
   }
 
   .subTitle {
     text-align:start;
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: -125px;
+    text-align: center;
   }
 
   .colStyle {
     background-color: '#EEF0F2';
   }
    
+  .button {
+    background-color: $ms-color-themePrimary;
+    border-color: $ms-color-themePrimary;
+    color: $ms-color-white;
+
+    font-size: $ms-font-size-m;
+    font-weight: $ms-font-weight-semibold;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    padding:5px 50px;
+
+    .label {
+      font-weight: $ms-font-weight-semibold;
+      font-size: $ms-font-size-m;
+      height: 32px;
+      line-height: 32px;
+      margin: 0 4px;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
   
 }
