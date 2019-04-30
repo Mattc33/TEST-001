@@ -34,7 +34,7 @@
     ]
   },
   "include": [
-    "src/**/*.ts", "src/webparts/reportRotator/report-rotaro-provider.tsx"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
