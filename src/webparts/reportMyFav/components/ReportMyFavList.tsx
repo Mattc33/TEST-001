@@ -1,11 +1,14 @@
 import * as React from 'react';
 import styles from './ReportMyFavList.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
-import { IReportFavoriteItem, ReportFavoriteType } from "../../../models/IReportItem";
+import { IReportFavoriteItem } from "../../../models/IReportItem";
 import { autobind } from '@uifabric/utilities/lib';
 import MyFavHome from "./MyFavHome";
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
+import { ReportFavoriteType } from "../../../helpers/UrlHelper";
+
+
 
 export interface IReportMyFavProps {
   controlHeaderMessage: string;
