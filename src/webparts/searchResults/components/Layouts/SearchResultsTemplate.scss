@@ -47,7 +47,7 @@
                 background-size: contain;
                 height: auto;
                 background-position: top;
-                margin: 0 0 0 1em;
+                margin: 0;
             }
             .cardInfo {
                 padding-left: 10px;
@@ -77,7 +77,7 @@
       }
       
       .datamkt-sub {
-        margin: 1em !important;
+        margin: .5em 1em 0 1em !important;
         display: flex !important;
       } 
 
