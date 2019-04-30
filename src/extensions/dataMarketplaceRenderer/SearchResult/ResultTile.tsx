@@ -2,14 +2,15 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, SpinnerType } from 'office-ui-fabric-react';
 import { Logger, LogLevel } from '@pnp/logging';
-
+import { truncate } from '@microsoft/sp-lodash-subset';
 import IResultTileProps from './IResultTileProps';
 import styles from './SearchResult.module.scss';
 import { ISearchResult } from '../../../models/ISearchResult';
-import { ReportActionsService } from '../../../services/ReportActionsService/ReportActionsService';
+import { ReportActionsService, IFavoriteState } from '../../../services/ReportActionsService/ReportActionsService';
 
 export interface IResultTileState {
   isFavorite: boolean;
+  favoriteId: number;
   busyFavoriting: boolean;
   isLiked: boolean;
   busyLiking: boolean;
@@ -26,6 +27,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
     this.state = {
       isFavorite: false,
+      favoriteId: -1,
       busyFavoriting: false,
       isLiked: false,
       busyLiking: false,
@@ -37,13 +39,14 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
   public async componentDidMount() {
     let itemId: number = parseInt(this.props.result.ListItemId);
-    let [isFavorite, isLiked] = await Promise.all([
+    let [favorite, isLiked] = await Promise.all([
       this.actionsService.GetFavoriteState(this.props.result.SPWebUrl, itemId),
       this.actionsService.GetLikeState(this.props.result.SPWebUrl, itemId, this.props.currentUser.Id)
     ]);
 
     this.setState({
-      isFavorite: isFavorite,
+      isFavorite: favorite.isFavorite,
+      favoriteId: favorite.favoriteId,
       isLiked: isLiked
     });
   }
@@ -55,20 +58,34 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private renderResultItem(result: ISearchResult): JSX.Element {
 
     let isFavoriteIconElement: JSX.Element = (
-      <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.unfavorite}></i>
+      <React.Fragment>
+        <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.unfavorite}></i>&nbsp;Favorite
+      </React.Fragment>
     );
 
     let isNotFavoriteIconElement: JSX.Element = (
-      <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.showFavoriteDialog}></i>
+      <React.Fragment>
+        <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.showFavoriteDialog}></i>&nbsp;Favorite
+      </React.Fragment>
     );
 
     let isLikedIconElement: JSX.Element = (
-      <i className={"ms-Icon ms-Icon--LikeSolid " + styles.linkItem} aria-hidden="true" onClick={this.removeLike}></i>
+      <React.Fragment>
+        <i className={"ms-Icon ms-Icon--LikeSolid " + styles.linkItem} aria-hidden="true" onClick={this.removeLike}></i>&nbsp;Like
+      </React.Fragment>
     );
 
     let isNotLikedIconElement: JSX.Element = (
-      <i className={"ms-Icon ms-Icon--Like " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>
+      <React.Fragment>
+        <i className={"ms-Icon ms-Icon--Like " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>&nbsp;Like
+      </React.Fragment>
     );
+
+    const reportURL = (this.state.isFavorite)
+      ? `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?favReportId=${this.state.favoriteId}`
+      : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${this.props.result.ListItemId}`;
+
+    const reportDesc = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
 
     return (
       <li className={styles.resultItem}>
@@ -78,7 +95,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             <li className="ms-ListItem ms-ListItem--document">
               <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
                 <span className="ms-ListItem-primaryText">
-                  <a className={styles.itemLink} href={result.SVPVisualizationAddress}>
+                  <a className={styles.itemLink} href={reportURL}>
                     <span className={styles.itemTitle}>{result.Title}</span>
                   </a>
                 </span>
@@ -89,7 +106,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                   </div>
 
                   <div className="datamkt-right">
-                <span className="ms-ListItem-secondaryText">{result.SVPVisualizationDescription}</span>
+                <span className="ms-ListItem-secondaryText">{reportDesc}</span>
                 <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
                 </div>
                 </div>
@@ -100,7 +117,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                       { this.state.busyFavoriting && this.busyElement }
                       { !this.state.busyFavoriting && this.state.isFavorite && isFavoriteIconElement }
                       { !this.state.busyFavoriting && !this.state.isFavorite && isNotFavoriteIconElement }
-                      &nbsp;Favorite
                     </span>
                     <span>
                       &nbsp;&nbsp;
@@ -109,7 +125,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                       { this.state.busyLiking && this.busyElement }
                       { !this.state.busyLiking && this.state.isLiked && isLikedIconElement }
                       { !this.state.busyLiking && !this.state.isLiked && isNotLikedIconElement }
-                      &nbsp;Like
                     </span>
                   </div>
                 </span>
@@ -183,9 +198,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
   private async getFavoriteState() {
     let itemId: number = parseInt(this.props.result.ListItemId);
-    let isFavorited: boolean = await this.actionsService.GetFavoriteState(this.props.result.SPWebUrl, itemId);
+    let favorited: IFavoriteState = await this.actionsService.GetFavoriteState(this.props.result.SPWebUrl, itemId);
 
-    if (isFavorited) {
+    if (favorited && favorited.isFavorite) {
       this.setState({ isFavorite: true });
     }
   }
@@ -228,11 +243,11 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private async favorite() {
     this.setState({ busyFavoriting: true});
     let itemId: number = parseInt(this.props.result.ListItemId);
-    let success: boolean = await this.actionsService.FavoriteReport(
+    let favorite: IFavoriteState = await this.actionsService.FavoriteReport(
       this.props.result.SPWebUrl, itemId, this.state.favoriteDescription || "");
 
-    const state = (success) 
-      ? { ...this.state, isFavorite: true, busyFavoriting: false }
+    const state = (favorite && favorite.isFavorite) 
+      ? { ...this.state, isFavorite: true, favoriteId: favorite.favoriteId, busyFavoriting: false }
       : { ...this.state, busyFavoriting: false };
 
     this.setState(state);

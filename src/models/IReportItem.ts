@@ -55,7 +55,7 @@ export interface IReportItem {
     Title:string;
     SVPVisualizationDescription:string;
     SVPFavoriteType:string;
-    SVPVisualizationLookupId?: string;
+    SVPVisualizationLookupId?: number;
     SVPVisualizationLookupTitle?: string;
     SVPVisualizationImage?: string;
     SVPVisualizationParameters?: string;

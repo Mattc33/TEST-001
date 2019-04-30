@@ -62,7 +62,7 @@ export class ReportFavoriteService implements IReportFavoriteService {
                 Title: r.Title,
                 SVPVisualizationDescription:r.SVPVisualizationDescription,
                 SVPFavoriteType:r.SVPFavoriteType,
-                SVPVisualizationLookupId: _SVPVisualizationLookupId,
+                SVPVisualizationLookupId: Number.parseInt(_SVPVisualizationLookupId),
                 SVPVisualizationLookupTitle: _SVPVisualizationLookupTitle,
                 SVPVisualizationImage: _SVPVisualizationImage,
                 SVPVisualizationMetadata: r.SVPVisualizationMetadata
