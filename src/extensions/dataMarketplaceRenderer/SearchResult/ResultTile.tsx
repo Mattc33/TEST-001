@@ -93,13 +93,14 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                 <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
                 </div>
                 </div>
-               
+                <div className="datamkt-icons">
                 <span className={styles.likeFaveButtons}>
                   <div className={styles.likeFavContainer}>
                     <span>
                       { this.state.busyFavoriting && this.busyElement }
                       { !this.state.busyFavoriting && this.state.isFavorite && isFavoriteIconElement }
                       { !this.state.busyFavoriting && !this.state.isFavorite && isNotFavoriteIconElement }
+                      &nbsp;Favorite
                     </span>
                     <span>
                       &nbsp;&nbsp;
@@ -108,10 +109,11 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                       { this.state.busyLiking && this.busyElement }
                       { !this.state.busyLiking && this.state.isLiked && isLikedIconElement }
                       { !this.state.busyLiking && !this.state.isLiked && isNotLikedIconElement }
+                      &nbsp;Like
                     </span>
                   </div>
                 </span>
-
+                </div>
                 <div className="ms-ListItem-selectionTarget"></div>
               </div>
             </li>

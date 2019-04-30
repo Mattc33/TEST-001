@@ -18,6 +18,9 @@
     color: #666;
     margin: 1em 1em 0 1em;
     display:block;  
+    line-height:24px;
+    height:48px;
+    overflow:hidden;
   }
 
   .featuredCard {
@@ -29,7 +32,7 @@
     //right: 0.5em;
     //bottom: -0.25em;
     //margin: 0 0.1em;
-    margin: 0 0em 0 1em;
+    margin: 0 0em 0 1.5em;
   }
 
   .linkItem {
@@ -44,6 +47,7 @@
     height: auto;
     box-sizing: border-box;
     align-items: center;
+    font-size:.9em;
   }
 
   li.resultItem {
