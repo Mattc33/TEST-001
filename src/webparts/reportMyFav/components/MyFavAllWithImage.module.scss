@@ -1,5 +1,8 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+
+
+
 .MyFavAllWithImage {
 
   .visualizationTechnologyIcon {
@@ -46,28 +49,6 @@
 li.resultItem {
   display: block;
   list-style: none;
-
-  /*.imageContainer {
-    height: 100px;
-    width: 78px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    > img {
-      max-width: 78px;
-      max-height: 48px;
-      margin: auto 0;
-      width: auto;
-      height: auto;
-    }*/
-
-    .tile-class {
-      display: flex;
-      height: 160px;
-      margin-bottom:1em;
-    }
-
 }
 
 li.ms-ListItem.ms-ListItem--document {
@@ -85,6 +66,7 @@ li.ms-ListItem.ms-ListItem--document {
   height:48px;
   overflow:hidden;
   align-items:center;
+  text-decoration:none;
 }
 
 .likeFaveButtons {
@@ -92,55 +74,64 @@ li.ms-ListItem.ms-ListItem--document {
 }
 
 
-.datamkt-right {
-  width: 80% !important;
-  margin: 0 1em 1em 0 !important;
-  overflow:hidden;
-  height:100px;
+.tile-class {
+  border: 1px solid #ccc;
+  padding: .5em;
+  margin: 0 1em 1em 0;
+  width: 30%;
 }
 
-.datamkt-sub {
-  margin: .5em 1em 0 1em !important;
-  display: flex !important;
-} 
 
-.datamkt-icons {
+.datamkt-sub {
   display: flex;
 }
 
-span.ms-ListItem-secondaryText {
-  font-size: .9em;
-  color: #666;
+.previewImg.datamkt-left {
+  display: flex;
+  width: 40%;
 }
 
-  .previewImg {
-      width: 20%;
-      position: relative;
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: auto;
-      background-position: top;
-      margin: 0 1em 0 0;
-  }
-  .cardInfo {
-      padding-left: 10px;
-      padding-right: 10px;
-  }
-  .cardFileIcon {
-      left: 10px;
-      bottom: 8px;
-      position: absolute;
-  }
 
 
-  .singleCard {
-    border: 1px solid #eaeaea;
-    min-height: 210px;
-    display: flex;
-    margin-bottom:1.5em;
+.container {
+  border: 1px solid pink;
+.reportMyFavList {
+  border: 1px solid green;
+  .rowHeader {
+    border: 1px solid turquoise;
+    .col-md-12 {
+
+    }
+  }
+  li.resultItem {
+    border: 1px solid gold;
+    .tile-class{
+      border: 1px solid gray;
+      .singleCard {
+        border: 1px solid brown;
+        li.ms-ListItem {
+          border: 1px solid magenta;
+          .cardInfoFeaturedCard {
+            border: 1px solid teal;
+            span.ms-ListItem-primaryText {
+              
+            }
+            .datamkt-sub {
+              border: 1px solid purple;
+              .previewImg.datamkt-left {
+                border: 1px solid lightblue;
+              }
+              .datamkt-right {
+                border: 1px solid orange;
+                span.ms-ListItem-secondaryText {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
-
-.singleCard:hover {
-  border-color: #c8c8c8;
-  cursor: pointer;
 }

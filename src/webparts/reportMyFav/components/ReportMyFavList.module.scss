@@ -1,6 +1,10 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+
+
+
 .reportMyFavList {
+
   .container {
     max-width: 350px !important;
     margin: 0px auto;
@@ -9,7 +13,8 @@
     overflow-x: hidden;
     overflow-y: scroll;
   }
-
+  
+  
   .row {
     @include ms-Grid-row;
     //@include ms-fontColor-white;
@@ -32,62 +37,13 @@
     @include ms-lgPush1;
   }
 
-  .subTitle {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .description {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-
-  .itemLink {
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .itemTitle, .itemTitle a {
-    font-weight: 400;
-    font-size: 1.3em;
-    color: #666;
-    margin: .5em 1em .25em 1em;
-    display:flex;  
-    line-height:24px;
-    height:48px;
-    overflow:hidden;
-    align-items:center;
-  }
-
-
-  li.ms-ListItem.ms-ListItem--document {
-    list-style: none;
-}
-
-
-
-li.resultItem {
-  display: block;
-  list-style: none;
-
-
-
-    .tile-class {
-      display: flex;
-      height: 160px;
-      margin-bottom:1em;
-    }
-
-}
-
-  .myFavReportList {
-   // max-width: 360px;
-    max-height: 400px;
-    //width: 360px;
-    height: 400px !important;
-    overflow-x: hidden;
-    overflow-y: scroll;
+.myFavReportList {
+  // max-width: 360px;
+  max-height: 400px;
+  //width: 360px;
+  height: 400px !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
   }
 
 
@@ -125,4 +81,7 @@ li.resultItem {
       display: inline-block;
     }
   }
+
+  
+
 }
