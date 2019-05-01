@@ -16,11 +16,12 @@
     font-weight: 400;
     font-size: 1.3em;
     color: #666;
-    margin: 1em 1em 0 1em;
-    display:block;  
+    margin: .5em 1em .25em 1em;
+    display:flex;  
     line-height:24px;
     height:48px;
     overflow:hidden;
+    align-items:center;
   }
 
   .featuredCard {
@@ -32,11 +33,12 @@
     //right: 0.5em;
     //bottom: -0.25em;
     //margin: 0 0.1em;
-    margin: 0 0em 0 1.5em;
+    margin: 0 0 .5em 1.5em;
   }
 
   .linkItem {
     cursor: pointer;
+    margin-left:.7em;
   }
 
   .likeFavContainer {

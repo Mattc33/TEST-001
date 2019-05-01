@@ -65,19 +65,19 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
     let isNotFavoriteIconElement: JSX.Element = (
       <React.Fragment>
-        <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.showFavoriteDialog}></i>&nbsp;Favorite
+        <i className={"ms-Icon ms-Icon--HeartFill " + styles.linkItem} aria-hidden="true" onClick={this.showFavoriteDialog}></i>&nbsp;Favorite
       </React.Fragment>
     );
 
     let isLikedIconElement: JSX.Element = (
       <React.Fragment>
-        <i className={"ms-Icon ms-Icon--LikeSolid " + styles.linkItem} aria-hidden="true" onClick={this.removeLike}></i>&nbsp;Like
+        <i className="ms-Icon ms-Icon--LikeSolid" aria-hidden="true" onClick={this.removeLike}></i>&nbsp;Like
       </React.Fragment>
     );
 
     let isNotLikedIconElement: JSX.Element = (
       <React.Fragment>
-        <i className={"ms-Icon ms-Icon--Like " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>&nbsp;Like
+        <i className={"ms-Icon ms-Icon--LikeSolid " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>&nbsp;Like
       </React.Fragment>
     );
 
