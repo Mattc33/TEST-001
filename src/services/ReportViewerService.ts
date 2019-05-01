@@ -1,6 +1,7 @@
 import { sp, ItemUpdateResult, FileAddResult, Field, Folder, WebEnsureUserResult, Web } from '@pnp/sp';
 import { IReportViewerService } from ".";
 import { IReportItem, IReportFavoriteItem, IFavoriteReport } from "../models";
+import { FavoriteType } from './ReportActionsService/ReportActionsService';
 
 const VizListTitle = "Visualizations";
 const FavoriteListTitle = "Favorites";
@@ -32,7 +33,8 @@ const FavoriteListFields = [
     "Id",
     "Title",
     "SVPVisualizationLookupId",
-    "SVPVisualizationMetadata"
+    "SVPVisualizationMetadata",
+    "SVPFavoriteType"
 ];
 
 
@@ -67,11 +69,25 @@ export class ReportViewerService implements IReportViewerService {
         let favoriteReport: IFavoriteReport = undefined;
 
         if (favorite) {
-            const metadata: any = JSON.parse(favorite.SVPVisualizationMetadata);
-            favoriteReport = {
-                favoriteReportUrl: metadata.ViewUrl,
-                reportId: Number.parseInt(favorite.SVPVisualizationLookupId)
-            };
+            if (favorite.SVPFavoriteType === FavoriteType.CUSTOM) { //Tablue report
+                if (!favorite.SVPVisualizationMetadata)
+                    throw new Error("Favorite metadata field is empty");
+
+                const metadata: any = JSON.parse(favorite.SVPVisualizationMetadata);
+                favoriteReport = {
+                    favoriteReportUrl: metadata.ViewUrl,
+                    reportId: favorite.SVPVisualizationLookupId
+                };
+            }
+            else { //all other
+                const report: IReportItem = await this.loadReportDefinition(favorite.SVPVisualizationLookupId);
+                if (report) {
+                    favoriteReport = {
+                        favoriteReportUrl: report.SVPVisualizationAddress,
+                        reportId: favorite.SVPVisualizationLookupId
+                    };
+                }
+            }
         }
 
         return favoriteReport;

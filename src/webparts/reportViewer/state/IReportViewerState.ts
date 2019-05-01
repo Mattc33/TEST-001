@@ -33,6 +33,7 @@ export interface IReportViewer {
   reportHeight?: number;
   reportWidth?: number;
   tableauReportConfig?: ITableauReportViewerConfig;
+  isFavorite?: boolean;
 
   //report discussion properties
   loadingDiscussion?: boolean;

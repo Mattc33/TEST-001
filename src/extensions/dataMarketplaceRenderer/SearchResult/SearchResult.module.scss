@@ -12,6 +12,14 @@
     display: inline-block;
   }
 
+  .itemSelected {
+    color: #398bcc;
+  }
+
+  .itemUnselected {
+    color: #909090;
+  }
+
   .itemTitle, .itemTitle a {
     font-weight: 400;
     font-size: 1.3em;

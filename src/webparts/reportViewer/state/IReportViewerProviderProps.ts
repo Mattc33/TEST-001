@@ -3,6 +3,7 @@ import { ITableauReportViewerConfig } from "../../../models";
 
 
 export interface IReportViewerProviderProps {
+    SVPClientLabel: string;
     tableauReportConfig: ITableauReportViewerConfig;
     context: WebPartContext;
 }

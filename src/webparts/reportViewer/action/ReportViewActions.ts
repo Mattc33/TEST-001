@@ -18,7 +18,8 @@ import {
   ReportActionsService, 
   ReportDiscussionService,
   FavoriteType, 
-  withErrHandler } from "../../../services";
+  withErrHandler, 
+  IFavoriteState} from "../../../services";
 import { normalize } from "normalizr";
 import { BaseAction, IBaseStore } from "../../../base";
 import { 
@@ -36,6 +37,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   private userProfileApi: IUserProfileService;
   private favoriteApi: ReportActionsService;
   private discussionApi:ReportDiscussionService;
+
   constructor(store: IBaseStore, context: WebPartContext) {
     super(store);
 
@@ -50,6 +52,8 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   public async loadReportData(reportId: any, favReportId: any, defaultHeight?: number, defaultWidth?: number) {
     this.dispatch({ loading: true, error: null });
 
+    let isFavorite: boolean = undefined;
+
     if ((!reportId || isNaN(reportId)) && (!favReportId || isNaN(favReportId))) 
       return this.dispatchError(`Invalid or missing parameters. reportId: ${reportId}, favReportId: ${favReportId}`, {}, { loading: false });
 
@@ -61,8 +65,10 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
       if (fvErr) 
         return this.dispatchError(`Invalid or missing favorite report. ${favReportId}`, fvErr, { loading: false});
 
-      if (favorite)
+      if (favorite) 
         reportId = favorite.reportId;
+      
+      isFavorite = true;
     }
     
     //check again, in case invalid favReportId is provided
@@ -72,6 +78,11 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     let [report, rvErr] = await withErrHandler<IReportItem>(this.reportViewerApi.loadReportDefinition(parseInt(reportId)));
     if (rvErr) 
       return this.dispatchError(`Report doesn't exists or you don't have permission to view this report: ${reportId}`, rvErr, { loading: false });
+
+    if (!isFavorite) {
+      const favorited: IFavoriteState = await this.favoriteApi.GetFavoriteState(this.context.pageContext.web.absoluteUrl, reportId);
+      isFavorite = (favorited) ? favorited.isFavorite : false;
+    }
 
     const { SVPReportHeight, SVPReportWidth, SVPVisualizationTechnology } = report;
     const reportHeight = SVPReportHeight || defaultHeight || 700;
@@ -89,7 +100,8 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
       report, 
       userProfile: undefined, 
       reportHeight, 
-      reportWidth 
+      reportWidth,
+      isFavorite
     });
   }
   
@@ -230,7 +242,10 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.dispatch({ savingAsFavorite: true, error: null });
 
     if (tableauReportRef) {
-      const viewInfo = await tableauReportRef.saveCustomView(name);
+      const [viewInfo, errTab] = await withErrHandler<any>(tableauReportRef.saveCustomView(name));
+      if (errTab)
+        return this.dispatchError(`Unable to save Tableau view: ${reportId}`, errTab, { savingAsFavorite: false});
+
       viewUrl = viewInfo.url;
     }
 
@@ -239,7 +254,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
       "ImageUrl": "" 
     };
     
-    const [success, err] = await withErrHandler<Boolean>(this.favoriteApi.FavoriteReport(
+    const [favorite, errFav] = await withErrHandler<IFavoriteState>(this.favoriteApi.FavoriteReport(
       this.context.pageContext.web.absoluteUrl, 
       reportId, 
       description, 
@@ -249,14 +264,10 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
       name
     ));
 
-    if (err || !success) {
-      this.dispatchError(`Unable to favorite report: ${reportId}`, err, { savingAsFavorite: false});
-      return;
-    }
+    if (errFav || !favorite || favorite.favoriteId === -1) 
+      return this.dispatchError(`Unable to favorite report: ${reportId}`, errFav, { savingAsFavorite: false});
 
-    window.setTimeout(() => {
-      this.dispatch({ savingAsFavorite: false, error: null });
-    }, 3000);
+    this.dispatch({ savingAsFavorite: false, isFavorite: true, error: null });
   }
 
   @autobind
