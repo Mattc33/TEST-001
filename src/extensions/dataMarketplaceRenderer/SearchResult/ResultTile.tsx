@@ -22,6 +22,37 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private actionsService: ReportActionsService;
   private busyElement: JSX.Element = <Spinner size={SpinnerSize.small} />; // <i className="ms-Spinner-circle ms-Spinner--xSmall circle-95"></i>;
 
+  private selectedStyle = ` ${styles.linkItem} ${styles.itemSelected}`;
+  private unselectedStyle = ` ${styles.linkItem} ${styles.itemUnselected}`;
+
+  private isFavoriteIconElement: JSX.Element = (
+    <span onClick={this.unfavorite}>
+      <i className={"ms-Icon ms-Icon--HeartFill" + this.selectedStyle} aria-hidden="true"></i>&nbsp;
+      <span className={styles.itemSelected}>Favorite</span>
+    </span>
+  );
+
+  private isNotFavoriteIconElement: JSX.Element = (
+    <span onClick={this.showFavoriteDialog}>
+      <i className={"ms-Icon ms-Icon--HeartFill" + this.unselectedStyle} aria-hidden="true"></i>&nbsp;
+      <span className={styles.itemUnselected}>Favorite</span>
+    </span>
+  );
+
+  private isLikedIconElement: JSX.Element = (
+    <span onClick={this.removeLike}>
+      <i className={"ms-Icon ms-Icon--LikeSolid" + this.selectedStyle} aria-hidden="true"></i>&nbsp;
+      <span className={styles.itemSelected}>Like</span>
+    </span>
+  );
+
+  private isNotLikedIconElement: JSX.Element = (
+    <span onClick={this.addLike}>
+      <i className={"ms-Icon ms-Icon--LikeSolid" + this.unselectedStyle} aria-hidden="true"></i>&nbsp;
+      <span className={styles.itemUnselected}>Like</span>
+    </span>
+  );
+
   constructor(props: IResultTileProps) {
     super(props);
 
@@ -37,6 +68,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     this.actionsService = new ReportActionsService();
   }
 
+  @autobind
   public async componentDidMount() {
     let itemId: number = parseInt(this.props.result.ListItemId);
     let [favorite, isLiked] = await Promise.all([
@@ -51,35 +83,13 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     });
   }
 
+  @autobind
   public render() {
     return this.renderResultItem(this.props.result);
   }
 
+  @autobind
   private renderResultItem(result: ISearchResult): JSX.Element {
-
-    let isFavoriteIconElement: JSX.Element = (
-      <React.Fragment>
-        <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.unfavorite}></i>&nbsp;Favorite
-      </React.Fragment>
-    );
-
-    let isNotFavoriteIconElement: JSX.Element = (
-      <React.Fragment>
-        <i className={"ms-Icon ms-Icon--HeartFill " + styles.linkItem} aria-hidden="true" onClick={this.showFavoriteDialog}></i>&nbsp;Favorite
-      </React.Fragment>
-    );
-
-    let isLikedIconElement: JSX.Element = (
-      <React.Fragment>
-        <i className="ms-Icon ms-Icon--LikeSolid" aria-hidden="true" onClick={this.removeLike}></i>&nbsp;Like
-      </React.Fragment>
-    );
-
-    let isNotLikedIconElement: JSX.Element = (
-      <React.Fragment>
-        <i className={"ms-Icon ms-Icon--LikeSolid " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>&nbsp;Like
-      </React.Fragment>
-    );
 
     const reportURL = (this.state.isFavorite)
       ? `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?favReportId=${this.state.favoriteId}`
@@ -99,35 +109,33 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                     <span className={styles.itemTitle}>{result.Title}</span>
                   </a>
                 </span>
-
                 <div className="datamkt-sub">
                   <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-                  &nbsp;
+                    &nbsp;
                   </div>
-
                   <div className="datamkt-right">
-                <span className="ms-ListItem-secondaryText">{reportDesc}</span>
-                <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
-                </div>
+                    <span className="ms-ListItem-secondaryText">{reportDesc}</span>
+                    <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
+                  </div>
                 </div>
                 <div className="datamkt-icons">
-                <span className={styles.likeFaveButtons}>
-                  <div className={styles.likeFavContainer}>
-                    <span>
-                      { this.state.busyFavoriting && this.busyElement }
-                      { !this.state.busyFavoriting && this.state.isFavorite && isFavoriteIconElement }
-                      { !this.state.busyFavoriting && !this.state.isFavorite && isNotFavoriteIconElement }
-                    </span>
-                    <span>
-                      &nbsp;&nbsp;
-                    </span>
-                    <span>
-                      { this.state.busyLiking && this.busyElement }
-                      { !this.state.busyLiking && this.state.isLiked && isLikedIconElement }
-                      { !this.state.busyLiking && !this.state.isLiked && isNotLikedIconElement }
-                    </span>
-                  </div>
-                </span>
+                  <span className={styles.likeFaveButtons}>
+                    <div className={styles.likeFavContainer}>
+                      <span>
+                        { this.state.busyFavoriting && this.busyElement }
+                        { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
+                        { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
+                      </span>
+                      <span>
+                        &nbsp;&nbsp;
+                      </span>
+                      <span>
+                        { this.state.busyLiking && this.busyElement }
+                        { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
+                        { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
+                      </span>
+                    </div>
+                  </span>
                 </div>
                 <div className="ms-ListItem-selectionTarget"></div>
               </div>
@@ -139,6 +147,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     );
   }
 
+  @autobind
   private renderVizIconImage(result: ISearchResult) {
     let toReturn: JSX.Element;
 
@@ -166,6 +175,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     return toReturn;
   }
 
+  @autobind
   private renderFavoriteDialog(): JSX.Element {
     return (
       <Dialog
@@ -192,10 +202,12 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     );
   }
 
+  @autobind
   private fmtDateString(utcString) {
     return moment(utcString).fromNow();
   }
 
+  @autobind
   private async getFavoriteState() {
     let itemId: number = parseInt(this.props.result.ListItemId);
     let favorited: IFavoriteState = await this.actionsService.GetFavoriteState(this.props.result.SPWebUrl, itemId);

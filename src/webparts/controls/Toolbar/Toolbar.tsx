@@ -114,7 +114,8 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 case "sizing":
                     return prev.concat(this.renderSizing());
                 case "savecustom":
-                    return (this.isFavorite() ? prev : prev.concat(this.renderSaveCusomtView()));
+                    //return (this.isFavorite() ? prev : prev.concat(this.renderSaveCusomtView()));
+                    return prev.concat(this.renderSaveCusomtView());
                 case "story":
                     return prev.concat(this.renderStory());
                 case "profilefilter":
@@ -322,6 +323,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         return [{
             key: 'savecustom',
             name: 'Add view as favorite',
+            disabled: this.isFavorite(),
             iconProps: {
                 iconName: 'Heart'
             },
