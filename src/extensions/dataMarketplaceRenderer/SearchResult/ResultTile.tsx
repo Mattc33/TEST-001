@@ -59,7 +59,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     );
 
     let isNotFavoriteIconElement: JSX.Element = (
-      <i className="ms-Icon ms-Icon--Heart" aria-hidden="true" onClick={this.showFavoriteDialog}></i>
+      <i className="ms-Icon ms-Icon--HeartFill" aria-hidden="true" onClick={this.showFavoriteDialog}></i>
     );
 
     let isLikedIconElement: JSX.Element = (
@@ -67,7 +67,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     );
 
     let isNotLikedIconElement: JSX.Element = (
-      <i className={"ms-Icon ms-Icon--Like " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>
+      <i className={"ms-Icon ms-Icon--LikeSolid " + styles.linkItem} aria-hidden="true" onClick={this.addLike}></i>
     );
 
     return (
