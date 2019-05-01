@@ -8,26 +8,15 @@
     vertical-align: middle;
   }
 
+  
   .itemLink {
     text-decoration: none;
     display: inline-block;
   }
 
-  .itemTitle {
-    font-weight: 700;
-    font-size: larger;
-  }
 
   .featuredCard {
-    background-color: rgba(173, 216, 230, 0.2);
-  }
-
-  .likeFaveButtons {
-    //position: absolute;
-    //right: 0.5em;
-    //bottom: -0.25em;
-   // margin: 0 0.1em;
-   margin: 0 0em 0 0;
+    background-color: rgba(255, 255, 255, 1);
   }
 
   .linkItem {
@@ -42,31 +31,116 @@
     height: auto;
     box-sizing: border-box;
     align-items: center;
+    font-size:.9em;
   }
 
-  li.resultItem {
-    display: block;
 
-    .imageContainer {
-      height: 100px;
-      width: 78px;
+  .ms-dialogMainOverride {
+    width: 400px;
+    max-width: 1000px;
+  }
+
+}
+
+
+li.resultItem {
+  display: block;
+  list-style: none;
+
+  /*.imageContainer {
+    height: 100px;
+    width: 78px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    > img {
+      max-width: 78px;
+      max-height: 48px;
+      margin: auto 0;
+      width: auto;
+      height: auto;
+    }*/
+
+    .tile-class {
       display: flex;
-      justify-content: center;
-      flex-direction: column;
+      height: 160px;
+      margin-bottom:1em;
+    }
 
-      > img {
-        max-width: 78px;
-        max-height: 48px;
-        margin: auto 0;
-        width: auto;
-        height: auto;
-      }
-    }
-    
-    .ms-dialogMainOverride {
-      width: 400px;
-      max-width: 1000px;
-    }
+}
+
+li.ms-ListItem.ms-ListItem--document {
+  list-style: none;
+}
+
+
+.itemTitle, .itemTitle a {
+  font-weight: 400;
+  font-size: 1.3em;
+  color: #666;
+  margin: .5em 1em .25em 1em;
+  display:flex;  
+  line-height:24px;
+  height:48px;
+  overflow:hidden;
+  align-items:center;
+}
+
+.likeFaveButtons {
+ margin: 0 0em 0 0;
+}
+
+
+.datamkt-right {
+  width: 80% !important;
+  margin: 0 1em 1em 0 !important;
+  overflow:hidden;
+  height:100px;
+}
+
+.datamkt-sub {
+  margin: .5em 1em 0 1em !important;
+  display: flex !important;
+} 
+
+.datamkt-icons {
+  display: flex;
+}
+
+span.ms-ListItem-secondaryText {
+  font-size: .9em;
+  color: #666;
+}
+
+  .previewImg {
+      width: 20%;
+      position: relative;
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: auto;
+      background-position: top;
+      margin: 0 1em 0 0;
+  }
+  .cardInfo {
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+  .cardFileIcon {
+      left: 10px;
+      bottom: 8px;
+      position: absolute;
   }
 
+
+  .singleCard {
+    border: 1px solid #eaeaea;
+    min-height: 210px;
+    display: flex;
+    margin-bottom:1.5em;
+}
+
+.singleCard:hover {
+  border-color: #c8c8c8;
+  cursor: pointer;
 }

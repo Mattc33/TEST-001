@@ -43,6 +43,44 @@
   }
 
 
+  .itemLink {
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .itemTitle, .itemTitle a {
+    font-weight: 400;
+    font-size: 1.3em;
+    color: #666;
+    margin: .5em 1em .25em 1em;
+    display:flex;  
+    line-height:24px;
+    height:48px;
+    overflow:hidden;
+    align-items:center;
+  }
+
+
+  li.ms-ListItem.ms-ListItem--document {
+    list-style: none;
+}
+
+
+
+li.resultItem {
+  display: block;
+  list-style: none;
+
+
+
+    .tile-class {
+      display: flex;
+      height: 160px;
+      margin-bottom:1em;
+    }
+
+}
+
   .myFavReportList {
    // max-width: 360px;
     max-height: 400px;

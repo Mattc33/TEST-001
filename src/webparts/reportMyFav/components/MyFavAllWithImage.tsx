@@ -35,11 +35,9 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
 
     return (
       <li className={styles.resultItem}>
-        <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4">
+        <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
           <div className="singleCard">
-            <div className="previewImg" style={{ backgroundImage: `url(${reportImageUrl})` }}>
-              &nbsp;
-            </div>
+            
             <li className="ms-ListItem ms-ListItem--document">
               <div className={"cardInfo" + styles.featuredCard}>
                 <span className="ms-ListItem-primaryText">
@@ -47,7 +45,16 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
                     <span className={styles.itemTitle}>{reportTitle}</span>
                   </a>
                 </span>
+
+                <div className="datamkt-sub">
+
+                <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${reportImageUrl})` }}>
+                    &nbsp;
+                  </div>
+                  <div className="datamkt-right">
                 <span className="ms-ListItem-secondaryText">{reportDesc}</span>
+                </div>
+                </div>
                 <span className={styles.likeFaveButtons}>
                   <div className={styles.likeFavContainer}>
                     <span>
