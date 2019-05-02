@@ -66,7 +66,7 @@ export default class NewsRotator extends React.Component<INewsRotatorProps, INew
             {!this.state.isNewsLoaded &&
               <div className="row">
                 <div className={`col-xs-12 ${styles.spinner}`}>
-                  <Spinner size={SpinnerSize.large} label="Wait, Pulling Featured Reports..." ariaLive="assertive" />
+                  <Spinner size={SpinnerSize.large} label="Wait, Pulling Field News..." ariaLive="assertive" />
                 </div>
               </div>
               
