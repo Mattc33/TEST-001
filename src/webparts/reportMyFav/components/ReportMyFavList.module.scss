@@ -1,6 +1,10 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+
+
+
 .reportMyFavList {
+
   .container {
     max-width: 350px !important;
     margin: 0px auto;
@@ -9,7 +13,8 @@
     overflow-x: hidden;
     overflow-y: scroll;
   }
-
+  
+  
   .row {
     @include ms-Grid-row;
     //@include ms-fontColor-white;
@@ -32,24 +37,13 @@
     @include ms-lgPush1;
   }
 
-  .subTitle {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .description {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-
-  .myFavReportList {
-   // max-width: 360px;
-    max-height: 400px;
-    //width: 360px;
-    height: 400px !important;
-    overflow-x: hidden;
-    overflow-y: scroll;
+.myFavReportList {
+  // max-width: 360px;
+  max-height: 400px;
+  //width: 360px;
+  height: 400px !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
   }
 
 
@@ -87,4 +81,7 @@
       display: inline-block;
     }
   }
+
+
+
 }

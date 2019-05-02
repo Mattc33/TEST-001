@@ -8,26 +8,15 @@
     vertical-align: middle;
   }
 
+  
   .itemLink {
     text-decoration: none;
     display: inline-block;
   }
 
-  .itemTitle {
-    font-weight: 700;
-    font-size: larger;
-  }
 
   .featuredCard {
-    background-color: rgba(173, 216, 230, 0.2);
-  }
-
-  .likeFaveButtons {
-    //position: absolute;
-    //right: 0.5em;
-    //bottom: -0.25em;
-   // margin: 0 0.1em;
-   margin: 0 0em 0 0;
+    background-color: rgba(255, 255, 255, 1);
   }
 
   .linkItem {
@@ -42,31 +31,61 @@
     height: auto;
     box-sizing: border-box;
     align-items: center;
+    font-size:.9em;
   }
 
-  li.resultItem {
-    display: block;
 
-    .imageContainer {
-      height: 100px;
-      width: 78px;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-
-      > img {
-        max-width: 78px;
-        max-height: 48px;
-        margin: auto 0;
-        width: auto;
-        height: auto;
-      }
-    }
-    
-    .ms-dialogMainOverride {
-      width: 400px;
-      max-width: 1000px;
-    }
+  .ms-dialogMainOverride {
+    width: 400px;
+    max-width: 1000px;
   }
+
+
+.ms-ListItem--document {
+  list-style: none;
+}
+
 
 }
+
+
+
+.itemTitle, .itemTitle a {
+  font-weight: 400;
+  font-size: 1.3em;
+  color: #666;
+  margin: .5em 1em .25em 1em;
+  display:flex;  
+  line-height:24px;
+  height:48px;
+  overflow:hidden;
+  align-items:center;
+  text-decoration:none;
+}
+
+.likeFaveButtons {
+ margin: 0 0em 0 0;
+}
+
+
+
+
+.tile-class {
+  border: 1px solid #ccc;
+  padding: .5em;
+  margin: 0 1em 1em 0;
+  width: 30%;
+  }
+  
+  
+  .datamkt-sub {
+  display: flex;
+  }
+  
+  .previewImg.datamkt-left {
+  display: flex;
+  width: 40%;
+  }
+  
+
+
