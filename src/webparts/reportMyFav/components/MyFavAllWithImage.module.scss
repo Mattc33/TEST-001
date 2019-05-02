@@ -40,42 +40,14 @@
     max-width: 1000px;
   }
 
-}
 
-
-li.resultItem {
-  display: block;
-  list-style: none;
-}
-
-li.ms-ListItem.ms-ListItem--document {
+.ms-ListItem--document {
   list-style: none;
 }
 
 
-.tile-class {
-  border: 1px solid red;
-  margin: 0 1em 0 0;
-  width: 30%;
 }
 
-
-.tile-class {
-border: 1px solid #ccc;
-padding: .5em;
-margin: 0 1em 1em 0;
-width: 30%;
-}
-
-
-.datamkt-sub {
-display: flex;
-}
-
-.previewImg.datamkt-left {
-display: flex;
-width: 40%;
-}
 
 
 .itemTitle, .itemTitle a {
@@ -98,46 +70,22 @@ width: 40%;
 
 
 
-
-.container {
-  border: 1px solid pink;
-.reportMyFavList {
-  border: 1px solid green;
-  .rowHeader {
-    border: 1px solid turquoise;
-    .col-md-12 {
-
-    }
+.tile-class {
+  border: 1px solid #ccc;
+  padding: .5em;
+  margin: 0 1em 1em 0;
+  width: 30%;
   }
-  li.resultItem {
-    border: 1px solid gold;
-    .tile-class{
-      border: 1px solid gray;
-      .singleCard {
-        border: 1px solid brown;
-        li.ms-ListItem {
-          border: 1px solid magenta;
-          .cardInfoFeaturedCard {
-            border: 1px solid teal;
-            span.ms-ListItem-primaryText {
-              
-            }
-            .datamkt-sub {
-              border: 1px solid purple;
-              .previewImg.datamkt-left {
-                border: 1px solid lightblue;
-              }
-              .datamkt-right {
-                border: 1px solid orange;
-                span.ms-ListItem-secondaryText {
-
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  
+  
+  .datamkt-sub {
+  display: flex;
   }
-}
-}
+  
+  .previewImg.datamkt-left {
+  display: flex;
+  width: 40%;
+  }
+  
+
+

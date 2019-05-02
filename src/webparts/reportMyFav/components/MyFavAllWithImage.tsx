@@ -34,7 +34,7 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
     }
 
     return (
-      <li className={styles.resultItem}>
+      <li className={styles.MyFavAllWithImage}>
         <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
           <div className="singleCard">
             
