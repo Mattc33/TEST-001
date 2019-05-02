@@ -26,6 +26,7 @@ export interface INewsRotatorWebPartProps {
   enableGrabCursor: boolean;
   enableLoop: boolean;
   clientLabel:string;
+  listNameLabel:string;
 }
 
 export default class NewsRotatorWebPart extends BaseClientSideWebPart<INewsRotatorWebPartProps> {
@@ -36,6 +37,7 @@ export default class NewsRotatorWebPart extends BaseClientSideWebPart<INewsRotat
       {
         context: this.context,
         clientLabel:this.properties.clientLabel,
+        listNameLabel:this.properties.listNameLabel,
         enableNavigation: this.properties.enableNavigation,
         enablePagination: this.properties.enablePagination,
         enableVerticalReport:this.properties.enableVerticalReport,
@@ -75,6 +77,9 @@ export default class NewsRotatorWebPart extends BaseClientSideWebPart<INewsRotat
               groupFields: [
                 PropertyPaneTextField('clientLabel', {
                   label: strings.ClientNameFieldLabel
+                }),
+                PropertyPaneTextField('listNameLabel', {
+                  label: strings.ListNameFieldLabel
                 }),
                 PropertyPaneToggle('enableNavigation', {
                   label: strings.EnableNavigation

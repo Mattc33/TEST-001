@@ -18,5 +18,6 @@ define([], function() {
     "EnableGrabCursor": "Enable grab cursor",
     "EnableLoop": "Enable loop",
     "ClientNameFieldLabel": "Client Label",
+    "ListNameFieldLabel": "List Name",
   }
 });
