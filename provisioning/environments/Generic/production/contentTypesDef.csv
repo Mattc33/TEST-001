@@ -7,3 +7,4 @@ Viewport Favorite,Represents a single favorited visualization by a user,0x0100e4
 Visualization Discussion,Represents discussion topic by user,0x01200038B3C7985F42D342B647C6AB2CCBD390,Viewport Data Visualization,Folder
 Visualization Discussion Reply,Represents discussion response by user,0x0100B92A50FB75305D42A6D538A8C9A14E0B,Viewport Data Visualization,Item
 Visualization News,Hold the News for ViewPort Portal,0x010038C8697B2DE0483894594C9047502263,Viewport Data Visualization,Item
+Visualization Extension,Hold the Extended Fields nd Information on Visualizationa,0x010038C8697B2DE0483894594C9047502262,Viewport Data Visualization,Item

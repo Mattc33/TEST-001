@@ -2,107 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "search-results-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/searchResults/SearchResultsWebPart.js",
-          "manifest": "./src/webparts/searchResults/SearchResultsWebPart.manifest.json"
-        }
-      ]
-    },
-    "search-box-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/searchBox/SearchBoxWebPart.js",
-          "manifest": "./src/webparts/searchBox/SearchBoxWebPart.manifest.json"
-        }
-      ]
-    },
-    "search-navigation-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/searchNavigation/SearchNavigationWebPart.js",
-          "manifest": "./src/webparts/searchNavigation/SearchNavigationWebPart.manifest.json"
-        }
-      ]
-    },
-    "search-refiners-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/searchRefiners/SearchRefinersWebPart.js",
-          "manifest": "./src/webparts/searchRefiners/SearchRefinersWebPart.manifest.json"
-        }
-      ]
-    },
-    "search-pagination-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/searchPagination/SearchPaginationWebPart.js",
-          "manifest": "./src/webparts/searchPagination/SearchPaginationWebPart.manifest.json"
-        }
-      ]
-    },
-    "report-viewer-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/reportViewer/ReportViewerWebPart.js",
-          "manifest": "./src/webparts/reportViewer/ReportViewerWebPart.manifest.json"
-        }
-      ]
-    },
-    "report-rotator-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/reportRotator/ReportRotatorWebPart.js",
-          "manifest": "./src/webparts/reportRotator/ReportRotatorWebPart.manifest.json"
-        }
-      ]
-    },
+    
     "report-my-fav-web-part": {
       "components": [
         {
           "entrypoint": "./lib/webparts/reportMyFav/ReportMyFavWebPart.js",
           "manifest": "./src/webparts/reportMyFav/ReportMyFavWebPart.manifest.json"
-        }
-      ]
-    },
-    "data-marketplace-renderer-application-customizer": {
-      "components": [
-        {
-          "entrypoint": "./lib/extensions/dataMarketplaceRenderer/DataMarketplaceRendererApplicationCustomizer.js",
-          "manifest": "./src/extensions/dataMarketplaceRenderer/DataMarketplaceRendererApplicationCustomizer.manifest.json"
-        }
-      ]
-    },
-    "report-comments-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/reportComments/ReportCommentsWebPart.js",
-          "manifest": "./src/webparts/reportComments/ReportCommentsWebPart.manifest.json"
-        }
-      ]
-    },
-    "featured-reports-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/featuredReports/FeaturedReportsWebPart.js",
-          "manifest": "./src/webparts/featuredReports/FeaturedReportsWebPart.manifest.json"
-        }
-      ]
-    },
-    "sysco-application-customizer": {
-      "components": [
-        {
-          "entrypoint": "./lib/extensions/sysco/SyscoApplicationCustomizer.js",
-          "manifest": "./src/extensions/sysco/SyscoApplicationCustomizer.manifest.json"
-        }
-      ]
-    },
-    "news-rotator-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/newsRotator/NewsRotatorWebPart.js",
-          "manifest": "./src/webparts/newsRotator/NewsRotatorWebPart.manifest.json"
         }
       ]
     }

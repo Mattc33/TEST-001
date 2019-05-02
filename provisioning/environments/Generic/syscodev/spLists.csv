@@ -11,4 +11,6 @@ No,Visualization Discussion,Lists/VisualizationDiscussion,GenericList,No,Yes,Yes
 ,,,,,,,
 No,Visualization Assets,VisualizationAssets,PictureLibrary,No,No,Yes,Image|Audio|Video|Video Rendition
 ,,,,,,,
-Yes,Sysco News,Lists/News,GenericList,No,Yes,Yes,Visualization News
+No,Sysco News,Lists/News,GenericList,No,Yes,Yes,Visualization News
+,,,,,,,
+Yes,Visualizations Extension,Lists/VisualizationsExtension,GenericList,No,Yes,Yes,Visualization Extension
