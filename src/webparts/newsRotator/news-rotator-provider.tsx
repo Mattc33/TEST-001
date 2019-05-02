@@ -5,11 +5,12 @@ import {
 import NewsRotator from './components/NewsRotator';
 import { NewsServiceMock } from "../../services/MockServices/NewsServiceMock";
 import { INewsService } from "../../services/interfaces/INewsService";
-//import { ReportService } from "../../services/ReportService";
+import { NewsService } from "../../services/NewsService";
 
 export interface INewsRotatorProviderProps{
   context: WebPartContext;
   clientLabel:string;
+  listNameLabel:string;
   enableNavigation: boolean;
   enablePagination: boolean;
   enableVerticalReport:boolean;
@@ -34,8 +35,8 @@ export class NewsRotatorProvider extends React.Component<INewsRotatorProviderPro
   constructor(props: INewsRotatorProviderProps) {
     super(props);
 
-    this._newsService = new NewsServiceMock();
-    //this._newsService =  new NewsServiceMock(this.props.context);
+    //this._newsService = new NewsServiceMock();
+    this._newsService =  new NewsService(this.props.context);
   }
 
   public async componentDidMount() {
@@ -59,7 +60,7 @@ export class NewsRotatorProvider extends React.Component<INewsRotatorProviderPro
         reportPerGroup = {this.props.slidesPerGroup}
         spaceBetweenReports = {this.props.spaceBetweenSlides}
         currentSiteUrl = {this.props.context.pageContext.site.absoluteUrl}
-        
+        listName = {this.props.listNameLabel}
       />
     );
 

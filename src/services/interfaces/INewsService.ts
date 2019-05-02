@@ -1,5 +1,5 @@
 import { INewsItem } from "../../models/INewsItem";
 
 export interface INewsService {
-    getAllFeaturedNews(): Promise<Array<INewsItem>>;
+    getAllFeaturedNews(listName:string): Promise<Array<INewsItem>>;
 }
