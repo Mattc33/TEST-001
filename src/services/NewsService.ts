@@ -17,7 +17,7 @@ export class NewsService implements INewsService {
 
         let newsListName = listName;
         if(!newsListName)
-            newsListName = VIZ_NEWS_LST
+            newsListName = VIZ_NEWS_LST;
 
         const query = Caml.getCaml(
             () => this.getVizReportListViewFields().map((field: string): string => {
