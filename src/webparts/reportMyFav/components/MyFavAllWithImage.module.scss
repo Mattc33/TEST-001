@@ -1,8 +1,5 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-
-
-
 .MyFavAllWithImage {
 
   .visualizationTechnologyIcon {
@@ -56,6 +53,31 @@ li.ms-ListItem.ms-ListItem--document {
 }
 
 
+.tile-class {
+  border: 1px solid red;
+  margin: 0 1em 0 0;
+  width: 30%;
+}
+
+
+.tile-class {
+border: 1px solid #ccc;
+padding: .5em;
+margin: 0 1em 1em 0;
+width: 30%;
+}
+
+
+.datamkt-sub {
+display: flex;
+}
+
+.previewImg.datamkt-left {
+display: flex;
+width: 40%;
+}
+
+
 .itemTitle, .itemTitle a {
   font-weight: 400;
   font-size: 1.3em;
@@ -74,22 +96,6 @@ li.ms-ListItem.ms-ListItem--document {
 }
 
 
-.tile-class {
-  border: 1px solid #ccc;
-  padding: .5em;
-  margin: 0 1em 1em 0;
-  width: 30%;
-}
-
-
-.datamkt-sub {
-  display: flex;
-}
-
-.previewImg.datamkt-left {
-  display: flex;
-  width: 40%;
-}
 
 
 
