@@ -3,6 +3,11 @@ import { Logger, LogLevel } from '@pnp/logging';
 
 import { CurrentUser } from '@pnp/sp/src/siteusers';
 
+export interface IFavoriteState {
+  isFavorite: boolean;
+  favoriteId?: number;
+}
+
 export class FavoriteType {
   public static ORIGINAL: string = "Original";
   public static CUSTOM: string = "Custom";
@@ -14,7 +19,7 @@ const VISUALIZATIONS_LIST_TITLE: string = "Visualizations";
 
 export class ReportActionsService {
   public async FavoriteReport(webUrl: string, reportId: number, description?: string, favoriteType?: FavoriteType, parametersId?: Array<number>,
-    metadata?: string, reportTitle?: string): Promise<boolean> {
+    metadata?: string, reportTitle?: string): Promise<IFavoriteState> {
     let web: Web = await new Web(webUrl);
     let report: any = await web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items.getById(reportId).fieldValuesAsText.get();
 
@@ -35,14 +40,14 @@ export class ReportActionsService {
 
     if (favedInfo.item) {
       Logger.write(`Favorited report with id #${reportId}`, LogLevel.Info);
-      return true;
+      return { isFavorite: true, favoriteId: favedInfo.data.Id };
     } else {
       Logger.error(new Error("Favoriting report with id #${reportId} failed."));
-      return false;
+      return { isFavorite: false, favoriteId: -1 };
     }
   }
 
-  public async GetFavoriteState(webUrl: string, reportId: number): Promise<boolean> {
+  public async GetFavoriteState(webUrl: string, reportId: number): Promise<IFavoriteState> {
     let web: Web = await new Web(webUrl);
     let currentUser: any = await web.currentUser.get();
     let favoriteItem: Item[] = await web.lists.getByTitle(FAVORITES_LIST_TITLE).items
@@ -51,7 +56,9 @@ export class ReportActionsService {
       .filter(`SVPVisualizationLookupId eq ${reportId} and Author/Id eq ${currentUser.Id}`)
       .get();
 
-    return (favoriteItem.length > 0);
+    return (favoriteItem.length > 0) 
+      ? { isFavorite: true, favoriteId: (favoriteItem[0] as any).Id }
+      : { isFavorite: false, favoriteId: -1 };
   }
 
   public async UnfavoriteReport(webUrl: string, reportId: number): Promise<void> {

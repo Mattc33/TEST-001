@@ -17,6 +17,7 @@ declare interface INewsRotatorWebPartStrings {
   EnableGrabCursor: string;
   EnableLoop: string;
   ClientNameFieldLabel:string;
+  ListNameFieldLabel:string;
 }
 
 declare module 'NewsRotatorWebPartStrings' {

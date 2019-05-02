@@ -28,36 +28,30 @@ export class Utils {
             return [];
         
         let supportedToolbar: Array<string> = [];
-        let input: string = '';
+        let input: string = viewer.tableauReportConfig.SVPTableauToolbar;
 
         switch(viewer.report.SVPVisualizationTechnology) {
             case "Tableau":
-                input = viewer.tableauReportConfig.SVPTableauToolbar;
                 supportedToolbar = TABLEAU_SUPPORTED_TOOLBAR;
                 break;
 
             case "Office":
-                input = ''; //TODO: implement webpart props
                 supportedToolbar = OFFICE_SUPPORTED_TOOLBAR;
                 break;
 
             case "PDF":
-                input = ''; //TODO: implement webpart props
                 supportedToolbar = PDF_SUPPORTED_TOOLBAR;
                 break;
 
             case "Image":
-                input = ''; //TODO: implement webpart props
                 supportedToolbar = IMAGE_SUPPORTED_TOOLBAR;
                 break;
 
             case "Other":
-                input = ''; //TODO: implement webpart props
                 supportedToolbar = OTHER_SUPPORTED_TOOLBAR;
                 break;
 
             default:
-                input = ''; 
                 supportedToolbar = UNKNOWN_SUPPORTED_TOOLBAR;
                 break;
         }

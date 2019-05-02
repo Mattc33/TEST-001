@@ -20,7 +20,7 @@
     "description": { "default": "News Rotator Webpart" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "News Rotator"
+      "listNameLabel": "Sysco News"
     }
   }]
 }

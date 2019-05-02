@@ -54,9 +54,11 @@ export const ProfileFilters: React.SFC<IProfileFilterProps> = props => {
 export interface IToolbarProps {
     context: WebPartContext;
     report: IReportItem;
+    reportType: string;
     types: Array<string>;
     height: number;
     width: number;
+    isFavorite: boolean;
 
     profileFilters: Array<IProfileFilter>;
 
@@ -112,6 +114,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 case "sizing":
                     return prev.concat(this.renderSizing());
                 case "savecustom":
+                    //return (this.isFavorite() ? prev : prev.concat(this.renderSaveCusomtView()));
                     return prev.concat(this.renderSaveCusomtView());
                 case "story":
                     return prev.concat(this.renderStory());
@@ -152,6 +155,14 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 }
             </React.Fragment>
         );
+    }
+
+    @autobind
+    private isFavorite(): boolean {
+        if (this.props.reportType === "Tableau")
+            return false;
+
+        return this.props.isFavorite;
     }
 
     @autobind
@@ -312,6 +323,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
         return [{
             key: 'savecustom',
             name: 'Add view as favorite',
+            disabled: this.isFavorite(),
             iconProps: {
                 iconName: 'Heart'
             },

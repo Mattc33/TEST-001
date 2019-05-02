@@ -69,9 +69,9 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     const viewerProps = this.props.state;
 
     const viz = document.getElementById('VizContainer');
-    const widht = (viz) ? viz.clientWidth : 900;
+    const width = (viz) ? viz.clientWidth : 900;
 
-    viewerProps.actions.loadReportData(reportId, favReportId, 700, widht);
+    viewerProps.actions.loadReportData(reportId, favReportId, 700, width);
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
@@ -86,10 +86,12 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             <Toolbar 
               context={this.props.state.context}
               report={this.props.state.report}
+              reportType={this.props.state.report.SVPVisualizationTechnology}
               types={Utils.getToolbar(this.props.state)}
               height={this.props.state.reportHeight}
               width={this.props.state.reportWidth}
               profileFilters={this.getProfileFilter()}
+              isFavorite={this.props.state.isFavorite}
               onClick={this.handleToolbarClick}
             />
           }

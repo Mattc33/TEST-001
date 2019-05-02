@@ -26,6 +26,7 @@ export interface INewsRotatorProps {
   reportPerGroup: string;
   spaceBetweenReports: string;
   currentSiteUrl:string;
+  listName:string;
 }
 
 export interface INewsRotatorState {
@@ -46,7 +47,7 @@ export default class NewsRotator extends React.Component<INewsRotatorProps, INew
   }
 
   public componentDidMount(): void { 
-    this.props.featuredNewsService.getAllFeaturedNews().then((result: Array<INewsItem>) => {
+    this.props.featuredNewsService.getAllFeaturedNews(this.props.listName).then((result: Array<INewsItem>) => {
 
       this.setState({ featuredNewsItemsinState: result, isNewsLoaded: true});
       this.setSwiper();

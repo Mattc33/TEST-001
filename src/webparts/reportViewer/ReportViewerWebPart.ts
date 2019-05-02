@@ -14,6 +14,7 @@ import { IReportViewerProviderProps } from "./state/IReportViewerProviderProps";
 import { BaseWebpart, IInitConfig } from "../../base";
 
 export interface IReportViewerWebPartProps extends ITableauReportViewerConfig {
+  SVPClientLabel: string;
   // ITableauReportViewerWebPartProps Props
   // SVPTableauJavaScriptURL: string;
   // SVPTableauToolbar: string;
@@ -30,6 +31,7 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
   public render(): void {
     const element: React.ReactElement<IReportViewerProviderProps> = React.createElement(
       ReportViewerProviderSFC, {
+        SVPClientLabel: this.properties.SVPClientLabel,       
         context: this.context,
         tableauReportConfig: {
           SVPTableauJavaScriptURL: this.properties.SVPTableauJavaScriptURL,
@@ -60,26 +62,25 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
           header: {
             description: "Report Viewer Properties"
           },
+          displayGroupsAsAccordion: true,
           groups: [
             {
-              groupName: "Tableau Report Configurations",
+              groupName: "Report Viewer Basic Settings",
               groupFields: [
+                PropertyPaneTextField("SVPClientLabel", {
+                  label: "Client Label"
+                }),
                 PropertyPaneTextField("SVPTableauJavaScriptURL", {
                   label: "Tableau JavaScript API URL"
                 }),
                 PropertyPaneTextField("SVPTableauToolbar", {
-                  label: "Toolbar Controls for Tableau Report",
-                  description: "Comma separated values toolbar buttons. Valid values are [sizing, savecustom, feedback, profilefilter, fullscreen]"
+                  label: "Report Toolbar Controls",
+                  description: "Comma separated values for toolbar buttons. Valid values are [sizing,savecustom,feedback,profilefilter,fullscreen]"
                 })
               ]
             },
             {
-              groupName: "Excel Report Configurations",
-              groupFields: [
-              ]
-            },
-            {
-              groupName: "Pdf Report Configurations",
+              groupName: "Report Viewer Advance Settings",
               groupFields: [
               ]
             }
