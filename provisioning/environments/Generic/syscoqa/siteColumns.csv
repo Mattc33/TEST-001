@@ -2,7 +2,7 @@ FieldLabel,DataType,FieldInternalName,Required,GroupName,Format,Multi,LinkMenu,C
 Visualization Address,Note,SVPVisualizationAddress,No,Viewport Data Visualization,,,,,
 Visualization Image,Text,SVPVisualizationImage,No,Viewport Data Visualization,,,,,
 Visualization Parameters,Lookup,SVPVisualizationParameters,No,Viewport Data Visualization,,,,,Visualization Parameters|ID
-Visualization Metadata,Note,SVPVisualizationMetadata,No,Viewport Data Visualization,,,,,
+Visualization Keywords,Note,SVPVisualizationMetadata,No,Viewport Data Visualization,,,,,
 Visualization Owner,User,SVPVisualizationOwner,No,Viewport Data Visualization,,,,,
 Visualization Technology,Choice,SVPVisualizationTechnology,No,Viewport Data Visualization,,,,Tableau|Office|PDF|Image|Others,
 Last Updated,DateTime,SVPLastUpdated,No,Viewport Data Visualization,,,,,
@@ -15,7 +15,7 @@ Likes,Note,SVPLikes,No,Viewport Data Visualization,,,,,
 Likes Count,Number,SVPLikesCount,No,Viewport Data Visualization,,,,,
 Category,Choice,SVPCategory,No,Viewport Data Visualization,,,,LOB|Sales|HR|Corporate|IT|B2B|Other,
 Segment,Choice,SVPMetadata1,No,Viewport Data Visualization,,,,USBL,
-Funtion,Choice,SVPMetadata2,No,Viewport Data Visualization,,,,Category Management|Financial Performance|Inventory Management|Human Resource|Operations|Revenue Management|Sales,
+Function,Choice,SVPMetadata2,No,Viewport Data Visualization,,,,Category Management|Financial Performance|Inventory Management|Human Resources|Operations|Revenue Management|Sales,
 Frequency,Choice,SVPMetadata3,No,Viewport Data Visualization,,,,Daily|Weekly|Monthly|Quarterly|Yearly,
 ,,,,,,,,,
 Visualization Lookup,Lookup,SVPVisualizationLookup,No,Viewport Data Visualization,,,,,Visualizations|ID
