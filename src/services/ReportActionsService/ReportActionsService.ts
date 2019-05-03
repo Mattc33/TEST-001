@@ -2,6 +2,7 @@ import { sp, ItemAddResult, ItemUpdateResult, Item, Web, Items } from '@pnp/sp';
 import { Logger, LogLevel } from '@pnp/logging';
 
 import { CurrentUser } from '@pnp/sp/src/siteusers';
+import { create } from 'handlebars';
 
 export interface IFavoriteState {
   isFavorite: boolean;
@@ -16,6 +17,7 @@ export class FavoriteType {
 
 const FAVORITES_LIST_TITLE: string = "Favorites";
 const VISUALIZATIONS_LIST_TITLE: string = "Visualizations";
+const VISUALIZATIONS_EXTENSION_LIST_TITLE: string = "Visualizations Extension";
 
 export class ReportActionsService {
   public async FavoriteReport(webUrl: string, reportId: number, description?: string, favoriteType?: FavoriteType, parametersId?: Array<number>,
@@ -112,24 +114,68 @@ export class ReportActionsService {
     return (result.item) ? true : false;
   }
 
-  private async saveLikes(webUrl: string, reportId: number, likes: string): Promise<ItemUpdateResult> {
+  private async saveLikes(webUrl: string, reportId: number, likes: string): Promise<ItemUpdateResult|ItemAddResult> {
     let web: Web = await new Web(webUrl);
-    return web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items
-      .getById(reportId)
-      .update({
-        "SVPLikes": likes
-      });
+    let likeItem: Item = await this.getLikesItem(webUrl, reportId);
+    let result: ItemUpdateResult|ItemAddResult;
+    let cleanLikes = (likes && likes[0] === ",") ? likes.substring(1) : likes;
+
+    if (likeItem) { //update
+      const likeItemId: number = likeItem["Id"] as number;
+      result = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
+        .getById(likeItemId)
+        .update({
+          "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}`,
+          "SVPLikes": cleanLikes
+        });
+    }
+    else { //add
+      let likeObject: any = {
+        "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}`,
+        "SVPVisualizationLookupId": reportId,
+        "SVPLikes": cleanLikes
+      };
+  
+      result = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
+        .add(likeObject);
+    }
+
+    return result;
+
+    // return web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items
+    //   .getById(reportId)
+    //   .update({
+    //     "SVPLikes": likes
+    //   });
   }
 
-  private async getLikes(webUrl, reportId: number): Promise<string> {
+  private async getLikes(webUrl: string, reportId: number): Promise<string> {
     let web: Web = await new Web(webUrl);
-    let reportItem: Item = await web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items
-      .getById(reportId)
-      .select("SVPLikes")
+    let likeItem: Item = await this.getLikesItem(webUrl, reportId);
+
+    return (likeItem && likeItem["SVPLikes"])
+      ? (likeItem["SVPLikes"] as string)
+      : '';
+
+    // let reportItem: Item = await web.lists.getByTitle(VISUALIZATIONS_LIST_TITLE).items
+    //   .getById(reportId)
+    //   .select("SVPLikes")
+    //   .get();
+
+    // return (reportItem && reportItem["SVPLikes"])
+    //   ? (reportItem["SVPLikes"] as string)
+    //   : '';
+  }
+
+  private async getLikesItem(webUrl: string, reportId: number): Promise<Item> {
+    let web: Web = await new Web(webUrl);
+    let likeItems: Item[] = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
+      .select("Id", "SVPLikes", "SVPVisualizationLookupId")
+      .filter(`SVPVisualizationLookupId eq ${reportId}`)
       .get();
 
-    return (reportItem && reportItem["SVPLikes"])
-      ? (reportItem["SVPLikes"] as string)
-      : '';
+    return (likeItems && likeItems.length > 0 )
+      ? likeItems[0]
+      : null;
   }
 }
