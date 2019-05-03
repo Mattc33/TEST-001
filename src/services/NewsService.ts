@@ -34,11 +34,7 @@ export class NewsService implements INewsService {
             ViewXml: query
         };
       
-        const result = await sp
-            .web
-            .lists
-              .getByTitle(newsListName)
-              .renderListDataAsStream(parameters);
+        const result = await sp.web.lists.getByTitle(newsListName).renderListDataAsStream(parameters);
 
         return this.processVizReportListResult(result);
 

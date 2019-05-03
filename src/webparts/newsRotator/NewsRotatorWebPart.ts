@@ -12,6 +12,7 @@ import * as strings from 'NewsRotatorWebPartStrings';
 import NewsRotator from './components/NewsRotator';
 //import { INewsRotatorProps } from './components/INewsRotatorProps';
 import { INewsRotatorProviderProps, NewsRotatorProvider } from './news-rotator-provider';
+import { BaseWebpart, IInitConfig } from "../../base";
 
 export interface INewsRotatorWebPartProps {
   enableNavigation: boolean;
@@ -29,7 +30,7 @@ export interface INewsRotatorWebPartProps {
   listNameLabel:string;
 }
 
-export default class NewsRotatorWebPart extends BaseClientSideWebPart<INewsRotatorWebPartProps> {
+export default class NewsRotatorWebPart extends BaseWebpart<INewsRotatorWebPartProps> {
 
   public render(): void {
     const element: React.ReactElement<INewsRotatorProviderProps > = React.createElement(
