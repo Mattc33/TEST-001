@@ -25,7 +25,6 @@ export interface IReportItem {
     SVPMetadata3?: string;          //frequency
     SVPReportHeight?: number;
     SVPReportWidth?: number;
-    SVPLikes?: string;
     Modified: Date;
     Created: Date;
 
@@ -33,7 +32,8 @@ export interface IReportItem {
     UniqueId?: string;
     FileWebUrl?: string;
 
-    SVPLikesCount?: number;
+    //SVPLikes?: string;
+    //SVPLikesCount?: number;
     SVPIsFeatured: boolean;
     SVPCategory: string;
     SVPVisualizationParameters?: Array<IReportParameters>;
