@@ -17,8 +17,19 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
     public constructor(props: IFilterLayoutProps) {
         super(props);
 
+        const groups: Array<string> = [];
+        props.refinementResults.map((refinementResult, i) => {
+
+            // Get group name
+            let groupName = refinementResult.FilterName;
+            const configuredFilter = this.props.refinersConfiguration.filter(e => { return e.refinerName === refinementResult.FilterName;});
+            groupName = configuredFilter.length > 0 && configuredFilter[0].displayValue ? configuredFilter[0].displayValue : groupName;
+
+            groups.push(groupName);
+        });
+
         this.state = {
-            expandedGroups: []
+            expandedGroups: groups //[]
         };
 
         this._removeAllFilters = this._removeAllFilters.bind(this);
