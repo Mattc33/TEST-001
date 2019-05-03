@@ -3,6 +3,14 @@
 .MyFavAllWithImage {
   list-style:none;
 
+  .tileClass {
+    border: 1px solid #ccc;
+    padding: 0;
+    margin: 0 1em 1em 0;
+    width: 30%;
+    }
+    
+
   .visualizationTechnologyIcon {
     height: 24px;
     display: inline-block;
@@ -15,7 +23,7 @@
     display: inline-block;
   }
 
-
+  
   .featuredCard {
     background-color: rgba(255, 255, 255, 1);
   }
@@ -46,34 +54,40 @@
   list-style: none;
 }
 
-.tileClass {
-  border: 1px solid #ccc;
-  padding: .5em;
-  margin: 0 1em 1em 0;
-  width: 30%;
-  }
-  
+
   .datamktSub {
-  display: flex;
-  }
+    margin: .5em 1em 0 1em !important;
+    display: flex !important;
+    }
+
   
-  .previewImg {
-  display: flex;
-  width: 40%;
+  .datamktRight {
+    width: 80% !important;
+    margin: 0 !important;
+    overflow:hidden;
+    height:75px;
   }
-  
-  .datamktLeft, .datamktRight {
-    border:none;
-  }
+
+
+
+.previewImg {
+  width: 15%;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: auto;
+  background-position: top;
+  margin: 0 1em 0 0;
+}
 
 }
 
 
 .itemTitle, .itemTitle a {
   font-weight: 400;
-  font-size: 1.3em;
+  font-size: 1.4em;
   color: #666;
-  margin: .5em 1em .25em 1em;
+  margin: .5em .75em .25em;
   display:flex;  
   line-height:24px;
   height:48px;
@@ -87,7 +101,25 @@
 }
 
 
+.ControlZone {
+  margin: 0 0 1em 0em !important;
+}
 
+.ms-Button-flexContainer {
+  font-size: .95em;
+  color: #398bcc;
+  font-weight: 800;
+}
 
+span.ms-ListItem-secondaryText {
+  font-size: .95em;
+  color: #666;
+}
 
+.ms-Button-label {
+  font-size:.9em;
+  color:#398bcc;
+  font-weight:600;
+  margin-left:0;
+}
 
