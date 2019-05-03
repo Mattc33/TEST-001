@@ -153,6 +153,9 @@ export default class SearchRefinersContainer extends React.Component<ISearchRefi
     this.setState({
       availableRefiners: this.props.availableRefiners
     });
+
+    const divs = document.getElementsByClassName('CanvasSection-xl4');
+    if (divs && divs.length > 0) (divs[0] as HTMLElement).style.width = "23%";
   }
 
   /**
