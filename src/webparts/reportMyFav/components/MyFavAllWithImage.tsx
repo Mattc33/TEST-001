@@ -2,8 +2,7 @@ import * as React from 'react';
 import styles from './MyFavAllWithImage.module.scss';
 import { IReportFavoriteItem } from "../../../models/IReportItem";
 import { ReportFavoriteType } from "../../../helpers/UrlHelper";
-import { IconButton } from 'office-ui-fabric-react/lib/Button';
-import { Link } from 'office-ui-fabric-react/lib/Link';
+import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 
 export interface IReportProps {
   key: string;
@@ -48,22 +47,19 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
 
                 <div className={styles.datamktSub}>
 
-                <div className={"previewImg" + styles.datamktLeft} style={{ backgroundImage: `url(${reportImageUrl})` }}>
-                    &nbsp;
+                  <div className={"previewImg" + styles.datamktLeft} style={{ backgroundImage: `url(${reportImageUrl})` }}>
+                      &nbsp;
                   </div>
                   <div className={styles.datamktRight}>
-                <span className="ms-ListItem-secondaryText">{reportDesc}</span>
-                </div>
-                </div>
-                <span className={styles.likeFaveButtons}>
-                  <div className={styles.likeFavContainer}>
-                    <span>
-                    <IconButton iconProps={{ iconName: 'HeartFill' }} title="Remove Report" ariaLabel="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)}/>Favorite
-                    <IconButton iconProps={{ iconName: 'Share' }} title="Share Report" ariaLabel="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)}/>Like
-                    </span>
+                    <span className="ms-ListItem-secondaryText">{reportDesc}</span>
                   </div>
-                </span>
-
+                </div>
+                <div className={styles.likeFaveButtons}>
+                  <span className={styles.likeFavContainer}>
+                    <ActionButton data-automation-id="HeartFill" iconProps={{ iconName: 'HeartFill' }} allowDisabledFocus={true} title="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)} >Favorite</ActionButton>
+                    <ActionButton data-automation-id="Share" iconProps={{ iconName: 'Share' }} allowDisabledFocus={true} title="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)} >Share</ActionButton>
+                  </span>
+                </div>
                 <div className="ms-ListItem-selectionTarget"></div>
               </div>
             </li>
