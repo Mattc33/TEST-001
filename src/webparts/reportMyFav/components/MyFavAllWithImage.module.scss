@@ -46,17 +46,14 @@
   list-style: none;
 }
 
-
-
-.tile-class {
+.tileClass {
   border: 1px solid #ccc;
   padding: .5em;
   margin: 0 1em 1em 0;
   width: 30%;
   }
   
-  
-  .datamkt-sub {
+  .datamktSub {
   display: flex;
   }
   
@@ -65,10 +62,11 @@
   width: 40%;
   }
   
-
+  .datamktLeft, .datamktRight {
+    border:none;
+  }
 
 }
-
 
 
 .itemTitle, .itemTitle a {
