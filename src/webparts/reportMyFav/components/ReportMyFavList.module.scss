@@ -1,8 +1,6 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 
-
-
 .reportMyFavList {
 
   .container {
@@ -82,6 +80,23 @@
     }
   }
 
-
+  .MyFavAllWithImage {
+  .tile-class {
+    border: 1px solid #ccc;
+    padding: .5em;
+    margin: 0 1em 1em 0;
+    width: 30%;
+    }
+    
+    
+    .datamkt-sub {
+    display: flex;
+    }
+    
+    .previewImg {
+    display: flex;
+    width: 40%;
+    }
+  }
 
 }
