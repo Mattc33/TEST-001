@@ -21,6 +21,9 @@
   }
   .rowHeader {
     @include ms-Grid-row;
+    margin-left: .25em;
+    margin-bottom: .5em;
+    
     //@include ms-fontColor-white;
     //background-color: $ms-color-themeDark;
    // padding: 10px;
@@ -81,3 +84,4 @@
   }
 
 }
+

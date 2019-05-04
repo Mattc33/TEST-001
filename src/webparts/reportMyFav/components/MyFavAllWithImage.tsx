@@ -38,7 +38,7 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
           <div className="singleCard">
             
             <li className="ms-ListItem ms-ListItem--document">
-              <div className={"cardInfo" + styles.featuredCard}>
+              <div className={"cardInfo " + styles.featuredCard}>
                 <span className="ms-ListItem-primaryText">
                   <a className={styles.itemLink} href={favReportViewUrl}>
                     <span className={styles.itemTitle}>{reportTitle}</span>
@@ -47,7 +47,7 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
 
                 <div className={styles.datamktSub}>
 
-                  <div className={"previewImg" + styles.datamktLeft} style={{ backgroundImage: `url(${reportImageUrl})` }}>
+                  <div className={styles.previewImg} style={{ backgroundImage: `url(${reportImageUrl})` }}>
                       &nbsp;
                   </div>
                   <div className={styles.datamktRight}>
@@ -67,10 +67,4 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
         </div>
       </li>
     );
-  }
-//TODO
-//<p className={styles.description}>{this.props.reportItem.SVPVisualizationDescription}</p>
-////<button className={styles.button} type="button" onClick={(e) => this.props.onView(this.props.reportItem.Id)}>View</button>
-//<Link  className={styles.button} href={ favReportViewUrl } target="_self">View </Link>
-
-}
+  } }
