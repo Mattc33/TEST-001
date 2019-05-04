@@ -34,11 +34,11 @@ export default class MyFavAllWithImage extends React.Component<IReportProps, {}>
 
     return (
       <li className={styles.MyFavAllWithImage}>
-        <div className={"ms-Grid-col ms-sm12 ms-md6 ms-lg4" + styles.tileClass}>
+        <div className={"ms-Grid-col ms-sm12 ms-md6 ms-lg4 " + styles.tileClass}>
           <div className="singleCard">
             
             <li className="ms-ListItem ms-ListItem--document">
-              <div className={"cardInfo" + styles.featuredCard}>
+              <div className={"cardInfo " + styles.featuredCard}>
                 <span className="ms-ListItem-primaryText">
                   <a className={styles.itemLink} href={favReportViewUrl}>
                     <span className={styles.itemTitle}>{reportTitle}</span>

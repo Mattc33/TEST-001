@@ -54,6 +54,14 @@
   list-style: none;
 }
 
+.ms-Button-label {
+  font-size:.9em;
+    color:#398bcc;
+    font-weight:600;
+    margin-left:0;
+}
+
+
 
   .datamktSub {
     margin: .5em 1em 0 1em !important;
@@ -66,7 +74,17 @@
     margin: 0 !important;
     overflow:hidden;
     height:75px;
+
+    > span {
+      font-size: .95em;
+      color: #666;
+    }
   }
+
+  .likeFaveButtons {
+    margin: 0 0em 0 0;
+   }
+   
 
 
 
@@ -79,6 +97,20 @@
   background-position: top;
   margin: 0 1em 0 0;
 }
+
+
+.ms-Button-flexContainer {
+  font-size: .95em;
+  color: #398bcc;
+  font-weight: 800;
+}
+
+/*
+span.ms-ListItem-secondaryText {
+  font-size: .95em;
+  color: #666;
+}*/
+
 
 }
 
@@ -96,30 +128,10 @@
   text-decoration:none;
 }
 
-.likeFaveButtons {
- margin: 0 0em 0 0;
-}
 
 
 .ControlZone {
   margin: 0 0 1em 0em !important;
 }
 
-.ms-Button-flexContainer {
-  font-size: .95em;
-  color: #398bcc;
-  font-weight: 800;
-}
-
-span.ms-ListItem-secondaryText {
-  font-size: .95em;
-  color: #666;
-}
-
-.ms-Button-label {
-  font-size:.9em;
-  color:#398bcc;
-  font-weight:600;
-  margin-left:0;
-}
 

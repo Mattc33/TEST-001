@@ -20,6 +20,7 @@
     padding: 20px;
   }
   .rowHeader {
+    
     @include ms-Grid-row;
     //@include ms-fontColor-white;
     //background-color: $ms-color-themeDark;
