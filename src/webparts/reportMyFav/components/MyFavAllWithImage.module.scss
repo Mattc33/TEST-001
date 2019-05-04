@@ -41,7 +41,28 @@
     box-sizing: border-box;
     align-items: center;
     font-size:.9em;
+
+      button div {
+        font-size:.95em;
+        color:#398bcc;
+        font-weight:600;
+        margin-left:0;
+      }
+
+      button:first-child div:first-child  {
+        margin-left: .5em;
+      }
+
+      button:first-child div:first-child div  {
+        margin-left: 0;
+    }
   }
+
+
+
+  .MyFavAllWithImage_0fe0c49f .likeFavContainer_0fe0c49f 
+
+.MyFavAllWithImage_0fe0c49f .likeFavContainer_0fe0c49f 
 
 
   .ms-dialogMainOverride {
@@ -52,13 +73,6 @@
 
 .ms-ListItem--document {
   list-style: none;
-}
-
-.ms-Button-label {
-  font-size:.9em;
-    color:#398bcc;
-    font-weight:600;
-    margin-left:0;
 }
 
 
@@ -86,8 +100,6 @@
    }
    
 
-
-
 .previewImg {
   width: 15%;
   position: relative;
@@ -98,14 +110,14 @@
   margin: 0 1em 0 0;
 }
 
-
+/*
 .ms-Button-flexContainer {
   font-size: .95em;
   color: #398bcc;
   font-weight: 800;
 }
 
-/*
+
 span.ms-ListItem-secondaryText {
   font-size: .95em;
   color: #666;
@@ -135,3 +147,7 @@ span.ms-ListItem-secondaryText {
 }
 
 
+span.likeFavContainer_23554792 button div {
+  font-size: .95em;
+  color:blue;
+}
