@@ -13,11 +13,15 @@
   }
 
   .itemSelected {
-    color: #398bcc;
+    & * {
+      color: #398bcc;
+    }
   }
 
   .itemUnselected {
-    color: #909090;
+    & * {
+      color: #909090;
+    }
   }
 
   .itemTitle, .itemTitle a {
@@ -37,11 +41,7 @@
   }
 
   .likeFaveButtons {
-    //position: absolute;
-    //right: 0.5em;
-    //bottom: -0.25em;
-    //margin: 0 0.1em;
-    margin: 0 0 .5em 1.5em;
+    margin: 0 0 .5em .75em;
   }
 
   .linkItem {
@@ -58,31 +58,23 @@
     box-sizing: border-box;
     align-items: center;
     font-size:.9em;
+
+      span span {
+        display: flex;
+        align-items: center;
+      }
   }
 
   li.resultItem {
     display: block;
     list-style: none;
 
-    /*.imageContainer {
-      height: 100px;
-      width: 78px;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-
-      > img {
-        max-width: 78px;
-        max-height: 48px;
-        margin: auto 0;
-        width: auto;
-        height: auto;
-      }*/
-
       .tile-class {
         display: flex;
         height: 160px;
         margin-bottom:1em;
+        padding-left: 0 !important;
+        padding-right: 1em !important;
       }
  
   }
