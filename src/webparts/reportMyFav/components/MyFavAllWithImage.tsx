@@ -17,20 +17,17 @@ export interface IReportProps {
 
 export default class MyFavAllWithImage extends React.Component<IReportProps, {}> {
 
-  
 
   public render(): React.ReactElement<IReportProps> {
     const reportTitle = this.props.reportItem.Title;
     const reportDesc = this.props.reportItem.SVPVisualizationDescription;
     const favReportViewUrl = this.props.siteURL + "/SitePages/ViewReport.aspx?favReportId=" + this.props.reportItem.Id;
 
-
-
     let reportImageUrl = this.props.reportItem.SVPVisualizationImage;
-    if(this.props.reportItem.SVPFavoriteType != ReportFavoriteType.Original) {
+    //if(this.props.reportItem.SVPFavoriteType != ReportFavoriteType.Original) {
       //TODO: Get the URL from SVPVisualizationMetadata:
-      reportImageUrl = "#";
-    }
+      //reportImageUrl = "#";
+    //}
 
     return (
       <li className={styles.MyFavAllWithImage}>
