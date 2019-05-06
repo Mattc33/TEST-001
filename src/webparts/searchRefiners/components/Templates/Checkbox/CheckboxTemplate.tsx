@@ -27,7 +27,7 @@ export default class CheckboxTemplate extends React.Component<IBaseRefinerTempla
     
     public render() {
 
-        return <div>
+        return <div className="checkboxer">
                     {
                         this.props.refinementResult.Values.map((refinementValue: IRefinementValue, j) => {
 
@@ -45,7 +45,7 @@ export default class CheckboxTemplate extends React.Component<IBaseRefinerTempla
                     {
                         this.props.isMultiValue ? 
                         
-                            <div>
+                            <div className="multicheckboxer">
                                 <Link onClick={() => { this._applyFilters(this.state.refinerSelectedFilterValues);}} disabled={this.state.refinerSelectedFilterValues.length === 0}>{strings.Refiners.ApplyFiltersLabel}</Link>|<Link onClick={this._clearFilters} disabled={this.state.refinerSelectedFilterValues.length === 0}>{strings.Refiners.ClearFiltersLabel}</Link> 
                             </div>
                         

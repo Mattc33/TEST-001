@@ -138,7 +138,7 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
                 <div className={styles.verticalLayout__filterPanel__body__headerIcon}>
                     <i className={props.group.isCollapsed ? 'ms-Icon ms-Icon--ChevronDown' : 'ms-Icon ms-Icon--ChevronUp'}></i>
                 </div>
-                <div className='ms-font-l'>{props.group.name}</div>
+                <div className={"ms-font-l " + styles.refinerhead}>{props.group.name}</div>
             </div>
         );
     }
