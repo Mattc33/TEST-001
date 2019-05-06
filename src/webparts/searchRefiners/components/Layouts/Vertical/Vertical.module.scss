@@ -4,6 +4,11 @@
 
     min-height: 35px;
 
+    .refinerhead {
+        font-size: 1.3em;
+        padding:.5em;
+    }
+
     &__filterPanel {
         &__body {
             overflow: auto;
@@ -24,7 +29,8 @@
 
                 &__header {                    
                     display: flex;
-                    align-items: center;                    
+                    align-items: center;  
+                    margin-left: 1em;                  
                 }
 
                 button {

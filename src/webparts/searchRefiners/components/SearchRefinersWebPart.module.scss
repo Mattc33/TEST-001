@@ -1,9 +1,41 @@
 .searchRefiners {
-    
+    -webkit-box-shadow: 6px 7px 6px -5px rgba(102,102,102,1);
+    -moz-box-shadow: 6px 7px 6px -5px rgba(102,102,102,1);
+    box-shadow: 6px 7px 6px -5px rgba(102,102,102,1);
+    border:1px solid #f6f6f6;
+    border-radius:.5em !important;
+
     // Needed to avoid overlay overflow
     position: relative;
 
     &__noFilter {
         padding:10px 0;
     }
+
+    > div:first-child {
+        background:#eee;
+        padding:.5em;
+    }
+
+
+    .checkboxer * {
+        padding: 0 0 .25em 0;
+        color: #777 !important;
+    
+        i.ms-Checkbox-checkmark {
+        padding: .5em 0 0em 0;
+    }
+    
+    }
+
+}
+
+.checkboxer * {
+    padding: 0 0 .25em 0;
+    color: #777 !important;
+
+    i.ms-Checkbox-checkmark {
+    padding: .5em 0 0em 0;
+}
+
 }
