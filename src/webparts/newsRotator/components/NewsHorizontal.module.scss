@@ -34,17 +34,29 @@
 
   .title {
     text-align:start;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: -275px;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: -255px;
     text-align: center;
+    font-size: 1.7em;
+    font-weight: 800;
+    color: white;
+    text-shadow: none !important;
+    letter-spacing: 1px;
   }
 
   .subTitle {
     text-align:start;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 3em;
+    margin-right: 3em;
     text-align: center;
+    color:white;
+    line-height: 1.5em;
+    max-height: 4.4em;
+    overflow: hidden;
+    margin-top: -1em;
+    text-shadow: 1px 1px 5px black; 
+    font-size:.97em !important;
   }
 
   .colStyle {
@@ -62,6 +74,7 @@
     cursor: pointer;
     display: inline-block;
     padding:5px 50px;
+    margin-top: -1.2em;
 
     .label {
       font-weight: $ms-font-weight-semibold;
