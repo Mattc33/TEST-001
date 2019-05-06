@@ -13,11 +13,15 @@
   }
 
   .itemSelected {
-    color: #398bcc;
+    & * {
+      color: #398bcc;
+    }
   }
 
   .itemUnselected {
-    color: #909090;
+    & * {
+      color: #909090;
+    }
   }
 
   .itemTitle, .itemTitle a {

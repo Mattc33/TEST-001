@@ -5,7 +5,8 @@ import * as update from                                                'immutabi
 import {
     GroupedList,
     IGroup,
-    IGroupDividerProps
+    IGroupDividerProps,
+    IGroupFooterProps
 } from                                                                 'office-ui-fabric-react/lib/components/GroupedList/index';
 import {Link} from 'office-ui-fabric-react';
 import styles from './Vertical.module.scss';
@@ -71,6 +72,7 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
             items.push(
                 <TemplateRenderer 
                     key={i} 
+                    customClassName={styles.verticalLayout__filterPanel__body__group__item__checkboxers}
                     refinementResult={refinementResult}
                     shouldResetFilters={this.props.shouldResetFilters}
                     templateType={configuredFilter[0].template}
@@ -89,6 +91,7 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
             groupProps={
                 {
                     onRenderHeader: this._onRenderHeader,
+                    onRenderFooter: this._onRenderFooter
                 }
             }
             groups={groups} /> : noResultsElement;
@@ -141,6 +144,12 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
                 <div className={"ms-font-l " + styles.refinerhead}>{props.group.name}</div>
             </div>
         );
+    }
+
+    private _onRenderFooter(props: IGroupFooterProps): JSX.Element {
+        return ((props.groupIndex + 1) === props.groups.length)
+            ? <div>&nbsp;</div>
+            : <hr className={styles.verticalLayout__filterPanel__body__group__divider} />;
     }
 
     private _removeAllFilters() {        

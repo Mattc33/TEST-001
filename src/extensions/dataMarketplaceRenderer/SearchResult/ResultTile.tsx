@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import { Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, SpinnerType } from 'office-ui-fabric-react';
+import { Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, ActionButton } from 'office-ui-fabric-react';
 import { Logger, LogLevel } from '@pnp/logging';
 import { truncate } from '@microsoft/sp-lodash-subset';
 import IResultTileProps from './IResultTileProps';
@@ -25,18 +25,43 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private selectedStyle = ` ${styles.linkItem} ${styles.itemSelected}`;
   private unselectedStyle = ` ${styles.linkItem} ${styles.itemUnselected}`;
 
+  // <ActionButton data-automation-id="HeartFill" iconProps={{ iconName: 'HeartFill' }} allowDisabledFocus={true} title="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)} >Favorite</ActionButton>
+  // <ActionButton data-automation-id="Share" iconProps={{ iconName: 'Share' }} allowDisabledFocus={true} title="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)} >Share</ActionButton>
+
   private isFavoriteIconElement: JSX.Element = (
-    <span onClick={this.unfavorite}>
-      <i className={"ms-Icon ms-Icon--HeartFill" + this.selectedStyle} aria-hidden="true"></i>&nbsp;
-      <span className={styles.itemSelected}>Favorite</span>
-    </span>
+    <ActionButton 
+      className={this.selectedStyle} 
+      data-automation-id="HeartFill" 
+      iconProps={{ iconName: 'HeartFill' }} 
+      allowDisabledFocus={true} 
+      title="Add report to favorite list" 
+      onClick={this.unfavorite}>
+        Favorite
+    </ActionButton>
   );
 
   private isNotFavoriteIconElement: JSX.Element = (
-    <span onClick={this.showFavoriteDialog}>
-      <i className={"ms-Icon ms-Icon--HeartFill" + this.unselectedStyle} aria-hidden="true"></i>&nbsp;
-      <span className={styles.itemUnselected}>Favorite</span>
-    </span>
+    <ActionButton 
+      className={this.unselectedStyle} 
+      data-automation-id="HeartFill" 
+      iconProps={{ iconName: 'HeartFill' }} 
+      allowDisabledFocus={true} 
+      title="Remove report from favorite list" 
+      onClick={this.showFavoriteDialog}>
+        Favorite
+    </ActionButton>
+  );
+
+  private shareIconElement: JSX.Element = (
+    <ActionButton 
+      className={this.selectedStyle} 
+      data-automation-id="Share" 
+      iconProps={{ iconName: 'Share' }} 
+      allowDisabledFocus={true} 
+      title="Share Report" 
+      onClick={this.shareReport}>
+        Share
+    </ActionButton>
   );
 
   private isLikedIconElement: JSX.Element = (
@@ -91,9 +116,11 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   @autobind
   private renderResultItem(result: ISearchResult): JSX.Element {
 
+    const hideLike: boolean = true;
+
     const reportURL = (this.state.isFavorite)
       ? `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?favReportId=${this.state.favoriteId}`
-      : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${this.props.result.ListItemId}`;
+      : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
 
     const reportDesc = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
 
@@ -127,13 +154,18 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                         { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
                       </span>
                       <span>
-                        &nbsp;&nbsp;
+                        { this.shareIconElement }
                       </span>
-                      <span>
-                        { this.state.busyLiking && this.busyElement }
-                        { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
-                        { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
-                      </span>
+                      { !hideLike && 
+                        <span>
+                          <span>
+                            &nbsp;&nbsp;
+                          </span>
+                          { this.state.busyLiking && this.busyElement }
+                          { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
+                          { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
+                        </span>
+                      }
                     </div>
                   </span>
                 </div>
@@ -215,6 +247,16 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     if (favorited && favorited.isFavorite) {
       this.setState({ isFavorite: true });
     }
+  }
+
+  @autobind
+  private async shareReport() {
+    const result: ISearchResult = this.props.result;
+    const reportURL = `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
+
+    const personName = this.props.currentUser.Title;
+    const subject = `${personName} shared a report: ${result.Title}`;
+    window.location.href = `mailto:?subject=${subject}&body=%0d%0a%0d%0a${reportURL}%0d%0a%0d%0a${result.SVPVisualizationDescription}`;
   }
 
   @autobind

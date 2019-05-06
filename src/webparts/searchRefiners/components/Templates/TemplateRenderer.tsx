@@ -42,6 +42,11 @@ export interface ITemplateRendererProps {
      * Used to build local state for sub components
      */
     selectedValues: IRefinementValue[];
+
+    /**
+     * Custom css style to apply to container
+     */
+    customClassName?: string;
 }
 
 export default class TemplateRenderer extends React.Component<ITemplateRendererProps> {
@@ -54,6 +59,7 @@ export default class TemplateRenderer extends React.Component<ITemplateRendererP
         switch (this.props.templateType) {
             case RefinerTemplateOption.CheckBox:
                 renderTemplate =    <CheckboxTemplate 
+                                    customClassName={this.props.customClassName}
                                     refinementResult={this.props.refinementResult}
                                     onFilterValuesUpdated={this.props.onFilterValuesUpdated}
                                     shouldResetFilters={this.props.shouldResetFilters}
@@ -65,6 +71,7 @@ export default class TemplateRenderer extends React.Component<ITemplateRendererP
 
             case RefinerTemplateOption.CheckBoxMulti:
                 renderTemplate =    <CheckboxTemplate 
+                                    customClassName={this.props.customClassName}
                                     refinementResult={this.props.refinementResult}
                                     onFilterValuesUpdated={this.props.onFilterValuesUpdated}
                                     shouldResetFilters={this.props.shouldResetFilters}
