@@ -19,7 +19,7 @@ export default class NewsHorizontal extends React.Component<INewsProps, {}> {
           background: '#EEF0F2',
         };
     
-        const reportURL = this.props.siteUrl + "/Lists/SyscoNews/DispForm.aspx?ID=" + this.props.newsItem.Id;
+        const reportURL = this.props.siteUrl + "/Lists/News/DispForm.aspx?ID=" + this.props.newsItem.Id;
     
         return (
           <div className={styles.newsHorizontal}>
