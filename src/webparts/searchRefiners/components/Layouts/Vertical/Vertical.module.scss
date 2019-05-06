@@ -7,6 +7,7 @@
     .refinerhead {
         font-size: 1.3em;
         padding:.5em;
+        font-weight: bolder;
     }
 
     &__filterPanel {
@@ -40,6 +41,26 @@
                 &__item {
                     padding-left: 15px;
                     padding-top: 10px;
+
+                    &__checkboxers {
+                        & * {
+                            padding: 0 0 .25em 0;
+                            color: #777 !important;
+                        
+                            i.ms-Checkbox-checkmark {
+                                padding: .5em 0 0em 0;
+                            }
+                        }
+                    }
+                }
+
+                &__divider {
+                    border: .03em solid #777;
+                    margin: 15px 0;
+                }
+
+                &__last_divider {
+                    margin: 15px 0;
                 }
             }
 

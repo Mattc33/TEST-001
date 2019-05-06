@@ -27,7 +27,7 @@ export default class CheckboxTemplate extends React.Component<IBaseRefinerTempla
     
     public render() {
 
-        return <div className="checkboxer">
+        return <div className={this.props.customClassName}>
                     {
                         this.props.refinementResult.Values.map((refinementValue: IRefinementValue, j) => {
 

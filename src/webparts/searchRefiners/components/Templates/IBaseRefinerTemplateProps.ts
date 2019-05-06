@@ -33,6 +33,11 @@ interface IBaseRefinerTemplateProps {
      * A single filter value to reset
      */
     removeFilterValue?: IRefinementValue;
+
+    /**
+     * Custom css style to apply to container
+     */
+    customClassName?: string;
 } 
 
 export default IBaseRefinerTemplateProps;
