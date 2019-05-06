@@ -21,12 +21,20 @@
 
         .searchTextField {
             width: 100%;
+            border-right:32px solid rgba(108, 174, 84, 1);
+            border-radius:0 .5em .5em 0;
         }
 
         .searchBtn {
             position: absolute;
             right: 0;
+
+            i.ms-Button-icon, .icon-236 {
+                color: white;
+             }
+             
         }
+
     }
 
     .suggestionPanel {

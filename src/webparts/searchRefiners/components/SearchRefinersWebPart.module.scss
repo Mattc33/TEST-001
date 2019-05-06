@@ -1,9 +1,10 @@
 .searchRefiners {
-    -webkit-box-shadow: 6px 7px 6px -5px rgba(102,102,102,1);
-    -moz-box-shadow: 6px 7px 6px -5px rgba(102,102,102,1);
-    box-shadow: 6px 7px 6px -5px rgba(102,102,102,1);
+    -webkit-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+   -moz-box-shadow: 6px 7px 6px -7px rgba(102,102,102,1);
+  box-shadow: 6px 7px 6px -7px rgba(102,102,102,1);
     border:1px solid #f6f6f6;
     border-radius:.5em !important;
+    padding-bottom: 2em;
 
     // Needed to avoid overlay overflow
     position: relative;
