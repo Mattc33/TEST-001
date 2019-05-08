@@ -19,6 +19,9 @@ const VizListFields = [
     "SVPCategory",
     "SVPReportHeight",
     "SVPReportWidth",
+    "SVPMetadata1",          //segment
+    "SVPMetadata2",          //function
+    "SVPMetadata3",  
     "Modified",
     "Created",
     "SVPVisualizationParameters/Id",
