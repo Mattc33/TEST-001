@@ -64,16 +64,6 @@ div {
   background: #f8f8f8;
 }
 
-.white{
-color: white;
-padding: 1em;
-background-color: #333;
-}
-
-.foot {
-  width: 100%;
-  position: absolute;
-}
 
 div[class^="feedback_"]{
 display: none !important;
@@ -83,9 +73,16 @@ display: none !important;
 }
 
 
+div[class^="searchBoxContainer_"]{
+  display: none !important;
+  }
+
 div[class^="pageTitle_"]{
   div[class^="contentBox"]{
     min-height:auto;
     padding-top: 12px !important;
   }
 }
+
+
+div[class^="featuredReports_"] .ms-Dropdown-title {border-top: none;border-bottom: 2px solid black;border-left: none;border-right: none;}

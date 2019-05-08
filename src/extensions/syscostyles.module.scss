@@ -11,14 +11,51 @@ body, a {
     font-family:'opensans-regular' !important;
 }
 
-.white{
+body {
+  overflow: visible;
+}
+
+.footeritem7 {
   color: white;
   padding: 1em;
-  background-color: #333;
-  position: absolute;
-  width: 100%;
+  flex-grow: 7;
+  }
+
+  .footeritem2 {
+    color: white;
+    padding: 1em;
+    flex-grow: 2;
+  }
+
+  .footeritem1 {
+    color: white;
+    padding: 1em;
+    flex-grow: 1;
   }
 
   .foot {
-    border:none;
+    background-color: #2b2f3f;
+    width: 1268px;
   }
+
+  .insideFoot {
+    display:flex;
+    justify-content:center;
+  }
+
+  .footContainer {
+    display: flex;
+    width: 100%;
+    background: #2b2f3f;
+    justify-content: center;
+  }
+
+  div[class^="footContainer_"]{
+    display: flex;
+    width: 100%;
+    background: #2b2f3f;
+    justify-content: center;
+    }
+
+
+    div[class^="featuredReports_"] .ms-Dropdown-title {border-top: none;border-bottom: 2px solid black;border-left: none;border-right: none;}
