@@ -44,18 +44,29 @@ body {
   }
 
   .footContainer {
-    display: flex;
+    /*display: flex;
     width: 100%;
     background: #2b2f3f;
     justify-content: center;
+    position: absolute;*/
+    display:none;
   }
 
   div[class^="footContainer_"]{
-    display: flex;
+  /*  display: flex;
     width: 100%;
     background: #2b2f3f;
     justify-content: center;
+    position: absolute;*/
+    display:none;
     }
 
-
+/*
     div[class^="featuredReports_"] .ms-Dropdown-title {border-top: none;border-bottom: 2px solid black;border-left: none;border-right: none;}
+
+    .ms-Dropdown-title {border-top: none;border-bottom: 2px solid black;border-left: none;border-right: none;}
+
+    .ms-Grid-col {
+      border: 1px solid green;
+  }
+  */
