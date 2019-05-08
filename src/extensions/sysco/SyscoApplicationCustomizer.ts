@@ -53,11 +53,24 @@ export default class SyscoApplicationCustomizer
 
     let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
     if (bottomPlaceholder) {
-      bottomPlaceholder.domElement.innerHTML = `<div class="${styles.foot}">
-                  <div class=" ${styles.white}">
-                    &nbsp; footer placeholder
-                  </div>
-                </div>`;
+      bottomPlaceholder.domElement.innerHTML = `
+        <div class="${styles.footContainer}">
+
+          <div class="${styles.foot}">
+
+          <div class="${styles.insideFoot}">
+
+              <div class="${styles.footeritem7}">footer7</div>
+              <div class="${styles.footeritem2}">footer2</div>
+              <div class="${styles.footeritem2}">footer2</div>
+              <div class="${styles.footeritem2}">footer2</div>
+              <div class="${styles.footeritem2}">footer2</div>
+              <div class="${styles.footeritem1}">footer1</div>
+          </div>     
+
+          </div>
+
+        </div>`;
     }
 
 
