@@ -5,6 +5,7 @@
     border:1px solid #f6f6f6;
     border-radius:.5em !important;
     padding-bottom: 2em;
+    background-color:White;
 
     // Needed to avoid overlay overflow
     position: relative;
@@ -25,18 +26,11 @@
     
         i.ms-Checkbox-checkmark {
         padding: .5em 0 0em 0;
+        color: white !important;
+        margin-top: .5em;
     }
     
     }
 
 }
 
-.checkboxer * {
-    padding: 0 0 .25em 0;
-    color: #777 !important;
-
-    i.ms-Checkbox-checkmark {
-    padding: .5em 0 0em 0;
-}
-
-}

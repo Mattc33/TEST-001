@@ -2,7 +2,9 @@
   background-color: #e5e5e5;
 }
 
-
+html {
+  overflow: overlay;
+}
 
 @font-face {
   font-family: 'open_sansregular';
@@ -58,19 +60,19 @@ div {
 }
 
 
-.firstclass{
-  display: inline-block;
-  color: navy;
-}
-
-
 .mainRow-43 {
   background: #f8f8f8;
 }
 
 .white{
 color: white;
-padding: 2em;
+padding: 1em;
+background-color: #333;
+}
+
+.foot {
+  width: 100%;
+  position: absolute;
 }
 
 div[class^="feedback_"]{

@@ -1,20 +1,24 @@
+html {
+  overflow: overlay;
+}
+
+.spAppAndPropertyPanelContainer {
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
 
 body, a {
     font-family:'opensans-regular' !important;
 }
 
-.firstclass{
-    display: inline-block;
-    color: navy;
-}
-
-
 .white{
-    color: white;
-    padding: 2em;
+  color: white;
+  padding: 1em;
+  background-color: #333;
+  position: absolute;
+  width: 100%;
   }
 
-  .foot{
-    height: 7em;
+  .foot {
+    border:none;
   }
-  

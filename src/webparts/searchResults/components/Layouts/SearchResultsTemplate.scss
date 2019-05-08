@@ -13,6 +13,12 @@
         }
     }
 
+
+   .ms-Grid-col {
+       padding-left: 0 !important;
+       padding-right: 12px !important;
+   }
+
     .template_promotedResults {
         border: 1px solid #eaeaea;
         list-style: none;
@@ -40,6 +46,7 @@
             min-height: 210px;
             display: flex;
             margin-bottom:1.5em;
+            background-color: #fff;
             -webkit-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
    -moz-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
   box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
@@ -69,7 +76,7 @@
     }
     
     .template_resultCount {
-        padding-left: 10px;
+        padding-left: 0px;
         margin-bottom: 10px;
     }
 
