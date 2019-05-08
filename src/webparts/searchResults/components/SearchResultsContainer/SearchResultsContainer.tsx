@@ -2,6 +2,7 @@ import * as React from 'react';
 import ISearchResultsContainerProps from './ISearchResultsContainerProps';
 import ISearchResultsContainerState from './ISearchResultsContainerState';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { Shimmer, ShimmerElementType as ElemType, ShimmerElementsGroup } from 'office-ui-fabric-react/lib/Shimmer';
 import { Logger, LogLevel } from '@pnp/logging';
@@ -105,7 +106,10 @@ export default class SearchResultsContainer extends React.Component<ISearchResul
                         <div>
                             {renderWebPartTitle}
                             <div className={styles.searchWp__buttonBar}>{sortPanel}</div>
-                            <div className={styles.searchWp__noresult}>{strings.NoResultMessage}</div>
+                            <div>
+                                <label className="ms-fontWeight-semibold">{strings.NoResultMessage}</label>
+                                <span> (Click here to</span><Link href={window.location.href}> reset </Link><span>search.)</span>
+                            </div>
                         </div>;
                 } else {
                     if (this.props.displayMode === DisplayMode.Edit && !areResultsLoading && this.props.showBlank) {
