@@ -12,30 +12,33 @@ export interface IUser {
 }
 
 export interface IReportItem {
-    Id: number;
-    Title: string;
-    SVPVisualizationAddress: string;
-    SVPVisualizationOwner: IUser;
-    SVPVisualizationTechnology: string;
+    Id?: number;
+    Title?: string;
+    SVPVisualizationAddress?: string;
+    SVPVisualizationOwner?: IUser;
+    SVPVisualizationTechnology?: string;
     SVPLastUpdated?: any;
-    SVPVisualizationDescription: string;
+    SVPVisualizationDescription?: string;
     SVPVisualizationImage?: string;
     SVPMetadata1?: string;          //segment
     SVPMetadata2?: string;          //function
     SVPMetadata3?: string;          //frequency
     SVPReportHeight?: number;
     SVPReportWidth?: number;
-    Modified: Date;
-    Created: Date;
+    Modified?: Date;
+    Created?: Date;
 
     FileLeafRef?: string;
     UniqueId?: string;
     FileWebUrl?: string;
 
+    IconName?: string;
+    ModifiedFormatted?: string;
+    ModifiedNumber?: number;
     //SVPLikes?: string;
     //SVPLikesCount?: number;
-    SVPIsFeatured: boolean;
-    SVPCategory: string;
+    SVPIsFeatured?: boolean;
+    SVPCategory?: string;
     SVPVisualizationParameters?: Array<IReportParameters>;
     SVPVisualizationMetadata?: any;
 }
