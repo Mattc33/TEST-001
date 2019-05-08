@@ -256,7 +256,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 key: 'contractVert',
                 name: 'Contract vertically',
                 iconProps: {
-                    iconName: 'PaddingBottom'
+                    iconName: 'ChevronDownSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('contractVert')
@@ -264,7 +264,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 key: 'contractHorz',
                 name: 'Contract horizontally',
                 iconProps: {
-                    iconName: 'PaddingRight'
+                    iconName: 'ChevronRightSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('contractHorz')
@@ -278,12 +278,12 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 onClick: () => this.handlerSizingCommandClick('reset')
             }, {
                 key: 'sizeLabel',
-                name: `${height}px X ${width}px`, // '1445px X 2535px'
+                name: `${height}px H X ${width}px W`, // '1445px X 2535px'
             }, {
                 key: 'expandHorz',
                 name: 'Expand horizontally',
                 iconProps: {
-                    iconName: 'PaddingLeft'
+                    iconName: 'ChevronLeftSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('expandHorz')
@@ -291,7 +291,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 key: 'expandVert',
                 name: 'Expand vertically',
                 iconProps: {
-                    iconName: 'PaddingTop'
+                    iconName: 'ChevronUpSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('expandVert')

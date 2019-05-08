@@ -30,6 +30,7 @@ import {
   IReportDiscussionReply, 
   IFavoriteReport
 } from "../../../models";
+import * as moment from 'moment';
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
   private context: WebPartContext;
@@ -92,6 +93,10 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     if (SVPVisualizationTechnology === "Tableau" && favorite)
       report.SVPVisualizationAddress = favorite.favoriteReportUrl;
 
+    const modDate: Date = report.SVPLastUpdated || report.Modified;
+    if (modDate) {
+      report.ModifiedFormatted = moment(modDate).format("M/D/YY");
+    }
     //expect null 'userProfile' (Profile filtering not used by Sysco)
     //const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 

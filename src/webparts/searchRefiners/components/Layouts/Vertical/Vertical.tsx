@@ -148,7 +148,7 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
 
     private _onRenderFooter(props: IGroupFooterProps): JSX.Element {
         return ((props.groupIndex + 1) === props.groups.length)
-            ? <div>&nbsp;</div>
+            ? null
             : <hr className={styles.verticalLayout__filterPanel__body__group__divider} />;
     }
 
