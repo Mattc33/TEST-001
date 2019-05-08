@@ -1,0 +1,41 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.featuredReportsFilter {
+  .container {
+    max-width: 700px;
+    margin: 0px auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .row {
+    @include ms-Grid-row;
+  }
+
+  .grid {
+    @include ms-Grid;
+  }
+
+  .column2 {
+    @include ms-Grid-col;
+    @include ms-sm2;
+    @include ms-md2;
+    @include ms-xl2;
+    @include ms-lg2;
+  }
+
+  .column4 {
+    @include ms-Grid-col;
+    @include ms-sm4;
+    @include ms-md4;
+    @include ms-xl4;
+    @include ms-lg4;
+  }
+
+  .column12 {
+    @include ms-Grid-col;
+    @include ms-sm12;
+    @include ms-md12;
+    @include ms-xl12;
+    @include ms-lg12;
+  }
+}

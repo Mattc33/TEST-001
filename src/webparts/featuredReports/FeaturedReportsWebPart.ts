@@ -8,20 +8,22 @@ import {
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'FeaturedReportsWebPartStrings';
-import FeaturedReports from './components/FeaturedReports';
-import { IFeaturedReportsProps } from './components/IFeaturedReportsProps';
+import { FeaturedReportsProviderSFC } from './FeaturedReportsProvider';
+import { IFeaturedReportsProviderProps } from './state/IFeaturedReportsProviderProps';
+import { BaseWebpart, IInitConfig } from "../../base";
 
 export interface IFeaturedReportsWebPartProps {
-  description: string;
+  SVPClientLabel: string;
 }
 
-export default class FeaturedReportsWebPart extends BaseClientSideWebPart<IFeaturedReportsWebPartProps> {
+export default class FeaturedReportsWebPart extends BaseWebpart<IFeaturedReportsWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IFeaturedReportsProps > = React.createElement(
-      FeaturedReports,
+    const element: React.ReactElement<IFeaturedReportsProviderProps> = React.createElement(
+      FeaturedReportsProviderSFC,
       {
-        description: this.properties.description
+        SVPClientLabel: this.properties.SVPClientLabel,
+        context: this.context
       }
     );
 
@@ -41,15 +43,21 @@ export default class FeaturedReportsWebPart extends BaseClientSideWebPart<IFeatu
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: "Best in Class Reports Properties"
           },
+          displayGroupsAsAccordion: true,
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: "Best in Class Reports Basic Settings",
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField("SVPClientLabel", {
+                  label: "Client Label"
                 })
+              ]
+            },
+            {
+              groupName: "Best in Class Reports Advance Settings",
+              groupFields: [
               ]
             }
           ]

@@ -1,21 +1,28 @@
 import * as React from 'react';
 import styles from './FeaturedReports.module.scss';
-import { IFeaturedReportsProps } from './IFeaturedReportsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { Connect } from "../../../base";
+import { FeaturedReportsContext } from "../store/FeaturedReportsStore";
 
-export default class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> {
+import { FeaturedReportsFilter } from "./FeaturedReportsFilter";
+
+export interface IFeaturedReportsProps {
+  description: string;
+}
+
+export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> {
   public render(): React.ReactElement<IFeaturedReportsProps> {
     return (
       <div className={ styles.featuredReports }>
-        <div className={ styles.container }>
-          <div className={ styles.row }>
-            <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
-              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
+        <div className="ms-Grid" dir="ltr">
+          <div className="ms-Grid-row">
+            <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
+              <FeaturedReportsFilter
+                segmentItems={['seg 1', 'seg 2', 'seg 3']}
+                functionItems={['func 1', 'funq 2', 'funq 3']}
+                frequencyItems={['freq 1', 'freq 2', 'freq 3']}
+                resultsPerPageItems={['10','15','20','25']}
+              />
             </div>
           </div>
         </div>
@@ -23,3 +30,10 @@ export default class FeaturedReports extends React.Component<IFeaturedReportsPro
     );
   }
 }
+
+const FeaturedReportsWithState = Connect(
+  FeaturedReportsContext,
+  FeaturedReports
+);
+
+export { FeaturedReportsWithState };
