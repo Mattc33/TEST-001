@@ -10,6 +10,8 @@ export interface IFeaturedReportsProps {
   description: string;
 }
 
+require("./ReportView.SPFix.css");
+
 export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> {
   public render(): React.ReactElement<IFeaturedReportsProps> {
     return (
