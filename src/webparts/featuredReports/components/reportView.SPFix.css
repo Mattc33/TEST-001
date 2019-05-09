@@ -19,3 +19,12 @@ span.ms-Dropdown-caretDownWrapper {
     background-size: contain;
     margin-top: .9em;
 }
+
+.ms-DetailsHeader-cellName {
+    font-weight: 600;
+}
+
+
+.ms-DetailsRow {
+    padding: .5em 0em;
+}
