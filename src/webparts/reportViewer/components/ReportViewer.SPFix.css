@@ -1,0 +1,3 @@
+div[class^="pageTitle_"] {
+    display: none;    
+}

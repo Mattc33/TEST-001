@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import { Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, ActionButton } from 'office-ui-fabric-react';
+import { TooltipHost, getId, Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, ActionButton } from 'office-ui-fabric-react';
 import { Logger, LogLevel } from '@pnp/logging';
 import { truncate } from '@microsoft/sp-lodash-subset';
 import IResultTileProps from './IResultTileProps';
@@ -21,6 +21,7 @@ export interface IResultTileState {
 export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
   private actionsService: ReportActionsService;
   private busyElement: JSX.Element = <Spinner size={SpinnerSize.small} />; // <i className="ms-Spinner-circle ms-Spinner--xSmall circle-95"></i>;
+  private tooltipId: string;
 
   private selectedStyle = ` ${styles.linkItem} ${styles.itemSelected}`;
   private unselectedStyle = ` ${styles.linkItem} ${styles.itemUnselected}`;
@@ -90,6 +91,8 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       favoriteDialogHidden: true,
       favoriteDescription: this.props.result.SVPVisualizationDescription
     };
+
+    this.tooltipId = getId('svpDesc');
     this.actionsService = new ReportActionsService();
   }
 
@@ -141,7 +144,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                     &nbsp;
                   </div>
                   <div className="datamkt-right">
-                    <span className="ms-ListItem-secondaryText">{reportDesc}</span>
+                    <TooltipHost content={result.SVPVisualizationDescription} id={this.tooltipId} calloutProps={{ gapSpace: 0 }}>
+                      <span className="ms-ListItem-secondaryText">{reportDesc}</span>
+                    </TooltipHost>
                     <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
                   </div>
                 </div>
@@ -158,9 +163,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                       </span>
                       { !hideLike && 
                         <span>
-                          <span>
-                            &nbsp;&nbsp;
-                          </span>
                           { this.state.busyLiking && this.busyElement }
                           { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
                           { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }

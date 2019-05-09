@@ -13,12 +13,15 @@ import {
   IProfileFilter, 
   FavoriteDialog, 
   SaveStatus, 
-  ReportDiscussionDialog
+  ReportDiscussionDialog,
+  ReportHeader
 } from "../../controls";
 import { IReportViewer } from "../state/IReportViewerState";
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../services";
 import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
+
+require("./ReportViewer.SPFix.css");
 
 export interface IReportViewerProps {
   description: string;
@@ -81,6 +84,15 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       <div className={styles.reportViewer}>
         <div id="VizContainer" className={styles.container}>
           {this.props.state.loading && <div>Loading....</div>}
+
+          {!this.props.state.loading && this.props.state.report &&
+            <ReportHeader 
+              title={this.props.state.report.Title}
+              lastModified={this.props.state.report.ModifiedFormatted}
+              segment={this.props.state.report.SVPMetadata1} 
+              function={this.props.state.report.SVPMetadata2}
+              frequency={this.props.state.report.SVPMetadata3}/>
+          }
 
           {!this.props.state.loading && this.props.state.report &&
             <Toolbar 

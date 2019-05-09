@@ -17,7 +17,7 @@ export interface IReportItem {
     SVPVisualizationAddress?: string;
     SVPVisualizationOwner?: IUser;
     SVPVisualizationTechnology?: string;
-    SVPLastUpdated?: any;
+    SVPLastUpdated?: Date;
     SVPVisualizationDescription?: string;
     SVPVisualizationImage?: string;
     SVPMetadata1?: string;          //segment
