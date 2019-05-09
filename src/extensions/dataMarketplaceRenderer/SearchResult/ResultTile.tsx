@@ -21,7 +21,8 @@ export interface IResultTileState {
 export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
   private actionsService: ReportActionsService;
   private busyElement: JSX.Element = <Spinner size={SpinnerSize.small} />; // <i className="ms-Spinner-circle ms-Spinner--xSmall circle-95"></i>;
-  private tooltipId: string;
+  private descTooltipId: string;
+  private titleTooltipId: string;
 
   private selectedStyle = ` ${styles.linkItem} ${styles.itemSelected}`;
   private unselectedStyle = ` ${styles.linkItem} ${styles.itemUnselected}`;
@@ -92,7 +93,8 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       favoriteDescription: this.props.result.SVPVisualizationDescription
     };
 
-    this.tooltipId = getId('svpDesc');
+    this.descTooltipId = getId('svpDesc');
+    this.titleTooltipId = getId('svpTitle');
     this.actionsService = new ReportActionsService();
   }
 
@@ -126,6 +128,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
 
     const reportDesc = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
+    const reportTitle = truncate(result.Title, { 'length': 45, 'separator': ' ' });
 
     return (
       <li className={styles.resultItem}>
@@ -135,16 +138,18 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             <li className="ms-ListItem ms-ListItem--document">
               <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
                 <span className="ms-ListItem-primaryText">
-                  <a className={styles.itemLink} href={reportURL}>
-                    <span className={styles.itemTitle}>{result.Title}</span>
-                  </a>
+                  <TooltipHost content={result.Title} id={this.titleTooltipId} calloutProps={{ gapSpace: 0 }}>
+                    <a className={styles.itemLink} href={reportURL}>
+                      <span className={styles.itemTitle}>{reportTitle}</span>
+                    </a>
+                  </TooltipHost>
                 </span>
                 <div className="datamkt-sub">
                   <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
                     &nbsp;
                   </div>
                   <div className="datamkt-right">
-                    <TooltipHost content={result.SVPVisualizationDescription} id={this.tooltipId} calloutProps={{ gapSpace: 0 }}>
+                    <TooltipHost content={result.SVPVisualizationDescription} id={this.descTooltipId} calloutProps={{ gapSpace: 0 }}>
                       <span className="ms-ListItem-secondaryText">{reportDesc}</span>
                     </TooltipHost>
                     <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
