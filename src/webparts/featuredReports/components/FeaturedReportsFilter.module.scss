@@ -13,6 +13,7 @@
 
   .grid {
     @include ms-Grid;
+    padding: 0 !important;
   }
 
   .column2 {
@@ -37,5 +38,12 @@
     @include ms-md12;
     @include ms-xl12;
     @include ms-lg12;
+  }
+
+  .filterarea {
+    background-color:#e9f3fc;
+    padding: 1em;
+    margin:0 !important;
+    border-top: 10px solid #008cd3;
   }
 }

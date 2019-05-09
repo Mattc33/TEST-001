@@ -176,6 +176,9 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
         return (
             <div className={ styles.featuredReportsFilter }>
                 <div className={ styles.grid } dir="ltr">
+                  
+                  <div className={ styles.filterarea }>
+
                     <div className={ styles.row }>
                         <div className={ styles.column2 }>Segment</div>
                         <div className={ styles.column2 }>Function</div>
@@ -207,6 +210,9 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
                             {this.getDropdown("resultsPerPage", this.props.resultsPerPageItems, this.state.resultsPerPage)}
                         </div>
                     </div>
+
+                    </div>
+                    
                     <div className={ styles.row }>
                         <div className={ styles.column12 }>
                             <MarqueeSelection selection={this._selection}>
