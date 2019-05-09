@@ -21,7 +21,7 @@ export default class SearchResult extends React.Component<ISearchResultProps, {}
         <div className="template_defaultCard">
           <div className="template_resultCount">
             <label className="ms-fontWeight-semibold">{this.props.searchResults.PaginationInformation.TotalRows} results</label>
-            <span> (Click here to</span><Link href={window.location.href}> reset </Link><span>search.)</span>
+            <span> (</span><Link href={window.location.href}>Click to reset search</Link><span>)</span>
           </div>
           <div className="ms-Grid">
             <div className="ms-Grid-row">

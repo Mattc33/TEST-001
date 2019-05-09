@@ -108,7 +108,7 @@ export default class SearchResultsContainer extends React.Component<ISearchResul
                             <div className={styles.searchWp__buttonBar}>{sortPanel}</div>
                             <div>
                                 <label className="ms-fontWeight-semibold">{strings.NoResultMessage}</label>
-                                <span> (Click here to</span><Link href={window.location.href}> reset </Link><span>search.)</span>
+                                <span> (</span><Link href={window.location.href}>Click to reset search</Link><span>)</span>
                             </div>
                         </div>;
                 } else {
