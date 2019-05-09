@@ -15,6 +15,8 @@ import ISearchQuery from '../../../../models/ISearchQuery';
 import NlpDebugPanel from '../NlpDebugPanel/NlpDebugPanel';
 import { IconButton } from 'office-ui-fabric-react/lib/Button';
 
+require("./SearchBoxIcon.SPFix.css");
+
 const SUGGESTION_CHAR_COUNT_TRIGGER = 3;
 
 export default class SearchBoxContainer extends React.Component<ISearchBoxContainerProps, ISearchBoxContainerState> {
