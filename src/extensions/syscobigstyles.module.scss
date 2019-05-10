@@ -93,3 +93,8 @@ div[class^="pageTitle_"]{
   box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
   border:1px solid #f6f6f6;
   }
+
+
+  div[class^="seeAll_"]{
+    display: none !important;
+    }

@@ -41,6 +41,7 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
     return (
       
       <div className={styles.MyFavHome}>
+
         <div className={styles.wrapper}>
        
           <div className="row">
