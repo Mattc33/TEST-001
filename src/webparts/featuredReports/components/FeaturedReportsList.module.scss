@@ -1,23 +1,14 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-.featuredReports {
+.featuredReportsList {
   .container {
+    max-width: 700px;
     margin: 0px auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
 
   .row {
     @include ms-Grid-row;
-  }
-
-  .titleContainer {
-    width: 97%;
-    padding-bottom: .6em;
-  }
-  
-  .title {
-    font-size: 1.6em;
-    display: inline;
-    margin-left: .0em; 
   }
 
   .grid {
@@ -47,5 +38,12 @@
     @include ms-md12;
     @include ms-xl12;
     @include ms-lg12;
+  }
+
+  .filterarea {
+    background-color:#e9f3fc;
+    padding: 1em;
+    margin:0 !important;
+    border-top: 10px solid #008cd3;
   }
 }

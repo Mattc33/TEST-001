@@ -24,6 +24,7 @@ export class FeaturedReportsStore extends BaseStore<IFeaturedReportsStoreProps, 
 
     this.state = {
         clientLabel: props.storeState.SVPClientLabel,
+        webpartTitle: props.storeState.SVPTitle,
         context: props.storeState.context,
         actions: actions
     };

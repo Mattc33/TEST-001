@@ -75,5 +75,5 @@ export enum ReportFavoriteType {
     Custom = "Custom",
     Original = "Original",
     Parameterized = "Parameterized"
-  }
+}
   

@@ -1,6 +1,6 @@
 import { sp, ItemUpdateResult, FileAddResult, Field, Folder, WebEnsureUserResult, Web } from '@pnp/sp';
 import { IFeaturedReportsService } from ".";
-import { IReportItem, IReportFavoriteItem, IFavoriteReport } from "../models";
+import { IReportItem, IFilter } from "../models";
 
 const VizListTitle = "Visualizations";
 const FavoriteListTitle = "Favorites";
@@ -33,7 +33,7 @@ export class FeaturedReportsService implements IFeaturedReportsService {
         
     }
     
-    public loadReports(pageNbr: number, pageSize: number, sortField: string): Promise<Array<IReportItem>> {
+    public loadReports(filter: IFilter, pageNbr: number, pageSize: number, sortField: string, isAsc: boolean): Promise<Array<IReportItem>> {
         return Promise.resolve([]);
     }
 }

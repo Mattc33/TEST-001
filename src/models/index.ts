@@ -6,3 +6,4 @@ export * from "./IUserItem";
 export * from "./IReportViewerWebPart";
 export * from "./IErrorResult";
 export * from "./IReportDiscussion";
+export * from "./IFeaturedReports";

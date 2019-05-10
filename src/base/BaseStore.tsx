@@ -15,8 +15,9 @@ export abstract class BaseStore<P = {}, S = {}> extends React.Component<P, S>
 
   public dispatcher(incomingState: any): Promise<void> {
     return new Promise((resolve, reject) => {
-      const newState = { ...(this.state as any), ...incomingState };
-      this.setState(newState, () => {
+      this.setState(state => {
+        return { ...state, ...incomingState };
+      }, () => {
         resolve();
       });
     });

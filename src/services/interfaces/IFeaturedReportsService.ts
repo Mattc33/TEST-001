@@ -1,5 +1,5 @@
-import { IReportItem } from "../../models";
+import { IReportItem, IFilter } from "../../models";
 
 export interface IFeaturedReportsService {
-    loadReports(pageNbr: number, pageSize: number, sortField: string): Promise<Array<IReportItem>>;
+    loadReports(filter: IFilter, pageNbr: number, pageSize: number, sortField: string, isAsc: boolean): Promise<Array<IReportItem>>;
 }

@@ -14,6 +14,7 @@ import { BaseWebpart, IInitConfig } from "../../base";
 
 export interface IFeaturedReportsWebPartProps {
   SVPClientLabel: string;
+  SVPTitle: string;
 }
 
 export default class FeaturedReportsWebPart extends BaseWebpart<IFeaturedReportsWebPartProps> {
@@ -23,6 +24,7 @@ export default class FeaturedReportsWebPart extends BaseWebpart<IFeaturedReports
       FeaturedReportsProviderSFC,
       {
         SVPClientLabel: this.properties.SVPClientLabel,
+        SVPTitle: this.properties.SVPTitle,
         context: this.context
       }
     );
@@ -52,6 +54,9 @@ export default class FeaturedReportsWebPart extends BaseWebpart<IFeaturedReports
               groupFields: [
                 PropertyPaneTextField("SVPClientLabel", {
                   label: "Client Label"
+                }),
+                PropertyPaneTextField("SVPTitle", {
+                  label: "Control Title"
                 })
               ]
             },
