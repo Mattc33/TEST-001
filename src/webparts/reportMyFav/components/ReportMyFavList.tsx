@@ -10,7 +10,6 @@ import { ReportFavoriteType } from "../../../helpers/UrlHelper";
 import MyFavAllWithImage from "./MyFavAllWithImage";
 
 
-
 export interface IReportMyFavProps {
   controlHeaderMessage: string;
   siteUrl: string;
@@ -50,10 +49,13 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 }
 
   public render(): React.ReactElement<IReportMyFavProps> {
+    const style = (this.props.viewName !== "MyFavAllWithImage")
+      ? `${styles.reportMyFavList} ${styles.homePage}`
+      : `${styles.reportMyFavList}`;
 
     return (
       <div className={styles.container}>
-        <div className={styles.reportMyFavList}>
+        <div className={style}>
             <div className={"row " + styles.rowHeader}>
               <div className="col-md-12">
                 <div dangerouslySetInnerHTML={{ __html: this.props.controlHeaderMessage }} />
