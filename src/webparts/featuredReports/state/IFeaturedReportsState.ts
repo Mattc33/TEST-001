@@ -5,6 +5,7 @@ import { FeaturedReportsActions } from "../action/FeaturedReportsActions";
 import { 
     IReportItem,
     IFilter,
+    IFilterValues,
     ISort,
     IPaging, 
     IErrorResult
@@ -15,9 +16,11 @@ import {
 export interface IFeaturedReportsState {
     clientLabel: string;
     webpartTitle: string;
+    pageSizes: string;
     context: WebPartContext;
 
-    loading?: boolean;
+    loadingFilters?: boolean;
+    loadingReports?: boolean;
     actions?: FeaturedReportsActions;
     error?: IErrorResult; 
 
@@ -26,4 +29,6 @@ export interface IFeaturedReportsState {
     filter?: IFilter;
     sort?: ISort;
     paging?: IPaging;
+
+    filterValues?: IFilterValues;
 }

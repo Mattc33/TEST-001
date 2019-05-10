@@ -33,7 +33,18 @@ export class FeaturedReportsService implements IFeaturedReportsService {
         
     }
     
-    public loadReports(filter: IFilter, pageNbr: number, pageSize: number, sortField: string, isAsc: boolean): Promise<Array<IReportItem>> {
+    public async loadFilter(webUrl: string, filterName: string): Promise<Array<string>> {
+        const web: Web = new Web(webUrl);
+        const field = await web
+            .fields
+                .getByInternalNameOrTitle(filterName)
+                .select("Title", "Choices")
+                .get();
+
+        return (field && field.Choices) ? field.Choices : [];
+    }
+
+    public loadReports(webUrl: string, filter: IFilter, pageNbr: number, pageSize: number, sortField: string, isAsc: boolean): Promise<Array<IReportItem>> {
         return Promise.resolve([]);
     }
 }

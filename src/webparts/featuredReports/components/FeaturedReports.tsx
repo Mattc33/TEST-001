@@ -28,9 +28,14 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
     return true;
   }
 
+  public componentDidMount() {
+    this.props.state.actions.loadFilters();
+  }
+
   public render(): React.ReactElement<IFeaturedReportsProps> {
 
     console.info('FeaturedReports::render', this.props.state);
+    const props = this.props.state;
 
     return (
       <div className={ styles.featuredReports }>
@@ -43,10 +48,11 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
           <div className={ styles.row }>
             <div className={ styles.column12 }>
               <FeaturedReportsFilter
-                segmentItems={['seg 1', 'seg 2', 'seg 3']}
-                functionItems={['func 1', 'funq 2', 'funq 3']}
-                frequencyItems={['freq 1', 'freq 2', 'freq 3']}
-                resultsPerPageItems={['10','15','20','25']}
+                loading={props.loadingFilters}
+                segmentItems={props.filterValues.segments}
+                functionItems={props.filterValues.functions}
+                frequencyItems={props.filterValues.frequencies}
+                resultsPerPageItems={props.filterValues.pageSizes}
                 onFilterChange={this.handleFilterChange}
                 onPageSizeChange={this.handlePageSizeChange}
               />

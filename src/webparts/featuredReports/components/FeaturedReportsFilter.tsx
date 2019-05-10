@@ -1,17 +1,18 @@
 import * as React from 'react';
 import styles from './FeaturedReportsFilter.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
-import { autobind, Dropdown, IDropdownOption, ActionButton, MarqueeSelection, DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, mergeStyleSets } from 'office-ui-fabric-react';
+import { autobind, Dropdown, IDropdownOption, ActionButton, Spinner, SpinnerSize, SpinnerLabelPosition, MarqueeSelection, DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, mergeStyleSets } from 'office-ui-fabric-react';
 import { IReportItem } from "../../../models";
 
 export interface IFeaturedReportsFilterProps {
-    segmentItems?: Array<string>;
-    functionItems?: Array<string>;
-    frequencyItems?: Array<string>;
-    resultsPerPageItems?: Array<string>;
+  loading?: boolean;
+  segmentItems?: Array<string>;
+  functionItems?: Array<string>;
+  frequencyItems?: Array<string>;
+  resultsPerPageItems?: Array<string>;
 
-    onFilterChange(name: string, value: string): void;
-    onPageSizeChange(value: string): void;
+  onFilterChange(name: string, value: string): void;
+  onPageSizeChange(value: string): void;
 }
 
 export interface IFeaturedReportsFilterState {
@@ -39,40 +40,55 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
         return (
             <div className={ styles.featuredReportsFilter }>
               <div className={ styles.grid } dir="ltr">
-                <div className={ styles.filterarea }>
-                  <div className={ styles.row }>
+                { this.props.loading && this.renderBusy() }
+                { !this.props.loading && this.renderFilters() }
+              </div>
+            </div>
+        );
+    }
+
+    @autobind
+    private renderBusy(): JSX.Element {
+        return (
+            <Spinner size={SpinnerSize.medium} label="Loading filters..." labelPosition="right"></Spinner>
+        );
+    }
+
+    @autobind
+    private renderFilters(): JSX.Element {
+        return (
+            <div className={ styles.filterarea }>
+                <div className={ styles.row }>
                     <div className={ styles.column2 }>Segment</div>
                     <div className={ styles.column2 }>Function</div>
                     <div className={ styles.column2 }>Frequency</div>
                     <div className={ styles.column4 }>&nbsp;</div>
                     <div className={ styles.column2 }>Results per page</div>
-                  </div>
-                  <div className={ styles.row }>
+                </div>
+                <div className={ styles.row }>
                     <div className={ styles.column2 }>
-                      {this.getFilterDropdown("segment", this.props.segmentItems, this.state.segment)}
+                        {this.getFilterDropdown("segment", this.props.segmentItems, this.state.segment)}
                     </div>
                     <div className={ styles.column2 }>
-                      {this.getFilterDropdown("function", this.props.functionItems, this.state.function)}
+                        {this.getFilterDropdown("function", this.props.functionItems, this.state.function)}
                     </div>
                     <div className={ styles.column2 }>
-                      {this.getFilterDropdown("frequency", this.props.frequencyItems, this.state.frequency)}
+                        {this.getFilterDropdown("frequency", this.props.frequencyItems, this.state.frequency)}
                     </div>
                     <div className={ styles.column4 }>
-                      <ActionButton 
-                        data-automation-id="ClearFilter" 
-                        iconProps={{ iconName: 'ClearFilter' }} 
-                        allowDisabledFocus={true} 
-                        title="Reset all filters" 
-                        onClick={this._resetFilters}>
-                          Reset Filters
-                      </ActionButton>
+                        <ActionButton 
+                            data-automation-id="ClearFilter" 
+                            iconProps={{ iconName: 'ClearFilter' }} 
+                            allowDisabledFocus={true} 
+                            title="Reset all filters" 
+                            onClick={this._resetFilters}>
+                                Reset Filters
+                        </ActionButton>
                     </div>
                     <div className={ styles.column2 }>
-                      {this.getPageSizeDropdown("resultsPerPage", this.props.resultsPerPageItems, this.state.resultsPerPage)}
+                        {this.getPageSizeDropdown("resultsPerPage", this.props.resultsPerPageItems, this.state.resultsPerPage)}
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
         );
     }

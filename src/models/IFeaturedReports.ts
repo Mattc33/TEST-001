@@ -4,6 +4,13 @@ export interface IFilter {
     frequency?: string;
 }
 
+export interface IFilterValues {
+    segments?: Array<string>;
+    functions?: Array<string>;
+    frequencies?: Array<string>;
+    pageSizes?: Array<string>;
+}
+
 export interface ISort {
     sortField?: string;
     isAsc?: boolean;
