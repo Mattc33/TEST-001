@@ -1,6 +1,10 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .featuredReportsFilter {
+  -webkit-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+  -moz-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+ box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+ 
   .container {
     max-width: 700px;
     margin: 0px auto;

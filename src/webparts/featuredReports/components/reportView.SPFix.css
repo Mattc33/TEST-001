@@ -28,3 +28,7 @@ span.ms-Dropdown-caretDownWrapper {
 .ms-DetailsRow {
     padding: .5em 0em;
 }
+
+.ms-DetailsList div {
+    background:white;
+  }
