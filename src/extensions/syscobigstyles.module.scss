@@ -95,7 +95,19 @@ div[class^="pageTitle_"]{
   background:white;
   }
 
-  span[class^="seeAllLinkMarginBottomMiddle_"]{
-    display: none !important;
-    }
+span[class^="seeAllLinkMarginBottomMiddle_"]{
+  display: none !important;
+  }
+
+span[class^="ms-Dropdown-caretDownWrapper"] i{
+  display: none !important;
+  }
+
   
+span[class^="ms-Dropdown-caretDownWrapper"]{
+  width: .7em;
+  background-image: url("../extensions/sysco/images/blackcaret.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: .9em;  
+}

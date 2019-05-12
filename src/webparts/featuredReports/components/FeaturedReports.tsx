@@ -20,9 +20,9 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
           <div className="ms-Grid-row">
             <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
               <FeaturedReportsFilter
-                segmentItems={['seg 1', 'seg 2', 'seg 3']}
-                functionItems={['func 1', 'funq 2', 'funq 3']}
-                frequencyItems={['freq 1', 'freq 2', 'freq 3']}
+                segmentItems={['USBL']}
+                functionItems={['Category Management','Financial Performance','Inventory Management','Human Resources','Operations','Revenue Management','Sales']}
+                frequencyItems={['Daily','Weekly','Monthly','Quarterly','Yearly']}
                 resultsPerPageItems={['10','15','20','25']}
               />
             </div>
