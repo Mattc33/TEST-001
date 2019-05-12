@@ -305,22 +305,77 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
 
     private _generateDocuments() {
         const items: IReportItem[] = [];
-        for (let i = 0; i < 25; i++) {
-          const randomDate = this._randomDate(new Date(2012, 0, 1), new Date());
-          const randomFileType = this._randomFileIcon();
-          let fileName = this._lorem(2);
-          fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).concat(`.${randomFileType.docType}`);
+        
+        items.push({
+          Title: "Monthly Reporting Suite (MRS)",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Financial Performance",
+          SVPMetadata3: "Monthly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
 
-          items.push({
-            Title: fileName,
-            IconName: randomFileType.url,
-            SVPMetadata1: this._lorem(1),
-            SVPMetadata2: this._lorem(1),
-            SVPMetadata3: this._lorem(1),
-            ModifiedFormatted: randomDate.dateFormatted,
-            ModifiedNumber: randomDate.value
-          });
-        }
+        items.push({
+          Title: "Cost Per Pirce",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Human Resources",
+          SVPMetadata3: "Monthly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
+
+        items.push({
+          Title: "Service Level",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Operations",
+          SVPMetadata3: "Quaterly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
+
+        items.push({
+          Title: "Revenue Management Dashboard",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Sales",
+          SVPMetadata3: "Monthly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
+
+        items.push({
+          Title: "Corporate Scorecard",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Category Management",
+          SVPMetadata3: "Monthly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
+
+        items.push({
+          Title: "Strategic Territory Planning",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Sales",
+          SVPMetadata3: "Quaterly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
+
+        items.push({
+          Title: "Monthly Business Review (MBR)",
+          IconName: (this._randomFileIcon()).url,
+          SVPMetadata1: "USBL",
+          SVPMetadata2: "Financial Performance",
+          SVPMetadata3: "Weekly",
+          ModifiedFormatted: (this._randomDate(new Date(2012, 0, 1), new Date())).dateFormatted,
+          ModifiedNumber: (this._randomDate(new Date(2012, 0, 1), new Date())).value
+        });
+
         return items;
       }
       
