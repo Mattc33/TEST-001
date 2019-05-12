@@ -36,24 +36,24 @@ label[class^="reportTitle_"] {
     letter-spacing:1px;
 }
 
-.ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:last-child {
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:last-child {
     position:absolute;
     right:0 !important;
    padding-top:.75em;
 }
 
-.ms-OverflowSet.ms-CommandBar-primaryCommand {
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand {
     display:flex;
     justify-content:center;
 }
 
-.ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:nth-child(1) {
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:nth-child(1) {
     position:absolute;
     left:0;
     padding-top:.75em;
 }
 
-.ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:nth-child(2) {
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:nth-child(2) {
     position:absolute;
     left:10%;
     padding-top:.75em;
