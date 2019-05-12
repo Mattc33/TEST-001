@@ -1,6 +1,4 @@
-.ms-CommandBar {
-    background: #f8f8f8 !important;
-}
+
 
 div[class^="reportViewer_"] .ms-Button-label {
     font-size:.9em;
@@ -20,6 +18,10 @@ div[class^="reportViewer_"] hr[class^="divider_"] {
 
 div[class^="reportViewer_"] {
     background:#f8f8f8;
+}
+
+div[class^="reportViewer_"] .ms-CommandBar {
+    background: #f8f8f8 !important;
 }
 
 div[class^="reportViewer_"] div[class^="container_"] {
@@ -53,8 +55,3 @@ div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-Ove
     padding-top:.75em;
 }
 
-div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:nth-child(2) {
-    position:absolute;
-    left:10%;
-    padding-top:.75em;
-}
