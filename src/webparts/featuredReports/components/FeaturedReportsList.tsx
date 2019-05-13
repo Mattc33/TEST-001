@@ -3,13 +3,21 @@ import styles from './FeaturedReportsList.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { autobind, Dropdown, IDropdownOption, ActionButton, MarqueeSelection, DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, mergeStyleSets } from 'office-ui-fabric-react';
 import { IReportItem } from "../../../models";
+import { Button, Spinner, SpinnerSize, MessageBar } from 'office-ui-fabric-react';
 
 export interface IFeaturedReportsListProps {
+  loading: boolean;
   items: Array<IReportItem>;
+
+  currentPage: number;
+  hasNext: boolean;
+
+  onFetchPage(director: string);
+  onSort(sortField: string, isAsc: boolean);
 }
 
 export interface IFeaturedReportsListState {
-    
+    columns: IColumn[];
 }
 
 const classNames = mergeStyleSets({
@@ -56,7 +64,8 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
     constructor(props: IFeaturedReportsListProps) {
         super(props);
 
-        this._columns = [
+        this.state = {
+          columns: [
             {
               key: 'docIcon',
               name: '',
@@ -67,7 +76,7 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
               isIconOnly: true,
               minWidth: 16,
               maxWidth: 16,
-              onColumnClick: this._onColumnClick,
+              //onColumnClick: this._onColumnClick,
               onRender: (item: IReportItem) => {
                 return <img src={item.IconName} className={classNames.fileIconImg} alt={item.Title} />;
               }
@@ -91,10 +100,12 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
             {
               key: 'lastModified',
               name: 'Last Modified',
-              fieldName: 'Modified',
+              fieldName: 'SVPLastUpdated',
               minWidth: 70,
               maxWidth: 90,
               isResizable: true,
+              isSorted: false,
+              isSortedDescending: true,
               onColumnClick: this._onColumnClick,
               data: 'number',
               onRender: (item: IReportItem) => {
@@ -109,6 +120,8 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
               minWidth: 70,
               maxWidth: 90,
               isResizable: true,
+              isSorted: false,
+              isSortedDescending: true,
               isCollapsible: true,
               data: 'string',
               onColumnClick: this._onColumnClick,
@@ -124,6 +137,8 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
               minWidth: 70,
               maxWidth: 90,
               isResizable: true,
+              isSorted: false,
+              isSortedDescending: true,
               isCollapsible: true,
               data: 'string',
               onColumnClick: this._onColumnClick,
@@ -138,6 +153,8 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
                 minWidth: 70,
                 maxWidth: 90,
                 isResizable: true,
+                isSorted: false,
+                isSortedDescending: true,
                 isCollapsible: true,
                 data: 'string',
                 onColumnClick: this._onColumnClick,
@@ -145,7 +162,8 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
                   return <span>{item.SVPMetadata3}</span>;
                 }
               }
-          ];
+          ]
+        };
           
         this._selection = new Selection({
             onSelectionChanged: () => {
@@ -154,8 +172,6 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
             //   });
             }
         });
-      
-        this.state = {};
     }
 
     public render(): React.ReactElement<IFeaturedReportsListProps> {
@@ -165,56 +181,100 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
         return (
             <div className={ styles.featuredReportsList }>
               <div className={ styles.grid } dir="ltr">
-                <div className={ styles.row }>
-                  <div className={ styles.column12 }>
-                    <MarqueeSelection selection={this._selection}>
-                      <DetailsList
-                        items={items}
-                        compact={false}
-                        columns={this._columns}
-                        selectionMode={SelectionMode.none}
-                        setKey="set"
-                        layoutMode={DetailsListLayoutMode.justified}
-                        isHeaderVisible={true}
-                        selection={this._selection}
-                        selectionPreservedOnEmptyClick={true}
-                        //onItemInvoked={this._onItemInvoked}
-                        enterModalSelectionOnTouch={true}
-                        ariaLabelForSelectionColumn="Toggle selection"
-                        ariaLabelForSelectAllCheckbox="Toggle selection for all items"
-                      />
-                    </MarqueeSelection>
-                  </div>
-                </div>
+                { this.props.loading && this.renderBusy() }
+                { !this.props.loading && this.props.items.length > 0 && this.renderReports() }
+                { !this.props.loading && this.props.items.length === 0 && this.renderNoReports() }
               </div>
             </div>
         );
     }
 
     @autobind
+    private renderNoReports() {
+      return (
+        <div className={ styles.row }>
+          <div className={ styles.column12 }>
+            <MessageBar>
+              No report found matching your criteria.
+            </MessageBar>
+          </div>
+        </div>
+      );
+    }
+
+    @autobind
+    private renderBusy(): JSX.Element {
+        return (
+          <div className={ styles.row }>
+            <div className={ styles.column12 }>
+              <Spinner size={SpinnerSize.medium} label="Loading reports..." labelPosition="right"></Spinner>
+            </div>
+          </div>
+        );
+    }
+
+    @autobind
+    private renderReports(): JSX.Element {
+      return (
+        <React.Fragment>
+          <div className={ styles.row }>
+            <div className={ styles.column12 }>
+              <MarqueeSelection selection={this._selection}>
+                <DetailsList
+                  items={this.props.items}
+                  compact={false}
+                  columns={this.state.columns}
+                  selectionMode={SelectionMode.none}
+                  setKey="set"
+                  layoutMode={DetailsListLayoutMode.justified}
+                  isHeaderVisible={true}
+                  selection={this._selection}
+                  selectionPreservedOnEmptyClick={true}
+                  //onItemInvoked={this._onItemInvoked}
+                  enterModalSelectionOnTouch={true}
+                  ariaLabelForSelectionColumn="Toggle selection"
+                  ariaLabelForSelectAllCheckbox="Toggle selection for all items"
+                />
+              </MarqueeSelection>
+            </div>
+          </div>
+          <div className={ styles.row }>
+            <div className={ styles.column12 }>
+              <Button disabled={this.props.currentPage <= 1} onClick={() => this.props.onFetchPage("prev")}>Prev</Button>
+              <Button disabled={!this.props.hasNext} onClick={() => this.props.onFetchPage("next")}>Next</Button>
+            </div>
+          </div>
+        </React.Fragment>
+      );
+    }
+
+    @autobind
     private _onColumnClick(ev: React.MouseEvent<HTMLElement>, column: IColumn): void {
-        // const { columns, items } = this.state;
-        // const newColumns: IColumn[] = columns.slice();
-        // const currColumn: IColumn = newColumns.filter(currCol => column.key === currCol.key)[0];
-        // newColumns.forEach((newCol: IColumn) => {
-        //   if (newCol === currColumn) {
-        //     currColumn.isSortedDescending = !currColumn.isSortedDescending;
-        //     currColumn.isSorted = true;
-        //   } else {
-        //     newCol.isSorted = false;
-        //     newCol.isSortedDescending = true;
-        //   }
-        // });
-        // const newItems = _copyAndSort(items, currColumn.fieldName!, currColumn.isSortedDescending);
-        // this.setState({
-        //   columns: newColumns,
-        //   items: newItems
-        // });
+        const { columns } = this.state;
+        const newColumns: IColumn[] = columns.slice();
+        const currColumn: IColumn = newColumns.filter(currCol => column.key === currCol.key)[0];
+        newColumns.forEach((newCol: IColumn) => {
+          if (newCol === currColumn) {
+            currColumn.isSortedDescending = !currColumn.isSortedDescending;
+            currColumn.isSorted = true;
+          } else {
+            newCol.isSorted = false;
+            newCol.isSortedDescending = true;
+          }
+        });
+
+        console.info('Sort', currColumn);
+
+        this.setState({
+          columns: newColumns
+        }, () => {
+          this.props.onSort(currColumn.fieldName, !currColumn.isSortedDescending);
+        });
     }
 
     private _generateDocuments() {
         const items: IReportItem[] = [];
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 5; i++) {
           const randomDate = this._randomDate(new Date(2012, 0, 1), new Date());
           const randomFileType = this._randomFileIcon();
           let fileName = this._lorem(2);

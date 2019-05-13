@@ -1,3 +1,5 @@
+import { IReportItem } from ".";
+
 export interface IFilter {
     segment?: string;
     function?: string;
@@ -18,6 +20,9 @@ export interface ISort {
 
 export interface IPaging {
     recordsPerPage?: number;
-    totalRecords?: number;
     currentPage?: number;
+    nextToken?: IReportItem;
+    prevToken?: IReportItem;
+    direction?: string; //next|prev
+    hasNext?: boolean;
 }

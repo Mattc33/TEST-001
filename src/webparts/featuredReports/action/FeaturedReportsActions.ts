@@ -14,9 +14,13 @@ import { BaseAction, IBaseStore } from "../../../base";
 import {
     IErrorResult,
     IReportItem,
-    IFilterValues
+    IFilterValues,
+    IPaging,
+    ISort,
+    IFilter,
 } from "../../../models";
-
+import { PagedItemCollection } from '@pnp/sp';
+import * as moment from 'moment';
 export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IBaseStore> {
     private context: WebPartContext;
     private featureReportsApi: IFeaturedReportsService;
@@ -66,18 +70,31 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
 
         const webUrl: string = this.context.pageContext.web.absoluteUrl;
         const currentPage: number = (!state.paging || !state.paging.currentPage) ? 1 : state.paging.currentPage;
-        const recordsPerPage: number = (!state.paging || !state.paging.recordsPerPage) ? 10 : state.paging.recordsPerPage;
+        const recordsPerPage: number = (!state.paging || !state.paging.recordsPerPage) ? 4 : state.paging.recordsPerPage;
         const sortField: string = (!state.sort || !state.sort.sortField) ? "Title" : state.sort.sortField;
         const isAsc: boolean = (!state.sort || !state.sort.isAsc) ? true : state.sort.isAsc;
 
-        const [reports, err] = await withErrHandler<IReportItem[]>(this.featureReportsApi.loadReports(webUrl, state.filter, currentPage, recordsPerPage, sortField, isAsc));
+        const paging: IPaging = {...state.paging, currentPage, recordsPerPage };
+        const sort: ISort = {...state.sort, sortField, isAsc };
+
+        const [result, err] = await withErrHandler<PagedItemCollection<IReportItem[]>>(this.featureReportsApi.loadReports(webUrl, state.filter, paging, sort));
         if (err) 
             return this.dispatchError(`Error querying Visualizations list.`,  err, { loadingReports: false});
 
+        const reports = result.results;
+        const prevToken = (reports.length > 0) ? reports[0] : null;
+        const nextToken = (reports.length > 0) ? reports[reports.length-1] : null;
+        const hasNext = result.hasNext;
+
+        reports.forEach((report: IReportItem) => {
+            const mod = moment(report.SVPLastUpdated);
+            report.ModifiedFormatted = (mod.isValid()) ? mod.format("M/D/YY") : '';
+        });
+
         await this.dispatch({
             loadingReports: false,
-            paging: {...state.paging, currentPage, recordsPerPage },
-            sort: {...state.sort, sortField, isAsc },
+            paging: {...state.paging, ...paging, prevToken, nextToken, hasNext },
+            sort: {...state.sort, ...sort },
             reports
         });
     }
@@ -85,8 +102,38 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
     @autobind
     public async updateFilter(name: string, value: string) {
         const state: IFeaturedReportsState = this.getState();
+        const paging: IPaging = {...state.paging};
+        paging.currentPage = 1;
+        paging.prevToken = null;
+        paging.nextToken = null;
+
+        value = (value !== "All") ? value : undefined;
+
         await this.dispatch({
-            filter: {...state.filter, [name]: value }
+            filter: {...state.filter, [name]: value },
+            paging: {...state.paging, ...paging },
+        });
+
+        await this.loadReports();
+    }
+
+    @autobind
+    public async resetFilters() {
+        const state: IFeaturedReportsState = this.getState();
+
+        const paging: IPaging = {...state.paging};
+        paging.currentPage = 1;
+        paging.prevToken = null;
+        paging.nextToken = null;
+
+        const filter: IFilter = {...state.filter};
+        filter.segment = undefined;
+        filter.function = undefined;
+        filter.frequency = undefined;
+
+        await this.dispatch({
+            filter: {...state.filter, ...filter },
+            paging: {...state.paging, ...paging },
         });
 
         await this.loadReports();
@@ -95,8 +142,15 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
     @autobind
     public async updateSort(sortField: string, isAsc: boolean) {
         const state: IFeaturedReportsState = this.getState();
+        
+        const paging: IPaging = {...state.paging};
+        paging.currentPage = 1;
+        paging.prevToken = null;
+        paging.nextToken = null;
+
         await this.dispatch({
-            sort: {...state.sort, sortField, isAsc }
+            sort: {...state.sort, sortField, isAsc },
+            paging: {...state.paging, ...paging }
         });
 
         await this.loadReports();
@@ -112,7 +166,6 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
         await this.loadReports();
     }
 
-
     @autobind
     public async updatePaging(recordsPerPage: number, totalRecords: number, currentPage: number) {
         const state: IFeaturedReportsState = this.getState();
@@ -120,6 +173,20 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
             paging: {...state.paging, recordsPerPage, totalRecords, currentPage }
         });
 
+        await this.loadReports();
+    }
+
+    @autobind
+    public async updateFetchPage(direction: string) {
+        const state: IFeaturedReportsState = this.getState();
+        const currentPage = (direction === "prev")
+            ? state.paging.currentPage - 1
+            : state.paging.currentPage + 1;
+
+        await this.dispatch({
+            paging: {...state.paging, currentPage, direction }
+        });
+    
         await this.loadReports();
     }
 

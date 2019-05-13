@@ -20,6 +20,7 @@ export interface IFeaturedReportsProps {
 require("./ReportView.SPFix.css");
 
 export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> {
+  private reportFilterRef: FeaturedReportsFilter;
 
   public shouldComponentUpdate(nextProps: IFeaturedReportsProps): boolean {
     // if (this.props.state !== nextProps.state)
@@ -30,12 +31,17 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
 
   public componentDidMount() {
     this.props.state.actions.loadFilters();
+    this.props.state.actions.loadReports();
   }
 
   public render(): React.ReactElement<IFeaturedReportsProps> {
 
     console.info('FeaturedReports::render', this.props.state);
     const props = this.props.state;
+    const currentPage = (props.paging && props.paging.currentPage)
+      ? props.paging.currentPage : 1;
+    const hasNext = (props.paging && props.paging.hasNext)
+      ? props.paging.hasNext : false;
 
     return (
       <div className={ styles.featuredReports }>
@@ -48,20 +54,30 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
           <div className={ styles.row }>
             <div className={ styles.column12 }>
               <FeaturedReportsFilter
+                ref={arg => this.reportFilterRef = arg}
                 loading={props.loadingFilters}
                 segmentItems={props.filterValues.segments}
+                //selectedSegment={props.filter.segment}
                 functionItems={props.filterValues.functions}
+                //selectedFunction={props.filter.function}
                 frequencyItems={props.filterValues.frequencies}
+                //selectedFrequency={props.filter.frequency}
                 resultsPerPageItems={props.filterValues.pageSizes}
-                onFilterChange={this.handleFilterChange}
-                onPageSizeChange={this.handlePageSizeChange}
+                onFilterReset={this.handleOnFilterReset}
+                onFilterChange={this.handleOnFilterChange}
+                onPageSizeChange={this.handleOnPageSizeChange}
               />
             </div>
           </div>
           <div className={ styles.row }>
             <div className={ styles.column12 }>
               <FeaturedReportsList
-                items={[]}
+                loading={props.loadingReports}
+                items={props.reports}
+                currentPage={currentPage}
+                hasNext={hasNext}
+                onFetchPage={this.handleOnFetchPage}
+                onSort={this.handleOnSort}
               />
             </div>
           </div>
@@ -71,13 +87,30 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
   }
 
   @autobind
-  private handleFilterChange(name: string, value: string) {
+  private handleOnFilterReset() {
+    this.props.state.actions.resetFilters();
+    if (this.reportFilterRef)
+      this.reportFilterRef.resetFilters();
+  }
+
+  @autobind
+  private handleOnFilterChange(name: string, value: string) {
     this.props.state.actions.updateFilter(name, value);
   }
 
   @autobind
-  private handlePageSizeChange(value: string) {
+  private handleOnPageSizeChange(value: string) {
     this.props.state.actions.updatePageSize(Number.parseInt(value));
+  }
+
+  @autobind
+  private handleOnSort(sortField: string, isAsc: boolean) {
+    this.props.state.actions.updateSort(sortField, isAsc);
+  }
+
+  @autobind
+  private handleOnFetchPage(direction: string) {
+    this.props.state.actions.updateFetchPage(direction);
   }
 }
 

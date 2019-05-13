@@ -11,6 +11,7 @@ export interface IFeaturedReportsFilterProps {
   frequencyItems?: Array<string>;
   resultsPerPageItems?: Array<string>;
 
+  onFilterReset(): void;
   onFilterChange(name: string, value: string): void;
   onPageSizeChange(value: string): void;
 }
@@ -48,9 +49,22 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
     }
 
     @autobind
+    public resetFilters() {
+        this.setState({
+            segment: null,
+            function: null,
+            frequency: null
+        });
+    }
+
+    @autobind
     private renderBusy(): JSX.Element {
         return (
-            <Spinner size={SpinnerSize.medium} label="Loading filters..." labelPosition="right"></Spinner>
+            <div className={ styles.row }>
+                <div className={ styles.column2 }>
+                    <Spinner size={SpinnerSize.medium} label="Loading filters..." labelPosition="right"></Spinner>
+                </div>
+            </div>
         );
     }
 
@@ -81,7 +95,7 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
                             iconProps={{ iconName: 'ClearFilter' }} 
                             allowDisabledFocus={true} 
                             title="Reset all filters" 
-                            onClick={this._resetFilters}>
+                            onClick={this.props.onFilterReset}>
                                 Reset Filters
                         </ActionButton>
                     </div>
@@ -105,7 +119,7 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
         return (
             <Dropdown
                 selectedKey={selectedItem ? selectedItem.key : defaultItem.key}
-                onChange={this._onFilterChange(dropdownFor)}
+                onChange={this.onFilterChange(dropdownFor)}
                 placeholder="Select an option"
                 options={options}
             />
@@ -123,7 +137,7 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
         return (
             <Dropdown
                 selectedKey={selectedItem ? selectedItem.key : defaultItem.key}
-                onChange={this._onPageSizeChange(dropdownFor)}
+                onChange={this.onPageSizeChange(dropdownFor)}
                 placeholder="Select an option"
                 options={options}
             />
@@ -131,7 +145,7 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
     }
 
     @autobind
-    private _onFilterChange(dropdownFor: string) {
+    private onFilterChange(dropdownFor: string) {
         return (event: React.FormEvent<HTMLDivElement>, item: IDropdownOption) => {
             const state = { ...this.state };
             state[dropdownFor] = item;
@@ -143,7 +157,7 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
     }
 
     @autobind
-    private _onPageSizeChange(dropdownFor: string) {
+    private onPageSizeChange(dropdownFor: string) {
         return (event: React.FormEvent<HTMLDivElement>, item: IDropdownOption) => {
             const state = { ...this.state };
             state[dropdownFor] = item;
@@ -152,10 +166,5 @@ export class FeaturedReportsFilter extends React.Component<IFeaturedReportsFilte
               this.props.onPageSizeChange(item.key as string);
             });
         };
-    }
-
-    @autobind
-    private _resetFilters() {
-
     }
 }
