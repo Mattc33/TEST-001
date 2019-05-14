@@ -42,9 +42,9 @@ export class FavoriteDialog extends React.Component<IFavoriteDialogProps, IFavor
 
   public static getDerivedStateFromProps(newProps: IFavoriteDialogProps, state: IFavoriteDialogState) {
     if (state.saveState !== newProps.saveState) {
-      return {
-        saveState: newProps.saveState
-      };
+      return (newProps.saveState === SaveStatus.SaveSuccess) 
+        ? { hideDialog: true }
+        : { saveState: newProps.saveState };
     }
 
     return null;
@@ -59,6 +59,7 @@ export class FavoriteDialog extends React.Component<IFavoriteDialogProps, IFavor
       <Dialog
         hidden={this.state.hideDialog}
         onDismiss={this.handleDialogCanceled}
+        onDismissed={this.handleDialogClosed}
         dialogContentProps={{
           type: DialogType.largeHeader,
           title: 'Save Favorite',
@@ -128,25 +129,23 @@ export class FavoriteDialog extends React.Component<IFavoriteDialogProps, IFavor
     Logger.write("Save clicked on save favorite dialog.", LogLevel.Verbose);
     if (this.props.onSave)
       this.props.onSave(this.state.title, this.state.description);
-      
-    // this.setState({
-    //   hideDialog: true
-    // }, () => {
-    //   if (this.props.onSave) {
-    //     this.props.onSave(this.state.title, this.state.description);
-    //   }
-    // });
   }
 
   @autobind
   private async handleDialogCanceled() {
-    Logger.write("Cancel clicked on save favorite dialog.", LogLevel.Verbose);
     this.setState({
       hideDialog: true
     }, () => {
       if (this.props.onCancel) {
-        this.props.onCancel();
+        //this.props.onCancel();
       }
     });
+  }
+
+  @autobind
+  private async handleDialogClosed() {
+    if (this.props.onCancel) {
+      this.props.onCancel();
+    }
   }
 }
