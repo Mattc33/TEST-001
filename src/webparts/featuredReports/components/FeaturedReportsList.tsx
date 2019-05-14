@@ -3,7 +3,7 @@ import styles from './FeaturedReportsList.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { autobind, Dropdown, IDropdownOption, ActionButton, MarqueeSelection, DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, mergeStyleSets } from 'office-ui-fabric-react';
 import { IReportItem } from "../../../models";
-import { Button, Spinner, SpinnerSize, MessageBar } from 'office-ui-fabric-react';
+import { Button, Spinner, SpinnerSize, MessageBar, Link } from 'office-ui-fabric-react';
 
 export interface IFeaturedReportsListProps {
   loading: boolean;
@@ -11,6 +11,7 @@ export interface IFeaturedReportsListProps {
 
   currentPage: number;
   hasNext: boolean;
+  webUrl: string;
 
   onFetchPage(director: string);
   onSort(sortField: string, isAsc: boolean);
@@ -78,7 +79,11 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
               maxWidth: 16,
               //onColumnClick: this._onColumnClick,
               onRender: (item: IReportItem) => {
-                return <img src={item.IconName} className={classNames.fileIconImg} alt={item.Title} />;
+                const imageUrl = (item.SVPVisualizationImage)
+                  ? item.SVPVisualizationImage
+                  : `${props.webUrl}/ReportImages/Icons/Logo_ReportDefault.png`;
+
+                return <img src={imageUrl} className={classNames.fileIconImg} alt={item.Title} />;
               }
             },
             {
@@ -95,6 +100,10 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
               sortDescendingAriaLabel: 'Sorted Z to A',
               onColumnClick: this._onColumnClick,
               data: 'string',
+              onRender: (item: IReportItem) => {
+                const reportUrl = `${props.webUrl}/SitePages/ViewReport.aspx?reportId=${item.Id}`;
+                return <Link href={reportUrl}>{item.Title}</Link>;
+              },
               isPadded: true
             },
             {

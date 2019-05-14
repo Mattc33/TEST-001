@@ -21,6 +21,7 @@ import {
 } from "../../../models";
 import { PagedItemCollection } from '@pnp/sp';
 import * as moment from 'moment';
+
 export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IBaseStore> {
     private context: WebPartContext;
     private featureReportsApi: IFeaturedReportsService;
@@ -70,7 +71,7 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
 
         const webUrl: string = this.context.pageContext.web.absoluteUrl;
         const currentPage: number = (!state.paging || !state.paging.currentPage) ? 1 : state.paging.currentPage;
-        const recordsPerPage: number = (!state.paging || !state.paging.recordsPerPage) ? 4 : state.paging.recordsPerPage;
+        const recordsPerPage: number = (!state.paging || !state.paging.recordsPerPage) ? this.getDefaultPageSize(10) : state.paging.recordsPerPage;
         const sortField: string = (!state.sort || !state.sort.sortField) ? "Title" : state.sort.sortField;
         const isAsc: boolean = (!state.sort || !state.sort.isAsc) ? true : state.sort.isAsc;
 
@@ -159,8 +160,15 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
     @autobind
     public async updatePageSize(recordsPerPage: number) {
         const state: IFeaturedReportsState = this.getState();
+
+        const paging: IPaging = {...state.paging};
+        paging.currentPage = 1;
+        paging.recordsPerPage = recordsPerPage;
+        paging.prevToken = null;
+        paging.nextToken = null;
+
         await this.dispatch({
-            paging: {...state.paging, recordsPerPage, currentPage: 1 }
+            paging: {...state.paging, ...paging }
         });
 
         await this.loadReports();
@@ -202,6 +210,17 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
 
     //     return await withErrHandler<IReportItem[]>(this.featureReportsApi.loadReports(webUrl, state.filter, currentPage, recordsPerPage, sortField, isAsc));
     // }
+
+    @autobind
+    private getDefaultPageSize(defaultSize: number): number {
+        const state: IFeaturedReportsState = this.getState();
+        const pageSizes = (state.pageSizes) 
+            ? state.pageSizes.split(',')
+            : this.defaultPageSizes;
+
+        return (pageSizes && pageSizes.length > 0 && !isNaN(Number.parseInt(pageSizes[0])))
+            ? Number.parseInt(pageSizes[0]) : defaultSize;
+    }
 
     @autobind
     private dispatchError(msg: string, err: any, status: any) {

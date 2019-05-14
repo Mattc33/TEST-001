@@ -72,6 +72,7 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
           <div className={ styles.row }>
             <div className={ styles.column12 }>
               <FeaturedReportsList
+                webUrl={props.context.pageContext.site.absoluteUrl}
                 loading={props.loadingReports}
                 items={props.reports}
                 currentPage={currentPage}
