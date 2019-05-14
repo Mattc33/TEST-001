@@ -1,15 +1,9 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .MyFavHome {
+  border-bottom: .5px solid #e4e5e6;
 
-  .wrapper{
-    border: .5px solid #e4e5e6;
-    -webkit-box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
--moz-box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
-box-shadow: 1px 0px 1px 1px rgba(204,204,204,1);
-
-  }
-
+ 
   .title {
     //align-content: flex-start;
     //text-align:start;

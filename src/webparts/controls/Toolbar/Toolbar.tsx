@@ -9,6 +9,8 @@ import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { IReportItem } from "../../../models";
 
+require("./toolbar.SPFix.css");
+
 export interface IProfileFilter {
     filterName: string;
     filterValue: string;

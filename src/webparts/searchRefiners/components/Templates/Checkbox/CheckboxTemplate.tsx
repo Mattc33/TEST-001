@@ -8,6 +8,8 @@ import { Link } from "office-ui-fabric-react";
 import * as strings from 'SearchRefinersWebPartStrings';
 import * as update from 'immutability-helper';
 
+require("./checkboxTemplate.SPFix.css");
+
 export default class CheckboxTemplate extends React.Component<IBaseRefinerTemplateProps, IBaseRefinerTemplateState> {
 
     private _operator: RefinementOperator;

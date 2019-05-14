@@ -1,0 +1,57 @@
+
+
+div[class^="reportViewer_"] .ms-Button-label {
+    font-size:.9em;
+    font-weight: 800;
+    color: #3f94d8;
+}
+
+
+div[class^="reportViewer_"] hr[class^="divider_"] {
+    margin: 5px 0 0px 0 !important;
+}
+
+
+#VizContainer .ms-OverflowSet-item * {
+    background: #f8f8f8 !important;
+}
+
+div[class^="reportViewer_"] {
+    background:#f8f8f8;
+}
+
+div[class^="reportViewer_"] .ms-CommandBar {
+    background: #f8f8f8 !important;
+}
+
+div[class^="reportViewer_"] div[class^="container_"] {
+    padding-top:.25em;
+}
+
+label[class^="reportTitle_"] {
+    padding-left:.5em;
+    font-size: 1.9em;
+}
+
+.ms-fontWeight-semibold {
+    font-size:.9em;
+    letter-spacing:1px;
+}
+
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:last-child {
+    position:absolute;
+    right:0 !important;
+   padding-top:.75em;
+}
+
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand {
+    display:flex;
+    justify-content:center;
+}
+
+div[class^="reportViewer_"] .ms-OverflowSet.ms-CommandBar-primaryCommand .ms-OverflowSet-item:nth-child(1) {
+    position:absolute;
+    left:0;
+    padding-top:.75em;
+}
+

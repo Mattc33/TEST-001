@@ -1,0 +1,7 @@
+
+div[class^="searchFieldGroup_"]{
+    .ms-Button-icon {
+        color: white;
+    }
+  }
+  

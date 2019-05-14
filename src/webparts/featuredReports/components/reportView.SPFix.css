@@ -8,14 +8,18 @@
     background-color:#e9f3fc;
 }
 
-span.ms-Dropdown-caretDownWrapper i {
-    display: none;
+
+
+
+.ms-DetailsHeader-cellName {
+    font-weight: 600;
 }
 
-span.ms-Dropdown-caretDownWrapper {
-    width: .7em;
-    background-image: url("https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/blackcaret.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-top: .9em;
+
+.ms-DetailsRow {
+    padding: .5em 0em;
 }
+
+.ms-DetailsList div {
+    background:white;
+  }

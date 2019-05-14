@@ -36,7 +36,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       data-automation-id="HeartFill" 
       iconProps={{ iconName: 'HeartFill' }} 
       allowDisabledFocus={true} 
-      title="Add report to favorite list" 
+      title="Remove report from favorite list" 
       onClick={this.unfavorite}>
         Favorite
     </ActionButton>
@@ -48,7 +48,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       data-automation-id="HeartFill" 
       iconProps={{ iconName: 'HeartFill' }} 
       allowDisabledFocus={true} 
-      title="Remove report from favorite list" 
+      title="Add report to favorite list" 
       onClick={this.showFavoriteDialog}>
         Favorite
     </ActionButton>
