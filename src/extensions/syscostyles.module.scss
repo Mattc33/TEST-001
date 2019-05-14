@@ -15,58 +15,117 @@ body {
   overflow: visible;
 }
 
+.foothead {
+  text-transform:uppercase;
+  font-size:.85em;
+}
+
+.footeritem2 p, .footeritem2 p a, .footeritem5_second p, .footeritem5_second p a {
+  font-size:.9em;
+  color: #eee;
+  line-height:1.2em;
+  text-decoration:none;
+}
+
 .footeritem7 {
   color: white;
   padding: 1em;
-  flex-grow: 7;
+ width: 40%;
   }
+
+
+.footeritem5_second {
+  text-align:right;
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+
+.footeritem5_second p, .footeritem5_second p a {
+    color: white;
+    padding: 0 .5em;
+}
+
+.footeritem5_first {
+    color: white;
+    padding: 0 .75em;
+    text-align: left;
+    font-size: .75em;
+    font-style: italic;
+
+    img {
+      width:23%;
+     }
+}
+
+
+.blurb {
+  color: white;
+  font-size:.78em;
+  line-height:1.5em;
+}
+
+hr {
+  border: 1px solid #aaa;
+    width:95vw;
+    text-align:center;
+    margin-top: -.1em;
+}
 
   .footeritem2 {
     color: white;
     padding: 1em;
-    flex-grow: 2;
+  width: 13%;
   }
 
   .footeritem1 {
     color: white;
     padding: 1em;
-    flex-grow: 1;
+   width: 8%;
+   text-align:center;
+
+      img {
+          width:2.7em;
+          padding-bottom:1em;
+          padding-top: .2em;
+          opacity: 0.7;
+          filter: alpha(opacity=70); /* For IE8 and earlier */
+      }
   }
 
   .foot {
     background-color: #2b2f3f;
-    width: 1268px;
+    max-width: 1268px;
   }
 
   .insideFoot {
     display:flex;
     justify-content:center;
+    padding:1em .5em 0 .5em;
+  }
+
+  .insideFoot:last-child {
+    padding-bottom:2em;
   }
 
   .footContainer {
-    /*display: flex;
-    width: 100%;
+    display: flex;
     background: #2b2f3f;
     justify-content: center;
-    position: absolute;*/
-    display:none;
-  }
-
-  div[class^="footContainer_"]{
-  /*  display: flex;
-    width: 100%;
-    background: #2b2f3f;
-    justify-content: center;
-    position: absolute;*/
-    display:none;
+    position: absolute;
+    display: flex; 
+    padding: 0 1em;
     }
 
-/*
-    div[class^="featuredReports_"] .ms-Dropdown-title {border-top: none;border-bottom: 2px solid black;border-left: none;border-right: none;}
 
-    .ms-Dropdown-title {border-top: none;border-bottom: 2px solid black;border-left: none;border-right: none;}
+  div[class^="footContainer_"]{
+    display: flex;
+    background: #2b2f3f;
+    justify-content: center;
+    position: absolute;
+    display: flex; 
+    padding: 0 1em;
+    }
 
-    .ms-Grid-col {
-      border: 1px solid green;
-  }
-  */
