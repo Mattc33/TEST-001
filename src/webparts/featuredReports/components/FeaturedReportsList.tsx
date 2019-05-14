@@ -175,17 +175,11 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
         };
           
         this._selection = new Selection({
-            onSelectionChanged: () => {
-            //   this.setState({
-            //     selectionDetails: this._getSelectionDetails()
-            //   });
-            }
+            onSelectionChanged: () => { }
         });
     }
 
     public render(): React.ReactElement<IFeaturedReportsListProps> {
-
-        const items = this._generateDocuments();
 
         return (
             <div className={ styles.featuredReportsList }>
@@ -239,7 +233,6 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
                   isHeaderVisible={true}
                   selection={this._selection}
                   selectionPreservedOnEmptyClick={true}
-                  //onItemInvoked={this._onItemInvoked}
                   enterModalSelectionOnTouch={true}
                   ariaLabelForSelectionColumn="Toggle selection"
                   ariaLabelForSelectAllCheckbox="Toggle selection for all items"
@@ -278,74 +271,4 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
           this.props.onSort(currColumn.fieldName, !currColumn.isSortedDescending);
         });
     }
-
-    private _generateDocuments() {
-        const items: IReportItem[] = [];
-        for (let i = 0; i < 5; i++) {
-          const randomDate = this._randomDate(new Date(2012, 0, 1), new Date());
-          const randomFileType = this._randomFileIcon();
-          let fileName = this._lorem(2);
-          fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).concat(`.${randomFileType.docType}`);
-
-          items.push({
-            Title: fileName,
-            IconName: randomFileType.url,
-            SVPMetadata1: this._lorem(1),
-            SVPMetadata2: this._lorem(1),
-            SVPMetadata3: this._lorem(1),
-            ModifiedFormatted: randomDate.dateFormatted,
-            ModifiedNumber: randomDate.value
-          });
-        }
-        return items;
-      }
-      
-      private _randomDate(start: Date, end: Date): { value: number; dateFormatted: string } {
-        const date: Date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-        return {
-          value: date.valueOf(),
-          dateFormatted: date.toLocaleDateString()
-        };
-      }
-      
-      private FILE_ICONS: { name: string }[] = [
-        { name: 'accdb' },
-        { name: 'csv' },
-        { name: 'docx' },
-        { name: 'dotx' },
-        { name: 'mpt' },
-        { name: 'odt' },
-        { name: 'one' },
-        { name: 'onepkg' },
-        { name: 'onetoc' },
-        { name: 'pptx' },
-        { name: 'pub' },
-        { name: 'vsdx' },
-        { name: 'xls' },
-        { name: 'xlsx' },
-        { name: 'xsn' }
-      ];
-      
-      private _randomFileIcon(): { docType: string; url: string } {
-        const docType: string = this.FILE_ICONS[Math.floor(Math.random() * this.FILE_ICONS.length)].name;
-        return {
-          docType,
-          url: `https://static2.sharepointonline.com/files/fabric/assets/brand-icons/document/svg/${docType}_16x1.svg`
-        };
-      }
-      
-      private LOREM_IPSUM = (
-        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut ' +
-        'labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut ' +
-        'aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore ' +
-        'eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt '
-      ).split(' ');
-
-      private loremIndex = 0;
-      private _lorem(wordCount: number): string {
-        const startIndex = this.loremIndex + wordCount > this.LOREM_IPSUM.length ? 0 : this.loremIndex;
-        this.loremIndex = startIndex + wordCount;
-        return this.LOREM_IPSUM.slice(startIndex, this.loremIndex).join(' ');
-      }
-    
 }
