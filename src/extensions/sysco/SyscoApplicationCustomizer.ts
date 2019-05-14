@@ -105,13 +105,13 @@ export default class SyscoApplicationCustomizer
                 <p><a href="#">Report a Concern</a></p>    
               </div>
               
-              <div class="${styles.footeritem1}"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/fb_footer.png"><br/><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/tw_footer.png"><br/><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/in_footer.png"></div>
+              <div class="${styles.footeritem1}"><a href="#"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/fb_footer.png"></a><br/><a href="#"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/tw_footer.png"></a><br/><a href="#"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/in_footer.png"></a></div>
           </div>   
           
           <div class="${styles.insideFoot}"><hr></div>
 
           <div class="${styles.insideFoot}">
-                 <div class="${styles.footeritem5_first}"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/sysco_bw.png"></div>
+                 <div class="${styles.footeritem5_first}"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/sysco_bw.png"><br/>&copy;2019 All Rights Reserved. Sysco Corporation.</div>
                  <div class="${styles.footeritem5_second}"><p><a href="#">Terms</a> | <a href="#">Privacy Policy</a> | <a href="#">System Usage Policy</a></p></div>
           </div>
 
