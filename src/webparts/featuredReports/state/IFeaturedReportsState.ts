@@ -3,32 +3,24 @@ import {
   } from '@microsoft/sp-webpart-base';
 import { FeaturedReportsActions } from "../action/FeaturedReportsActions";
 import { 
-    IReportItem, 
-    IErrorResult 
+    IReportItem,
+    IFilter,
+    IFilterValues,
+    ISort,
+    IPaging, 
+    IErrorResult
 } from "../../../models";
 
-export interface IFilter {
-    segment?: string;
-    function?: string;
-    frequency?: string;
-}
 
-export interface ISort {
-    sortField?: string;
-    asc?: boolean;
-}
-
-export interface IPaging {
-    recordsPerPage?: number;
-    totalRecords?: number;
-    currentPage?: number;
-}
 
 export interface IFeaturedReportsState {
     clientLabel: string;
+    webpartTitle: string;
+    pageSizes: string;
     context: WebPartContext;
 
-    loading?: boolean;
+    loadingFilters?: boolean;
+    loadingReports?: boolean;
     actions?: FeaturedReportsActions;
     error?: IErrorResult; 
 
@@ -37,4 +29,6 @@ export interface IFeaturedReportsState {
     filter?: IFilter;
     sort?: ISort;
     paging?: IPaging;
+
+    filterValues?: IFilterValues;
 }

@@ -23,9 +23,15 @@ export class FeaturedReportsStore extends BaseStore<IFeaturedReportsStoreProps, 
     const actions = new FeaturedReportsActions(this, props.storeState.context);
 
     this.state = {
-        clientLabel: props.storeState.SVPClientLabel,
-        context: props.storeState.context,
-        actions: actions
+      loadingFilters: true,
+      filterValues: { segments: [], functions: [], frequencies: [], pageSizes: [] },
+      loadingReports: true,
+      reports: [],
+      clientLabel: props.storeState.SVPClientLabel,
+      webpartTitle: props.storeState.SVPTitle,
+      pageSizes: props.storeState.SVPPageSizes,
+      context: props.storeState.context,
+      actions: actions
     };
   }
 

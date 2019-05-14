@@ -40,8 +40,6 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
 
     public render(): React.ReactElement<IFilterLayoutProps> {
 
-        console.info('Vertical::render', this.props);
-
         let items: JSX.Element[] = [];
         let groups: IGroup[] = [];
         let noResultsElement: JSX.Element;
