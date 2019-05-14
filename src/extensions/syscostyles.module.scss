@@ -67,7 +67,7 @@ body {
   line-height:1.5em;
 }
 
-hr {
+.footContainer hr {
   border: 1px solid #aaa;
     width:95vw;
     text-align:center;
@@ -110,22 +110,16 @@ hr {
     padding-bottom:2em;
   }
 
-  .footContainer {
+
+
+  div[class^="footContainer_"], .footContainer{
     display: flex;
     background: #2b2f3f;
     justify-content: center;
     position: absolute;
     display: flex; 
     padding: 0 1em;
-    }
-
-
-  div[class^="footContainer_"]{
-    display: flex;
-    background: #2b2f3f;
-    justify-content: center;
-    position: absolute;
-    display: flex; 
-    padding: 0 1em;
+    width: 99vw;
+    overflow-x:hidden;
     }
 
