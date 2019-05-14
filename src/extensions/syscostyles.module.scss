@@ -15,22 +15,68 @@ body {
   overflow: visible;
 }
 
+.foothead {
+  text-transform:uppercase;
+  font-size:.85em;
+}
+
+.footeritem2 p, .footeritem2 p a, .footeritem5_second p, .footeritem5_second p a {
+  font-size:.85em;
+  color: #eee;
+  line-height:1.2em;
+  text-decoration:none;
+}
+
 .footeritem7 {
   color: white;
   padding: 1em;
-  flex-grow: 7;
+ width: 40%;
   }
+
+
+.footeritem5_second, .footeritem5_second p, .footeritem5_second p a {
+    color: white;
+    padding: 1em;
+    width: 50%;
+    text-align: right;
+}
+
+.footeritem5_first {
+  color: white;
+    padding: 1em;
+    width: 50%;
+  text-align: left;
+
+    img {
+      width:20%;
+     }
+}
+
+
+.blurb {
+  color: white;
+  font-size:.78em;
+  line-height:1.5em;
+}
+
+hr {
+  color:#ccc;
+}
 
   .footeritem2 {
     color: white;
     padding: 1em;
-    flex-grow: 2;
+  width: 13%;
   }
 
   .footeritem1 {
     color: white;
     padding: 1em;
-    flex-grow: 1;
+   width: 8%;
+
+      img {
+        width:45%;
+      }
   }
 
   .foot {
@@ -41,24 +87,23 @@ body {
   .insideFoot {
     display:flex;
     justify-content:center;
+    padding:1em;
   }
 
   .footContainer {
-    /*display: flex;
+    display: flex;
     width: 100%;
     background: #2b2f3f;
     justify-content: center;
-    position: absolute;*/
-    display:none;
+    position: absolute;
   }
 
   div[class^="footContainer_"]{
-  /*  display: flex;
+    display: flex;
     width: 100%;
     background: #2b2f3f;
     justify-content: center;
-    position: absolute;*/
-    display:none;
+    position: absolute;
     }
 
 /*

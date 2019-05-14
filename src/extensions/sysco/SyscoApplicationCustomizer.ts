@@ -60,14 +60,59 @@ export default class SyscoApplicationCustomizer
 
           <div class="${styles.insideFoot}">
 
-              <div class="${styles.footeritem7}">footer7</div>
-              <div class="${styles.footeritem2}">footer2</div>
-              <div class="${styles.footeritem2}">footer2</div>
-              <div class="${styles.footeritem2}">footer2</div>
-              <div class="${styles.footeritem2}">footer2</div>
-              <div class="${styles.footeritem1}">footer1</div>
-          </div>     
+              <div class="${styles.footeritem7}">
 
+                <span class="${styles.blurb}">Sysco is the global leader in selling, marketing and distributing food products to restaurants, healthcare and educational facilities, lodging establishments and other customers who prepare meals away from home. Its family of products also includes equipment and supplies for the food service and hospitality industries. With over 65,000 associations, the company operates approximately 300 distribution facilities across the globe and serves more than 500,000 customer locations. 
+                For the fiscal year 2017 that ended July 1, 2017, the company generated sales of more than $55 billion.</span>
+
+              </div>
+
+              <div class="${styles.footeritem2}">
+                <span class="${styles.foothead}">about</span>
+                <p><a href="#">The Sysco Story</a></p>
+                <p><a href="#">Annual Report</a></p>
+                <p><a href="#">Corporate Social Responsibility</a></p>
+                <p><a href="#">Diversity</a></p>
+                <p><a href="#">News Room</a></p>
+              </div>
+              
+              <div class="${styles.footeritem2}">
+              
+                <span class="${styles.foothead}">customer solutions</span>
+                <p><a href="#">Product Categories</a></p>
+                <p><a href="#">Sysco Brand Family</a></p>
+                <p><a href="#">Services</a></p>
+                <p><a href="#">Culinary Solutions</a></p>
+                <p><a href="#">Technology Solutions</a></p>
+
+              </div>
+              
+              <div class="${styles.footeritem2}">
+              
+                <span class="${styles.foothead}">resources</span>
+                <p><a href="#">Suppliers</a></p>
+                <p><a href="#">Investors</a></p>
+                <p><a href="#">Careers</a></p>
+              
+              </div>
+              
+              <div class="${styles.footeritem2}">
+              
+                <span class="${styles.foothead}">contact us</span>
+                <p><a href="#">Become a Customer</a></p>
+                <p><a href="#">Our Locations</a></p><br/>
+                <span class="${styles.foothead}">support</span>
+                <p><a href="#">Report a Concern</a></p>    
+              </div>
+              
+              <div class="${styles.footeritem1}"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/fb_footer.png"><br/><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/tw_footer.png"><br/><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/in_footer.png"></div>
+          </div>   
+          
+          <div class="${styles.insideFoot}"><hr></div>
+
+          <div class="${styles.insideFoot}">
+                 <div class="${styles.footeritem5_first}"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/sysco_bw.png"></div>
+                 <div class="${styles.footeritem5_second}"><p><a href="#">Terms</a> | <a href="#">Privacy Policy</a> | <a href="#">System Usage Policy</a></p></div>
           </div>
 
         </div>`;
