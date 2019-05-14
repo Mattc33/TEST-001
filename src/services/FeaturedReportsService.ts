@@ -61,8 +61,6 @@ export class FeaturedReportsService implements IFeaturedReportsService {
             .expand("SVPVisualizationOwner")
             .getPaged<IReportItem[]>();
 
-        console.info('loadReports', result);
-
         return result;
     }
 

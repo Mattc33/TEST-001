@@ -36,7 +36,6 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
 
   public render(): React.ReactElement<IFeaturedReportsProps> {
 
-    console.info('FeaturedReports::render', this.props.state);
     const props = this.props.state;
     const currentPage = (props.paging && props.paging.currentPage)
       ? props.paging.currentPage : 1;

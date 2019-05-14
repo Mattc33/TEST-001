@@ -272,8 +272,6 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
           }
         });
 
-        console.info('Sort', currColumn);
-
         this.setState({
           columns: newColumns
         }, () => {
