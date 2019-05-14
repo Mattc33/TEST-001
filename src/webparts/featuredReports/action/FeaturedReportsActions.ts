@@ -73,7 +73,7 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
         const currentPage: number = (!state.paging || !state.paging.currentPage) ? 1 : state.paging.currentPage;
         const recordsPerPage: number = (!state.paging || !state.paging.recordsPerPage) ? this.getDefaultPageSize(10) : state.paging.recordsPerPage;
         const sortField: string = (!state.sort || !state.sort.sortField) ? "Title" : state.sort.sortField;
-        const isAsc: boolean = (!state.sort || !state.sort.isAsc) ? true : state.sort.isAsc;
+        const isAsc: boolean = (!state.sort) ? true : state.sort.isAsc;
 
         const paging: IPaging = {...state.paging, currentPage, recordsPerPage };
         const sort: ISort = {...state.sort, sortField, isAsc };
@@ -144,13 +144,17 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
     public async updateSort(sortField: string, isAsc: boolean) {
         const state: IFeaturedReportsState = this.getState();
         
+        const sort: ISort = { ...state.sort };
+        sort.sortField = sortField;
+        sort.isAsc = isAsc;
+
         const paging: IPaging = {...state.paging};
         paging.currentPage = 1;
         paging.prevToken = null;
         paging.nextToken = null;
 
         await this.dispatch({
-            sort: {...state.sort, sortField, isAsc },
+            sort: {...state.sort, ...sort },
             paging: {...state.paging, ...paging }
         });
 
