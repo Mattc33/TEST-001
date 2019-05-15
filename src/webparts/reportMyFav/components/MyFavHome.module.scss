@@ -18,6 +18,7 @@
     color: #444 !important;
     font-size: 1.05em !important;
     text-decoration:none;
+    word-break: break-all;
   }
 
   .description {
@@ -25,6 +26,7 @@
     text-align:start;
     font-size: .95em !important;
     color: #666 !important;
+    word-break: break-all;
   }
 
   .socialIcons, .socialIcons i {
