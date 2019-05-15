@@ -2,7 +2,7 @@
     color:#398bcc;
     font-size:.9em;
     float: left;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .bold {
@@ -11,22 +11,46 @@
 
 .linkButton {
  font-size: 12px;
- color:darkblue;
+ color:#398bcc;
+ font-weight:600;
 }
 
 .parentReply {
-    color:darkblue;
+    color:#398bcc;
+    font-weight:600;
 }
 
 .Active {
     color: darkred !important;
+    font-weight:600;
 }
 
 .inActive {
-    color:darkblue !important;
+    color:#398bcc !important;
+    font-weight:600;
 }
 
  .ms-Panel-content div[class^="row_"] div[class^="column_"] > div:nth-child(2) {
     font-size:.9em !important;
     font-weight:800;
  }
+
+
+ .ms-Panel-content div[class^="row_"]:nth-child(2) > div {
+    font-size:.8em;
+}
+
+.ms-Panel-content div[class^="row_"]:nth-child(3) div[class^="column_"] {
+    font-size:.8em;
+}
+
+.ms-ActivityItem-commentText {
+    font-size: 1.2em;
+    padding: .5em .5em;
+    margin:.5em 0 
+}
+
+.ms-Panel-content div[class^="row_"]:nth-child(4) div[class^="column_"] > div {
+    padding: .5em 0;
+    border-bottom:1px solid #ddd;
+}
