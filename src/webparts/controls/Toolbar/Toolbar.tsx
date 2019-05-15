@@ -256,17 +256,17 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
 
         return [{
                 key: 'contractVert',
-                name: 'Contract vertically',
+                name: 'Reduce vertically',
                 iconProps: {
-                    iconName: 'ChevronDownSmall'
+                    iconName: 'ChevronUpSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('contractVert')
             }, {
                 key: 'contractHorz',
-                name: 'Contract horizontally',
+                name: 'Reduce horizontally',
                 iconProps: {
-                    iconName: 'ChevronRightSmall'
+                    iconName: 'ChevronLeftSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('contractHorz')
@@ -280,12 +280,13 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 onClick: () => this.handlerSizingCommandClick('reset')
             }, {
                 key: 'sizeLabel',
+                disabled: true,
                 name: `${height}px H X ${width}px W`, // '1445px X 2535px'
             }, {
                 key: 'expandHorz',
                 name: 'Expand horizontally',
                 iconProps: {
-                    iconName: 'ChevronLeftSmall'
+                    iconName: 'ChevronRightSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('expandHorz')
@@ -293,7 +294,7 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 key: 'expandVert',
                 name: 'Expand vertically',
                 iconProps: {
-                    iconName: 'ChevronUpSmall'
+                    iconName: 'ChevronDownSmall'
                 },
                 iconOnly: true,
                 onClick: () => this.handlerSizingCommandClick('expandVert')
