@@ -2,6 +2,8 @@ import * as React from 'react';
 import styles from './NewsHorizontal.module.scss';
 import { INewsItem } from "../../../models/INewsItem";
 
+require("./newsQuery.SPFix.css");
+
 export interface INewsProps {
   key: number;
   newsItem: INewsItem;
