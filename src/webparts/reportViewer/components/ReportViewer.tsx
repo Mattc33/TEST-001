@@ -276,7 +276,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         title,
         desc,
         url,
-        (report.SVPVisualizationTechnology === "Tableau") ? this.tableauReportRef : undefined
+        undefined // (no need to create view in Tableau) (report.SVPVisualizationTechnology === "Tableau") ? this.tableauReportRef : undefined
       );
     }
   }
