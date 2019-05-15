@@ -21,9 +21,12 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
     private VizSheets: any;
     private VizSheet: any;
     private VizPlaceholder: HTMLDivElement;
+    private VizLoaded: boolean;
 
     constructor(props: ITableauReportProps) {
         super(props);
+
+        this.VizLoaded = false;
     }
 
     @autobind
@@ -33,7 +36,7 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
 
     @autobind
     public componentWillReceiveProps(nextProps: ITableauReportProps) {
-        if (this.Viz && (this.props.height !== nextProps.height || this.props.width !== nextProps.width)) {
+        if (this.Viz && this.VizLoaded && (this.props.height !== nextProps.height || this.props.width !== nextProps.width)) {
             this.Viz.setFrameSize(nextProps.width, nextProps.height);
 
             // this code re-size frame and reload report within new size...
@@ -113,6 +116,7 @@ class TableauReport extends React.Component<ITableauReportProps, ITableauReportS
     @autobind
     private initEvents() {
         if (this.Viz) {
+            this.VizLoaded = true;
             this.Viz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, this.handleFilterChangeEvent);
             this.Viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, this.handleFilterChangeEvent);
         }
