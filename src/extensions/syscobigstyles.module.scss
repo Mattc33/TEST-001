@@ -82,7 +82,7 @@ div[class^="pageTitle_"]{
   div[class^="contentBox"]{
     // min-height:auto;
     // padding-top: 12px !important;
-    display: none;
+    display: none !important;
   }
 }
 
@@ -112,3 +112,8 @@ span[class^="ms-Dropdown-caretDownWrapper"]{
   background-size: contain;
   margin-top: .9em;  
 }
+
+div[class^="ControlZone"]{
+  margin-top: 2px !important;
+  margin-bottom: -2px !important;
+  }
