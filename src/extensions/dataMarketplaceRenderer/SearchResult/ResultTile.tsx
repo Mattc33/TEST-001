@@ -16,6 +16,7 @@ export interface IResultTileState {
   busyLiking: boolean;
   favoriteDialogHidden: boolean;
   favoriteDescription: string;
+  favoriteTitle: string;
 }
 
 export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
@@ -90,7 +91,8 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       isLiked: false,
       busyLiking: false,
       favoriteDialogHidden: true,
-      favoriteDescription: this.props.result.SVPVisualizationDescription
+      favoriteDescription: this.props.result.SVPVisualizationDescription,
+      favoriteTitle: this.props.result.Title
     };
 
     this.descTooltipId = getId('svpDesc');
@@ -138,20 +140,28 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             <li className="ms-ListItem ms-ListItem--document">
               <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
                 <span className="ms-ListItem-primaryText">
-                  <TooltipHost content={result.Title} id={this.titleTooltipId} calloutProps={{ gapSpace: 0 }}>
+                  <a className={styles.itemLink} href={reportURL} title={result.Title}>
+                    <span className={styles.itemTitle}>{reportTitle}</span>
+                  </a>
+                  {/* <TooltipHost content={result.Title} id={this.titleTooltipId} calloutProps={{ gapSpace: 0 }}>
                     <a className={styles.itemLink} href={reportURL}>
                       <span className={styles.itemTitle}>{reportTitle}</span>
                     </a>
-                  </TooltipHost>
+                  </TooltipHost> */}
                 </span>
                 <div className="datamkt-sub">
                   <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-                    &nbsp;
+                    <a className={styles.itemLink} href={reportURL} style={{display: "block"}}>
+                      &nbsp;
+                    </a>
                   </div>
                   <div className="datamkt-right">
-                    <TooltipHost content={result.SVPVisualizationDescription} id={this.descTooltipId} calloutProps={{ gapSpace: 0 }}>
-                      <span className="ms-ListItem-secondaryText">{reportDesc}</span>
-                    </TooltipHost>
+                    <a className={styles.itemLink} href={reportURL}>
+                      <span className="ms-ListItem-secondaryText" title={result.SVPVisualizationDescription}>{reportDesc}</span>
+                    </a>
+                      {/* <TooltipHost content={result.SVPVisualizationDescription} id={this.descTooltipId} calloutProps={{ gapSpace: 0 }}>
+                        <span className="ms-ListItem-secondaryText">{reportDesc}</span>
+                      </TooltipHost> */}
                     <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
                   </div>
                 </div>
@@ -216,22 +226,43 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
   @autobind
   private renderFavoriteDialog(): JSX.Element {
+    const subText = (!this.state.busyFavoriting)
+      ? "Enter a custom report title and description." 
+      : "";
+
     return (
       <Dialog
         hidden={this.state.favoriteDialogHidden}
         onDismiss={this.favoriteDialogCanceled}
         dialogContentProps={{
-          type: DialogType.normal,
+          type: DialogType.largeHeader,
           title: 'Save Favorite',
-          subText: 'Enter a custom description. Only you will see this description. Others will see the default description for the visualization.'
+          subText: subText //'Enter a custom description. Only you will see this description. Others will see the default description for the visualization.'
         }}
         modalProps={{
           isBlocking: false,
           containerClassName: 'ms-dialogMainOverride'
         }}>
-        <TextField placeholder="Enter custom description..."
-          ariaLabel="Please enter text here" multiline rows={4}
-          value={this.state.favoriteDescription} onChanged={this.onFavoriteDescriptionChanged} />
+
+        { !this.state.busyFavoriting && 
+          <React.Fragment>
+            <div><strong>Title:</strong></div>
+              <TextField placeholder="Enter custom title..."
+                ariaLabel="Please enter text here" multiline rows={3}
+                value={this.state.favoriteTitle} onChanged={this.onFavoriteTitleChanged} />
+
+            <br />
+
+            <div><strong>Description:</strong></div>
+            <TextField placeholder="Enter custom description..."
+              ariaLabel="Please enter text here" multiline rows={4}
+              value={this.state.favoriteDescription} onChanged={this.onFavoriteDescriptionChanged} />
+          </React.Fragment>
+        }
+
+        { this.state.busyFavoriting && 
+          <Spinner size={SpinnerSize.large} label="Saving report in favorite list, wait..." ariaLive="assertive" />
+        }
 
         <DialogFooter>
           <PrimaryButton onClick={this.favoriteDialogSaved} text="Save" />
@@ -305,7 +336,13 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     this.setState({ busyFavoriting: true});
     let itemId: number = parseInt(this.props.result.ListItemId);
     let favorite: IFavoriteState = await this.actionsService.FavoriteReport(
-      this.props.result.SPWebUrl, itemId, this.state.favoriteDescription || "");
+      this.props.result.SPWebUrl, 
+      itemId, 
+      this.state.favoriteDescription || "",
+      undefined,
+      undefined,
+      undefined,
+      this.state.favoriteTitle || undefined);
 
     const state = (favorite && favorite.isFavorite) 
       ? { ...this.state, isFavorite: true, favoriteId: favorite.favoriteId, busyFavoriting: false }
@@ -348,6 +385,13 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private onFavoriteDescriptionChanged(newValue: string) {
     this.setState({
       favoriteDescription: newValue || ""
+    });
+  }
+
+  @autobind
+  private onFavoriteTitleChanged(newValue: string) {
+    this.setState({
+      favoriteTitle: newValue || ""
     });
   }
 

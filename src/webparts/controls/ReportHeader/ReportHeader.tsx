@@ -31,7 +31,7 @@ export const ReportHeader: React.FunctionComponent<IReportHeaderProps> = props =
   return (
     <React.Fragment>
         <label className={styles.reportTitle}>{props.title}</label>
-        <HeaderSection title={"Last Modified"} value={props.lastModified} />
+        {/* <HeaderSection title={"Last Modified"} value={props.lastModified} /> */}
         <HeaderSection title={"Segment"} value={props.segment} />
         <HeaderSection title={"Function"} value={props.function} />
         <HeaderSection title={"Frequency"} value={props.frequency} />
