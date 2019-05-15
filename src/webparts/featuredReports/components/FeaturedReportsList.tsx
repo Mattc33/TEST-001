@@ -106,22 +106,22 @@ export class FeaturedReportsList extends React.Component<IFeaturedReportsListPro
               },
               isPadded: true
             },
-            {
-              key: 'lastModified',
-              name: 'Last Modified',
-              fieldName: 'SVPLastUpdated',
-              minWidth: 70,
-              maxWidth: 90,
-              isResizable: true,
-              isSorted: false,
-              isSortedDescending: true,
-              onColumnClick: this._onColumnClick,
-              data: 'number',
-              onRender: (item: IReportItem) => {
-                return <span>{item.ModifiedFormatted}</span>;
-              },
-              isPadded: true
-            },
+            // {
+            //   key: 'lastModified',
+            //   name: 'Last Modified',
+            //   fieldName: 'SVPLastUpdated',
+            //   minWidth: 70,
+            //   maxWidth: 90,
+            //   isResizable: true,
+            //   isSorted: false,
+            //   isSortedDescending: true,
+            //   onColumnClick: this._onColumnClick,
+            //   data: 'number',
+            //   onRender: (item: IReportItem) => {
+            //     return <span>{item.ModifiedFormatted}</span>;
+            //   },
+            //   isPadded: true
+            // },
             {
               key: 'segment',
               name: 'Segment',

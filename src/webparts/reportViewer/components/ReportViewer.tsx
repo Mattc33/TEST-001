@@ -21,7 +21,7 @@ import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../services";
 import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
 
-require("./ReportViewer.SPFix.css");
+// require("./ReportViewer.SPFix.css");
 
 export interface IReportViewerProps {
   description: string;
@@ -73,6 +73,16 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
     const viz = document.getElementById('VizContainer');
     const width = (viz) ? viz.clientWidth : 900;
+
+    const pageTitleEl = document.querySelector("div[class^='pageTitle_']") as HTMLElement;
+    if (pageTitleEl) {
+      pageTitleEl.style.display = "none";
+    }
+
+    const controlZoneEl = document.querySelector(".ControlZone") as HTMLElement;
+    if (controlZoneEl) {
+      controlZoneEl.style.marginTop = "0";
+    }
 
     viewerProps.actions.loadReportData(reportId, favReportId, 700, width);
   }

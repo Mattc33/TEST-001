@@ -140,20 +140,28 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             <li className="ms-ListItem ms-ListItem--document">
               <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
                 <span className="ms-ListItem-primaryText">
-                  <TooltipHost content={result.Title} id={this.titleTooltipId} calloutProps={{ gapSpace: 0 }}>
+                  <a className={styles.itemLink} href={reportURL} title={result.Title}>
+                    <span className={styles.itemTitle}>{reportTitle}</span>
+                  </a>
+                  {/* <TooltipHost content={result.Title} id={this.titleTooltipId} calloutProps={{ gapSpace: 0 }}>
                     <a className={styles.itemLink} href={reportURL}>
                       <span className={styles.itemTitle}>{reportTitle}</span>
                     </a>
-                  </TooltipHost>
+                  </TooltipHost> */}
                 </span>
                 <div className="datamkt-sub">
                   <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-                    &nbsp;
+                    <a className={styles.itemLink} href={reportURL} style={{display: "block"}}>
+                      &nbsp;
+                    </a>
                   </div>
                   <div className="datamkt-right">
-                    <TooltipHost content={result.SVPVisualizationDescription} id={this.descTooltipId} calloutProps={{ gapSpace: 0 }}>
-                      <span className="ms-ListItem-secondaryText">{reportDesc}</span>
-                    </TooltipHost>
+                    <a className={styles.itemLink} href={reportURL}>
+                      <span className="ms-ListItem-secondaryText" title={result.SVPVisualizationDescription}>{reportDesc}</span>
+                    </a>
+                      {/* <TooltipHost content={result.SVPVisualizationDescription} id={this.descTooltipId} calloutProps={{ gapSpace: 0 }}>
+                        <span className="ms-ListItem-secondaryText">{reportDesc}</span>
+                      </TooltipHost> */}
                     <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
                   </div>
                 </div>
@@ -218,6 +226,10 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
   @autobind
   private renderFavoriteDialog(): JSX.Element {
+    const subText = (!this.state.busyFavoriting)
+      ? "Enter a custom report title and description." 
+      : "";
+
     return (
       <Dialog
         hidden={this.state.favoriteDialogHidden}
@@ -225,7 +237,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
         dialogContentProps={{
           type: DialogType.largeHeader,
           title: 'Save Favorite',
-          subText: 'Enter a custom report title and description.' //'Enter a custom description. Only you will see this description. Others will see the default description for the visualization.'
+          subText: subText //'Enter a custom description. Only you will see this description. Others will see the default description for the visualization.'
         }}
         modalProps={{
           isBlocking: false,
