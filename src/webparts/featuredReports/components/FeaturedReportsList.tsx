@@ -5,6 +5,8 @@ import { autobind, Dropdown, IDropdownOption, ActionButton, MarqueeSelection, De
 import { IReportItem } from "../../../models";
 import { Button, Spinner, SpinnerSize, MessageBar, Link } from 'office-ui-fabric-react';
 
+require("./ReportView.SPFix.css");
+
 export interface IFeaturedReportsListProps {
   loading: boolean;
   items: Array<IReportItem>;
