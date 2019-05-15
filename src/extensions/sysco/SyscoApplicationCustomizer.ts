@@ -51,7 +51,7 @@ export default class SyscoApplicationCustomizer
     }*/
 
 
-    let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
+  /*  let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
     if (bottomPlaceholder) {
       bottomPlaceholder.domElement.innerHTML = `
         <div class="${styles.footContainer}">
@@ -63,7 +63,7 @@ export default class SyscoApplicationCustomizer
 
         </div>`;
     }
-
+*/
 
     return Promise.resolve();
   }

@@ -23,6 +23,18 @@
   }
 
 
+div[class^="featuredReportsList_"] div[class^="row_"]:nth-child(2) div[class^="column12_"] {
+    text-align:right;
+}
+
+div[class^="featuredReportsList_"] div[class^="row_"]:nth-child(2) div[class^="column12_"] button {
+    color:#008cd3;
+}
+
+button {
+    background:white;
+  }
+
   @media only screen and (max-width: 768px) {
     div[class^="filterarea_"] {
         display:none;
