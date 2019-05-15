@@ -9,8 +9,6 @@
 }
 
 
-
-
 .ms-DetailsHeader-cellName {
     font-weight: 600;
 }
@@ -23,3 +21,10 @@
 .ms-DetailsList div {
     background:white;
   }
+
+
+  @media only screen and (max-width: 768px) {
+    div[class^="filterarea_"] {
+        display:none;
+    }
+}
