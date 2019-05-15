@@ -1,30 +1,32 @@
-.discussionTitle
-{
-    color: rgb(10, 86, 121);
-    font-size: 15px;
+.discussionTitle {
+    color:#398bcc;
+    font-size:.9em;
     float: left;
     font-weight: 500;
 }
-.bold
-{
+
+.bold {
     font-weight: 600;
 }
 
-.linkButton
-{
+.linkButton {
  font-size: 12px;
  color:darkblue;
 }
 
-.parentReply
-{
+.parentReply {
     color:darkblue;
 }
-.Active
-{
+
+.Active {
     color: darkred !important;
 }
-.inActive
-{
+
+.inActive {
     color:darkblue !important;
 }
+
+ .ms-Panel-content div[class^="row_"] div[class^="column_"] > div:nth-child(2) {
+    font-size:.9em !important;
+    font-weight:800;
+ }
