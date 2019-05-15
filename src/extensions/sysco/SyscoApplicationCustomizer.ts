@@ -50,7 +50,7 @@ export default class SyscoApplicationCustomizer
         </div>`;
     }*/
 
-
+/*
     let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
     if (bottomPlaceholder) {
       bottomPlaceholder.domElement.innerHTML = `
@@ -118,7 +118,7 @@ export default class SyscoApplicationCustomizer
         </div>`;
     }
 
-
+*/
     return Promise.resolve();
   }
 }
