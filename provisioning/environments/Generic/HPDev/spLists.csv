@@ -1,8 +1,0 @@
-Execute,Title,Url,Template,OnQuickLaunch,EnableVersioning,EnableContentTypes,ContentType
-Yes,Visualization Documentation,Lists/Visualization Documentation,DocumentLibrary,No,Yes,Yes,Visualization Training Document
-
-Yes,Visualizations,Lists/Visualizations,GenericList,No,Yes,Yes,Tableau Visualization|Power BI Visualization|File Visualization
-Yes,User Profiles,Lists/UserProfiles,GenericList,No,Yes,Yes,User Profile
-Yes,Visualization Parameters,Lists/VisualizationParameters,GenericList,No,Yes,Yes,Visualization Parameter
-
-Yes,Favorites,Lists/Favorites,GenericList,No,Yes,Yes,Viewport Favorite

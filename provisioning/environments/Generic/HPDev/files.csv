@@ -1,7 +1,0 @@
-Execute,LocalPathAndFilename,RemoteFolderSiteRelativePath
-No,../search/configuration/DataMarketplaceTiles.html,Style%20Library/SlalomViewport/search/datamarketplace/resulttemplates
-Yes,../search/configuration/icons/power-bi.webp,Style%20Library/SlalomViewport/search/datamarketplace/icons
-Yes,../search/configuration/icons/qlik.webp,Style%20Library/SlalomViewport/search/datamarketplace/icons
-Yes,../search/configuration/icons/tableau.webp,Style%20Library/SlalomViewport/search/datamarketplace/icons
-Yes,../search/configuration/icons/excel.webp,Style%20Library/SlalomViewport/search/datamarketplace/icons
-Yes,../search/configuration/icons/pdf.webp,Style%20Library/SlalomViewport/search/datamarketplace/icons
