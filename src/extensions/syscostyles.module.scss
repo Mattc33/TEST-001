@@ -36,16 +36,14 @@ body {
 
 .footeritem5_second {
   color: white;
-    padding: 0 .75em;
-    text-align: left;
-    font-size: .75em;
+    padding: 1.5em 1.75em .5em 0;
+    font-size: .9em;
     font-style: italic;
-    
-  text-align:right;
-    width:100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    width: 80%;
+    text-align:right;
+    display:-webkit-box;
+    -webkit-box-pack: end;
+    float:right;
 }
 
 
@@ -56,14 +54,15 @@ body {
 
 .footeritem5_first {
     color: white;
-    padding: 0 .75em;
+    padding: 1em 1.5em;
     text-align: left;
     font-size: .75em;
     font-style: italic;
+    width: 20%;
 
     img {
-      width:23%;
-     }
+      width: 7em;
+  }
 }
 
 
@@ -109,24 +108,17 @@ body {
   .insideFoot {
     display:flex;
     justify-content:center;
-    padding:1em .5em 0 .5em;
+    width:100%;
   }
-
-  .insideFoot:last-child {
-    padding-bottom:2em;
-  }
-
 
 
   div[class^="footContainer_"], .footContainer{
     display: flex;
     background: #2b2f3f;
     justify-content: center;
-    position: absolute;
     display: flex; 
-    padding: 0 1em;
-    width: 99vw;
-    overflow-x:hidden;
+    width: 100%;
+    height: 50px;
     }
 
     
