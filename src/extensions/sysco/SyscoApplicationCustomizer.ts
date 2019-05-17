@@ -36,35 +36,20 @@ export default class SyscoApplicationCustomizer
     Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
 
     console.log("Available Placeholders: ", this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(","));
-/*
-    if(!this.headerplaceholder){
-      this.headerplaceholder =
-      this.context.placeholderProvider.tryCreateContent(
-        PlaceholderName.Top,
-        { //on dispose method
-        });
-        
-        this.headerplaceholder.domElement.innerHTML = `
-        <div class="${styles.firstclass}">
-        
-        </div>`;
-    }*/
-
-
-  /*  let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
+    /*
+    let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
     if (bottomPlaceholder) {
       bottomPlaceholder.domElement.innerHTML = `
         <div class="${styles.footContainer}">
 
           <div class="${styles.insideFoot}">
-                 <div class="${styles.footeritem5_first}"><img src="https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/SiteAssets/sysco_bw.png"></div>
+                 <div class="${styles.footeritem5_first}"><img src="https://sysco.sharepoint.com/sites/DASHQA/VisualizationAssets/Logos/sysco_bw.png"></div>
                  <div class="${styles.footeritem5_second}">&copy;2019 All Rights Reserved. Sysco Corporation.</div>
           </div>
 
         </div>`;
     }
-*/
-
+  */ 
     return Promise.resolve();
   }
 }
