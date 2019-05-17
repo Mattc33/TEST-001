@@ -12,7 +12,7 @@ export default class SearchResult extends React.Component<ISearchResultProps, {}
 
     let resultTiles: JSX.Element[] = this.props.searchResults.RelevantResults.map((result: ISearchResult) => {
       return (
-        <ResultTile result={result} currentUser={this.props.currentUser} />
+        <ResultTile key={result.ListItemId} result={result} currentUser={this.props.currentUser} />
       );
     });
 
