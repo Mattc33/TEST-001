@@ -80,12 +80,13 @@ div[class^="searchBoxContainer_"]{
 
 div[class^="pageTitle_"]{
   div[class^="contentBox"]{
-    // min-height:auto;
-    // padding-top: 12px !important;
     display: none !important;
   }
 }
 
+div[class^="webPartHeader_"] span {
+  font-size: .9em !important;;
+}
 
   div[class^="webPartChrome_"]{
     padding: 1em;
