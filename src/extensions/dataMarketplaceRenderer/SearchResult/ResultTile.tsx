@@ -377,7 +377,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   @autobind
   private showFavoriteDialog() {
     this.setState({
-      favoriteDialogHidden: false
+      favoriteDialogHidden: false,
+      favoriteDescription: this.props.result.SVPVisualizationDescription,
+      favoriteTitle: this.props.result.Title
     });
   }
 
