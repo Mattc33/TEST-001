@@ -21,6 +21,11 @@ import {
 } from "../../../models";
 import { PagedItemCollection } from '@pnp/sp';
 import * as moment from 'moment';
+interface MyWindow extends Window {
+    parseInt(): number;
+}
+  
+declare var window: MyWindow;
 
 export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IBaseStore> {
     private context: WebPartContext;
@@ -222,8 +227,12 @@ export class FeaturedReportsActions extends BaseAction<IFeaturedReportsState, IB
             ? state.pageSizes.split(',')
             : this.defaultPageSizes;
 
+        if (Number.parseInt === undefined) {
+            Number.parseInt = window.parseInt;
+            }
         return (pageSizes && pageSizes.length > 0 && !isNaN(Number.parseInt(pageSizes[0])))
             ? Number.parseInt(pageSizes[0]) : defaultSize;
+        //return (10);
     }
 
     @autobind
