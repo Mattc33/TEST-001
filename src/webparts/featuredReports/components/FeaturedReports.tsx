@@ -19,6 +19,12 @@ export interface IFeaturedReportsProps {
 
 require("./ReportView.SPFix.css");
 
+interface MyWindow extends Window {
+  parseInt(): number;
+}
+
+declare var window: MyWindow;
+
 export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> {
   private reportFilterRef: FeaturedReportsFilter;
 
@@ -93,6 +99,7 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
       this.reportFilterRef.resetFilters();
   }
 
+
   @autobind
   private handleOnFilterChange(name: string, value: string) {
     this.props.state.actions.updateFilter(name, value);
@@ -100,6 +107,9 @@ export class FeaturedReports extends React.Component<IFeaturedReportsProps, {}> 
 
   @autobind
   private handleOnPageSizeChange(value: string) {
+    if (Number.parseInt === undefined) {
+      Number.parseInt = window.parseInt;
+    }
     this.props.state.actions.updatePageSize(Number.parseInt(value));
   }
 
