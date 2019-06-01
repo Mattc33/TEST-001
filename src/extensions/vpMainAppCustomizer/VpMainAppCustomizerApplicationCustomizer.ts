@@ -1,0 +1,77 @@
+import { override } from '@microsoft/decorators';
+import { Log, SPEventArgs } from '@microsoft/sp-core-library';
+import {
+  BaseApplicationCustomizer,
+  PlaceholderContent,
+  PlaceholderName
+} from '@microsoft/sp-application-base';
+import styles from './mainAppstyles.module.scss';
+import * as strings from 'VpMainAppCustomizerApplicationCustomizerStrings';
+const LOG_SOURCE: string = 'VpMainAppCustomizerApplicationCustomizer';
+
+require('./mainAppbigstyles.module.scss');
+
+
+/**
+ * If your command set uses the ClientSideComponentProperties JSON input,
+ * it will be deserialized into the BaseExtension.properties object.
+ * You can define an interface to describe it.
+ */
+export interface IVpMainAppCustomizerApplicationCustomizerProperties {
+  // This is an example; replace with your own property
+  testMessage: string;
+}
+
+/** A Custom Action which can be run during execution of a Client Side Application */
+export default class VpMainAppCustomizerApplicationCustomizer
+  extends BaseApplicationCustomizer<IVpMainAppCustomizerApplicationCustomizerProperties> {
+
+  @override
+  public onInit(): Promise<void> {
+    Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
+
+    console.log(`LCEVENT:onInit=${window.location.href}`);
+
+    if (!(window as any).isNavigatedEventSubscribed) {
+      this.context.application.navigatedEvent.add(this, this.logNavigatedEvent);
+      (window as any).isNavigatedEventSubscribed = true;
+    }
+
+    console.log("Available Placeholders: ", this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(","));
+    /*
+    let bottomPlaceholder: PlaceholderContent = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Bottom);
+    if (bottomPlaceholder) {
+      bottomPlaceholder.domElement.innerHTML = `
+        <div class="${styles.footContainer}">
+          <div class="${styles.insideFoot}">
+                 <div class="${styles.footeritem5_first}"><img src="https://{xxxxxx.sharepoint.com}/sites/DASHQA/VisualizationAssets/Logos/sysco_bw.png"></div>
+                 <div class="${styles.footeritem5_second}">&copy;2019 All Rights Reserved. Sysco Corporation.</div>
+          </div>
+        </div>`;
+    }
+  */ 
+    return Promise.resolve();
+  }
+
+  @override
+  public onDispose(): Promise<void> {
+
+    console.log(`LCEVENT:onDispose=${window.location.href}`);
+    this.context.application.navigatedEvent.remove(this, this.logNavigatedEvent);
+    (window as any).isNavigatedEventSubscribed = false;
+    (window as any).currentPage = '';
+
+    return Promise.resolve();
+  }
+
+  public logNavigatedEvent(args: SPEventArgs): void {
+    setTimeout(() => {
+      if ((window as any).currentPage !== window.location.href) {
+        // REGISTER PAGE VIEW HERE >>>
+        console.log(`LCEVENT:navigatedEvent=${window.location.href}`);
+        (window as any).currentPage = window.location.href;
+      }
+    }, 3000);
+  }
+
+}

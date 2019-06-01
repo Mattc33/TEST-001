@@ -10,15 +10,14 @@ html {
   font-family: 'open_sansregular';
   font-style: normal;
   font-weight: normal;
-  src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+  src: local('open_sansregular'), url('../vpMainAppCustomizer/fonts/opensans-regular-webfont.woff') format("woff");
   }
-
 
   @font-face {
     font-family: 'open_sanslight';
     font-style: normal;
     font-weight: normal;
-    src: local('open_sanslight'), url('fonts/opensans-light-webfont.woff') format("woff");
+    src: local('open_sanslight'), url('../vpMainAppCustomizer/fonts/opensans-light-webfont.woff') format("woff");
     }
 
 
@@ -26,14 +25,14 @@ html {
       font-family: 'open_sansbold';
       font-style: normal;
       font-weight: normal;
-      src: local('open_sansbold'), url('fonts/opensans-bold-webfont.woff') format("woff");
+      src: local('open_sansbold'), url('../vpMainAppCustomizer/fonts/opensans-bold-webfont.woff') format("woff");
       }
 
 @font-face {
   font-family: 'open_sansregular';
   font-style: normal;
   font-weight: normal;
-  src: local('open_sansregular'), url('fonts/opensans-regular-webfont.woff') format("woff");
+  src: local('open_sansregular'), url('../vpMainAppCustomizer/fonts/opensans-regular-webfont.woff') format("woff");
   }
 
 
@@ -108,7 +107,7 @@ span[class^="ms-Dropdown-caretDownWrapper"] i{
   
 span[class^="ms-Dropdown-caretDownWrapper"]{
   width: .7em;
-  background-image: url("../extensions/sysco/images/blackcaret.png");
+  background-image: url("../vpMainAppCustomizer/images/blackcaret.png");
   background-repeat: no-repeat;
   background-size: contain;
   margin-top: .9em;  

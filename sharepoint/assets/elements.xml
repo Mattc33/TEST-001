@@ -2,6 +2,6 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <CustomAction Title="DataMarketplaceRenderer" Location="ClientSideExtension.ApplicationCustomizer" ClientSideComponentId="4c745113-7612-4aa3-a670-d110298e2fff" ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
     </CustomAction>
-    <CustomAction Title="sysco" Location="ClientSideExtension.ApplicationCustomizer" ClientSideComponentId="c1362c3b-6bf1-481d-b644-ff11910d59b2" ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    <CustomAction Title="vpMainAppCustomizer" Location="ClientSideExtension.ApplicationCustomizer" ClientSideComponentId="80d346cb-64e2-4cdf-8836-ddbc841311b9" ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
     </CustomAction>
 </Elements>
