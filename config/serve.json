@@ -30,14 +30,14 @@
         }
       }
     },
-    "sysco": {
+    "vpMainAppCustomizer": {
       "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
-        "c1362c3b-6bf1-481d-b644-ff11910d59b2": {
+        "80d346cb-64e2-4cdf-8836-ddbc841311b9": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
             "testMessage": "Test message"
-          }
+          }
         }
       }
     }

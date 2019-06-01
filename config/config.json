@@ -90,19 +90,19 @@
         }
       ]
     },
-    "sysco-application-customizer": {
-      "components": [
-        {
-          "entrypoint": "./lib/extensions/sysco/SyscoApplicationCustomizer.js",
-          "manifest": "./src/extensions/sysco/SyscoApplicationCustomizer.manifest.json"
-        }
-      ]
-    },
     "news-rotator-web-part": {
       "components": [
         {
           "entrypoint": "./lib/webparts/newsRotator/NewsRotatorWebPart.js",
           "manifest": "./src/webparts/newsRotator/NewsRotatorWebPart.manifest.json"
+        }
+      ]
+    },
+    "vp-main-app-customizer-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/vpMainAppCustomizer/VpMainAppCustomizerApplicationCustomizer.js",
+          "manifest": "./src/extensions/vpMainAppCustomizer/VpMainAppCustomizerApplicationCustomizer.manifest.json"
         }
       ]
     }
@@ -123,7 +123,7 @@
     "DataMarketplaceRendererApplicationCustomizerStrings": "lib/extensions/dataMarketplaceRenderer/loc/{locale}.js",
     "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js",
     "FeaturedReportsWebPartStrings": "lib/webparts/featuredReports/loc/{locale}.js",
-    "SyscoApplicationCustomizerStrings": "lib/extensions/sysco/loc/{locale}.js",
-    "NewsRotatorWebPartStrings": "lib/webparts/newsRotator/loc/{locale}.js"
+    "NewsRotatorWebPartStrings": "lib/webparts/newsRotator/loc/{locale}.js",
+    "VpMainAppCustomizerApplicationCustomizerStrings": "lib/extensions/vpMainAppCustomizer/loc/{locale}.js"
   }
 }
