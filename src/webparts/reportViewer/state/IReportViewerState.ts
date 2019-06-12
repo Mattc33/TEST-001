@@ -40,5 +40,9 @@ export interface IReportViewer {
   busyDiscussionUpdates?: boolean;
   discussionInitialized?: boolean;
   discussion?: IReportDiscussion;
-
+  
+  useSentimentService: boolean;
+  sentimentServiceAPIUrl: string;
+  sentimentServiceAPIKey: string;
+  sentimentScore?: number;
 }

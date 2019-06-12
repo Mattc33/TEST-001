@@ -14,3 +14,8 @@ export interface IReportDiscussionReply {
     parentReplyId?: number;
     likes?:number[];
 }
+
+export interface ISentimentReply {
+    Id:number;
+    replyBody?:string;
+}

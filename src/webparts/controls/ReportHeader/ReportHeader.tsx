@@ -8,6 +8,9 @@ export interface IReportHeaderProps {
     segment?: string;
     function?: string;
     frequency?: string;
+
+    likeCount?:string;
+    viewCount?:string;
 }
 
 export interface IHeaderSectionProps {
@@ -35,6 +38,8 @@ export const ReportHeader: React.FunctionComponent<IReportHeaderProps> = props =
         <HeaderSection title={"Segment"} value={props.segment} />
         <HeaderSection title={"Function"} value={props.function} />
         <HeaderSection title={"Frequency"} value={props.frequency} />
+        <HeaderSection title={"Likes Count"} value={props.likeCount} />
+        <HeaderSection title={"Views Count"} value={props.viewCount} />
         <hr className={styles.divider} />
     </React.Fragment>
   );

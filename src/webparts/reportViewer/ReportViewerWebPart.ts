@@ -5,7 +5,7 @@ import { Version } from "@microsoft/sp-core-library";
 import { 
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
-  PropertyPaneSlider
+  PropertyPaneToggle
 } from "@microsoft/sp-property-pane";
 
 import { ITableauReportViewerConfig } from "../../models";
@@ -20,6 +20,9 @@ export interface IReportViewerWebPartProps extends ITableauReportViewerConfig {
   // SVPTableauToolbar: string;
   // SVPDefaultReportHeight: number;
   // SPVDefaultReportWidth: number;
+  SVPUseSentimentService: boolean;
+  SVPSentimentServiceAPI: string;
+  SVPSentimentServiceKey: string;
 }
 
 export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPartProps> {
@@ -36,7 +39,10 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
         tableauReportConfig: {
           SVPTableauJavaScriptURL: this.properties.SVPTableauJavaScriptURL,
           SVPTableauToolbar: this.properties.SVPTableauToolbar
-        }
+        },
+        SVPUseSentimentService:this.properties.SVPUseSentimentService,
+        SVPSentimentServiceAPI:this.properties.SVPSentimentServiceAPI,
+        SVPSentimentServiceKey:this.properties.SVPSentimentServiceKey
     });
 
     ReactDom.render(element, this.domElement);
@@ -82,6 +88,15 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
             {
               groupName: "Report Viewer Advance Settings",
               groupFields: [
+                PropertyPaneToggle("SVPUseSentimentService", {
+                  label: "Use Sentiment Service"
+                }),
+                PropertyPaneTextField("SVPSentimentServiceAPI", {
+                  label: "Sentiment Service API"
+                }),
+                PropertyPaneTextField("SVPSentimentServiceKey", {
+                  label: "Sentiment Service Key"
+                })
               ]
             }
           ]

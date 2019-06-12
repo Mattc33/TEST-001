@@ -1,3 +1,4 @@
+import { number } from "prop-types";
 
 export interface IReportParameters {
     Id: number;
@@ -41,6 +42,8 @@ export interface IReportItem {
     SVPCategory?: string;
     SVPVisualizationParameters?: Array<IReportParameters>;
     SVPVisualizationMetadata?: any;
+
+    ReportAnalytics?:IReportAnalytics;
 }
 
  export interface IReportBasicItem {
@@ -77,3 +80,7 @@ export enum ReportFavoriteType {
     Parameterized = "Parameterized"
 }
   
+export interface IReportAnalytics{
+    LikeCount:number;
+    ViewCount:number;
+}

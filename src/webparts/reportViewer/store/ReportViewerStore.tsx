@@ -25,7 +25,10 @@ export class ReportViewerStore extends BaseStore<IReportViewerStoreProps, IRepor
         actions: viewerActions, 
         loading: false,
         loadingDiscussion: false,
-        discussionInitialized: false
+        discussionInitialized: false,
+        useSentimentService: props.storeState.SVPUseSentimentService,
+        sentimentServiceAPIUrl: props.storeState.SVPSentimentServiceAPI,
+        sentimentServiceAPIKey: props.storeState.SVPSentimentServiceKey
       } 
     };
   }

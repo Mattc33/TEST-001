@@ -19,7 +19,11 @@ import {
   ReportDiscussionService,
   FavoriteType, 
   withErrHandler, 
-  IFavoriteState} from "../../../services";
+  IFavoriteState
+} from "../../../services";
+
+//import {} from "../../../services/AnalyticsServices"
+
 import { normalize } from "normalizr";
 import { BaseAction, IBaseStore } from "../../../base";
 import { 
@@ -28,9 +32,16 @@ import {
   IUserProfile, 
   IReportDiscussion,
   IReportDiscussionReply, 
-  IFavoriteReport
+  IFavoriteReport,
+  IReportAnalytics,
+  ISentimentReply
 } from "../../../models";
 import * as moment from 'moment';
+import { imageProperties } from '@uifabric/utilities';
+import { SentimentService } from '../../../services/AnalyticsServices/SentimentService';
+import { ISentimentService } from '../../../services/interfaces/ISentimentService';
+
+import {HttpClient} from "@microsoft/sp-http";
 
 export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStore> {
   private context: WebPartContext;
@@ -38,6 +49,8 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   private userProfileApi: IUserProfileService;
   private favoriteApi: ReportActionsService;
   private discussionApi:ReportDiscussionService;
+  private sentimentApi:SentimentService;   
+  private _httpClient: HttpClient;
 
   constructor(store: IBaseStore, context: WebPartContext) {
     super(store);
@@ -47,6 +60,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     this.userProfileApi = new UserProfileService();
     this.favoriteApi = new ReportActionsService();
     this.discussionApi= new ReportDiscussionService();
+    this.sentimentApi = new SentimentService(this.context);
   }
 
   @autobind
@@ -97,6 +111,8 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     if (modDate) {
       report.ModifiedFormatted = moment(modDate).format("M/D/YY");
     }
+
+    report.ReportAnalytics = await this.getReportAnalytics(reportId);
     //expect null 'userProfile' (Profile filtering not used by Sysco)
     //const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 
@@ -111,26 +127,33 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   }
   
   @autobind
-  public async loadReportDiscussion(reportId: number, reportTitle: string) {
+  public async loadReportDiscussion(reportId: number, reportTitle: string, useSentimentService: boolean, sentimentServiceAPIKey: string, sentimentServiceAPIUrl: string) {
     this.dispatch({ loadingDiscussion: true, error: null });
     const state: IReportViewer = this.getState()[REPORT_VIEWER_PATH];
 
     let discussion: IReportDiscussion;
     let replies: Array<IReportDiscussionReply> = undefined;
+    let sentimentScore = -10;
 
     if (state.discussionInitialized) {
       //get from Cache
       discussion = { ...state.discussion };
       replies = [ ...state.discussion.replies ];
+      sentimentScore = state.sentimentScore ;
       console.info('loadReportDiscussion > loading from state', discussion);
+      console.info('sentimentScore > loading from state', sentimentScore);
     }
     else {
      discussion= await this.discussionApi.loadDiscussion(this.context.pageContext.web.absoluteUrl,this.context.pageContext.web.serverRelativeUrl,reportId,reportTitle);
+     if(useSentimentService) {
+        sentimentScore = await this.getSentimentFromReportDiscussion(discussion, sentimentServiceAPIKey, sentimentServiceAPIUrl);
+     }
     }
 
     this.dispatch({ 
       loadingDiscussion: false,
       discussion,
+      sentimentScore,
       discussionInitialized: true 
     });
   }
@@ -302,6 +325,33 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     });
   }
 
+  @autobind
+  private async getSentimentFromReportDiscussion(reportDiscussion: IReportDiscussion, sentimentServiceAPIKey: string, sentimentServiceAPIUrl: string) {
+    
+    if(reportDiscussion.replies.length>0){
+      const sentimentReplies: ISentimentReply[] = reportDiscussion.replies.map((c) => {
+          const comment: ISentimentReply = {
+              Id: c.replyId,
+              replyBody: c.replyBody
+          };
+          return comment;
+      });
+      const score = await this.sentimentApi.GetSentimentScore(sentimentReplies, sentimentServiceAPIKey, sentimentServiceAPIUrl);
+      
+      return score*5;
+    }
+  }
+
+  private async getReportAnalytics(reportID:number)
+  {
+    var reportAnalytics:IReportAnalytics = <any>{};
+
+    //TODO - SKS - Get Data from Viz Ext List.
+    reportAnalytics.LikeCount=12;
+    reportAnalytics.ViewCount=14;
+
+    return reportAnalytics;
+  }
   // private async dispatchByPath(path: string, incoming: any) {
   //   await this.dispatcherByPath(path, incoming);
   // }

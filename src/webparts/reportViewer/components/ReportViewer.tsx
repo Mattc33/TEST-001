@@ -47,7 +47,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
     this.state = {  
       showSaveFavoriteDialog: false,
-      showReportDiscussionDialog: false
+      showReportDiscussionDialog: false,
     };
   }
 
@@ -101,7 +101,10 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
               lastModified={this.props.state.report.ModifiedFormatted}
               segment={this.props.state.report.SVPMetadata1} 
               function={this.props.state.report.SVPMetadata2}
-              frequency={this.props.state.report.SVPMetadata3}/>
+              frequency={this.props.state.report.SVPMetadata3}
+              likeCount={this.props.state.report.ReportAnalytics.LikeCount.toString()}
+              viewCount={this.props.state.report.ReportAnalytics.ViewCount.toString()}
+              />
           }
 
           {!this.props.state.loading && this.props.state.report &&
@@ -133,6 +136,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
               discussion={this.props.state.discussion}
               action={this.props.state.actions}
               onCancel={() => this.setReportDiscussionDialog(false)}
+              score = {this.props.state.sentimentScore}
             />
           }
 
@@ -248,7 +252,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   private handleReportDiscussion() {
     const report = this.props.state.report;
     if (report) {
-      this.props.state.actions.loadReportDiscussion(report.Id, report.Title);
+      this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportDiscussionDialog(true);
     }
   }
