@@ -7,10 +7,18 @@ import { Logger, LogLevel } from '@pnp/logging';
 import styles from '../../reportViewer/components/ReportViewer.module.scss';
 import * as moment from 'moment';
 import { ReportActivityItem } from './ReportActivityItem';
+import { Rating, RatingSize } from "office-ui-fabric-react/lib/Rating";
+import { ProgressIndicator } from "office-ui-fabric-react/lib/ProgressIndicator";
 import * as _ from 'lodash';
+interface MyWindow extends Window {
+  parseFloat(): number;
+}
+
+declare var window: MyWindow;
 export interface IReportDiscussionDialogProps {
   discussion?: IReportDiscussion;
   action?: ReportViewerActions;
+  score?:number;
 
   onCancel(): void;
 }
@@ -50,6 +58,9 @@ export class ReportDiscussionDialog extends React.Component<IReportDiscussionDia
   public render(): React.ReactNode {
     const activityList: Array<JSX.Element> = this.createActivity(this.props.discussion.replies);
 
+    const rating: number = this.props.score;
+    console.info('ReportDiscussionDialog from props: ', rating);
+
     return (
       <Panel
         isOpen={this.state.showDialog}
@@ -61,19 +72,23 @@ export class ReportDiscussionDialog extends React.Component<IReportDiscussionDia
         <div className={styles.row}>
           <div className={styles.column}>
             <div className='discussionTitle'>ViewPort Discussion Forum</div>
-            <div style={{ float: "left", fontSize: '15px' }}>: {this.props.discussion.title}</div>
+            <div style={{ fontSize: '18px', fontWeight: 500 }}>: {this.props.discussion.title}</div>
           </div>
         </div>
 
         <div className={styles.row} style={{ clear: 'left' }}>
-          <div className={styles.column}>
-            <span style={{ fontWeight: 600 }}> {this.props.discussion.replies.length}</span>  Replies
+          <div className={styles.column} style={{ display: 'flex' }}>
+            Post and Replies Count:&nbsp;<span style={{ fontWeight: 600 }}>{this.props.discussion.replies.length}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+            Discussion Sentiment:&nbsp;
+            {(rating===-10) 
+                  ? <span>Disabled by Admin</span> 
+                  : <span className={styles.sentimentHeader} style={{ marginTop: '-9px'}}><Rating size={RatingSize.Small} rating={rating} readOnly={true} /></span>
+            }
           </div>
         </div>
 
         <div className={styles.row} style={{ clear: 'left', marginBottom: '5px', marginTop: '10px' }}>
           <div className={styles.column}>
-            <div style={{ fontSize: '18px', fontWeight: 500 }}>{this.props.discussion.title} </div>
             <Link onClick={() => this.sortDiscussionReplies('Descending')} className={this.state.sortOrder==='Descending'?'Active':'inActive'}>Newest</Link>{' | '}
             <Link onClick={() => this.sortDiscussionReplies('Ascending')}  className={this.state.sortOrder==='Ascending'?'Active':'inActive'}>Oldest</Link>
           </div>
@@ -88,7 +103,7 @@ export class ReportDiscussionDialog extends React.Component<IReportDiscussionDia
         <div className={styles.row} style={{ clear: 'left', marginTop: '15px', marginBottom: '5px' }}>
           <div className={styles.column} >
             <div style={{ width: '420px', float: 'left', marginRight: '5px' }}>
-              <TextField onChanged={this._onChanged} styles={{ fieldGroup: { width: 420 } }} placeholder='Add reply' value={this.state.postReply}></TextField>
+              <TextField onChanged={this._onChanged} styles={{ fieldGroup: { width: 420 } }} placeholder='Add post' value={this.state.postReply}></TextField>
             </div>
             <PrimaryButton disabled={(!(this.state.postReply.length > 0)) || this.state.loading} onClick={this.handleAdd}>Post</PrimaryButton>
           </div>

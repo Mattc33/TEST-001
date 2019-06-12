@@ -20,6 +20,7 @@ require('./mainAppbigstyles.module.scss');
 export interface IVpMainAppCustomizerApplicationCustomizerProperties {
   // This is an example; replace with your own property
   testMessage: string;
+  trackingID: string;
 }
 
 /** A Custom Action which can be run during execution of a Client Side Application */
@@ -50,7 +51,31 @@ export default class VpMainAppCustomizerApplicationCustomizer
         </div>`;
     }
   */ 
-    return Promise.resolve();
+
+
+    //Implementing Google Analytics - START
+    let trackingID: string = this.properties.trackingID;
+    if (!trackingID) {
+      Log.info(LOG_SOURCE, "Tracking ID not provided");
+    }else{
+      var gtagScript = document.createElement("script");
+      gtagScript.type = "text/javascript";
+      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${trackingID}`;    
+      gtagScript.async = true;
+      document.head.appendChild(gtagScript);  
+  
+      eval(`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());    
+        gtag('config',  '${trackingID}');
+      `);
+    }
+    //Implementing Google Analytics - END
+  
+  return Promise.resolve();
+  
+   
   }
 
   @override
@@ -69,6 +94,7 @@ export default class VpMainAppCustomizerApplicationCustomizer
       if ((window as any).currentPage !== window.location.href) {
         // REGISTER PAGE VIEW HERE >>>
         console.log(`LCEVENT:navigatedEvent=${window.location.href}`);
+        //TODO: Read the User and Time and Page URL and Write in table somewhere.
         (window as any).currentPage = window.location.href;
       }
     }, 3000);
