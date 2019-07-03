@@ -125,7 +125,7 @@ export class ReportActionsService {
       result = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
         .getById(likeItemId)
         .update({
-          "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}`,
+          "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}| Views Count: 1`,
           "SVPLikes": cleanLikes
         });
     }
@@ -176,6 +176,18 @@ export class ReportActionsService {
 
     return (likeItems && likeItems.length > 0 )
       ? likeItems[0]
+      : null;
+  }
+
+  public async getReportLikeCount(webUrl: string, reportId: number): Promise<string> {
+    let web: Web = await new Web(webUrl);
+    let likeItems: string = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
+      .select("Title")
+      .filter(`SVPVisualizationLookupId eq ${reportId}`)
+      .get();
+
+    return (likeItems && likeItems.length > 0 )
+      ? likeItems[0]["Title"]
       : null;
   }
 }

@@ -346,10 +346,11 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
   {
     var reportAnalytics:IReportAnalytics = <any>{};
 
-    //TODO - SKS - Get Data from Viz Ext List.
-    reportAnalytics.LikeCount=12;
-    reportAnalytics.ViewCount=14;
-
+   
+    const likeViewCount= await this.favoriteApi.getReportLikeCount(this.context.pageContext.web.absoluteUrl,reportID);
+    console.log("likeViewCount",likeViewCount);
+    reportAnalytics.LikeCount=(likeViewCount!==null && likeViewCount.split("|")[0].length>0)?parseInt(likeViewCount.split("|")[0].split(":")[1]):0;
+    reportAnalytics.ViewCount=(likeViewCount!==null && likeViewCount.split("|")[1].length>0)?parseInt(likeViewCount.split("|")[1].split(":")[1]):0;
     return reportAnalytics;
   }
   // private async dispatchByPath(path: string, incoming: any) {
