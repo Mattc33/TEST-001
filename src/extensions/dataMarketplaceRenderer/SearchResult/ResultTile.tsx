@@ -76,7 +76,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
   private isNotLikedIconElement: JSX.Element = (
     <span onClick={this.addLike}>
-      <i className={"ms-Icon ms-Icon--LikeSolid" + this.unselectedStyle} aria-hidden="true"></i>&nbsp;
+      <i className={"ms-Icon ms-Icon--Like" + this.unselectedStyle} aria-hidden="true"></i>&nbsp;
       <span className={styles.itemUnselected}>Like</span>
     </span>
   );
@@ -113,6 +113,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       favoriteId: favorite.favoriteId,
       isLiked: isLiked
     });
+    
   }
 
   @autobind
@@ -176,8 +177,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
                       <span>
                         { this.shareIconElement }
                       </span>
-                      { !hideLike && 
+                      { hideLike && 
                         <span>
+                         
                           { this.state.busyLiking && this.busyElement }
                           { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
                           { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
