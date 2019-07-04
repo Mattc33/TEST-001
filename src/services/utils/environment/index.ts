@@ -13,6 +13,6 @@ export const getSiteOptions: Function = (siteUrl: string): ISiteOptions => {
 
      const key: string = (siteUrl || "").toLowerCase();
 
-     return environmentMap[key] as ISiteOptions;
+     return environmentMap[key] as ISiteOptions || viewport.atlanticDevOptions;
 
 };
