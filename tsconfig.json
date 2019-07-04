@@ -22,7 +22,8 @@
       "es6-promise",
       "webpack-env",
       "microsoft-ajax",
-      "sharepoint"
+      "sharepoint",
+      "node"
     ],
     "lib": [
       "dom",

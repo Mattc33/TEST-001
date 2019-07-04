@@ -1,0 +1,547 @@
+.artist-landing-page__title {
+
+    font-size: 2.5em;
+    padding: 0 .5em 0 0 !important;
+
+}
+
+
+//one sheet button
+.green-btn {
+
+    background: $green;
+    border:1px solid $black;
+    padding: 5px;
+    text-align:left;
+    display: flex;
+
+        img {      
+            padding: .2em;
+        }
+
+        .btn-txt {
+            color: white;
+            padding-right: .7em;
+            font-size: 1.1em !important;
+        }
+
+        span {
+            padding-top:.4em !important;
+        }
+
+}
+
+
+
+//Artist page tabs
+.artist-sections {
+
+    height: 100vh;
+
+    .nav-item {
+
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+        flex-basis:0;
+        margin: .2em;
+        align-items:center;
+        border-radius: 0px !important;
+        background-color: $white !important;
+        text-align:center;
+        border:1px solid $black;
+        font-size:1em;
+        height: 40px;
+
+    }
+
+    .nav-item--active {
+
+        background-color: $light-grey !important;
+
+    }
+
+    .nav-item__btn {
+
+        margin-left: auto;
+
+    }
+
+    .nav-item__spacer {
+
+        margin-right: auto;
+
+    }
+
+    .nav-item__title {
+
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+
+    .nav-link {
+
+        color:#000;
+        text-align:center;
+        font-family: $headings-font-family !important;
+        text-decoration:none !important;
+        width:100%;
+        height:100%;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .nav-link:hover {
+
+        background-color: $light-grey !important;
+        color: $black;
+
+    }
+
+    ul.nav-pills.nav-justified {
+
+        display: flex;
+
+    }
+
+}
+
+.nav-pills.nav-justified > li.active > a, 
+.nav-pills.nav-justified > li.active > a:hover, 
+.nav-pills.nav-justified > li.active > a:focus {
+
+    background-color: #eee !important;
+    color: $black;
+
+}
+
+
+//My artists dropdown
+
+div.top-right-artists {
+
+    width: 100% !important;
+    margin: 0 1em;
+
+}
+
+
+.btn.btn-default.dropdown-toggle {
+
+    text-align: left;
+
+}
+
+.row__text {
+
+    font-weight: 600;
+    font-size: 1em;
+    padding-left: 0px;
+
+}
+
+.row__text--grey {
+
+    color: $gray-light;
+    
+}
+
+.atlantic-right {
+
+    height: 100vh;
+    padding: 0 !important;
+    border-left:1px solid $brand-neutral-light;
+
+}
+
+.artist-team__link {
+
+    text-decoration:underline !important;
+    font-size: 1em !important;
+    color: $dark-grey !important;
+
+}
+
+.artist-team__contact {
+
+    font-size: 1em !important;
+    color: $gray !important;
+    line-height:1.5em;
+
+}
+
+.no-touch .scrollable.hover {
+
+    overflow-y:hidden;
+
+}
+
+.no-touch .scrollable.hover:hover {
+
+    overflow-y:auto;
+    overflow:visible;
+
+}
+
+a:hover,a:focus {
+
+    text-decoration:none;
+
+}
+
+nav {
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -o-user-select:none;
+    user-select:none;
+
+}
+
+nav ul,nav li {
+
+    outline:0;
+    margin:0;
+    padding:0;
+
+}
+
+.marketing-plan__date-status-anchors li:hover > a,
+nav.marketing-plan__date-status-anchors li.active > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+.dashboard-page nav.dashboard-menu ul li.active a {
+
+    color:#fff;
+
+}
+
+.icon--green {
+
+    color: $green;
+    
+}
+
+.icon--grey {
+
+    color: $grey;
+    
+}
+
+.artist-about__info-styles div a {
+
+    font-family: $font-family-base;
+    line-height:1.5em;
+
+}
+
+.artist-about__info-styles, 
+.artist-about--contentarea {
+
+    h1, h2, h3, h4, h5, h6 {
+
+        font-family: $site-font-bold !important;
+
+    }
+
+}
+
+//these styles are best as relative to other styles because these padding and margins are contextual
+.artist__under-tabs .container-fluid {
+
+    padding: 0;
+
+}
+
+.artist-about--contentarea .ms-webpart-zone.ms-fullWidth > div:first-of-type,
+.artist-about__info-styles .ms-webpart-zone.ms-fullWidth > div:first-of-type {
+
+    margin-top: 0em !important;
+
+}
+
+.artist-about--contentarea .ms-webpart-zone.ms-fullWidth > div,
+.artist-about__info-styles .ms-webpart-zone.ms-fullWidth > div {
+
+    margin-top: 1.6em !important;
+
+}
+
+
+div#artist-team__container .row {
+
+    margin-top: .75em !important;
+
+}
+
+div#artist-team__container .row:first-of-type {
+
+    margin-top: 0em !important;
+
+}
+
+//find artists top right
+
+.my-artist--spacing {
+
+    justify-content: space-between;
+
+}
+
+.my-artist--spacing .form-inline {
+
+    flex-grow: 1;
+
+}
+
+.my-artist--spacing select {
+
+    width:100% !important;
+
+}
+
+.find-artist--width, .find-artist--width > div, .pull-right.inputtext {
+
+    width: 100% !important;
+
+}
+
+
+.rbt-input-wrapper,
+.rbt-input-wrapper > div {
+
+  width:100%;
+
+}
+
+.rbt-input-wrapper > div {
+
+  background: url("../../_wmg-portal/images/search-icon.png") no-repeat;
+  background-size: 1.35em;
+  background-position: 98% 50%;
+
+}
+
+.find-artist--width .rbt-input-wrapper > div > input {
+
+   padding:0.5em !important;
+
+}
+
+.rbt-input-hint{
+
+    display: none !important;
+
+}
+
+.one-sheet__icon {
+
+    font-size: 1em;
+    margin-left: -.3em !important;
+    //margin-right:0;
+
+}
+
+.modal__checkbox--spacing {
+
+    flex-basis:100% !important;
+
+}
+
+.people-picker__height-small {
+
+    padding: .1em !important;
+
+}
+
+.break {
+
+    clear: both !important;
+    min-height: 100vh !important;
+
+}
+
+.artist__under-tabs {
+
+    overflow-y: scroll;
+
+}
+
+.row.break {
+
+    border-bottom: 12px solid black;
+
+}
+
+  
+.artist-page--print-button {
+
+    padding: .4em 1em !important;
+    border:1px solid black;
+    margin-right: .5em;
+
+}
+  
+
+.artist-page--tab-nav {
+
+    margin-top: 1em !important;
+
+}
+
+.artist-page--tab-nav:first-of-type {
+
+    margin-top: 0em;
+
+}
+
+.artist-page--tab-nav li.nav-item.active a.nav-link {
+
+    font-size: 1.8em !important;
+    //kcasamento is going to say this style is too nested but in this case it is really helpful
+
+}
+
+
+.marketing-plan__tab-title {
+
+    text-align: left;
+    width: -webkit-fill-available;
+
+}
+
+
+.calendar__left-filters {
+
+    margin-left: -.5em;
+    margin-right: .5em;
+    margin-bottom: 1em;
+
+}
+
+.artist-page__header 
+> div:first-of-type {
+
+    height: fit-content;
+
+}
+
+
+.artist-page__header 
+> div:nth-of-type(2) {
+    
+    height: fit-content;
+
+}
+
+
+.document-button-rollup > button {
+
+    height: auto !important;
+    text-align:left;
+    display: inline !important;
+    margin-left: 5px !important;
+}
+
+.document-button-rollup button {
+
+    min-height: 40px;
+    margin-left: 5px !important;
+    display: inline !important;
+}
+
+.my-artist--spacing {
+
+    overflow: hidden;
+
+}
+
+.artist__calendar-section .universal__content--styles {
+
+    margin-top: 1em;
+
+    .ms-webpart-zone.ms-fullWidth > div {
+
+        padding: 0 1em .5em 1em !important;
+        
+    }
+
+}
+
+
+div#artist__about-section {
+
+    overflow-y: auto;
+
+    .universal__content--styles {
+
+        margin-top: 1.5em;
+    
+        .ms-webpart-zone.ms-fullWidth > div {
+
+            padding: 0 1em .5em 1em !important;
+            
+        }
+    }
+    
+}
+
+
+.artist-about--contentarea .ms-webpart-zone.ms-fullWidth > div:first-of-type,
+.artist-about__info-styles .ms-webpart-zone.ms-fullWidth > div:first-of-type {
+
+    margin-top: 0em !important;
+
+}
+
+
+.artist-about--contentarea .ms-webpart-zone.ms-fullWidth > div:first-of-type {
+
+    background-color: #f5f5f5;
+
+}
+  
+div#artist__about-section .artist-about--contentarea .ms-webpartzone-cell {
+
+    border: 2px #eee solid;
+
+}
+  
+div#artist__about-section .artist-about--contentarea .ms-webpartzone-cell:first-of-type {
+
+    border: none !important;
+
+}
+
+div#artist__about-section .artist-about--contentarea .universal__content--styles .ms-webpart-zone.ms-fullWidth > div {
+
+    width:95%;
+
+}
+
+div#artist__about-section .artist-about--contentarea .universal__content--styles .ms-webpart-zone.ms-fullWidth {
+
+    display:flex;
+    flex-basis:100%;
+    flex-direction:column;
+    align-items:center !important;
+
+}
+
+.artist-heading > div {
+
+    display: inline-block !important;
+
+}

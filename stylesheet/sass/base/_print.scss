@@ -1,0 +1,397 @@
+@media print and (color) {
+  * {
+	-webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  @page {
+	-webkit-print-color-adjust: exact !important;
+	print-color-adjust: exact !important;
+  }
+}
+
+@media print {
+
+	@page {
+		padding: 0;
+		marks:none;
+		size: landscape;
+	}
+
+	html, body {
+		height: auto !important;
+		-webkit-print-color-adjust: exact !important;
+		print-color-adjust: exact !important;
+	}
+
+	html, body, div, .ms-backgroundImage {
+		background-color:none !important;
+	}
+
+	div#s4-titlerow {
+		display:none !important;
+	}
+
+	body.modal-open * {
+		visibility: hidden;
+		height: 0px;
+	}
+
+	a[href]:after {
+        content: none !important;
+	}
+
+	.modal, .modal * {
+		visibility: visible !important;
+		height: auto !important;
+	}
+
+	.modal-header,
+	.modal-footer {
+		visibility: hidden !important;
+		display: none !important;
+	}
+
+	.modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        overflow: visible !important;
+	}
+	
+	.modal, .modal * {
+		height: auto;
+	}
+
+	.wmg-export-container {
+		padding: 0px;
+		margin: 0px;
+	}
+
+
+
+	//ARTIST PAGE PRINT STYLES
+	body * {
+
+		visibility: hidden;
+
+	}
+
+	.hide-printy {
+
+		display: none !important;
+
+	}
+	
+	.printy {
+
+	   visibility:visible;
+	   
+	}
+	
+	
+	.printy * {
+		
+		visibility: visible;
+		
+	}
+
+
+
+
+	span.rbc-continues-after i {
+	    -webkit-print-color-adjust: exact !important;
+	    print-color-adjust: exact !important;
+	}
+
+
+	// Artist page 
+
+	.subsection__padding-top:first-of-type {
+		margin-top: 0em !important;
+	}
+
+	.marketing-plan__edit, 
+	.marketing-plan__edit button,
+	.marketing-plan__breakdown button,
+	.marketing-plan__anchor,
+	.artist__search-section,
+	.marketing-plan__edit-button,
+	.marketing-plan__edit-button button {
+		display: none !important;
+	}
+
+	.marketing-plan__breakdown {
+		width: 50% !important;
+	}
+
+	.artist-layout__container {
+		float: none !important;
+		display:block;
+
+		
+		h3.landing-page__title.artist-landing-page__title {
+			font-size: 2em;
+		}
+
+	   .landing-page__btn--inline.landing-page__btn-group,
+	   .landing-page__btn-group.pull-right,
+	   .landing-page__btn-group > div,
+	   .artist-page--print-button,
+	   a.nav-link i.demo-icon.icon-open-new,
+	   .marketing-plan__row--filter-category,
+	   .marketing-plan__row--filter-category div  {
+			display: none !important;
+		}
+
+
+	.row.row--padding-top.marketing-plan--filter-headers {
+		margin-top: 2em !important;
+	}
+	
+
+		.artist-page--tab-nav {
+
+			li.nav-item {
+				visibility:hidden;
+
+					a.nav-link {
+						visibility:hidden;
+					}
+
+					&.active {
+						visibility:visible;
+
+							a.nav-link {
+								visibility:visible;
+							}
+					
+					}
+			}
+
+		}
+
+	}
+
+
+	//TIMELINE
+
+	div#wmg-marketing-plan {
+	
+		//timeline filters
+		//.row.row--padding-top.marketing-plan--filter-headers,
+		.marketing-plan--filter-header-event-category,
+		.marketing-plan--filter-header-event-type,
+		.marketing-plan__row--filter-eventtype,
+		.primary-title--class h4,
+		.agenda-datapicker button,
+		.marketing-plan__row--filter-type,
+		.container-fluid.my-artists {
+			display: none !important;
+		}
+
+		
+	
+		.agenda-datapicker {
+			margin-top: -1em !important;
+		}
+		
+		.marketing-plan__row--filter-category {
+			position: absolute;
+			top: -2em !important;
+			left: 45%;
+			display:block;
+	
+				&:before {
+					content: 'Categories';
+				}
+		}
+	
+		.row.artist-sections {
+			width: 100%;
+		}
+	
+		div#marketing-plan-tbd {
+			margin-top:3em !important;
+		}
+	
+	}
+
+	.blank-page--no div {
+		display:block;
+	}
+
+	.page__break-avoid {
+		page-break-inside: avoid !important;
+		break-inside: avoid !important;
+		-webkit-region-break-inside: avoid !important;
+
+		div {
+			display: block !important;
+		}
+	}
+	
+	.page__break {
+		page-break-after: always !important;
+		break-after: always !important;
+		-webkit-break-after: always !important;
+		display: block !important;
+		
+		div {
+			display: block !important;
+		}
+	}
+
+	
+//Calendar month view
+	//Print page breaking
+	.days-container {
+	  page-break-inside: avoid;
+	}
+
+	.calendar__buttons--left-side, .calendar__buttons--views {
+		display: none !important;
+	}
+
+
+	.wmg-month-view {
+		page-break-after: always !important;
+		break-after: always !important;
+		display: block;
+
+		page-break-inside: avoid;
+		-webkit-region-break-inside: avoid;
+
+		height:100%;
+		border-top: none !important;
+		margin-top:1em;
+		border-bottom:1px solid $black;
+	}
+
+	.wmg-month-view:last-child {
+		page-break-after: avoid !important;
+		break-after: avoid !important;
+	}
+
+	.rbc-month-view, .rbc-month-view * {
+		visibility: hidden;
+	}
+	
+	
+	.rbc-month-view:before {
+		margin:3em;
+		content:'TO PRINT CALENDAR MONTH VIEW, PLEASE USE BUTTON ON TOP RIGHT OF SCREEN';
+		visibility:visible;
+	}
+
+	label.toolbar-month-label, button.btn.btn-prev, button.btn.btn-next {
+		display:none;
+	}
+	
+
+
+//CALENDAR GENERAL
+
+	.wmgArtistCalendar {
+		
+		ul.calendar-list.list-group .list-group-item {
+			background:none !important;  
+		}	
+	
+
+		.calendar__date-filter button {
+			display: none;
+		}
+
+		.agenda-datapicker {
+			margin-top: -3em;
+		}
+
+		.rbt-input.form-control {
+			display: none;
+		}
+		
+		span.badge {
+			display: none;
+		}
+
+
+		ul.calendar-list li.list-group-item {
+			width:60% !important;
+		}
+		
+		.calendar__left-filters .universal__header--medium {
+			display: none;
+		}
+
+
+		.event-category__container
+		{
+			display: none;
+		}
+
+	}
+
+
+	.event-cateogory-filter-container .select__control {
+		border:none !important;
+	}
+	
+	
+	.select__placeholder, .select__dropdown-indicator {
+		display:none;
+	}
+
+	.marketing-plan__row--filter-eventtype {
+		display:none;
+	}
+	
+	.select__indicator svg {
+		display: none;
+	}
+
+	.select__multi-value__remove svg {
+		display: none;
+	}
+
+	.marketing-plan--filter-header-date-range {
+		display:block;
+		margin-bottom:2em !important;
+		margin-top:-2em;
+	}
+
+
+	.artist-layout__container .row.sub-component__padding {
+		display: none;
+	}
+
+	
+	.calendar-list li.list-group-item {
+		width: 100% !important;
+		display:block;
+	}
+
+
+	.col-xs-2.calendar__left-filters {
+	width: 100% !important;
+	margin-bottom:1em !important;
+	font-size:1.5em;
+	}
+
+
+.artist-calendar__wrapper.col-xs-10 {
+  width: 98%;
+}
+
+.calendar__left-filters > span {
+  display: none;
+}
+
+
+
+
+
+}
+

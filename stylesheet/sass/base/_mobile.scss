@@ -1,0 +1,413 @@
+
+// < 992px TABLET LANDSCAPE
+
+@media (max-width: 992px) {
+
+  .container-fluid.my-artists {
+    padding: 0;
+}
+
+#s4-workspace {
+  overflow: initial !important;
+}
+
+.col-md-8.artist-top-left {
+  width: 100% !important;
+}
+
+
+.col-md-8.artist-top-left .landing-page__title.artist-landing-page__title {
+  padding: 0 !important;
+  line-height: 1.2em;
+  margin: 0 !important;
+}
+
+.col-md-8.artist-top-left.bootstrap-div--nopadding.row--padding-top div {
+  display:block;
+}
+
+
+.follow-artists {
+  margin: 1em 0;
+}
+
+}
+
+
+
+// < 768px TABLET PORTRAIT
+
+@media (max-width: 768px) {
+
+
+span#fullscreenmodebox, div#searchInputBox {
+  display: none !important;
+}
+
+.table__header-row {
+  display:none;
+}
+
+.artist-sections {
+    width: 98vw;
+}
+
+  ul.static li.static ul.static {
+    display:block;
+
+    li.static {
+      display:block !important;
+      line-height:2em;
+      text-align:left;
+    }
+
+  }
+
+.artist__under-tabs {
+   overflow-x: hidden;
+  }
+
+
+ul.nav.nav-pills.nav-justified {
+  display:block;
+}
+
+.container-fluid.my-artists {
+  display:none !important;
+}
+
+
+          //CALENDAR
+
+          .calendar__buttons--views {
+            right:0 !important;
+            position: absolute;
+          }
+
+          .calendar__left-filters {
+            z-index: 1;
+          }
+
+
+          .artist-calendar__wrapper.col-xs-10.bootstrap-div--nopadding-right {
+            width: 100% !important;
+            display: flex;
+            padding-left:0;
+          }
+
+          .wmgArtistCalendar > div .row .col-xs-2 {
+              width: 100%;
+            }
+
+
+        .event-cateogory-filter-container > div:not(.select__control) div {
+          border-radius:0px !important;
+          margin-top:0 !important;
+        }
+
+        span.calendar__artist-name--as-of {
+          padding: 0 1em !important;
+        }
+
+
+        .calendar__date-filter {
+          padding:0 1em !important;
+      }
+
+      ul.calendar-list.list-group li {
+        background-color: transparent !important;
+     }
+    
+    
+    .wmgArtistCalendar .calendar-list label {
+        width: auto;
+    }
+    
+
+    .wmgArtistCalendar .calendar-list li {
+        width:100% !important;
+        display:block;
+    }
+
+    .wmgArtistCalendar .calendar-list .calendar-artist-label__a--white {
+          font-size:1.5em;
+      }
+      
+      li.list-group-item {
+          padding: .5em 0 !important;
+      }
+      
+
+      #artist__calendar-section .artist__under-tabs {
+          overflow:auto;
+      }
+    
+    
+    .landing-page__btn-group.pull-right  {
+        border-right: 1px solid $black;
+    }
+
+
+        // END CALENDAR VIEW
+
+
+
+        //  AGENDA VIEW
+
+          .rbc-agenda-view {
+            margin-top: 0em;
+        }
+
+        .agenda-row__datepicker-container {
+          margin-top: 2.5em !important;
+        }
+
+        td.rbc-agenda-date-cell {
+          padding: .2em !important;
+          font-size: .9em;
+          font-weight: 800;
+          width: 30%;
+        }
+
+
+        table.rbc-agenda-table {
+          th.rbc-header {
+            padding: 0 !important;
+
+            &:nth-child(2) {
+              width: 40% !important;
+            }
+
+            &:nth-child(1) {
+              width:30% !important;
+            }
+          }
+
+        }
+
+        td.rbc-agenda-event-cell {
+          font-size: .9em;
+        }
+
+        //  END AGENDA VIEW
+
+
+        //MARKETING PLAN
+        .marketing-plan--filter-headers {
+          display: none;
+        }
+
+
+        .marketing-plan__title, .marketing-plan__owners {
+          @include bootstrap-div--nopadding();
+        }
+
+
+        nav.marketing-plan__date-status-anchors {
+          display: none;
+        }
+
+        div#wmg-marketing-plan > div:nth-child(1) {
+          margin-bottom: 3em;
+        }
+
+        .bootstrap-div--nopadding.marketing-plan__row--filter-category {
+          z-index: 1;
+        }
+
+        .marketing-plan__date:before {
+          content:'Date: ';
+        }
+
+        .marketing-plan__title:before {
+          content: 'Title: ';
+        }
+
+        .marketing-plan__owners:before {
+          content: 'Owners: ';
+        }
+
+        .marketing-plan__rows > div {
+          margin-bottom: .5em;
+        }
+
+        .marketing-plan__rows {
+          border-top:1px solid #ccc;
+        }
+
+        .marketing-plan__date {
+          margin-top: .5em;
+        }
+
+        .calendar__buttons--left-side {
+          display: none;
+        }
+
+        .calendar__buttons--views {
+          float: right;
+        }
+
+        .calendar__date-filter {
+          width: 100%;
+        }
+
+        .wmgArtistCalendar {
+          width: auto !important;
+        }
+
+        .marketing-plan__tab-print {
+          display: none;
+        }
+
+        .marketing-plan__row--filter-date {
+          width: 100%;
+      }
+      
+      .marketing-plan__row--filter-date > div > div > div .agenda-datapicker {
+          border: 1px solid $formblack;
+      }
+
+      .rbc-agenda-view {
+        margin-top: 3em;
+      }
+      
+      .row.agenda-row__datepicker-container .calendar__date-filter {
+          padding: 0 !important;
+          width: 100% !important;
+          
+      }
+      
+      .agenda-row__datepicker-container .btn-toolbar .agenda-datapicker .DateRangePicker {
+          border: 1px solid $formblack !important;
+      }
+      
+      .marketing-plan__row--filter-category {
+        width: 100%;
+      }
+
+      .marketing-plan__rows {
+        top: 5em !important;
+        position: relative;
+      }
+
+      .marketing-plan__anchor-style button {
+        height:auto !important;
+      }
+
+        //END MARKETING PLAN
+
+}
+
+
+
+
+//MOBILE 
+
+@media (max-width: 500px) {
+
+  .artist-page--print-button {
+    display: none !important;
+  }
+
+
+td.rbc-agenda-time-cell {
+  padding: .5em !important;
+  font-size:.85em;
+  width: 30% !important;
+
+  span {
+    display:block !important;
+  }
+
+  i.demo-icon.icon-circle {
+    margin:0;
+  }
+}
+
+
+.calendar-toolbar > .row > div > .col-xs-4:nth-child(2),
+.calendar-toolbar > .row > div > .col-xs-4:nth-child(3) {
+    width: 100%;
+    display:flex;
+    padding:0 !important;
+    margin:0 !important;
+    justify-content:center;
+}
+
+
+.rbc-month-view {
+    margin-top: 3.5em;
+}
+
+.calendar-toolbar > .row > div > .col-xs-4:nth-child(2) {
+    position:relative;
+    top:3.5em;
+}
+
+ .wmg-calendar-modal {
+   width: 100%;
+ }
+
+}
+
+
+
+
+
+//VERY SPECIFIC MEETING BOOK QUERIES
+
+@media (min-width: 768px) and (max-width: 1160px) {
+
+  .carousel.carousel-slider {
+      height: 110px !important;
+  }
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1060px) {
+
+ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3 a.wmg-carousel-link,
+ul.slider li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3 a.wmg-carousel-link {
+    width: 60% !important;
+}
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+  i.far.fa-file-alt {
+          font-size: 1.8em !important;
+      }
+
+      a.wmg-carousel-link {
+          font-size: 1.15em !important;
+      }
+
+      div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3 a.wmg-carousel-link {
+        height: 49px !important;
+      }
+
+      .carousel .control-dots {
+          top: 82px !important;
+      }
+}
+
+
+@media (min-width: 768px) and (max-width: 1050px) {
+
+div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel .slider-wrapper.axis-horizontal {
+    width: 82% !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 930px) {
+
+  div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3 {
+      padding-left:7px !important;  
+      width: 55% !important;
+  }
+
+}

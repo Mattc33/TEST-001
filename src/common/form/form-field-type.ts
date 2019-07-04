@@ -1,0 +1,1 @@
+export type FormFieldType = {ignore?: boolean, value: any, touched: boolean, errorMessage?: string};

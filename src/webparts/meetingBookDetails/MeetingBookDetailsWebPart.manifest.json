@@ -1,0 +1,60 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "faca125a-70e1-4702-a720-0028071a527e",
+  "alias": "MeetingBookDetailsWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportsFullBleed": true,
+
+  "preconfiguredEntries": [
+      {
+      "groupId": "273f59a5-edc1-43b3-823f-5584d8b72074", // Other
+      "group": { "default": "Atlantic Digital Workplace" },
+      "title": { "default": "Meeting Book Details" },
+      "description": { "default": "The details view used to managed the contents of a single meeting book." },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "artistTermSetName": "WMG Artists",
+        "artistTermSetId": "e84a636f-01b1-4dce-8839-769c7d403e5b",
+        "categoryTermSetName": "WMG Event Categories",
+        "categoryTermSetId": "6114d1d8-6ed4-4760-b8df-a603ef966f0d"
+      }
+    },
+
+    {
+      "groupId": "273f59a5-edc1-43b3-823f-5584d8b72074", // Other
+      "group": { "default": "Atlantic Digital Workplace" },
+      "title": { "default": "Meeting Book Details (Dev)" },
+      "description": { "default": "The details view used to managed the contents of a single meeting book." },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "artistTermSetName": "DEV WMG Artists",
+        "artistTermSetId": "28f0b46e-5831-4e6b-8ef2-293b15d0c3e2",
+        "categoryTermSetName": "DEV WMG Event Categories",
+        "categoryTermSetId": "08b3caf2-43c4-4f0e-a05f-ee148bbbed20"
+      }
+    },
+
+    {
+      "groupId": "273f59a5-edc1-43b3-823f-5584d8b72074", // Other
+      "group": { "default": "Atlantic Digital Workplace" },
+      "title": { "default": "Meeting Book Details (QA)" },
+      "description": { "default": "The details view used to managed the contents of a single meeting book." },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "artistTermSetName": "QA WMG Artists",
+        "artistTermSetId": "70c4aa56-9c09-4deb-a751-1545799f12f2",
+        "categoryTermSetName": "QA WMG Event Categories",
+        "categoryTermSetId": "f6c02279-348f-4125-b83a-1a9d51ce6b1b"
+      }
+    }
+  ]
+}

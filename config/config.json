@@ -105,6 +105,22 @@
           "manifest": "./src/extensions/vpMainAppCustomizer/VpMainAppCustomizerApplicationCustomizer.manifest.json"
         }
       ]
+    },
+    "meeting-book-details-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/meetingBookDetails/MeetingBookDetailsWebPart.js",
+          "manifest": "./src/webparts/meetingBookDetails/MeetingBookDetailsWebPart.manifest.json"
+        }
+      ]
+    },
+    "meeting-book-list-view-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/meetingBookListView/MeetingBookListViewWebPart.js",
+          "manifest": "./src/webparts/meetingBookListView/MeetingBookListViewWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -124,6 +140,8 @@
     "ReportCommentsWebPartStrings": "lib/webparts/reportComments/loc/{locale}.js",
     "FeaturedReportsWebPartStrings": "lib/webparts/featuredReports/loc/{locale}.js",
     "NewsRotatorWebPartStrings": "lib/webparts/newsRotator/loc/{locale}.js",
-    "VpMainAppCustomizerApplicationCustomizerStrings": "lib/extensions/vpMainAppCustomizer/loc/{locale}.js"
+    "VpMainAppCustomizerApplicationCustomizerStrings": "lib/extensions/vpMainAppCustomizer/loc/{locale}.js",
+    "MeetingBookDetailsWebPartStrings": "lib/webparts/meetingBookDetails/loc/{locale}.js",
+    "MeetingBookListViewWebPartStrings": "lib/webparts/meetingBookListView/loc/{locale}.js"
   }
 }

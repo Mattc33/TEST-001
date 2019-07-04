@@ -11,3 +11,8 @@ export * from "./utils/utils";
 export * from "./utils/withErrorHandler";
 
 export * from "./interfaces";
+
+export * from "./meeting-book-service";
+export * from "./sp-user-service";
+
+export * from "./api";

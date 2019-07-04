@@ -14,3 +14,6 @@ No,Visualization Assets,VisualizationAssets,PictureLibrary,No,No,Yes,Image|Audio
 No,Sysco News,Lists/News,GenericList,No,Yes,Yes,Visualization News
 ,,,,,,,
 Yes,Visualizations Extension,Lists/VisualizationsExtension,GenericList,No,Yes,Yes,Visualization Extension
+,,,,,,,
+Yes,Meeting Book Items,Lists/Meeting Book Items,GenericList,No,No,Yes,Viewport Meeting Book Item
+Yes,Meeting Books,Lists/Meeting Books,GenericList,No,No,Yes,Viewport Meeting Book
