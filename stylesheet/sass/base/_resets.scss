@@ -1,0 +1,187 @@
+#suiteBar *, #s4-ribbonrow * {
+	box-sizing: content-box;
+}
+
+%reset-base {
+	margin: 0;
+	padding: 0;
+	height: auto;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	min-height: 0;
+	max-height: none;
+	line-height: normal;
+	float: none;
+	text-align: start;
+	vertical-align: baseline;
+}
+
+%reset-block {
+	@extend %reset-base;
+	display: block;
+}
+
+%reset-inline {
+	@extend %reset-base;
+	display: inline;
+}
+
+#s4-bodyContainer, #s4-titlerow, #titleAreaBox, #titleAreaRow,
+#titleAreaRow > div, #contentRow, #sideNavBox, #contentBox,
+#mainContent + div, .col-fluid-1, .right-wp-zone-col,
+.col-fluid-2, .ewiki-margin, #DeltaPlaceHolderSearchArea,
+#searchInputBox {
+	@extend %reset-block;
+}
+
+#ms-dnd-dropbox {
+	position: fixed;
+	height: 100vh !important;
+	width: 100vw !important;
+	top: 0 !important;
+	left: 0 !important;
+}
+
+#s4-titlerow {
+	display: block !important;
+}
+
+button.navbar-toggle {
+	min-width: 0;
+}
+
+
+
+
+$debug: false; // Toggle debug colors/outlines
+
+#s4-bodyContainer {
+  @extend .container-fluid;
+}
+
+#s4-titlerow {
+  display: block !important;
+}
+
+.ms-srch-sb {
+  display: block;
+  position: relative;
+  > input {
+    font-size: 1em;
+    padding: .5em;
+    height: auto;
+  }
+  > .ms-srch-sb-searchLink {
+    position: absolute;
+    margin: .35em;
+    top: 0;
+    right: 0;
+  }
+}
+
+#contentRow {
+  @if $debug == true {
+    outline: 2px dashed blue;
+  }
+  @extend .row;
+  #sideNavBox {       // Quick Launch (current nav)
+  @extend .col-sm-3;  // 3/12 for tablets
+  @extend .col-md-2;  // 2/12 for medium desktops
+    @if $debug == true {
+      @extend .bg-danger;
+    }
+  }
+  #contentBox {       // Page content container
+  @extend .col-sm-9;  // 9/12 for tablets
+  @extend .col-md-10; // 10/12 for medium desktops
+    @if $debug == true {
+      @extend .bg-warning;
+    }
+  }
+}
+
+#mainContent + div {
+  @extend .row;
+  .col-fluid-1 {
+    @extend .col-md-10;
+    .ewiki-margin {
+      padding: 0 0 1em 0;
+    }
+  }
+  .right-wp-zone-col {
+    @extend .col-md-2;
+    @media screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      transform: translateX(calc(-25vw + #{$grid-gutter-width / 2}));
+      background: rgba(255,0,0,.2);
+      margin: 0 calc(-25vw + #{$grid-gutter-width} ) 0 0;
+    }
+  }
+}
+
+
+.row {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+#sideNavBox, #DeltaPlaceHolderLeftNavBar {
+  display: none !important;
+}
+
+
+div#s4-ribbonrow, div#s4-ribbonrow div {
+    height: auto !important;
+    margin:0 !important;
+    padding:0;
+}
+
+
+div#DeltaPlaceHolderMain > .container-fluid > .row > div {
+    padding: 1.2em;
+}
+
+
+.root.ms-core-listMenu-root.static > li.static > a {
+    display: none;
+}
+
+
+//WEB PART ZONES
+div > div  .ms-webpart-zone.ms-fullWidth > div > .ms-webpart-chrome.ms-webpart-chrome-vertical.ms-webpart-chrome-fullWidth {
+    //padding: 0 !important;
+}
+
+div > div .ms-webpart-zone.ms-fullWidth > div {
+    //margin:0 !important;
+}
+
+.Placeholder-spinnerContainer {
+  margin: 0 !important;
+}
+
+button.close {
+  min-width: 1em;
+  
+  &:focus {
+    outline: none !important;
+  }
+
+  &:hover {
+    outline: none !important;
+  }
+}
+
+
+
+h5 {
+  font-size: 1em !important;
+}
+
+.ms-Fabric {
+
+  font-family: $font-family-base !important;
+  
+}
+

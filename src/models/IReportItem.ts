@@ -10,6 +10,13 @@ export interface IUser {
     Id: number;
     Title: string;
     EMail: string;
+
+    Name?: string;
+    Department?: string;
+    JobTitle?: string;
+    FirstName?: string;
+    LastName?: string;
+    UserName?: string;
 }
 
 export interface IReportItem {

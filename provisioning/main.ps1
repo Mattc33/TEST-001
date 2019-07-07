@@ -4,7 +4,7 @@ param(
 	[switch]$cleanup,
 	[object]$credential,
 	[boolean]$noDisconnect,
-	[boolean]$useCredentialManager,
+	[string]$windowsCredentialManager,
     [boolean]$useWebLogin
 )
 
@@ -38,20 +38,21 @@ function Run()
 
 	Write-Host "Connecting to site at $SiteUrl"
 
-	if(($null -eq $credential) -and -not $useCredentialManager) {
+	if(($null -eq $credential) -and [string]::IsNullOrWhiteSpace($windowsCredentialManager)) {
 		$credential = Get-Credential -Message "Enter user name and password for $SiteUrl"
 	}
 
-	if($useCredentialManager) {
-		Connect-PnPOnline -Url $SiteUrl
+	if(-not [string]::IsNullOrWhiteSpace($windowsCredentialManager)) {
+		Connect-PnPOnline -Url $SiteUrl -Credentials $windowsCredentialManager
 	} 
-    if ($useWebLogin){
+    elseif ($useWebLogin){
 		Connect-PnPOnline -Url $SiteUrl -UseWebLogin
 	}
     else
     {
         Connect-PnPOnline -Url $SiteUrl -Credentials $credential
-    }
+	}
+	
 	$web = Get-PnPWeb
 
 	Write-Host "Target Web : $($web.Url)"

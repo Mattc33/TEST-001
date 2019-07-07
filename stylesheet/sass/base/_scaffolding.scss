@@ -1,0 +1,153 @@
+body {
+  font-family: $font-family-base;
+  color: $text-color;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  font-size: 16px;
+}
+
+input[type=button],
+input[type=reset],
+input[type=submit],
+button {
+  min-width:0 !important;
+  padding:auto !important;
+}
+
+
+#O365_NavHeader,
+#O365_MainLink_NavMenu {
+  background-color: $black;
+}
+
+.o365cs-nav-button {
+  min-width: 50px !important;
+}
+
+
+//extensions
+
+.buttonnorms {
+  line-height: 1em;
+  letter-spacing: normal !important;
+  padding: .45em .8em !important;
+  font-family: $font-family-base !important;
+  height: 40px !important;
+}
+
+.inputnorms {
+  font-size: 1em;
+  padding: .45em .4em;
+  line-height: 1em;
+  height: 40px;
+}
+
+.dropdownnorms {
+    width: 100%;
+    box-shadow: none;
+    border:0 1px 1px 1px;
+    border-color:#999;
+    margin:-.2em 0;
+}
+
+.headernorms {
+
+  letter-spacing: normal !important;
+  font-family: $site-font-semibold !important;
+  //padding-right:.5em;
+  margin-right: .5em;
+  color: $black;
+  text-transform: $header-text-tranform;
+
+}
+
+
+
+
+
+// SHAREPOINT STUFF
+#s4-bodyContainer {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+
+.ms-core-navigation {
+  font-family: $font-family-base !important;
+  font-weight: 800 !important;
+}
+
+
+div#contentRow {
+      div#contentBox {
+        padding: 0 !important;
+
+        div#DeltaPlaceHolderMain {
+            margin: 0px 0px;
+            padding: 0 .5em;
+
+          .meetingbookthumbsitems {
+              a.wmg-carousel-link {
+                  &:hover, &:link, &:active, &:visited {
+                    color: #222 !important;
+                    font-family: $font-family-base !important;
+                    text-decoration:underline !important;
+                   }
+               }
+          }     
+
+            ul.dropdown-menu li a {
+              text-decoration:none !important;
+            }
+          
+
+            > .container-fluid {
+              margin: 0 !important;
+              background-color: $white !important;
+              padding: 0 !important;
+          }
+        }
+      }
+    }
+
+
+
+//RIBBON 
+a#ctl00_site_share_button {
+    display: none !important;
+}
+
+a#site_follow_button {
+    display: none !important;
+}
+
+span#fullscreenmode a, span#exitfullscreenmode a {
+    right: 0 !important;
+    background-color: $yellow !important;
+}
+
+.ms-cui-topBar2 {
+    height: 0px !important;
+}
+
+
+div#s4-titlerow {
+    border-top: 1px solid #666;
+}
+
+a#ctl00_fullscreenmodeBtn {
+    top: 0px !important;
+    z-index:999999999;
+    right:0;
+}
+
+
+div#DeltaWebPartAdderUpdatePanelContainer {
+    z-index: 9999;
+}
+
+.artist__under-tabs .container-fluid {
+  padding: 0;
+}

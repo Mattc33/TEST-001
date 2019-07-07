@@ -1,0 +1,6 @@
+{
+  "excludedFolderNames": [
+    "Site Collection Documents",
+    "Translation Packages"
+  ]
+}

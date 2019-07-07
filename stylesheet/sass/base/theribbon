@@ -1,0 +1,31 @@
+/*
+
+div#s4-ribbonrow {
+  z-index:9999999999999999;
+  visibility:visible;
+  position:absolute;
+  display:inline-block;
+  top:12em;
+}
+
+div#s4-ribbonrow * {
+  z-index:9999999999999999;
+  visibility:visible;
+  display:inline;
+}
+
+
+div#s4-ribbonrow img {
+  z-index:9999999999999999;
+  visibility:hidden;
+ 
+}
+
+
+div#s4-ribbonrow button {
+  top:6em !important;
+}
+
+div#wpadder_foofoo {display:none;}
+
+*/

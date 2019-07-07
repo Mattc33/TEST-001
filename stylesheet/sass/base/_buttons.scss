@@ -1,0 +1,222 @@
+.general__btn-group {
+
+    display: inline-flex;
+    padding: 0 !important;
+    align-content: center;
+
+}
+
+.general__btn-group {
+
+  > button.general__button--grouped,
+  > button.general__button--grouped--last {
+
+    border-top: $btn-border solid $formblack !important;
+    border-left: $btn-border solid $formblack !important;
+    border-bottom: $btn-border solid $formblack !important;
+    margin: 0px !important;
+    border-right: 0px !important;
+
+    &:last-of-type {
+
+        border-right: $btn-border solid $formblack !important;
+
+    }
+
+  }
+
+}
+
+.general__btn-group--right {
+
+    @extend .general__btn-group;
+
+    justify-content: flex-end;
+
+}
+
+.general__btn-group--left {
+
+  @extend .general__btn-group;
+
+  justify-content: flex-start;
+
+}
+
+.general__btn--inline {
+
+    display: inline-flex !important;
+    width: fit-content !important;
+  
+    > button {
+
+       border: $btn-border solid $formblack !important;
+       display: inline;
+
+    }
+
+}
+
+.general__button {
+
+    @extend .buttonnorms;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    border: $btn-border solid $formblack !important;
+
+    &:disabled {
+
+        background-color: $brand-neutral-light !important;
+        border: $btn-border solid $disabled-grey !important;
+        
+        .general__button__span {
+            color: $disabled-grey !important; 
+        }
+
+        .general__button__icon text {
+            stroke: $disabled-grey !important;
+        }
+
+    }
+
+
+    &:hover {
+
+      background-color: $grey !important;
+      border: $btn-border solid $dark-grey !important;
+      
+      .general__button__span {
+          color: $white !important; 
+      }
+
+  }
+
+}
+
+.general--pull-right {
+    margin-left: auto;
+}
+
+.general--pull-left {
+    margin-right: auto;
+}
+
+.general__button--default {
+
+    @extend .buttonnorms;
+    font-size: 1em;
+    min-width: 3em;
+    padding: .45em .8em !important;
+   
+}
+
+.general__button--small {
+
+    line-height: 1em;
+    letter-spacing: normal !important;
+    font-family: $font-family-base !important;
+    font-size: .9em;
+    height: auto !important;
+    padding: .45em .4em !important;
+
+}
+
+
+.general__button--clear {
+
+    background-color: transparent;
+    color: $black;
+
+}
+
+.general__button--grey {
+
+    background-color: $brand-neutral-light;
+    color: $black;
+
+}
+
+.general__button-neutral-dark {
+    
+    background-color: $brand-neutral-dark;
+    color: $white;
+
+}
+
+.general__button--brand-primary {
+
+    background-color: $brand-primary;
+    color: $white;
+
+}
+
+.general__button--brand-secondary {
+
+    background-color: $brand-secondary;
+    color: $white;
+
+}
+
+.general__button--alert {
+
+    background-color: $brand-error;
+    color: $white;
+}
+
+.general__button--links {
+
+    background-color: $links;
+    color: $white;
+
+}
+
+.general__button--black {
+
+    background-color: $black;
+    color: $white;
+
+}
+
+.general__button__span {
+
+    margin: 0px 5px 0px 5px;
+
+}
+
+.general__button__span--white {
+
+    color: $white;
+
+}
+
+.general__button__span--brand-secondary-invert {
+    color: $brand-secondary-invert;
+}
+
+.general__button__span--brand-primary-invert {
+    color: $brand-primary-invert;
+}
+
+.general__button__span--black {
+
+    color: $black;
+
+}
+
+.general__btn-group {
+
+    display: flex;
+    align-content: center;
+    padding: 0 !important;
+
+}
+
+.button__symbol {
+
+    font-size:1.7em;
+    padding: 0em .25em !important;
+  
+}
