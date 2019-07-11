@@ -12,17 +12,15 @@
 @import 'base/scaffolding';
 @import 'base/general-branding';
 @import 'base/mobile';
-@import 'base/artistsite';
+// @import 'base/artistsite';
 @import 'base/print';
 
-@import 'vendor/react-big-calendar';
-@import 'vendor/rc-time-picker';
-@import 'vendor/react-dates-datepicker';
+// @import 'vendor/react-big-calendar';
+// @import 'vendor/rc-time-picker';
+// @import 'vendor/react-dates-datepicker';
 
-@import 'vendor/quill.bubble';
-@import 'vendor/quill.core';
-@import 'vendor/quill.snow';
+// @import 'vendor/quill.bubble';
+// @import 'vendor/quill.core';
+// @import 'vendor/quill.snow';
 
-
-
-@import 'base/deptsite';
+@import 'components/wmg-meeting-book';

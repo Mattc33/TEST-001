@@ -157,7 +157,7 @@ export class LibraryBrowserCtrl extends React.Component<ILibraryBrowserCtrlProps
         ];
 
         this._selection = new Selection({
-            selectionMode: SelectionMode.multiple,
+            //selectionMode: SelectionMode.multiple,
             onSelectionChanged: () => {
 
                 const items = this._selection.getSelection() as Array<IDocument>;
@@ -217,7 +217,7 @@ export class LibraryBrowserCtrl extends React.Component<ILibraryBrowserCtrlProps
             && newProps.sortDesc === this.props.sortDesc
             && _.isEqual(newProps.breadcrumb, this.props.breadcrumb)
         ) {
-            this._selection.setItems(this.props.items as Array<IObjectWithKey>, true);
+            this._selection.setItems(newProps.items as Array<IObjectWithKey>, true);
             return;
         }
 
@@ -247,7 +247,7 @@ export class LibraryBrowserCtrl extends React.Component<ILibraryBrowserCtrlProps
     public render() {
 
         const items = this.props.items.map((i => i));
-
+        const selectionMode = SelectionMode.multiple;
         const file = items.find((i => !i.IsFolder));
         const hideDnd = this.props.browsingSite;
         if (!hideDnd) {
@@ -278,7 +278,9 @@ export class LibraryBrowserCtrl extends React.Component<ILibraryBrowserCtrlProps
                         <DetailsList
                             items={items}
                             columns={this.state.columns}
+                            selectionMode={SelectionMode.multiple}
                             initialFocusedIndex={this.props.focusedIndex}
+                            selectionPreservedOnEmptyClick={true}
                             enterModalSelectionOnTouch={false}
                             setKey='set'
                             selection={this._selection}

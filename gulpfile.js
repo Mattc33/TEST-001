@@ -10,7 +10,7 @@ const
     spSync = require('gulp-spsync'),
     run = require('gulp-run'),
     runSequence = require('run-sequence'),
-    //wmgUtil = require('./deploy/utility'),
+    viewportUtil = require('./config/viewport/utility'),
     build = require('@microsoft/sp-build-web'),
     gPrint = require('gulp-print'),
     gUtil = require('gulp-util'),
@@ -42,6 +42,9 @@ const moveCssTask = build.task('move-css', moveCssSubtask);
 const moveFontSubtask = build.subTask('move-font-task', gMoveFont);
 const moveFontTask = build.task('move-font', moveFontSubtask);
 
+const moveBootstrapFontSubtask = build.subTask('move-bootstrap-font-task', gMoveBootstrapFont);
+const moveBootstrapFontTask = build.task('move-bootstrap-font', moveBootstrapFontSubtask);
+
 const moveImagesSubtask = build.subTask('move-images-task', gMoveImages);
 const moveImagesTask = build.task('move-images', moveImagesSubtask);
 
@@ -52,6 +55,25 @@ const cssSubTask = build.subTask('build-css-task', gBuildCssMaster);
 const css = build.task('build-css', cssSubTask);
 
 // END: CSS
+
+// Deploy CSS/fonts/image etc....
+
+const deployPortalCssTask = build.subTask('deploy-portal-css-task', gDeployPortalCss);
+const deployPortalCss = build.task('deploy-portal-css', deployPortalCssTask);
+
+const deployPortalFontTask = build.subTask('deploy-portal-font-task', gDeployPortalFont);
+const deployPortalFont = build.task('deploy-portal-font', deployPortalFontTask);
+
+const deployPortalBootstrapTask = build.subTask('deploy-portal-bootstrap-task', gDeployPortalBootstrap);
+const deployPortalBootstrap = build.task('deploy-portal-bootstrap', deployPortalBootstrapTask);
+
+const deployImagesSubTask = build.subTask('deploy-portal-images-task', gDeployPortalImages);
+const deployImages = build.task('deploy-portal-images', deployImagesSubTask);
+
+const deployCssSubTask = build.subTask('deploy-css-task', gDeployCssMaster);
+const deployCss = build.task('deploy-css', deployCssSubTask);
+
+// END:
 
 // Build MasterPage - TODO
 
@@ -113,8 +135,11 @@ build.rig.addPostBuildTask(
   [ 
     compileCssTask, 
     moveFontTask, 
+    moveBootstrapFontTask,
+    moveImagesTask,
     moveCssTask, 
-    moveScriptsTask
+    moveScriptsTask,
+    cacheBustCss
   ]
 );
 
@@ -130,6 +155,7 @@ function gBuildCssMaster(gulp, buildOptions, done) {
   runSequence(
       'build-sass',
       'move-font',
+      'move-bootstrap-font',
       'move-static-scripts',
       'move-css',
       'move-images', 
@@ -159,6 +185,12 @@ function gMoveFont(gulp, buildOptions, done) {
       .pipe(gulp.dest('./dist/font'));
 }
 
+function gMoveBootstrapFont(gulp, buildOptions, done) {
+  return gulp.src('stylesheet/sass/bootstrap-sass-3.3.6/assets/fonts/bootstrap/**/*')
+      .pipe(gulp.dest('./dist/_wmg-portal/fonts'))
+      .pipe(gulp.dest('./dist/fonts/bootstrap'));
+}
+
 function gMoveCss(gulp, buildOptions, done) {
   return gulp.src('stylesheet/css/**/*.css')
       .pipe(gulp.dest('./dist/css'));
@@ -181,4 +213,83 @@ function gMoveScripts(gulp, buildOptions, done) {
 /*********
  * DEPLOY
  *********/
-//ALL DEPLOY TASKS. - TODO
+//ALL DEPLOY TASKS. -
+function gDeployCssMaster(gulp, buildOptions, done) {
+
+  console.log(args.env);
+
+  const settings = viewportUtil.getEnv(args.env || null);
+
+  if(settings == null) {
+      throw new gUtil.PluginError('deploy-css', {
+          message: 'Invalid argument: "env"'
+      });
+  }
+
+  runSequence(
+      'deploy-portal-css',
+      'deploy-portal-font',
+      'deploy-portal-images',
+      'deploy-portal-bootstrap',
+      function() {
+          console.log("!!CSS deployed!!");
+          done();
+      }
+  )
+
+}
+
+function gDeployPortalCss(gulp, buildOptions, done) {
+
+  const settings = viewportUtil.getEnv(args.env || null);
+
+  if(settings === null) {
+      throw new gUtil.PluginError('deploy-css', {
+          message: 'Invalid argument: "env"'
+      });
+  }
+
+  return gulp.src(settings.portal.glob.cssGlob)
+      .pipe(spSave(settings.portal.cssCore, settings.portal.creds));
+}
+
+function gDeployPortalImages(gulp, buildOptions, done) {
+
+  const settings = viewportUtil.getEnv(args.env || null);
+
+  if(settings === null) {
+      throw new gUtil.PluginError('deploy-images', {
+          message: 'Invalid argument: "env"'
+      });
+  }
+
+  return gulp.src(settings.portal.glob.imageGlob)
+      .pipe(spSave(settings.portal.imageCore, settings.portal.creds));
+}
+
+function gDeployPortalFont(gulp, buildOptions, done) {
+  const settings = viewportUtil.getEnv(args.env || null);
+
+  if( settings === null) {
+      throw new gUtil.PluginError('deploy-portal-font', {
+          message: 'Invalid argument: "env"'
+      });
+  }
+
+  return gulp.src(settings.portal.glob.fontGlob)
+      .pipe(spSave(settings.portal.fontCore, settings.portal.creds));
+}
+
+function gDeployPortalBootstrap(gulp, buildOptions, done) {
+  const settings = viewportUtil.getEnv(args.env || null);
+
+  if(settings === null) {
+      throw new gUtil.PluginError('deploy-portal-bootstrap', {
+          message: 'Invalid argument: "env"'
+      });
+  }
+
+  return gulp.src(settings.portal.glob.bootstrapGlob)
+      .pipe(spSave(settings.portal.bootstrapCore, settings.portal.creds));
+}
+

@@ -116,6 +116,11 @@ export class Runtime {
 
     }
 
+    @autobind
+    public isProdEnvironment(): boolean {
+        return !this._runningDev;
+    }
+
     /*******************
      * PRIVATE METHODS *
      *******************/
@@ -131,9 +136,9 @@ export class Runtime {
 
         const cssUrls = [];
 
-        const fileName = `wmg-${siteKey}-portal.css`;
+        const fileName = `vp-${siteKey}-portal.css`;
         const cssMasterHash = buster[`dist/css/${fileName}`];
-        const masterCssUrl = `${rootUrl}${distPath}/${fileName}?wmg_ref=${cssMasterHash}`;
+        const masterCssUrl = `${rootUrl}${distPath}/${fileName}?vp_ref=${cssMasterHash}`;
         cssUrls.push(masterCssUrl);
 
         // tslint:disable-next-line: no-console

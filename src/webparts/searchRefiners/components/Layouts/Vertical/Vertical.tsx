@@ -1,13 +1,12 @@
-import * as React from                                                 'react';
-import IFilterLayoutProps from                                              '../IFilterLayoutProps';
-import IVerticalState from                                              './IVerticalState';
-import * as update from                                                'immutability-helper';
+import * as React from 'react';
+import IFilterLayoutProps from '../IFilterLayoutProps';
+import IVerticalState from './IVerticalState';
+import * as update from 'immutability-helper';
 import {
     GroupedList,
     IGroup,
-    IGroupDividerProps,
-    IGroupFooterProps
-} from                                                                 'office-ui-fabric-react/lib/components/GroupedList/index';
+    IGroupDividerProps //,IGroupFooterProps
+} from 'office-ui-fabric-react';
 import {Link} from 'office-ui-fabric-react';
 import styles from './Vertical.module.scss';
 import * as strings from 'SearchRefinersWebPartStrings';
@@ -144,7 +143,7 @@ export default class Vertical extends React.Component<IFilterLayoutProps, IVerti
         );
     }
 
-    private _onRenderFooter(props: IGroupFooterProps): JSX.Element {
+    private _onRenderFooter(props: any): JSX.Element { //props: IGroupFooterProps
         return ((props.groupIndex + 1) === props.groups.length)
             ? null
             : <hr className={styles.verticalLayout__filterPanel__body__group__divider} />;

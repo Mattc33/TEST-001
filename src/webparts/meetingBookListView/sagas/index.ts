@@ -156,7 +156,7 @@ function* addMeetingBook(service: IMeetingBookService, rootUrl: string, action: 
             error: null
         });
 
-        window.location.href = `${rootUrl}/Pages/MeetingBook.aspx?wmg_mbid=${meetingBook.Id}&wmg_view=compile`;
+        window.location.href = `${rootUrl}/SitePages/MeetingBook.aspx?wmg_mbid=${meetingBook.Id}&wmg_view=compile`;
 
     } catch ( err ) {
 

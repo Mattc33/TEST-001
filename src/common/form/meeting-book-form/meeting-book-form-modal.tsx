@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal } from 'office-ui-fabric-react/lib/Modal';
+import { Modal, Dialog } from 'office-ui-fabric-react';
 
 import { MeetingBookForm } from './meeting-book-form';
 import { IUserService } from '../../../services';
@@ -34,7 +34,7 @@ export class MeetingBookFormModal extends React.Component<IMeetingBookFormModalP
   public render(): React.ReactElement<IMeetingBookFormModalProps> {
 
     return (
-      <Modal 
+      <Dialog 
         isBlocking={true} 
         containerClassName="wmg-calendar-modal" 
         isOpen={this.props.show} 
@@ -53,7 +53,7 @@ export class MeetingBookFormModal extends React.Component<IMeetingBookFormModalP
 
             />
 
-        </Modal>
+        </Dialog>
     );
 
   }

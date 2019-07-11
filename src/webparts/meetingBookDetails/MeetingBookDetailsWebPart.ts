@@ -87,11 +87,18 @@ export default class MeetingBookDetailsWebPart extends BaseClientSideWebPart<IMe
       SPComponentLoader
           .loadCss(fontAwesome);
 
+      const isProdEnvironment: boolean = this._runtime.isProdEnvironment();
+
       await this._runtime
         .runWhenDev(this.bootstrapDevelopment)
         .runWhenModernPage(this.bootstrapModern)
         .runWhen(()=> true, this.bootstrapEnv)
+        .runWhen(() => isProdEnvironment, this.bootstrapProd)
         .run();
+
+      if (this._runtime.isProdEnvironment()) {
+
+      }
 
       sp.setup({
         spfxContext: this.context
@@ -103,6 +110,13 @@ export default class MeetingBookDetailsWebPart extends BaseClientSideWebPart<IMe
       return Promise.reject(err);
     }
 
+  }
+
+  @autobind
+  private async bootstrapProd(siteKey: SiteKey, env: Environment, window: Window) {
+
+    const cssUrl = `${this.context.pageContext.site.absoluteUrl}/SVPSiteAssets/css/vp-${siteKey}-portal.css`;
+    SPComponentLoader.loadCss(cssUrl);
   }
 
   @autobind

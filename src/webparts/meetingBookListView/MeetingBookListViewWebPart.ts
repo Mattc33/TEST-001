@@ -55,8 +55,11 @@ export default class MeetingBookListViewWebPart extends BaseClientSideWebPart<IM
 
       this._runtime = new Runtime(Environment, window);
 
+      const isProdEnvironment: boolean = this._runtime.isProdEnvironment();
+
       await this._runtime
         .runWhenDev(this.bootstrapDev)
+        .runWhen(() => isProdEnvironment, this.bootstrapProd)
         .run();
 
       sp.setup({
@@ -95,6 +98,13 @@ export default class MeetingBookListViewWebPart extends BaseClientSideWebPart<IM
         }
       ]
     };
+  }
+
+  @autobind
+  private async bootstrapProd(siteKey: SiteKey, env: Environment, window: Window) {
+
+    const cssUrl = `${this.context.pageContext.site.absoluteUrl}/SVPSiteAssets/css/vp-${siteKey}-portal.css`;
+    SPComponentLoader.loadCss(cssUrl);
   }
 
   @autobind

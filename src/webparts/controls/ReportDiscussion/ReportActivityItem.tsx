@@ -1,5 +1,5 @@
 import * as React from "react";
-import { autobind, Link, ActivityItem, Icon, TextField, PrimaryButton, StackItem, MessageBar, MessageBarButton, MessageBarType, Label } from 'office-ui-fabric-react';
+import { autobind, Link, ActivityItem, Icon, TextField, PrimaryButton, MessageBar, MessageBarButton, MessageBarType, Label } from 'office-ui-fabric-react';
 import { IReportDiscussionReply } from "../../../models";
 import * as moment from 'moment';
 import { ReportViewerActions } from "../../../webparts/reportViewer/action/ReportViewActions";
@@ -92,7 +92,6 @@ export class ReportActivityItem extends React.Component<IReportActivityItemProps
             </div>
           }
           {this.state.operationClicked === "Delete" &&
-            <StackItem>
               <MessageBar isMultiline={false}
                 messageBarType={MessageBarType.severeWarning}
                 actions={
@@ -104,7 +103,6 @@ export class ReportActivityItem extends React.Component<IReportActivityItemProps
               >
                 Do you wish to delete the comment?
               </MessageBar>
-            </StackItem>
           }
 
         </div>

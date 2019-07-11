@@ -8,10 +8,10 @@
   "scripts": {
     "build:app": "gulp clean --ship && gulp build --max_old_space_size=4096 --ship && gulp bundle --max_old_space_size=4096 --ship && gulp package-solution --max_old_space_size=4096 --ship",
     "clean": "gulp clean",
-    "serve": "gulp clean && gulp serve --nobrowser --max_old_space_size=4096",
+    "serve": "gulp clean && gulp build-css && gulp serve --nobrowser --max_old_space_size=4096",
     "build": "gulp build-css && npm run build:app",
-    "deploy:bigapple-dev:css": "gulp deploy-css --env bigapple-dev",
-    "deploy:bigapple-dev:masterpage": "gulp deploy-masterpage --env bigapple-dev",
+    "deploy:bigapple-prod:css": "gulp deploy-css --env bigapple-dev",
+    "deploy:bigapple-prod:masterpage": "gulp deploy-masterpage --env bigapple-dev",
     "deploy:bigapple-dev:app": "gulp upload-app-pkg --env bigapple-dev && gulp deploy-app-package --env bigapple-dev",
     "test": "gulp test"
   },
@@ -52,7 +52,7 @@
     "immutability-helper": "2.4.0",
     "lodash": "4.17.11",
     "normalizr": "^3.3.0",
-    "office-ui-fabric-react": "6.192.1",
+    "office-ui-fabric-react": "6.127.0",
     "pdfobject": "^2.1.1",
     "react": "16.7.0",
     "react-ace": "5.8.0",

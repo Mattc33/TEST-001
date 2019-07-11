@@ -11,7 +11,7 @@ import {
 import {
     Breadcrumb, IBreadcrumbItem, IBreadcrumb
 } from 'office-ui-fabric-react/lib/Breadcrumb';
-import { Modal } from 'office-ui-fabric-react/lib/Modal';
+import { Modal, Dialog } from 'office-ui-fabric-react';
 
 import { IRootState } from '../../reducer';
 
@@ -121,11 +121,15 @@ class MeetingBookAddItems extends React.Component<IMeetingBookAddItemsProps, IMe
     public render(): React.ReactElement<IMeetingBookAddItemsProps> {
 
         return (
-            <Modal 
+            <Dialog 
                 isBlocking={true} 
                 containerClassName="wmg-mb-modal modal-lg modal-content" 
                 isOpen={this.props.show} 
-                onDismiss={this.props.onClose}>
+                onDismiss={this.props.onClose}
+                modalProps={{
+                    isBlocking: true,
+                    containerClassName: "wmg-mb-modal modal-lg modal-content" 
+                  }}>
                 <div className="modal-header">
                     <button type="button" className="close" onClick={this.props.onClose} aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -169,7 +173,7 @@ class MeetingBookAddItems extends React.Component<IMeetingBookAddItemsProps, IMe
                     </Pivot>
 
                 </div>
-            </Modal>
+            </Dialog>
         );
 
     }
