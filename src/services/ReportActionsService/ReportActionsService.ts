@@ -95,8 +95,8 @@ export class ReportActionsService {
       .split(",")
       .concat(userId.toString())
       .join(",");
-
-    const result = await this.saveLikes(webUrl, reportId, likes);
+    const rawViews = await this.getAllViews(webUrl, reportId);  
+    const result = await this.saveLikes(webUrl, reportId, likes, rawViews);
 
     return (result.item) ? true : false;
   }
@@ -108,32 +108,49 @@ export class ReportActionsService {
       .split(",")
       .filter((s: string) => s !== userIdStr)
       .join(",");
-    
-    const result = await this.saveLikes(webUrl, reportId, likes);
+    const rawViews = await this.getAllViews(webUrl, reportId);
+    const result = await this.saveLikes(webUrl, reportId, likes , rawViews) ;
+
+    return (result.item) ? true : false;
+  }
+ 
+  public async AddView(webUrl: string, reportId: number): Promise<boolean> {
+    let web: Web = await new Web(webUrl);
+    let currentUser: any = await web.currentUser.get();
+    const rawLikes = await this.getLikes(webUrl, reportId);
+    const rawViews = await this.getAllViews(webUrl, reportId);
+    const views = rawViews
+      .split(",")
+      .concat(currentUser.Id.toString())
+      .join(",");  
+    const result = await this.saveLikes(webUrl, reportId, rawLikes, views);
 
     return (result.item) ? true : false;
   }
 
-  private async saveLikes(webUrl: string, reportId: number, likes: string): Promise<ItemUpdateResult|ItemAddResult> {
+  private async saveLikes(webUrl: string, reportId: number, likes: string, views:string): Promise<ItemUpdateResult|ItemAddResult> {
     let web: Web = await new Web(webUrl);
     let likeItem: Item = await this.getLikesItem(webUrl, reportId);
     let result: ItemUpdateResult|ItemAddResult;
     let cleanLikes = (likes && likes[0] === ",") ? likes.substring(1) : likes;
+    let cleanViews = (views && views[0] === ",") ? views.substring(1) : views;
 
     if (likeItem) { //update
       const likeItemId: number = likeItem["Id"] as number;
       result = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
         .getById(likeItemId)
         .update({
-          "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}| Views Count: 1`,
-          "SVPLikes": cleanLikes
+          "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}| Views Count: ${(cleanViews && cleanViews.length > 0) ? cleanViews.split(",").length : 0}`,
+          "SVPLikes": cleanLikes,
+          "SVPViews": cleanViews
         });
     }
     else { //add
       let likeObject: any = {
-        "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}`,
+        "Title": `Likes Count: ${(cleanLikes && cleanLikes.length > 0) ? cleanLikes.split(",").length : 0}| Views Count: ${(cleanViews && cleanViews.length > 0) ? cleanViews.split(",").length : 0}`,
         "SVPVisualizationLookupId": reportId,
-        "SVPLikes": cleanLikes
+        "SVPLikes": cleanLikes,
+        "SVPViews": cleanViews
       };
   
       result = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
@@ -167,10 +184,19 @@ export class ReportActionsService {
     //   : '';
   }
 
+  private async getAllViews(webUrl: string, reportId: number): Promise<string> {
+    let web: Web = await new Web(webUrl);
+    let viewItem: Item = await this.getLikesItem(webUrl, reportId);
+
+    return (viewItem && viewItem["SVPViews"])
+      ? (viewItem["SVPViews"] as string)
+      : '';
+  }
+
   private async getLikesItem(webUrl: string, reportId: number): Promise<Item> {
     let web: Web = await new Web(webUrl);
     let likeItems: Item[] = await web.lists.getByTitle(VISUALIZATIONS_EXTENSION_LIST_TITLE).items
-      .select("Id", "SVPLikes", "SVPVisualizationLookupId")
+      .select("Id", "SVPLikes", "SVPVisualizationLookupId","SVPViews")
       .filter(`SVPVisualizationLookupId eq ${reportId}`)
       .get();
 

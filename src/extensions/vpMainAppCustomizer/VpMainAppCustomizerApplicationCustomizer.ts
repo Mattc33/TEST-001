@@ -8,6 +8,8 @@ import {
 import styles from './mainAppstyles.module.scss';
 import * as strings from 'VpMainAppCustomizerApplicationCustomizerStrings';
 const LOG_SOURCE: string = 'VpMainAppCustomizerApplicationCustomizer';
+import { ReportActionsService }  from '../../services/ReportActionsService/ReportActionsService';
+import { sp } from "@pnp/sp";
 
 require('./mainAppbigstyles.module.scss');
 
@@ -26,12 +28,15 @@ export interface IVpMainAppCustomizerApplicationCustomizerProperties {
 /** A Custom Action which can be run during execution of a Client Side Application */
 export default class VpMainAppCustomizerApplicationCustomizer
   extends BaseApplicationCustomizer<IVpMainAppCustomizerApplicationCustomizerProperties> {
-
+    private _reportActionsService: ReportActionsService;
   @override
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
 
     console.log(`LCEVENT:onInit=${window.location.href}`);
+    sp.setup({
+      spfxContext: this.context
+    });
 
     if (!(window as any).isNavigatedEventSubscribed) {
       this.context.application.navigatedEvent.add(this, this.logNavigatedEvent);
@@ -96,8 +101,25 @@ export default class VpMainAppCustomizerApplicationCustomizer
         console.log(`LCEVENT:navigatedEvent=${window.location.href}`);
         //TODO: Read the User and Time and Page URL and Write in table somewhere.
         (window as any).currentPage = window.location.href;
+        this._reportActionsService = new ReportActionsService();
+        const reportId = parseInt(this.getParameterByName('reportId', window.location.href));
+        console.log("Report Id",reportId);
+        if(reportId)
+        this._reportActionsService.AddView(this.context.pageContext.web.absoluteUrl,reportId);
       }
     }, 3000);
   }
+
+  public getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+  
 
 }
