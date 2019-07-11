@@ -56,3 +56,22 @@ export const atlanticProdOptions: ISiteOptions = {
     },
     
 };
+
+export const bigappleOptions: ISiteOptions = {
+
+    key: 'bigapple-prod',
+    calendarEventForm: 'bigapple',
+    calendarService: 'artist-calendar-service',
+    artistService: 'artist-service',
+    artistTermSetName: 'WMG Artists',
+    artistTermSetId: 'e84a636f-01b1-4dce-8839-769c7d403e5b',
+    categoryTermSetName: 'WMG Event Categories',
+    categoryTermSetId: '6114d1d8-6ed4-4760-b8df-a603ef966f0d',
+    cssPrefix: 'bigapple',
+    strings: {
+        ARTIST: 'Artist',
+        EVENT_CATEGORY: 'Event Category',
+        
+    },
+    
+};

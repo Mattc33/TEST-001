@@ -1,4 +1,4 @@
-export type EVENT_FORM_TYPE = "atlantic" | "elektra" | "warner-bros" | "warner-chappell";
+export type EVENT_FORM_TYPE = "bigapple" | "atlantic";
 export type CALENDAR_SERVICE = "wcm-artist-calendar-service" | "artist-calendar-service";
 export type ARTIST_SERVICE = "wcm-artist-service" | "artist-service";
 

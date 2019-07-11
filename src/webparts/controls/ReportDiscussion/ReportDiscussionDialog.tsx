@@ -64,7 +64,7 @@ export class ReportDiscussionDialog extends React.Component<IReportDiscussionDia
     return (
       <Panel
         isOpen={this.state.showDialog}
-        type={PanelType.customNear}
+        type={PanelType.custom}
         customWidth="600px"
         onDismiss={this.props.onCancel}
         closeButtonAriaLabel="Close">
