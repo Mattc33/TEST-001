@@ -2,6 +2,10 @@ import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { chunk } from '@microsoft/sp-lodash-subset';
 import { Carousel } from 'react-responsive-carousel';
+
+require("./content-carousel-control.css");
+
+
 import {
     IMeetingBookItem,
     GET_FILE_ICON
@@ -39,14 +43,15 @@ const GetSlide = ((
             { book.Url === 'ERROR' &&
                 <div>
                     <span  
-                        className="wmg-carousel-fileicon"
+                        className="svp-carousel-fileicon"
                         onClick={(e:any) => handler(e, book)}
                     >
-                            <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i>
+                            {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
+                            IconName
                     </span>
 
                     <span  
-                        className="wmg-carousel-link"
+                        className="svp-carousel-link"
                         onClick={(e:any) => handler(e, book)}
                     >
                             { !!book.Filename ? book.Filename : book.Title }
@@ -58,24 +63,25 @@ const GetSlide = ((
             { book.Url !== 'ERROR' &&
 
                 <div>
-                    <a  className="wmg-carousel-fileicon"
+                    <a  className="svp-carousel-fileicon"
                         href={book.Url}
                         target="_blank"
                         onClick={(e:any) => handler(e, book)}>
-                            <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i>
+                            {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
+                            FileIconErr
                     </a>
 
-                    <a  className="wmg-carousel-link"
+                    <a  className="svp-carousel-link"
                         href={book.Url}
                         target="_blank"
                         onClick={(e:any) => handler(e, book)}>
                             { !!book.Filename ? book.Filename : book.Title }
                     </a>
 
-                    <a  className="wmg-carousel-exticon"
+                    <a  className="svp-carousel-exticon"
                         href={book.Url}
                         target="_blank">
-                            <i className="demo-icon icon-link-ext-alt"></i>
+                            Ext
                     </a>
                 </div>
 
@@ -143,8 +149,8 @@ export class ContentsCarouselCtrl extends React.Component<IContentsCarouselCtrlP
             : <div>Loading...</div>;
 
         const arrowIcon = (this.state.carouselOpen) 
-            ? <i className="demo-icon icon-up-arrow"></i> 
-            : <i className="demo-icon icon-down-arrow"></i>;
+            ? <i className="">up</i> 
+            : <i className="">down</i>;
         const openStyle: React.CSSProperties = (this.state.carouselOpen) 
             ? { display: 'block' } 
             : { display: 'none' };

@@ -281,7 +281,7 @@ li.meeting-book-item ul.list-inline i.fab {
 
 }
 
-.wmg-meeting-book {
+.svp-meeting-book {
   padding: 1em 0;
 
   .form-inline {
@@ -837,7 +837,7 @@ li.meeting-book-item ul.list-inline i.fab {
   }
 }
 
-.wmg-mb-modal {
+.svp-mb-modal {
   .modal-header {
     border: 0;
     padding-bottom: 0;
@@ -1064,18 +1064,25 @@ div#meeting-book-thumbs {
                       }
 
 
-                      a.wmg-carousel-link {
+                      a.svp-carousel-link {
                           width: 68% !important;
                           height: 1.4em;
                           overflow: hidden;
                         }
 
-                        a.wmg-carousel-fileicon {
-                          display: flex !important;
-                          padding-right: 5px;
+                        a.svp-carousel-fileicon {
+                          //display: flex !important;
+                         // padding-right: 5px;
+                         height:2em;
+                         width:2em;
+                         border:1px solid #eee;
+                         background: url("https://via.placeholder.com/35x35") no-repeat center;
                         }
-                        a.wmg-carousel-exticon {
-                            font-size: 1.1em;
+                        a.svp-carousel-exticon {
+                          height:2em;
+                          width:2em;
+                          border:1px solid turquoise;
+                          background: url("https://via.placeholder.com/50x35") no-repeat center;
                         }
                     }
                   }
@@ -1185,7 +1192,7 @@ ul.control-dots {
   top: 53px !important;
 }
 
-.wmg-site-header {
+.svp-site-header {
   display: none;
 }
 
@@ -1246,7 +1253,7 @@ ul.slider li.slide .col-sm-12 .row.meetingbookthumbsitems i.demo-icon {
   }
 }
 
-.meeting-book-viewer .wmgArtistCalendar {
+.meeting-book-viewer .svpArtistCalendar {
     margin-left: 0 !important;
 }
 
