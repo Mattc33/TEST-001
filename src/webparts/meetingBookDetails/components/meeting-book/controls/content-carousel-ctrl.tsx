@@ -1,9 +1,10 @@
 import * as React from 'react';
+import styles from './contentCarouselControl.module.scss';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { chunk } from '@microsoft/sp-lodash-subset';
 import { Carousel } from 'react-responsive-carousel';
 
-require("./content-carousel-control.css");
+//require("./content-carousel-control.css");
 
 
 import {
@@ -38,57 +39,59 @@ const GetSlide = ((
     const iconName = GET_FILE_ICON(book.FileExtension);
 
     return (
-        <div className={"col-sm-3" + (book.Id === currentSelectedId ? " carousel__item--active" : "") }>
+        <div className={ styles.contentCarouselControl }>
+            <div className={"col-sm-3" + (book.Id === currentSelectedId ? " carousel__item--active" : "") }>
 
-            { book.Url === 'ERROR' &&
-                <div>
-                    <span  
-                        className="svp-carousel-fileicon"
-                        onClick={(e:any) => handler(e, book)}
-                    >
-                            {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
-                            IconName
-                    </span>
+                { book.Url === 'ERROR' &&
+                    <div>
+                        <span  
+                            className={styles["svp-carousel-fileicon"]} 
+                            onClick={(e:any) => handler(e, book)}
+                        >
+                                {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
+                                IconName
+                        </span>
 
-                    <span  
-                        className="svp-carousel-link"
-                        onClick={(e:any) => handler(e, book)}
-                    >
-                            { !!book.Filename ? book.Filename : book.Title }
-                    </span>
+                        <span  
+                            className="svp-carousel-link"
+                            onClick={(e:any) => handler(e, book)}
+                        >
+                                { !!book.Filename ? book.Filename : book.Title }
+                        </span>
 
-                </div>
-            }
+                    </div>
+                }
 
-            { book.Url !== 'ERROR' &&
+                { book.Url !== 'ERROR' &&
 
-                <div>
-                    <a  className="svp-carousel-fileicon"
-                        href={book.Url}
-                        target="_blank"
-                        onClick={(e:any) => handler(e, book)}>
-                            {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
-                            FileIconErr
-                    </a>
+                    <div>
+                        <a  className="svp-carousel-fileicon"
+                            href={book.Url}
+                            target="_blank"
+                            onClick={(e:any) => handler(e, book)}>
+                                {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
+                                FileIconErr
+                        </a>
 
-                    <a  className="svp-carousel-link"
-                        href={book.Url}
-                        target="_blank"
-                        onClick={(e:any) => handler(e, book)}>
-                            { !!book.Filename ? book.Filename : book.Title }
-                    </a>
+                        <a  className="svp-carousel-link"
+                            href={book.Url}
+                            target="_blank"
+                            onClick={(e:any) => handler(e, book)}>
+                                { !!book.Filename ? book.Filename : book.Title }
+                        </a>
 
-                    <a  className="svp-carousel-exticon"
-                        href={book.Url}
-                        target="_blank">
-                            Ext
-                    </a>
-                </div>
+                        <a  className="svp-carousel-exticon"
+                            href={book.Url}
+                            target="_blank">
+                                Ext
+                        </a>
+                    </div>
 
-            }
+                }
 
-            
+                
 
+            </div>
         </div>
     );
 });

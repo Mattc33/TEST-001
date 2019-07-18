@@ -1,0 +1,189 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+$black: #000;
+$white: #fff;
+$light-white: #f2f2f2;
+$light-grey: #eee;
+$grey: #777;
+$dark-grey: #535353;
+$disabled-grey: #9f9f9f;
+$blue: #0061ab;
+$lust: #e30613;
+$pink: #dd1779;
+$brand-green: #129f4d;
+$green: lighten($brand-green, 25%);
+$yellow: #f5eb40;
+$orange: #f58636;
+$links: #222;
+$gentler-yellow:#F6F19E;
+$green-tint3: #b4d8c8;
+$turquiose: #1a95a7;
+$formblack: #666;
+
+$brand-primary: $brand-green;
+$brand-primary-invert: $white;
+$brand-secondary: $pink;
+$brand-secondary-invert: $white;
+$brand-accent-1: $pink;
+$brand-accent-2: $lust;
+$brand-accent-3: $yellow;
+$brand-neutral-dark: #2b262a;
+$brand-neutral-medium: #999;
+$brand-neutral-light: #e3e3e3;
+$brand-neutral-xlight: $light-white;
+$brand-error: #e30613;
+$brand-header: #000;
+$brand-header-text: #f2f2f2;
+
+$text-color: #222;
+$font-family-base: Proxima-Nova, "proxima_nova_rgregular", Helvetica, Arial, sans-serif;
+$headings-font-family: Proxima-Nova, "proxima_nova_rgregular", Helvetica, Arial, sans-serif;
+$headings-font-weight: 800;
+$site-font-semibold: proxima_novasemibold, "proxima_novasemibold", Helvetica, Arial, sans-serif;
+$site-font-bold: proxima_nova_rgbold, "proxima_nova_rgbold", Helvetica, Arial, sans-serif;
+$site-font-light: proxima_novalight, "proxima_novalight", Helvetica, Arial, sans-serif;
+$header-text-tranform: none;
+
+$form-fields: #F0f0f0;
+
+$link-color: $links;
+$link-hover-color: darken($link-color, 15%);
+
+$icon-gray: #777;
+$yellow-tint: lighten($yellow, 25%);
+
+$padding-base-vertical: 6px;
+$padding-base-horizontal: 12px;
+
+$btn-border-radius-base: 0;
+$btn-border-radius-small: 0;
+$btn-border-radius-large: 0;
+$btn-font-weight: 900;
+
+$btn-border: 1px;
+
+$input-border: $brand-neutral-light !important;
+$input-border-radius: 0;
+$input-border-radius-small: 0;
+$input-border-radius-large: 0;
+
+$input-color: $text-color;
+$input-font: proxima_novalight, "proxima_novalight";
+
+$modal-header-border-color: transparent;
+$modal-footer-border-color: transparent;
+
+$color-map: (
+  gradient1: #dff4eb,
+  gradient2: #bcd6d1,
+  gradient3: #a3d1c8,
+  gradient4: #88b8b6,
+  gradient5: #91c4c8,
+  gradient6: #b0d8e3,
+  gradient7: #e1f2fa,
+  gradient8: #d1e1ed,
+  gradient9: #b5cdda,
+  gradient10: #cddae0
+);
+
+
+
+$bootstrap-sass-asset-helper: false !default;
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+$gray-loved:              #aaa !default;
+$green: #129f4d;
+$links: #222;
+
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               #fff !default;
+//** Global text color on `<body>`.
+$text-color:            $gray-dark !default;
+
+//** Global textual link color.
+$link-color:            $links !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($links, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif: Proxima-Nova, "proxima_nova_rgregular", Helvetica, Arial, sans-serif;
+//$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-sans-serif !default;
+
+$font-size-base:          14px !default;
+$font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
+
+$font-size-h1:            floor(($font-size-base * 2.6)) !default; // ~36px
+$font-size-h2:            floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h3:            ceil(($font-size-base * 1.7)) !default; // ~24px
+$font-size-h4:            ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h5:            $font-size-base !default;
+$font-size-h6:            ceil(($font-size-base * 0.85)) !default; // ~12px
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.428571429 !default; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:    inherit !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+
+
+.contentCarouselControl {
+
+    .svp-carousel-link, a.svp-carousel-link .svp-carousel-link a:link {
+    width: 68% !important;
+    height: 1.4em;
+    overflow: hidden;
+    }
+
+    a.svp-carousel-fileicon, .svp-carousel-fileicon, .svp-carousel-fileicon a:link {
+    height:2em;
+    width:2em;
+    border:1px solid #eee;
+    background: url("https://via.placeholder.com/35x35") no-repeat center;
+    }
+
+    a.svp-carousel-exticon, .svp-carousel-exticon, a.svp-carousel-exticon a:link {
+    height:2em;
+    width:2em;
+    border:1px solid turquoise;
+    background: url("https://via.placeholder.com/50x35") no-repeat center;
+    }
+
+}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styles from './meetingbook.module.scss';
 import { connect, Dispatch } from 'react-redux';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import {
@@ -27,6 +28,8 @@ import {
 } from '../../../../models';
 
 import MeetingBookViewActionCreator from './MeetingBookActionCreator';
+
+require("./svpbigappleportal.css");
 
 export interface IMeetingBookState {
 
@@ -116,8 +119,8 @@ class MeetingBookComponent extends React.Component<IMeetingBookProps, IMeetingBo
         const emptyBook = !(!!this.props.items && !!this.props.items.length);
 
         return (
-
-            <div id="meeting-book-thumbs" className="container-fluid row--padding-top">
+            <div className={ styles.meetingBook }>
+            <div className="meeting-book-thumbs row--padding-top container-fluid">
 
                 { !this.props.initialized &&
 
@@ -141,7 +144,7 @@ class MeetingBookComponent extends React.Component<IMeetingBookProps, IMeetingBo
                     !!this.props.meetingBook &&
                     !this.props.error &&
 
-                    <div className="row">
+                    <div className={styles.row}>
 
                         <MeetingBookHeadingCtrl
                             meetingBook={this.props.meetingBook}
@@ -157,7 +160,7 @@ class MeetingBookComponent extends React.Component<IMeetingBookProps, IMeetingBo
 
                         }
                         
-                        <div className="row">
+                        <div className={styles.row}>
 
                             { !!this.props.initialized && !emptyBook && 
 
@@ -190,7 +193,7 @@ class MeetingBookComponent extends React.Component<IMeetingBookProps, IMeetingBo
                     </div>
                 }
             </div>
-
+            </div>
         );
 
     }

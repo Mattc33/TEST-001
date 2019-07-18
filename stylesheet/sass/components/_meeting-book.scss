@@ -999,9 +999,9 @@ div#meeting-book-thumbs {
                 width: 88% !important;
                 margin-top: 25px !important;
 
-                @include breakpoint(largenotxl){
-                  width: 86% !important;
-                  }
+                // @include breakpoint(largenotxl){
+                //   width: 86% !important;
+                //   }
             }
           
         }
