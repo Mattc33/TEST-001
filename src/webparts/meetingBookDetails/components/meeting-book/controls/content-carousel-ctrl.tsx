@@ -70,7 +70,7 @@ const GetSlide = ((
                             target="_blank"
                             onClick={(e:any) => handler(e, book)}>
                                 {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
-                                FileIconErr
+                                <img className={styles.fileIke} /> 
                         </a>
 
                         <a  className="svp-carousel-link"
@@ -152,8 +152,8 @@ export class ContentsCarouselCtrl extends React.Component<IContentsCarouselCtrlP
             : <div>Loading...</div>;
 
         const arrowIcon = (this.state.carouselOpen) 
-            ? <i className="">up</i> 
-            : <i className="">down</i>;
+            ? <i className="">open</i> 
+            : <i className="">close</i>;
         const openStyle: React.CSSProperties = (this.state.carouselOpen) 
             ? { display: 'block' } 
             : { display: 'none' };
