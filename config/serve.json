@@ -20,7 +20,7 @@
       }
     },
     "dataMarketplaceRenderer": {
-      "pageUrl": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewport/home.aspx",
+      "pageUrl": "https://bigapplesharepoint.sharepoint.com/sites/SlalomViewportDev03/home.aspx",
       "customActions": {
         "4c745113-7612-4aa3-a670-d110298e2fff": {
           "location": "ClientSideExtension.ApplicationCustomizer",

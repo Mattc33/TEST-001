@@ -21,6 +21,8 @@ import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../services";
 import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
 
+import { PowerBIReport } from "../../controls/ReportRenderers/PowerBIReport/PowerBIReport";
+
 // require("./ReportViewer.SPFix.css");
 
 export interface IReportViewerProps {
@@ -39,6 +41,7 @@ export interface IReportViewerState {
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
   private tableauReportRef: TableauReport;
   private initFavriteDialog: boolean;
+  private powerbiReport:PowerBIReport;
 
   constructor(props: IReportViewerProps) {
     super(props);
@@ -159,10 +162,20 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     const report = this.props.state.report;
     let reportComponent: JSX.Element = null;
 
+    console.log("SVPVisualizationTechnology: ", report.SVPVisualizationTechnology);
     switch(report.SVPVisualizationTechnology) {
       case "Tableau":
         reportComponent = <TableauReport
                             ref={t => this.tableauReportRef = t}
+                            reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
+                            height={this.props.state.reportHeight}
+                            width={this.props.state.reportWidth}
+                          />;
+        break;               
+
+      case "Power BI":
+        reportComponent = <PowerBIReport
+                            ref={t=> this.powerbiReport = t}
                             reportURL={report.SVPVisualizationAddress}  //'https://viz.gallery/views/PHARMACEUTICALSALESPERFORMANCE/PharmaceuticalSalesPerformance?:embed=y' //{'https://viz.gallery/views/PROJECTMANAGEMENTPORTFOLIO/ProjectManagementPortfolio?:embed=y'}
                             height={this.props.state.reportHeight}
                             width={this.props.state.reportWidth}
