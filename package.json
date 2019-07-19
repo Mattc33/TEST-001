@@ -11,6 +11,7 @@
     "serve": "gulp clean && gulp build-css && gulp serve --nobrowser --max_old_space_size=4096",
     "build": "gulp build-css && npm run build:app",
     "deploy:bigapple-prod:css": "gulp deploy-css --env bigapple-dev",
+    "deploy:bigapple-dev03:css": "gulp deploy-css --env bigapple-dev03",
     "deploy:bigapple-prod:masterpage": "gulp deploy-masterpage --env bigapple-dev",
     "deploy:bigapple-dev:app": "gulp upload-app-pkg --env bigapple-dev && gulp deploy-app-package --env bigapple-dev",
     "test": "gulp test"

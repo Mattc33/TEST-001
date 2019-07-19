@@ -11,7 +11,8 @@ function getEnv(env) {
 
     if ([
         'viewport-prod',
-        'bigapple-dev'
+        'bigapple-dev',
+        'bigapple-dev03'
     ].indexOf(env) < 0) {
         return settings;
     }
