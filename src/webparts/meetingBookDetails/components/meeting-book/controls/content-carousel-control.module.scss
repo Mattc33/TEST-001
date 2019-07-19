@@ -1,0 +1,22 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+
+.svp-carousel-link, a.svp-carousel-link .svp-carousel-link a:link {
+  width: 68% !important;
+  height: 1.4em;
+  overflow: hidden;
+}
+
+ a.svp-carousel-fileicon, .svp-carousel-fileicon, .svp-carousel-fileicon a:link {
+ height:2em;
+ width:2em;
+ border:1px solid #eee;
+ background: url("https://via.placeholder.com/35x35") no-repeat center;
+}
+
+a.svp-carousel-exticon, .svp-carousel-exticon, a.svp-carousel-exticon a:link {
+  height:2em;
+  width:2em;
+  border:1px solid turquoise;
+  background: url("https://via.placeholder.com/50x35") no-repeat center;
+}

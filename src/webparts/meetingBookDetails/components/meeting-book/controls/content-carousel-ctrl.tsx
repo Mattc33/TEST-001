@@ -1,7 +1,12 @@
 import * as React from 'react';
+import styles from './contentCarouselControl.module.scss';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { chunk } from '@microsoft/sp-lodash-subset';
 import { Carousel } from 'react-responsive-carousel';
+
+//require("./content-carousel-control.css");
+
+
 import {
     IMeetingBookItem,
     GET_FILE_ICON
@@ -34,55 +39,59 @@ const GetSlide = ((
     const iconName = GET_FILE_ICON(book.FileExtension);
 
     return (
-        <div className={"col-sm-3" + (book.Id === currentSelectedId ? " carousel__item--active" : "") }>
+        <div className={ styles.contentCarouselControl }>
+            <div className={"col-sm-3" + (book.Id === currentSelectedId ? " carousel__item--active" : "") }>
 
-            { book.Url === 'ERROR' &&
-                <div>
-                    <span  
-                        className="wmg-carousel-fileicon"
-                        onClick={(e:any) => handler(e, book)}
-                    >
-                            <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i>
-                    </span>
+                { book.Url === 'ERROR' &&
+                    <div>
+                        <span  
+                            className={styles["svp-carousel-fileicon"]} 
+                            onClick={(e:any) => handler(e, book)}
+                        >
+                                {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
+                                IconName
+                        </span>
 
-                    <span  
-                        className="wmg-carousel-link"
-                        onClick={(e:any) => handler(e, book)}
-                    >
-                            { !!book.Filename ? book.Filename : book.Title }
-                    </span>
+                        <span  
+                            className="svp-carousel-link"
+                            onClick={(e:any) => handler(e, book)}
+                        >
+                                { !!book.Filename ? book.Filename : book.Title }
+                        </span>
 
-                </div>
-            }
+                    </div>
+                }
 
-            { book.Url !== 'ERROR' &&
+                { book.Url !== 'ERROR' &&
 
-                <div>
-                    <a  className="wmg-carousel-fileicon"
-                        href={book.Url}
-                        target="_blank"
-                        onClick={(e:any) => handler(e, book)}>
-                            <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i>
-                    </a>
+                    <div>
+                        <a  className="svp-carousel-fileicon"
+                            href={book.Url}
+                            target="_blank"
+                            onClick={(e:any) => handler(e, book)}>
+                                {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
+                                <img className={styles.fileIke} /> 
+                        </a>
 
-                    <a  className="wmg-carousel-link"
-                        href={book.Url}
-                        target="_blank"
-                        onClick={(e:any) => handler(e, book)}>
-                            { !!book.Filename ? book.Filename : book.Title }
-                    </a>
+                        <a  className="svp-carousel-link"
+                            href={book.Url}
+                            target="_blank"
+                            onClick={(e:any) => handler(e, book)}>
+                                { !!book.Filename ? book.Filename : book.Title }
+                        </a>
 
-                    <a  className="wmg-carousel-exticon"
-                        href={book.Url}
-                        target="_blank">
-                            <i className="demo-icon icon-link-ext-alt"></i>
-                    </a>
-                </div>
+                        <a  className="svp-carousel-exticon"
+                            href={book.Url}
+                            target="_blank">
+                                Ext
+                        </a>
+                    </div>
 
-            }
+                }
 
-            
+                
 
+            </div>
         </div>
     );
 });
@@ -143,8 +152,8 @@ export class ContentsCarouselCtrl extends React.Component<IContentsCarouselCtrlP
             : <div>Loading...</div>;
 
         const arrowIcon = (this.state.carouselOpen) 
-            ? <i className="demo-icon icon-up-arrow"></i> 
-            : <i className="demo-icon icon-down-arrow"></i>;
+            ? <i className="">open</i> 
+            : <i className="">close</i>;
         const openStyle: React.CSSProperties = (this.state.carouselOpen) 
             ? { display: 'block' } 
             : { display: 'none' };
