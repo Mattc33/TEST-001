@@ -26,7 +26,25 @@
       "name": "App customizer: DataMarket Place Dev",
       "type": "chrome",
       "request": "launch",
-      "url": "https://sysco.sharepoint.com/sites/MarketPlaceDev/SitePages/DataMarketplace.aspx?debugManifestsFile=https://localhost:4321/temp/manifests.js&loadSPFX=true&customActions={%224c745113-7612-4aa3-a670-d110298e2fff%22:{%22location%22:%22ClientSideExtension.ApplicationCustomizer%22,%22properties%22:{%22testMessage%22:%22Test%20message%22}}}",
+      "url": "https://twodegrees1.sharepoint.com/teams/SlalomVPDemo/SitePages/DataMarketplace.aspx?debugManifestsFile=https://localhost:4321/temp/manifests.js&loadSPFX=true&customActions={%224c745113-7612-4aa3-a670-d110298e2fff%22:{%22location%22:%22ClientSideExtension.ApplicationCustomizer%22,%22properties%22:{%22testMessage%22:%22Test%20message%22}}}",
+      "webRoot": "${workspaceRoot}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///.././src/*": "${webRoot}/src/*",
+        "webpack:///../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../../src/*": "${webRoot}/src/*"
+      },
+      "runtimeArgs": [
+        "--remote-debugging-port=9222",
+        "-incognito"
+      ]
+    },
+    {
+      "name": "Report View Dev",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://twodegrees1.sharepoint.com/teams/SlalomVPDemo/SitePages/ViewReport.aspx?reportId=2?debugManifestsFile=https://localhost:4321/temp/manifests.js&loadSPFX=true&customActions={%224c745113-7612-4aa3-a670-d110298e2fff%22:{%22location%22:%22ClientSideExtension.ApplicationCustomizer%22,%22properties%22:{%22testMessage%22:%22Test%20message%22}}}",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
