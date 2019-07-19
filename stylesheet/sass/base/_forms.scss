@@ -228,7 +228,7 @@ div#s4-workspace {
 
 .general__input {
 
-  @extend .inputnorms;
+ // @extend .inputnorms;
 
   width: 100%;
   border: 1px solid #666 !important; 
@@ -407,7 +407,7 @@ h4 {
 .event-category__container {
 
   .select__control {
-    @extend .inputnorms;
+  //  @extend .inputnorms;
 
     padding: 0 .4em;
     height: auto !important;

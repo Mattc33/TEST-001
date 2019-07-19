@@ -29,7 +29,7 @@
 
 .general__btn-group--right {
 
-    @extend .general__btn-group;
+  //  @extend .general__btn-group;
 
     justify-content: flex-end;
 
@@ -37,7 +37,7 @@
 
 .general__btn-group--left {
 
-  @extend .general__btn-group;
+ // @extend .general__btn-group;
 
   justify-content: flex-start;
 
@@ -59,7 +59,7 @@
 
 .general__button {
 
-    @extend .buttonnorms;
+   // @extend .buttonnorms;
 
     display: inline-flex;
     align-items: center;
@@ -106,7 +106,7 @@
 
 .general__button--default {
 
-    @extend .buttonnorms;
+ //   @extend .buttonnorms;
     font-size: 1em;
     min-width: 3em;
     padding: .45em .8em !important;
