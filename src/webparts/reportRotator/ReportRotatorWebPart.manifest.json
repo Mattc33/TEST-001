@@ -9,8 +9,8 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
-    "group": { "default": "Slalom ViewPort WebParts" },
-    "title": { "default": "Report Rotator" },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP Report Rotator" },
     "description": { "default": "Rotate and Slide Reports" },
     "officeFabricIconFontName": "Page",
     "properties": {

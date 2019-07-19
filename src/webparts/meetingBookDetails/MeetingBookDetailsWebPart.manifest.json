@@ -45,8 +45,8 @@
 
     {
       "groupId": "273f59a5-edc1-43b3-823f-5584d8b72074", // Other
-      "group": { "default": "Atlantic Digital Workplace" },
-      "title": { "default": "Meeting Book Details (QA)" },
+      "group": { "default": "SVP Webparts" },
+      "title": { "default": "SVP Meeting Book Details" },
       "description": { "default": "The details view used to managed the contents of a single meeting book." },
       "officeFabricIconFontName": "Page",
       "properties": {

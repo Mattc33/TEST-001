@@ -15,8 +15,8 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Slalom ViewPort WebParts" },
-    "title": { "default": "Comments on Reports" },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP Comments on Reports" },
     "description": { "default": "Add Edit and Remove for comments for Report" },
     "officeFabricIconFontName": "Page",
     "properties": {

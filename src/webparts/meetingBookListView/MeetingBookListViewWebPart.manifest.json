@@ -16,8 +16,8 @@
 
   "preconfiguredEntries": [{
     "groupId": "273f59a5-edc1-43b3-823f-5584d8b72074",
-    "group": { "default": "Atlantic Digital Workplace" },
-    "title": { "default": "Meeting Book List View" },
+    "group": { "default": "SVP Webparts" },
+    "title": { "default": "SVP Meeting Book List View" },
     "description": { "default": "Lists out all meeting books the current user has access to." },
     "officeFabricIconFontName": "Page",
     "properties": {
