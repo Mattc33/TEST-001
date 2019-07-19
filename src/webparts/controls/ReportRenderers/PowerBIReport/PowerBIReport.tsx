@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react';
 import Report from 'powerbi-report-component';
-import Iframe from 'react-iframe'
+import Iframe from 'react-iframe';
 
 declare var powerbi: any;
 
