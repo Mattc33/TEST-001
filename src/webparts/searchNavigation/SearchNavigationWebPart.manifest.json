@@ -11,8 +11,8 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
-    "group": { "default": "PnP" },
-    "title": { "default": "Search Navigation" },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP Search Navigation" },
     "description": { "default": "Displays a pivot-navigation link list that emulates the navigation in the out-of-the-box search center." },
     "officeFabricIconFontName": "NavigationFlipper",
     "properties": {

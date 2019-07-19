@@ -15,8 +15,8 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Slalom ViewPort WebParts" },
-    "title": { "default": "My Favorite Reports" },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP My Favorite Reports" },
     "description": { "default": "List of my Favorite Reports" },
     "officeFabricIconFontName": "Page",
     "properties": {

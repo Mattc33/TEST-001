@@ -11,17 +11,9 @@
   "preconfiguredEntries": [
     {
         "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
-        "group": {
-            "default": "PnP"
-        },
-        "title": {
-            "default": "Search Results",
-            "fr-fr": "Résultats de recherche"
-        },
-        "description": {
-            "default": "Displays search results",
-            "fr-fr": "Affiche des résulats de recherche"
-        },
+        "group": { "default": "SVP WebParts Group" },
+        "title": { "default": "SVP Search Results", "fr-fr": "Résultats de recherche" },
+        "description": { "default": "Displays search results", "fr-fr": "Affiche des résulats de recherche" },
         "officeFabricIconFontName": "SearchAndApps",
         "properties": {
             "queryKeywords": "",

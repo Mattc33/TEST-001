@@ -16,9 +16,9 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Other" },
-    "title": { "default": "FeaturedReports" },
-    "description": { "default": "FeaturedReports description" },
+    "group": { "default": "SVP Webparts" },
+    "title": { "default": "SVP Featured Reports" },
+    "description": { "default": "Shows Featured Reports only" },
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "FeaturedReports"

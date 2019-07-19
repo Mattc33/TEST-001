@@ -10,12 +10,8 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { 
-      "default": "PnP" 
-    },
-    "title": { 
-      "default": "Search Box" , "fr-fr": "Boîte de recherche"
-    },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP Search Box" , "fr-fr": "Boîte de recherche" },
     "description": { "default": "Allows users to enter query keywords", "fr-fr": "Permets aux utilisateurs d'entrer des mots clÃ©s de recherche." },
     "officeFabricIconFontName": "Search",
     "properties": {

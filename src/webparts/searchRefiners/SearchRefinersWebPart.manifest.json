@@ -10,33 +10,25 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
-    "group": { 
-      "default": "PnP" 
-    },
-    "title": { 
-      "default": "Search Refiners",
-      "fr-fr": "Filtres de recherche"
-    },
-    "description": { 
-      "default": "Displays the customizable dynamic refiners",
-      "fr-fr": "Affiche les filtres dynamiques personnalisables" 
-    },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP Search Refiners", "fr-fr": "Filtres de recherche" },
+    "description": { "default": "Displays the customizable dynamic refiners", "fr-fr": "Affiche les filtres dynamiques personnalisables" },
     "officeFabricIconFontName": "Filter",
     "properties": {
       "webPartTitle": "",
       "showBlank": true,
       "refinersConfiguration": [
         {
-            "refinerName": "Created",
-            "displayValue": "Created Date"
+            "refinerName": "RefinableString07",
+            "displayValue": "RefinableString07"
         },
         {
-            "refinerName": "Size",
-            "displayValue": "Size of the file"
+            "refinerName": "RefinableString08",
+            "displayValue": "RefinableString08"
         },
         {
-            "refinerName": "owstaxidmetadataalltagsinfo",
-            "displayValue": "Tags"
+            "refinerName": "RefinableString09",
+            "displayValue": "RefinableString09"
         }
       ],
       "searchQuery": "",

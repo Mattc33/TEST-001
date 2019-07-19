@@ -15,12 +15,12 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Slalom ViewPort WebParts" },
-    "title": { "default": "News Rotator" },
+    "group": { "default": "SVP WebParts Group" },
+    "title": { "default": "SVP News Rotator" },
     "description": { "default": "News Rotator Webpart" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "listNameLabel": "Sysco News"
+      "listNameLabel": "Home News"
     }
   }]
 }
