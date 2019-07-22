@@ -9,6 +9,8 @@ import {
     UNKNOWN_SUPPORTED_TOOLBAR
 } from "../../webparts/controls";
 
+import { POWERBI_SUPPORTED_TOOLBAR } from "../../webparts/controls/ReportRenderers/PowerBIReport/PowerBIReport";
+
 export class Utils {
     public static getParameterByName(name: string, url?: string) {
         if (!url) url = window.location.search;
@@ -34,6 +36,9 @@ export class Utils {
             case "Tableau":
                 supportedToolbar = TABLEAU_SUPPORTED_TOOLBAR;
                 break;
+            case "Power BI":
+              supportedToolbar = POWERBI_SUPPORTED_TOOLBAR;
+              break;
 
             case "Office":
                 supportedToolbar = OFFICE_SUPPORTED_TOOLBAR;
