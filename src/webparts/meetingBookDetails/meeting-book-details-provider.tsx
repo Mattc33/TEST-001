@@ -163,17 +163,17 @@ export class MeetingBookDetailsProvider extends React.Component<IMeetingBookDeta
 
       meetingBookId = 
         JSON
-          .parse(qs.wmg_mbid || 0);
+          .parse(qs.vp_mbid || 0);
 
-      view = qs.wmg_view || 'meeting';
+      view = qs.vp_view || 'meeting';
 
     } catch( err ) {
       // if error, just load an empty store and remvoe 
       // the bad query string
       qs = _.omit(
           qs, 
-          'wmg_mbid', 
-          'wmg_view');
+          'vp_mbid', 
+          'vp_view');
 
 
       this._history.push(

@@ -51,7 +51,7 @@ export interface IListViewCtrlState {
 
 export class ListViewCtrl extends React.Component<IListViewCtrlProps, IListViewCtrlState> {
     private _columns: Array<IColumn>;
-    private MEETING_BOOK_PAGE = '/SitePages/MeetingBook.aspx?wmg_mbid=';
+    private MEETING_BOOK_PAGE = '/SitePages/MeetingBook.aspx?vp_mbid=';
     private _selection: Selection;
 
     constructor(props: IListViewCtrlProps) {
