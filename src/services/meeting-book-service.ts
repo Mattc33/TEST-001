@@ -16,7 +16,7 @@ import { WebPartContext } from "@microsoft/sp-webpart-base";
 import * as moment from "moment";
 import * as _ from "lodash";
 import * as queryString from "query-string";
-const getVideoId: Function = require("get-video-id");
+const  getVideoId: Function = require("get-video-id");
 
 import {
     IUser,
@@ -30,6 +30,7 @@ import {
     IVideoItem,
     IDocumentItem,
     IMediaItem,
+    IReportLinkItem,
     ICalendarItem,
     ILinkItem,
     initialDocument
@@ -388,6 +389,12 @@ export class MeetingBookService implements IMeetingBookService {
                         const l = mediaItem.item as ILinkItem;
                         item.FileExtension = l.extension;
                         item.Filename = l.filename;
+                    }
+
+                    if (mediaItem.type === "reportLinkItem") {
+                        const l = mediaItem.item as IReportLinkItem;
+                        item.FileExtension = l.extension;
+                        
                     }
 
                     items.push(item);
@@ -1115,6 +1122,10 @@ export class MeetingBookService implements IMeetingBookService {
                     break;
             }
         }
+        
+        if (item.Url.indexOf("ViewReport.aspx") > -1) {
+            return this.handleReport(item);
+        }
 
         return this.handleGenericLink(item);
     }
@@ -1141,6 +1152,44 @@ export class MeetingBookService implements IMeetingBookService {
             service: "link",
             defaultThumbnail: this.getDefaultDocumentThumbnail(),
             openInNewTab: true,
+            item
+        };
+
+        return Promise.resolve(mediaItem);
+    }
+
+    @autobind
+    private handleReport(reportLink: IMeetingBookItem) {
+
+        const parser = document.createElement("a");
+        parser.href = reportLink.Url;
+
+        let qs = queryString.parse(parser.search);
+
+        qs["action"] = "view";
+        qs["wdAllowInteractivity"] = "true";
+
+        const previewUrlBase = reportLink.Url.split("?")[0];
+        const url = `${previewUrlBase}?${queryString.stringify(qs)}`;
+        console.log("reportlinkurl:",url);
+        /* const parser = document.createElement("a");
+        parser.href = reportLink.Url;
+
+        const url = [parser.protocol, "//", parser.host, parser.pathname].join("");
+         */
+        const thumbUrl = `${this._context.pageContext.site.absoluteUrl}/_layouts/15/getpreview.ashx?resolution=0&path=${url}`;
+
+        const item: IReportLinkItem = {
+            thumbnail: thumbUrl,
+            url: url,
+            extension: "",
+        };
+
+        const mediaItem: IMediaItem = {
+            type: "reportLinkItem",
+            service: "report",
+            defaultThumbnail: this.getDefaultDocumentThumbnail(),
+            openInNewTab: false,
             item
         };
 
