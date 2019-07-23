@@ -1,7 +1,7 @@
 export const QUERY_STRING_KEYS = {
 
-    MeetingBookView: "wmg_view",
-    MeetingBookId: "wmg_mbid"
+    MeetingBookView: "vp_view",
+    MeetingBookId: "vp_mbid"
     // CalendarFilters: 'wmg_cals',
 
     // StartDate: 'wmg_startdate',
