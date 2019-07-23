@@ -21,7 +21,7 @@ import {
 } from '@microsoft/sp-core-library';
 
 import { Runtime, SiteKey, RuntimeCallback } from '../../services/utils';
-
+import { initializeIcons } from '@uifabric/icons';
 import * as strings from 'MeetingBookListViewWebPartStrings';
 
 import { 
@@ -66,6 +66,8 @@ export default class MeetingBookListViewWebPart extends BaseClientSideWebPart<IM
         spfxContext: this.context
       });
 
+      initializeIcons();
+      
       return Promise.resolve();
 
     } catch (err) {
