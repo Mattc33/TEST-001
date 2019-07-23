@@ -19,7 +19,7 @@ import {
 import { Environment, EnvironmentType} from '@microsoft/sp-core-library';
 
 import { Runtime, SiteKey, RuntimeCallback } from '../../services/utils';
-
+import { initializeIcons } from '@uifabric/icons';
 import * as strings from 'MeetingBookDetailsWebPartStrings';
 
 import { 
@@ -103,6 +103,8 @@ export default class MeetingBookDetailsWebPart extends BaseClientSideWebPart<IMe
       sp.setup({
         spfxContext: this.context
       });
+
+      initializeIcons();
 
       return Promise.resolve();
 
