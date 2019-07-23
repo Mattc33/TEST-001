@@ -17,6 +17,8 @@ import MeetingBookAddItems from '../meeting-book-add-items/meeting-book-add-item
 
 import MeetingBookItemsActionCreator from './MeetingBookItemsActionCreator';
 
+require("../meeting-book/svpbigappleportal.css");
+
 import { MeetingBookItemsDnd } from './controls';
 
 

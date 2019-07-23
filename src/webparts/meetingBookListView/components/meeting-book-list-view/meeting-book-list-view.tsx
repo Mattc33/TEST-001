@@ -16,6 +16,8 @@ import { ListViewCtrl } from './controls';
 
 import { MeetingBookFormModal } from '../../../../common/form/meeting-book-form';
 
+require("./svpbigappleportal.css");
+
 export declare type NavLinks = { [key: number]: PageLinks; };
 
 export interface PageLinks {
