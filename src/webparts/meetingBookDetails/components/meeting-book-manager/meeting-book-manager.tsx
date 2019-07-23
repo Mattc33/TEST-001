@@ -9,6 +9,8 @@ import { IRootState } from '../../reducer';
 
 import MeetingBookManagerActionCreator from './MeetingBookManagerActionCreator';
 
+require("../meeting-book/svpbigappleportal.css");
+
 import { MeetingBookForm } from './controls';
 import MeetingBookItems from '../meeting-book-items/meeting-book-items';
 

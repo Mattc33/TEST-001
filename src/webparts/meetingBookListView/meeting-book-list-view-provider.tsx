@@ -22,6 +22,8 @@ import { IRootState, initialRootState } from './reducer';
 
 import { MeetingBookListView } from './components/meeting-book-list-view/meeting-book-list-view';
 
+require("./components/meeting-book-list-view/svpbigappleportal.css");
+
 export interface IMeetingBookListViewProviderProps {
   context: WebPartContext;
 }
