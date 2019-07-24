@@ -29,7 +29,7 @@ import { ILink } from './controls';
 import MeetingBookAddItemsActionCreator from './MeetingBookAddItemsActionCreator';
 import { ErrorMessage } from '../../../../common/error-message';
 
-require("../meeting-book/svpbigappleportal.css");
+require("../meeting-book/meetingbookreg.css");
 
 export interface IMeetingBookAddItemsState {
 

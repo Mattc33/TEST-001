@@ -29,7 +29,7 @@ import {
 
 import MeetingBookViewActionCreator from './MeetingBookActionCreator';
 
-require("./svpbigappleportal.css");
+require("./meetingbookreg.css");
 
 export interface IMeetingBookState {
 
