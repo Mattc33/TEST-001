@@ -4964,7 +4964,6 @@ div#meeting-book-thumbs .row .row.meetingbookexpcoll, div#meeting-book-thumbs #c
   margin-top: 0px !important; }
 
 .col-sm-12.meetingbookcarousel {
- width: 95%;
     padding-left: 3em; }
 
 .custom-control.custom-checkbox {
@@ -5085,4 +5084,9 @@ i.fab {
     margin-right: .5em;
     height:3.5em;
     overflow:hidden;
+}
+
+
+.row.meetingbookthumbs, .meetingbookthumbs div, .meetingbookthumbs div div, .row.meetingbookthumbsitems .col-sm-3, .carousel.carousel-slider .control-arrow, li.slide.selected, .row.meetingbookinfo {
+  background: #f9f9f9 !important;
 }
