@@ -95,15 +95,21 @@ export default class VpMainAppCustomizerApplicationCustomizer
   }
 
   public logNavigatedEvent(args: SPEventArgs): void {
-    setTimeout(() => {
+    setTimeout(async () => {
       if ((window as any).currentPage !== window.location.href) {
         // REGISTER PAGE VIEW HERE >>>
         console.log(`LCEVENT:navigatedEvent=${window.location.href}`);
         //TODO: Read the User and Time and Page URL and Write in table somewhere.
         (window as any).currentPage = window.location.href;
         this._reportActionsService = new ReportActionsService();
-        const reportId = parseInt(this.getParameterByName('reportId', window.location.href));
+        let reportId = parseInt(this.getParameterByName('reportId', window.location.href));
         console.log("Report Id",reportId);
+        if(!reportId)
+        {
+        const favReportId = parseInt(this.getParameterByName('favReportId', window.location.href));
+        console.log("favReportId Id",favReportId);
+        reportId = favReportId ? await this._reportActionsService.getReportId(this.context.pageContext.web.absoluteUrl, favReportId) :null;
+        }
         if(reportId)
         this._reportActionsService.AddView(this.context.pageContext.web.absoluteUrl,reportId);
       }

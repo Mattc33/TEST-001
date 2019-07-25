@@ -216,4 +216,17 @@ export class ReportActionsService {
       ? likeItems[0]["Title"]
       : null;
   }
+
+
+  public async getReportId(webUrl: string, favoriteId: number)
+  : Promise<number> {
+    let web: Web = await new Web(webUrl);
+    let items: string = await web.lists.getByTitle(FAVORITES_LIST_TITLE).items
+      .select("SVPVisualizationLookupId")
+      .filter(`Id eq ${favoriteId}`)
+      .get();
+    return (items && items.length > 0 )
+      ? items[0]["SVPVisualizationLookupId"]
+      : null;
+  }
 }
