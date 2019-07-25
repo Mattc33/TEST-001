@@ -3563,7 +3563,7 @@ li.ms-navedit-editArea {
   color: #fff; }
 
 .general__button--brand-secondary {
-  background-color: #dd1779;
+  background-color: #242731;
   color: #fff; }
 
 .general__button--alert {
@@ -3702,8 +3702,8 @@ textarea {
   margin-left: .5em; }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #dd1779;
-  border-color: #dd1779; }
+  background-color: #242731;
+  border-color: #242731; }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"); }
@@ -3828,7 +3828,7 @@ textarea {
   font-weight: 700; }
 
 .ms-DetailsRow-check > .ms-Check.is-checked:before {
-  background-color: #dd1779; }
+  background-color: #242731; }
 
 .ms-DetailsRow:hover, .ms-DetailsRow.is-selected {
   background-color: #f2f2f2;
@@ -3997,8 +3997,8 @@ button,
 .bootstrap-div--padding-left {
   padding-left: 2em !important; }
 
-.row--padding-top {
-  margin-top: .75em !important; }
+/* .row--padding-top {
+  margin-top: .75em !important; } */
 
 .btn-toolbar {
   margin-left: 0 !important; }
@@ -4088,7 +4088,7 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle; }
 
 
-
+/* 
 @media (min-width: 768px) and (max-width: 1160px) {
   .carousel.carousel-slider {
     height: 110px !important; } }
@@ -4111,7 +4111,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 768px) and (max-width: 930px) {
   div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #contentRow .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs .row .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #contentRow .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #mainContent + div .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #contentRow #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs #contentRow .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs .row .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs #contentRow .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs #mainContent + div .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs #contentRow #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow .col-sm-3, div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #contentRow .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs .row .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #contentRow .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #mainContent + div .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #contentRow #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems .col-sm-3, div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #contentRow .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .row .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .meetingbookthumbs#contentRow .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #mainContent + div .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #contentRow #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .row.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs .meetingbookthumbsitems#contentRow .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs .row .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs .meetingbookthumbsitems#contentRow .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs #mainContent + div .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs .meetingbookthumbsitems#contentRow #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 .meetingbookthumbsitems#contentRow #sideNavBox, div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs .row .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #contentRow .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs #mainContent + div .row.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .row .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .meetingbookthumbs#contentRow .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #mainContent + div .meetingbookthumbs#contentRow div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs .row #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #contentRow #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox, div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow div#meeting-book-thumbs #mainContent + div #mainContent + div.meetingbookthumbs div .carousel.carousel-slider .slider-wrapper.axis-horizontal ul.slider.animated li.slide.selected .col-sm-12 #mainContent + div.meetingbookthumbsitems #sideNavBox {
     padding-left: 7px !important;
-    width: 55% !important; } }
+    width: 55% !important; } } */
 
 
 .carousel .control-arrow, .carousel.carousel-slider .control-arrow {
@@ -4227,8 +4227,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .carousel.carousel-slider {
   position: relative;
-  margin: 20px 0 0 0 !important;
-  overflow: hidden; }
+  margin: 20px 0 20px 0 !important;
+  
+}
 
 .carousel.carousel-slider .control-arrow {
   color: #fff;
@@ -4496,12 +4497,12 @@ li.meeting-book-item ul.list-inline i.fab {
       padding-bottom: 0.5rem;
       padding-top: 0.5rem; }
       .wmg-meeting-book [data-view="grid"] a:hover {
-        color: #dd1779;
+        color: #242731;
         text-decoration: none; }
         .wmg-meeting-book [data-view="grid"] a:hover .item-title {
           text-decoration: none; }
       .wmg-meeting-book [data-view="grid"] a.active {
-        color: #dd1779;
+        color: #242731;
         font-weight: 700; }
     .wmg-meeting-book [data-view="grid"] img {
       width: 100%; }
@@ -4743,7 +4744,7 @@ button.control-arrow.control-prev:before {
   text-decoration: none;
 text-align:center;
 border-top:1px solid #aaa;
-    margin-bottom:1em; }
+ }
 
 .col-sm-12.expand-and-collapse i {
   border: 1px solid #aaa;
@@ -4846,7 +4847,7 @@ div#meeting-book-thumbs {
           div.meetingbookthumbsitems {
             height: auto !important;
             min-height: 60px;
-            width: 92%;
+            width: 95%;
             text-align: center; }
 
 
@@ -4891,14 +4892,15 @@ div#meeting-book-thumbs {
           min-height: 80px; }
 
  div.meetingbookexpcoll {
-    margin-top: -5px !important;
-    z-index: 1;
+    margin-top: 20px !important;
+    /* z-index: 1;
     width: 15% !important;
     position: absolute;
     height: 50px;
     left: 44.5% !important;
     background-color: #fff;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2); }
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);  */
+  }
 
     .col-sm-12.expand-and-collapse {
       text-align: center;
@@ -4911,7 +4913,7 @@ div#meeting-book-thumbs {
 
   .meeting-book-viewer {
     clear: both !important;
-    padding-top: 70px;
+    padding-top: 50px;
     background-color: #fff !important; }
 
 button.control-arrow.control-prev,
@@ -4964,7 +4966,8 @@ div#meeting-book-thumbs .row .row.meetingbookexpcoll, div#meeting-book-thumbs #c
   margin-top: 0px !important; }
 
 .col-sm-12.meetingbookcarousel {
-    padding-left: 3em; }
+ 
+    padding-left: 4em; }
 
 .custom-control.custom-checkbox {
   margin: 0 0 10px 0; }
@@ -5046,13 +5049,11 @@ a.list-group-item:hover {
   padding-left: 10px !important;
   padding-bottom: 15px !important; }
   .row.meetingbookthumbsitems .col-sm-3.carousel__item--active, .meetingbookthumbsitems#contentRow .col-sm-3.carousel__item--active, #mainContent + div.meetingbookthumbsitems .col-sm-3.carousel__item--active, .row.meetingbookthumbsitems #contentRow .carousel__item--active#sideNavBox, #contentRow .row.meetingbookthumbsitems .carousel__item--active#sideNavBox, .meetingbookthumbsitems#contentRow .carousel__item--active#sideNavBox, #mainContent + div.meetingbookthumbsitems #contentRow .carousel__item--active#sideNavBox, #contentRow #mainContent + div.meetingbookthumbsitems .carousel__item--active#sideNavBox {
-    border-bottom: 3px solid #777; }
+    border: 3px solid #b6c4d2; }
 
 .carousel.carousel-slider {
   margin-top: 10px; }
 
-.row.meetingbookthumbs, .meetingbookthumbs#contentRow, #mainContent + div.meetingbookthumbs, ul.slider div {
-  background-color: #fff !important; }
 
 .row.meetingbookthumbsitems .col-sm-3, .meetingbookthumbsitems#contentRow .col-sm-3, #mainContent + div.meetingbookthumbsitems .col-sm-3, .row.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow .row.meetingbookthumbsitems #sideNavBox, .meetingbookthumbsitems#contentRow #sideNavBox, #mainContent + div.meetingbookthumbsitems #contentRow #sideNavBox, #contentRow #mainContent + div.meetingbookthumbsitems #sideNavBox {
   background-color: #fff !important;

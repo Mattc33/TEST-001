@@ -120,7 +120,15 @@ $headings-font-family : inherit !default;
 $headings-font-weight : 500 !default;
 $headings-line-height : 1.1 !default;
 $headings-color : inherit !default;
+
+
 .meetingBook {
+
+	height: 155px !important;
+    background: #f9f9f9;
+    margin: 0 !important;
+	z-index: 9999999999999999999 !important;
+	
 	.carousel .control-arrow, .carousel.carousel-slider .control-arrow {
 		-webkit-transition: all 0.25s ease-in;
 		-moz-transition: all 0.25s ease-in;
