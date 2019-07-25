@@ -4892,8 +4892,8 @@ div#meeting-book-thumbs {
           min-height: 80px; }
 
  div.meetingbookexpcoll {
-    margin-top: 20px !important;
-    /* z-index: 1;
+  /*   margin-top: 20px !important;
+    z-index: 1;
     width: 15% !important;
     position: absolute;
     height: 50px;
