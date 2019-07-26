@@ -45,15 +45,15 @@ const GetSlide = ((
                 { book.Url === 'ERROR' &&
                     <div>
                         <span  
-                            className={styles["svp-carousel-fileicon"]} 
+                            //className={styles["svp-carousel-fileicon"]} 
                             onClick={(e:any) => handler(e, book)}
                         >
-                                {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
-                                IconName
+                                <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i>
+                                
                         </span>
 
                         <span  
-                            className="svp-carousel-link"
+                           // className="svp-carousel-link"
                             onClick={(e:any) => handler(e, book)}
                         >
                                 { !!book.Filename ? book.Filename : book.Title }
@@ -65,25 +65,25 @@ const GetSlide = ((
                 { book.Url !== 'ERROR' &&
 
                     <div>
-                        <a  className="svp-carousel-fileicon"
+                        <a 
                             href={book.Url}
                             target="_blank"
                             onClick={(e:any) => handler(e, book)}>
-                                {/* <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i> */}
-                                <img className={styles.fileIke} /> 
+                                <i style={{ fontSize: '150%' }} className={iconName} aria-hidden="true"></i>
+                                
                         </a>
 
-                        <a  className="svp-carousel-link"
+                        <a 
                             href={book.Url}
-                            target="_blank"
+                            target="_blank" 
                             onClick={(e:any) => handler(e, book)}>
                                 { !!book.Filename ? book.Filename : book.Title }
                         </a>
 
-                        <a  className="svp-carousel-exticon"
+                        <a 
                             href={book.Url}
                             target="_blank">
-                                Ext
+                                <i data-icon-name="OpenInNewWindow" role="presentation" aria-hidden="true" style={{ fontSize: '150%' }} className="root-158 x-hidden-focus"></i>
                         </a>
                     </div>
 
