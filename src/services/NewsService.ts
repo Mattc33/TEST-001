@@ -5,7 +5,7 @@ import { INewsItem } from "../models/INewsItem";
 import { INewsService } from "./interfaces/INewsService";
 import { Caml } from "./utils/Caml";
 
-const VIZ_NEWS_LST = "Sysco News";
+const VIZ_NEWS_LST = "Home News";
 
 export class NewsService implements INewsService {
 

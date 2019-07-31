@@ -51,7 +51,7 @@ export default class VpMainAppCustomizerApplicationCustomizer
         <div class="${styles.footContainer}">
           <div class="${styles.insideFoot}">
                  <div class="${styles.footeritem5_first}"><img src="https://{xxxxxx.sharepoint.com}/sites/DASHQA/VisualizationAssets/Logos/sysco_bw.png"></div>
-                 <div class="${styles.footeritem5_second}">&copy;2019 All Rights Reserved. Sysco Corporation.</div>
+                 <div class="${styles.footeritem5_second}">&copy;2019 All Rights Reserved. Slalom LLC.</div>
           </div>
         </div>`;
     }
