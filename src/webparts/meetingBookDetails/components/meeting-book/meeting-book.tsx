@@ -120,7 +120,7 @@ class MeetingBookComponent extends React.Component<IMeetingBookProps, IMeetingBo
 
         return (
             <div className={ styles.meetingBook }>
-            <div className="meeting-book-thumbs row--padding-top container-fluid">
+            <div className="meeting-book-thumbs row--padding-top">
 
                 { !this.props.initialized &&
 

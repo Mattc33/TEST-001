@@ -965,30 +965,20 @@ $headings-color : inherit !default;
 					}
 				}
 			}
-			.row.meetingbookthumbs {
+			.meetingbookthumbs {
 				box-shadow: 1px 2px 4px rgba(0, 0, 0, .2);
 				width: 100% !important;
 				box-shadow: none !important;
 				margin: 0 !important;
 				padding: 0 !important;
-				background-color: #f9f9f9 !important; // .col-sm-1 {
-				//   i.demo-icon.icon-left-open-big,
-				//   i.demo-icon.icon-right-open-big {
-				//     font-size: 5em;
-				//     top: 30px !important;
-				//     position: relative;
-				//     text-align: left;
-				//     color: $links;
-				//   }
+				background-color: #f9f9f9 !important; 
 			}
 			div {
 				.carousel {
 					width: 100% !important;
 					.slider-wrapper.axis-horizontal {
 						width: 88% !important;
-						margin-top: 25px !important; // @include breakpoint(largenotxl){
-						//   width: 86% !important;
-						//   }
+						margin-top: 25px !important; 
 					}
 				}
 				.carousel.carousel-slider {
@@ -1171,7 +1161,7 @@ $headings-color : inherit !default;
   ul.slider div {
     background-color: $white !important;
   }
-  ul.slider li.slide .col-sm-12 #mainContent+div.meetingbookthumbsitems i.demo-icon, ul.slider li.slide .col-sm-12 .row.meetingbookthumbsitems i.demo-icon {
+  ul.slider li.slide .col-sm-12 #mainContent+div.meetingbookthumbsitems i.demo-icon, ul.slider li.slide .meetingbookthumbsitems i.demo-icon {
     position: absolute;
     right: 0;
     top: 0 !important;
@@ -1228,8 +1218,8 @@ $headings-color : inherit !default;
     margin: 0 !important;
     padding: 0 !important;
   }
-  .row.meetingbookthumbsitems {
-    .col-sm-3 {
+ .meetingbookthumbsitems {
+    .svp-mtgbk-item {
       padding-top: 20px !important;
       padding-left: 10px !important;
       padding-bottom: 15px !important;
@@ -1242,10 +1232,10 @@ $headings-color : inherit !default;
   .carousel.carousel-slider {
     margin-top: 10px;
   }
-  .row.meetingbookthumbs, ul.slider div {
+  .meetingbookthumbs, ul.slider div {
     background-color: #fff !important;
   }
-  .row.meetingbookthumbsitems .col-sm-3 {
+  .meetingbookthumbsitems .svp-mtgbk-item  {
     background-color: #fff !important;
     border: 1px solid #eee;
   }
