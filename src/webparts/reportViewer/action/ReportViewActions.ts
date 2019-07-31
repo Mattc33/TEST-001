@@ -113,7 +113,7 @@ export class ReportViewerActions extends BaseAction<IReportViewerState,IBaseStor
     }
 
     report.ReportAnalytics = await this.getReportAnalytics(reportId);
-    //expect null 'userProfile' (Profile filtering not used by Sysco)
+    //expect null 'userProfile' (Profile filtering not used)
     //const [userProfile, upErr] = await withErrHandler<IUserProfile>(this.userProfileApi.loadCurrentUserProfile());
 
     this.dispatch({ 
