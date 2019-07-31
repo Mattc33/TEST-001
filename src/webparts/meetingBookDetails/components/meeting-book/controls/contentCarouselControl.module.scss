@@ -165,6 +165,7 @@ $headings-color:          inherit !default;
 
 
 .contentCarouselControl {
+  display: inline;
 
     .svp-carousel-link, a.svp-carousel-link .svp-carousel-link a:link {
     width: 68% !important;
@@ -191,9 +192,22 @@ $headings-color:          inherit !default;
       width: 1em;
       background-image: url("https://bigapplesharepoint.sharepoint.com/:i:/r/sites/SlalomViewport/SiteAssets/document.png");
       background-size:     cover;                   
-    background-repeat:   no-repeat;
-    background-position: center center; 
-    border:none !important;
+      background-repeat:   no-repeat;
+      background-position: center center; 
+      border:none !important;
     }
+
+
+     .svp-mtgbk-openclose {
+      font-size: 1.3em;
+      padding-left: .75em;
+      color: #999;
+    }
+    
+
+    i.svp-mtgbk-openclose {
+      padding-top: .25em !important;
+  }
+
 
 }

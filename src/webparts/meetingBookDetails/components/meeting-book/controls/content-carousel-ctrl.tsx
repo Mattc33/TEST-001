@@ -3,8 +3,9 @@ import styles from './contentCarouselControl.module.scss';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { chunk } from '@microsoft/sp-lodash-subset';
 import { Carousel } from 'react-responsive-carousel';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
-//require("./content-carousel-control.css");
+require("./content-carousel-control.css");
 
 
 import {
@@ -40,7 +41,7 @@ const GetSlide = ((
 
     return (
         <div className={ styles.contentCarouselControl }>
-            <div className={"col-sm-3" + (book.Id === currentSelectedId ? " carousel__item--active" : "") }>
+            <div className={"svp-mtgbk-item" + (book.Id === currentSelectedId ? " carousel__item--active" : "") }>
 
                 { book.Url === 'ERROR' &&
                     <div>
@@ -64,7 +65,8 @@ const GetSlide = ((
 
                 { book.Url !== 'ERROR' &&
 
-                    <div>
+                    <div className="svp-mtgbk-itemdiv"> 
+                        <div className="svp-mtgbk-leftside">
                         <a 
                             href={book.Url}
                             target="_blank"
@@ -79,14 +81,15 @@ const GetSlide = ((
                             onClick={(e:any) => handler(e, book)}>
                                 { !!book.Filename ? book.Filename : book.Title }
                         </a>
-
+                        </div>
+                        <div className="svp-mtgbk-newwindowdiv">
                         <a 
                             href={book.Url}
                             target="_blank">
-                                <i data-icon-name="OpenInNewWindow" role="presentation" aria-hidden="true" style={{ fontSize: '150%' }} className="root-158 x-hidden-focus"></i>
+                                <Icon iconName="OpenInNewWindow" className="svp-mtgbk-newwindow"></Icon>
                         </a>
                     </div>
-
+                    </div>
                 }
 
                 
@@ -110,8 +113,8 @@ const GetCarousel = ((
         }); 
 
         return (
-            <div className="col-sm-12 meetingbookcarousel">
-                <div className="row meetingbookthumbsitems">
+            <div className="meetingbookcarousel">
+                <div className="meetingbookthumbsitems">
                     { slide }
                 </div>
              </div>
@@ -152,19 +155,19 @@ export class ContentsCarouselCtrl extends React.Component<IContentsCarouselCtrlP
             : <div>Loading...</div>;
 
         const arrowIcon = (this.state.carouselOpen) 
-            ? <i className="">open</i> 
-            : <i className="">close</i>;
+            ? <Icon iconName="ChevronDown" className="svp-mtgbk-openclose"></Icon>  
+            : <Icon iconName="ChevronUp" className="svp-mtgbk-openclose"></Icon> ;
         const openStyle: React.CSSProperties = (this.state.carouselOpen) 
             ? { display: 'block' } 
             : { display: 'none' };
 
         return (
             <div>
-                <div className="row meetingbookthumbs" style={openStyle}>
+                <div className="meetingbookthumbs" style={openStyle}>
                     { carousel }
                 </div>
-                <div className="row meetingbookexpcoll">
-                    <div onClick={this.toggleCarousel} className="col-sm-12 expand-and-collapse">
+                <div className="meetingbookexpcoll">
+                    <div onClick={this.toggleCarousel} className="expand-and-collapse">
                         <a href="#">
                             { arrowIcon }
                         </a>
