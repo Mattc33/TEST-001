@@ -41,9 +41,9 @@ export interface IReportViewerState {
 }
 
 export interface IReportInfo {
+  internalName: string;
   displayLabel: string;
   value: string;
-  dest: string;
 }
 
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
@@ -107,8 +107,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         var reportObj = this.props.state.report;
         //var reportObjArr = Object.keys(reportObj);
         
-        var reportMappedArr = Object.keys(reportObj).map(function(i) {
-          return [i, reportObj[i]];
+        var reportMappedArr = Object.keys(reportObj).map(i => {
+              return [i, reportObj[i]];
             });
         
       console.log("Report Object:: ", reportMappedArr);
@@ -123,7 +123,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             <ReportHeader 
               title={this.props.state.report.Title}
               lastModified={this.props.state.report.ModifiedFormatted}
-              //metadata = {FieldNameMapping}
+              metadata = "Segment 1: Scheduling 1 | Function 2: Compliance 2 | Frequency: Colorado" //Segment: Scheduling | Function: Compliance | Frequency: Colorado
               segment={this.props.state.report.SVPMetadata1} 
               function={this.props.state.report.SVPMetadata2}
               frequency={this.props.state.report.SVPMetadata3}
@@ -352,7 +352,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       }).sort((a: IReportInfo, b: IReportInfo): number => {
         if (isSortPropArray) {
           const sortFlds = sortProp as string[];
-          return sortFlds.indexOf(a.dest) - sortFlds.indexOf(b.dest);
+          return sortFlds.indexOf(a.internalName) - sortFlds.indexOf(b.internalName);
         }
         else {
           const sortFld = sortProp as string;
