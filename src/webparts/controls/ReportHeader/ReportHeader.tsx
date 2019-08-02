@@ -4,6 +4,7 @@ import styles from "./ReportHeader.module.scss";
 export interface IReportHeaderProps {
     title: string;
     lastModified: string;
+    metadata?: string;
 
     segment?: string;
     function?: string;
@@ -35,6 +36,7 @@ export const ReportHeader: React.FunctionComponent<IReportHeaderProps> = props =
     <React.Fragment>
         <div>
             <label className={styles.reportTitle}>{props.title}</label>
+            <label className="ms-fontWeight-regular">{props.metadata}</label>
             {/* <HeaderSection title={"Last Modified"} value={props.lastModified} /> */}
             <HeaderSection title={"Segment"} value={props.segment} />
             <HeaderSection title={"Function"} value={props.function} />

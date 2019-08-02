@@ -5,7 +5,7 @@ export interface IUserProfile {
     SVPActiveCountry: string;
     SVPBrand: string;
     SVPFunctionalArea: string;
-    SVPCategory: string;
+    SVPBusinessUnit: string;
     SVPDivision: string;
     Modified: Date;
     Created: Date;

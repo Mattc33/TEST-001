@@ -24,6 +24,8 @@ import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../.
 import { PowerBIReport } from "../../controls/ReportRenderers/PowerBIReport/PowerBIReport";
 
 // require("./ReportViewer.SPFix.css");
+//const FieldNameMapping = "| Business Unit: {this.props.state.report.SVPBusinessUnit} | Department: {this.props.state.report.SVPDepartment} | Purpose: {this.props.state.report.SVPMetadata1} | Process: {this.props.state.report.SVPMetadata2} | Area: {this.props.state.report.SVPMetadata3} | Role: {this.props.state.report.SVPMetadata4}";
+const FieldNameMapping = "{\r\n  \"metadata\": [\r\n    {\r\n      \"displayLabel\": \"Business Unit\",\r\n      \"internalName\": \"SVPBusinessUnit\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Department\",\r\n      \"internalName\": \"SVPDepartment\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Purpose\",\r\n      \"internalName\": \"SVPMetadata1\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Process\",\r\n      \"internalName\": \"SVPMetadata2\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Area\",\r\n      \"internalName\": \"SVPMetadata3\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Role\",\r\n      \"internalName\": \"SVPMetadata4\"\r\n    }\r\n  ]\r\n}";
 
 export interface IReportViewerProps {
   description: string;
@@ -36,6 +38,12 @@ export interface IReportViewerState {
   // width?: number;
   showSaveFavoriteDialog: boolean;
   showReportDiscussionDialog: boolean;
+}
+
+export interface IReportInfo {
+  displayLabel: string;
+  value: string;
+  dest: string;
 }
 
 export class ReportViewer extends React.Component<IReportViewerProps, IReportViewerState> {
@@ -93,6 +101,19 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   public render(): React.ReactElement<IReportViewerProps> {
     const saveState: SaveStatus = this.getSaveStatus();
 
+    if(this.props.state.report!=null){
+      //getReportMetadata
+    
+        var reportObj = this.props.state.report;
+        //var reportObjArr = Object.keys(reportObj);
+        
+        var reportMappedArr = Object.keys(reportObj).map(function(i) {
+          return [i, reportObj[i]];
+            });
+        
+      console.log("Report Object:: ", reportMappedArr);
+    }
+    //TODO: SKS
     return (
       <div className={styles.reportViewer}>
         <div id="VizContainer" className={styles.container}>
@@ -102,6 +123,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             <ReportHeader 
               title={this.props.state.report.Title}
               lastModified={this.props.state.report.ModifiedFormatted}
+              //metadata = {FieldNameMapping}
               segment={this.props.state.report.SVPMetadata1} 
               function={this.props.state.report.SVPMetadata2}
               frequency={this.props.state.report.SVPMetadata3}
@@ -316,6 +338,28 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     }
   }
 
+  @autobind
+  private getReportMetadata(reportInfo: IReportItem, sortProp: string|string[]): Array<IReportInfo> {
+    //const isSortPropArray = _.isArray(sortProp);
+
+    const isSortPropArray=null;
+    return Object.keys(this.props.state.report).filter((propName: string) => {
+      return (reportInfo[propName] && reportInfo[propName].displayLabel) 
+        ? propName
+        : null;
+      }).map((propName: string): IReportInfo => {
+        return reportInfo[propName];
+      }).sort((a: IReportInfo, b: IReportInfo): number => {
+        if (isSortPropArray) {
+          const sortFlds = sortProp as string[];
+          return sortFlds.indexOf(a.dest) - sortFlds.indexOf(b.dest);
+        }
+        else {
+          const sortFld = sortProp as string;
+          return ((a[sortFld] > b[sortFld]) ? 1 : ((b[sortFld] > a[sortFld]) ? -1 : 0));
+        }
+      });
+  }
   // @autobind
   // private imageTest() {
 

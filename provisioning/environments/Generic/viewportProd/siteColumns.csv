@@ -4,7 +4,7 @@ Visualization Image,Text,SVPVisualizationImage,No,Viewport Data Visualization,,,
 Visualization Parameters,Lookup,SVPVisualizationParameters,No,Viewport Data Visualization,,,,,Visualization Parameters|ID
 Visualization Keywords,Note,SVPVisualizationMetadata,No,Viewport Data Visualization,,,,,
 Visualization Owner,User,SVPVisualizationOwner,No,Viewport Data Visualization,,,,,
-Visualization Technology,Choice,SVPVisualizationTechnology,No,Viewport Data Visualization,,,,Tableau|Office|PDF|Image|Others,
+Visualization Technology,Choice,SVPVisualizationTechnology,No,Viewport Data Visualization,,,,Power BI|Office|PDF|Tableau|Spotfire|Others,
 Last Updated,DateTime,SVPLastUpdated,No,Viewport Data Visualization,,,,,
 Visualization Description,Note,SVPVisualizationDescription,No,Viewport Data Visualization,,,,,
 Visualization Training Document,URL,SVPVisualizationTrainingDocument,No,Viewport Data Visualization,,,,,
@@ -20,6 +20,7 @@ Purpose,Choice,SVPMetadata1,No,Viewport Data Visualization,,,,Metrics|Planning|S
 Process,Choice,SVPMetadata2,No,Viewport Data Visualization,,,,Break Fixes|Work Scheduling|Permit Tracking|Schedule Execution|Schedule|Metrics|Compliance|Planning,
 Area,Choice,SVPMetadata3,No,Viewport Data Visualization,,,,BU Wide|Bakersfield|Coalinga|Cymric|Kern River|Lost Hills|McKittrick|Midway|Sunset|San Ardo|Colorado|New Mexico|Oklahoma|Texas,
 Role,Choice,SVPMetadata4,No,Viewport Data Visualization,,,,Advisors|Leadership|Maintenance Crews|Operators|Planners|Schedulers,
+Related Learning,Note,SVPVisualizationLearning,No,Viewport Data Visualization,,,,,
 Visualization Lookup,Lookup,SVPVisualizationLookup,No,Viewport Data Visualization,,,,,Visualizations|ID
 Parameter Name,Text,SVPParameterName,No,Viewport Data Visualization,,,,,
 Parameter Value,Text,SVPParameterValue,No,Viewport Data Visualization,,,,,

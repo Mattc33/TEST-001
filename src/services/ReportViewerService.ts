@@ -16,12 +16,13 @@ const VizListFields = [
     "SVPVisualizationDescription",
     "SVPVisualizationImage",
     "SVPIsFeatured",
-    "SVPCategory",
+    "SVPBusinessUnit",
     "SVPReportHeight",
     "SVPReportWidth",
-    "SVPMetadata1",          //segment
-    "SVPMetadata2",          //function
-    "SVPMetadata3",  
+    "SVPMetadata1",          //Purpose
+    "SVPMetadata2",          //Process
+    "SVPMetadata3",         //Area
+    "SVPMetadata4",         //Role
     "Modified",
     "Created",
     "SVPVisualizationParameters/Id",
