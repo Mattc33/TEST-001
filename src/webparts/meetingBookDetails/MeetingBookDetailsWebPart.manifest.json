@@ -17,15 +17,15 @@
   "preconfiguredEntries": [
       {
       "groupId": "273f59a5-edc1-43b3-823f-5584d8b72074", // Other
-      "group": { "default": "Atlantic Digital Workplace" },
-      "title": { "default": "Meeting Book Details" },
+      "group": { "default": "SVP Webparts" },
+      "title": { "default": "SVP Meeting Book Details" },
       "description": { "default": "The details view used to managed the contents of a single meeting book." },
       "officeFabricIconFontName": "Page",
       "properties": {
-        "artistTermSetName": "WMG Artists",
-        "artistTermSetId": "e84a636f-01b1-4dce-8839-769c7d403e5b",
-        "categoryTermSetName": "WMG Event Categories",
-        "categoryTermSetId": "6114d1d8-6ed4-4760-b8df-a603ef966f0d"
+        "artistTermSetName": "",
+        "artistTermSetId": "",
+        "categoryTermSetName": "",
+        "categoryTermSetId": ""
       }
     },
 
