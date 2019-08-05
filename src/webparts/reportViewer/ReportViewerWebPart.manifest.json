@@ -22,6 +22,7 @@
     "properties": {
       "SVPTableauJavaScriptURL": "https://viz.gallery/javascripts/api/tableau-2.2.1.min.js",
       "SVPTableauToolbar": "comment, sizing, savecustom, feedback, share, fullscreen",
+      "SVPMetadata": "Some Medata JSON String",
       "SVPDefaultReportHeight": 600,
       "SPVDefaultReportWidth": 800
     }

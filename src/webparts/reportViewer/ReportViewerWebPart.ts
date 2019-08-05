@@ -20,6 +20,7 @@ export interface IReportViewerWebPartProps extends ITableauReportViewerConfig {
   // SVPTableauToolbar: string;
   // SVPDefaultReportHeight: number;
   // SPVDefaultReportWidth: number;
+  SVPMetadata:string;
   SVPUseSentimentService: boolean;
   SVPSentimentServiceAPI: string;
   SVPSentimentServiceKey: string;
@@ -40,6 +41,7 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
           SVPTableauJavaScriptURL: this.properties.SVPTableauJavaScriptURL,
           SVPTableauToolbar: this.properties.SVPTableauToolbar
         },
+        SVPMetadata:this.properties.SVPMetadata,
         SVPUseSentimentService:this.properties.SVPUseSentimentService,
         SVPSentimentServiceAPI:this.properties.SVPSentimentServiceAPI,
         SVPSentimentServiceKey:this.properties.SVPSentimentServiceKey
@@ -82,6 +84,10 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
                 PropertyPaneTextField("SVPTableauToolbar", {
                   label: "Report Toolbar Controls",
                   description: "Comma separated values for toolbar buttons. Valid values are [sizing,savecustom,feedback,profilefilter,fullscreen]"
+                }),
+                PropertyPaneTextField("SVPMetadata", {
+                  label: "Report Metadata",
+                  description: "Some JSON string"
                 })
               ]
             },
