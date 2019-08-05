@@ -6,6 +6,7 @@ export interface IReportViewerProviderProps {
     SVPClientLabel: string;
     tableauReportConfig: ITableauReportViewerConfig;
     context: WebPartContext;
+    SVPMetadata:string;
     SVPUseSentimentService:boolean;
     SVPSentimentServiceAPI:string;
     SVPSentimentServiceKey:string;

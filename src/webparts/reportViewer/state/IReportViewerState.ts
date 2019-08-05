@@ -41,6 +41,7 @@ export interface IReportViewer {
   discussionInitialized?: boolean;
   discussion?: IReportDiscussion;
   
+  SVPMetadata: string;
   useSentimentService: boolean;
   sentimentServiceAPIUrl: string;
   sentimentServiceAPIKey: string;
