@@ -10,6 +10,7 @@ import { Link } from "office-ui-fabric-react";
 export default class SearchResult extends React.Component<ISearchResultProps, {}> {
   public render() {
 
+    console.log("Search Results: ", this.props.searchResults);
     let resultTiles: JSX.Element[] = this.props.searchResults.RelevantResults.map((result: ISearchResult) => {
       return (
         <ResultTile key={result.ListItemId} result={result} currentUser={this.props.currentUser} />
