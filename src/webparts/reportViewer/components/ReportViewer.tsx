@@ -369,43 +369,36 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
          As an alternative to @autobind decorator
          you can correct the context of `this` in javascript class methods with an es6 arrow function
       */
-
-      console.log(typeof fieldNameMapping);
-      console.log(fieldNameMapping);
-
-      // const fieldNameMappingTest = `{\r\n  "metadata": [\r\n    {\r\n      "displayLabel": "Business Unit",\r\n      "internalName": "SVPBusinessUnit"\r\n    },\r\n    {\r\n      "displayLabel": "Department",\r\n      "internalName": "SVPDepartment"\r\n    },\r\n    {\r\n      "displayLabel": "Purpose",\r\n      "internalName": "SVPMetadata1"\r\n    },\r\n    {\r\n      "displayLabel": "Process",\r\n      "internalName": "SVPMetadata2"\r\n    },\r\n    {\r\n      "displayLabel": "Area",\r\n      "internalName": "SVPMetadata3"\r\n    },\r\n    {\r\n      "displayLabel": "Role",\r\n      "internalName": "SVPMetadata4"\r\n    }\r\n  ]\r\n}`;
-
       const fieldNameMappingObj = JSON.parse(fieldNameMapping); // remap incoming string as json
-      console.log(fieldNameMappingObj);
 
-      // const remapObj = fieldNameMappingObj.metadata
-      //    .map( eaMetaData => {
-      //       const temp = {...eaMetaData};
+      const remapObj = fieldNameMappingObj.metadata
+         .map( eaMetaData => {
+            const temp = {...eaMetaData};
 
-      //       if (reportObj[eaMetaData.internalName] !== undefined) {
-      //          temp.displayValue = reportObj[eaMetaData.internalName];
-      //          return temp;
-      //       } else {
-      //          // warn if a internal name does not have a mapping to the data obj
-      //          console.log(`${eaMetaData.internalName} does not map to anything in`);
-      //          console.log(JSON.stringify(reportObj));
-      //       }
-      //    })
-      //    .filter(eaMetaData => eaMetaData !== undefined);
+            if (reportObj[eaMetaData.internalName] !== undefined) {
+               temp.displayValue = reportObj[eaMetaData.internalName];
+               return temp;
+            } else {
+               // warn if a internal name does not have a mapping to the data obj
+               console.log(`${eaMetaData.internalName} does not map to anything in`);
+               console.log(JSON.stringify(reportObj));
+            }
+         })
+         .filter(eaMetaData => eaMetaData !== undefined);
    
-      // const constructAsString = remapObj
-      //    .map( (eaMetaData, index: number) => {
-      //       if(index === 0) {
-      //          return ` ${eaMetaData.displayLabel}: ${eaMetaData.displayValue} | `;
-      //       }
-      //       else if (index === remapObj.length - 1) {
-      //          return `${eaMetaData.displayLabel}: ${eaMetaData.displayValue}`;
-      //       }
-      //       return `${eaMetaData.displayLabel}: ${eaMetaData.displayValue} |`;
-      //    })
-      //    .join(' ');
+      const constructAsString = remapObj
+         .map( (eaMetaData, index: number) => {
+            if(index === 0) {
+               return ` ${eaMetaData.displayLabel}: ${eaMetaData.displayValue} | `;
+            }
+            else if (index === remapObj.length - 1) {
+               return `${eaMetaData.displayLabel}: ${eaMetaData.displayValue}`;
+            }
+            return `${eaMetaData.displayLabel}: ${eaMetaData.displayValue} |`;
+         })
+         .join(' ');
    
-      // return constructAsString;
+      return constructAsString;
 
       return '';
    }
