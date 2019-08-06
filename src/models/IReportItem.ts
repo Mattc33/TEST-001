@@ -50,6 +50,8 @@ export interface IReportItem {
     SVPVisualizationParameters?: Array<IReportParameters>;
     SVPVisualizationMetadata?: any;
 
+    SVPDepartment?: string;
+
     ReportAnalytics?:IReportAnalytics;
 }
 

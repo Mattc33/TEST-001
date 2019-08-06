@@ -25,7 +25,7 @@ import { PowerBIReport } from "../../controls/ReportRenderers/PowerBIReport/Powe
 
 // require("./ReportViewer.SPFix.css");
 //const FieldNameMapping = "| Business Unit: {this.props.state.report.SVPBusinessUnit} | Department: {this.props.state.report.SVPDepartment} | Purpose: {this.props.state.report.SVPMetadata1} | Process: {this.props.state.report.SVPMetadata2} | Area: {this.props.state.report.SVPMetadata3} | Role: {this.props.state.report.SVPMetadata4}";
-const FieldNameMapping = "{\r\n  \"metadata\": [\r\n    {\r\n      \"displayLabel\": \"Business Unit\",\r\n      \"internalName\": \"SVPBusinessUnit\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Department\",\r\n      \"internalName\": \"SVPDepartment\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Purpose\",\r\n      \"internalName\": \"SVPMetadata1\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Process\",\r\n      \"internalName\": \"SVPMetadata2\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Area\",\r\n      \"internalName\": \"SVPMetadata3\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Role\",\r\n      \"internalName\": \"SVPMetadata4\"\r\n    }\r\n  ]\r\n}";
+// const FieldNameMapping = "{\r\n  \"metadata\": [\r\n    {\r\n      \"displayLabel\": \"Business Unit\",\r\n      \"internalName\": \"SVPBusinessUnit\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Department\",\r\n      \"internalName\": \"SVPDepartment\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Purpose\",\r\n      \"internalName\": \"SVPMetadata1\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Process\",\r\n      \"internalName\": \"SVPMetadata2\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Area\",\r\n      \"internalName\": \"SVPMetadata3\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Role\",\r\n      \"internalName\": \"SVPMetadata4\"\r\n    }\r\n  ]\r\n}";
 
 export interface IReportViewerProps {
   description: string;
@@ -101,18 +101,20 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   public render(): React.ReactElement<IReportViewerProps> {
     const saveState: SaveStatus = this.getSaveStatus();
 
+    let getReportMetaDataAsString: string;
+
     if(this.props.state.report!=null){
       //getReportMetadata
-    
-        var reportObj = this.props.state.report;
-        //var reportObjArr = Object.keys(reportObj);
-        
-        var reportMappedArr = Object.keys(reportObj).map(i => {
-              return [i, reportObj[i]];
-            });
-        
-      console.log("Report Object:: ", reportMappedArr);
+      const reportObj = this.props.state.report;
+
+      const SVPMetadata = this.props.state.SVPMetadata;
+
+      if (SVPMetadata !== undefined && typeof SVPMetadata === 'string') {
+         getReportMetaDataAsString = this.getReportMetaDataAsString(this.props.state.SVPMetadata, reportObj);
+         console.log(getReportMetaDataAsString);
+      }
     }
+
     //TODO: SKS
     return (
       <div className={styles.reportViewer}>
@@ -123,7 +125,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
             <ReportHeader 
               title={this.props.state.report.Title}
               lastModified={this.props.state.report.ModifiedFormatted}
-              metadata = "Segment 1: Scheduling 1 | Function 2: Compliance 2 | Frequency: Colorado" //Segment: Scheduling | Function: Compliance | Frequency: Colorado
+              metadata={getReportMetaDataAsString}
               segment={this.props.state.report.SVPMetadata1} 
               function={this.props.state.report.SVPMetadata2}
               frequency={this.props.state.report.SVPMetadata3}
@@ -360,6 +362,47 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
         }
       });
   }
+
+  // @autobind 
+   private getReportMetaDataAsString = (fieldNameMapping: string, reportObj: IReportItem): string => {
+      /* 
+         As an alternative to @autobind decorator
+         you can correct the context of `this` in javascript class methods with an es6 arrow function
+      */
+      const fieldNameMappingObj = JSON.parse(fieldNameMapping); // remap incoming string as json
+
+      const remapObj = fieldNameMappingObj.metadata
+         .map( eaMetaData => {
+            const temp = {...eaMetaData};
+
+            if (reportObj[eaMetaData.internalName] !== undefined) {
+               temp.displayValue = reportObj[eaMetaData.internalName];
+               return temp;
+            } else {
+               // warn if a internal name does not have a mapping to the data obj
+               console.log(`${eaMetaData.internalName} does not map to anything in`);
+               console.log(JSON.stringify(reportObj));
+            }
+         })
+         .filter(eaMetaData => eaMetaData !== undefined);
+   
+      const constructAsString = remapObj
+         .map( (eaMetaData, index: number) => {
+            if(index === 0) {
+               return ` ${eaMetaData.displayLabel}: ${eaMetaData.displayValue} | `;
+            }
+            else if (index === remapObj.length - 1) {
+               return `${eaMetaData.displayLabel}: ${eaMetaData.displayValue}`;
+            }
+            return `${eaMetaData.displayLabel}: ${eaMetaData.displayValue} |`;
+         })
+         .join(' ');
+   
+      return constructAsString;
+
+      return '';
+   }
+
   // @autobind
   // private imageTest() {
 
