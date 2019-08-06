@@ -7,10 +7,10 @@ var PDFObject: any = require('pdfobject');
 
 declare var $: any;
 
-export const OFFICE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
-export const PDF_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
-export const IMAGE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
-export const OTHER_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "fullscreen"];
+export const OFFICE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "learn"];
+export const PDF_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "learn"];
+export const IMAGE_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "learn"];
+export const OTHER_SUPPORTED_TOOLBAR = ["comment", "savecustom", "feedback", "share", "learn"];
 export const UNKNOWN_SUPPORTED_TOOLBAR = [];
 
 export const OfficeReport: React.FunctionComponent<IReportItem> = report => {
