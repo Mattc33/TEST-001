@@ -3,7 +3,7 @@ import { autobind } from 'office-ui-fabric-react';
 
 declare var tableau: any;
 
-export const TABLEAU_SUPPORTED_TOOLBAR = ["comment", "sizing", "savecustom", "feedback", "share", "fullscreen"];
+export const TABLEAU_SUPPORTED_TOOLBAR = ["comment", "sizing", "savecustom", "feedback", "share", "learn"];
 
 export interface ITableauReportProps {
     reportURL: string;

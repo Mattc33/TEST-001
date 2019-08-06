@@ -37,10 +37,10 @@ export const ReportHeader: React.FunctionComponent<IReportHeaderProps> = props =
         <div>
             <label className={styles.reportTitle}>{props.title}</label>
             <label className="ms-fontWeight-regular">{props.metadata}</label>
-            {/* <HeaderSection title={"Last Modified"} value={props.lastModified} /> */}
+            {/* <HeaderSection title={"Last Modified"} value={props.lastModified} /> 
             <HeaderSection title={"Segment"} value={props.segment} />
             <HeaderSection title={"Function"} value={props.function} />
-            <HeaderSection title={"Frequency"} value={props.frequency} />
+            <HeaderSection title={"Frequency"} value={props.frequency} />*/}
             <HeaderSection title={"Likes Count"} value={props.likeCount} />
             <HeaderSection title={"Views Count"} value={props.viewCount} />
             <hr className={styles.divider} />

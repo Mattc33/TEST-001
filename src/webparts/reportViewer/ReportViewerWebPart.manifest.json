@@ -21,8 +21,8 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "SVPTableauJavaScriptURL": "https://viz.gallery/javascripts/api/tableau-2.2.1.min.js",
-      "SVPTableauToolbar": "comment, sizing, savecustom, feedback, share, fullscreen",
-      "SVPMetadata": "Some Medata JSON String",
+      "SVPTableauToolbar": "comment, sizing, savecustom, feedback, share, learn",
+      "SVPMetadata": "{'metadata':[{'displayLabel':'Business Unit','internalName':'SVPBusinessUnit'},{'displayLabel':'Department','internalName':'SVPDepartment'},{'displayLabel':'Purpose','internalName':'SVPMetadata1'},{'displayLabel':'Process','internalName':'SVPMetadata2'},{'displayLabel':'Area','internalName':'SVPMetadata3'},{'displayLabel':'Role','internalName':'SVPMetadata4'}]}",
       "SVPDefaultReportHeight": 600,
       "SPVDefaultReportWidth": 800
     }

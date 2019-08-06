@@ -128,6 +128,8 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                     return prev.concat(this.renderFeedback());
                 case "fullscreen":
                     return prev.concat(this.renderFullScreen());
+                case "learn":
+                    return prev.concat(this.renderLearn());
                 default:
                     return prev;
             }
@@ -247,6 +249,18 @@ class Toolbar extends React.Component<IToolbarProps, IToolbarState> {
                 iconName: 'Comment'
             },
             onClick: () => this.handleCommandClick('comment')
+        }];
+    }
+
+    @autobind
+    private renderLearn(): Array<ICommandBarItemProps> {
+        return [{
+            key: 'learn',
+            name: 'Learn',
+            iconProps: {
+                iconName: 'Comment'
+            },
+            onClick: () => this.handleCommandClick('learn')
         }];
     }
 

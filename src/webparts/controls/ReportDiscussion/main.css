@@ -54,3 +54,8 @@
     padding: .5em 0;
     border-bottom:1px solid #ddd;
 }
+
+.ms-Panel-main {
+    position: absolute;
+    left: 0;
+}

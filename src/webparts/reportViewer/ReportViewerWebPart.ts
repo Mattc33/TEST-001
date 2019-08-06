@@ -87,7 +87,7 @@ export default class ReportViewerWebPart extends BaseWebpart<IReportViewerWebPar
                 }),
                 PropertyPaneTextField("SVPMetadata", {
                   label: "Report Metadata",
-                  description: "Some JSON string"
+                  description: "Metadata Display Name and Internal Name mapping JSON string"
                 })
               ]
             },

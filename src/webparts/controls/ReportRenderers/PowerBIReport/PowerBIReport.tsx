@@ -5,7 +5,7 @@ import Iframe from 'react-iframe';
 
 declare var powerbi: any;
 
-export const POWERBI_SUPPORTED_TOOLBAR = ["comment", "sizing", "savecustom", "feedback", "share", "fullscreen"];
+export const POWERBI_SUPPORTED_TOOLBAR = ["comment", "sizing", "savecustom", "feedback", "share", "learn"];
 
 
 export interface IPowerBIReportProps {

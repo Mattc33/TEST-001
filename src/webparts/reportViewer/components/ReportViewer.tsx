@@ -24,8 +24,7 @@ import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../.
 import { PowerBIReport } from "../../controls/ReportRenderers/PowerBIReport/PowerBIReport";
 
 // require("./ReportViewer.SPFix.css");
-//const FieldNameMapping = "| Business Unit: {this.props.state.report.SVPBusinessUnit} | Department: {this.props.state.report.SVPDepartment} | Purpose: {this.props.state.report.SVPMetadata1} | Process: {this.props.state.report.SVPMetadata2} | Area: {this.props.state.report.SVPMetadata3} | Role: {this.props.state.report.SVPMetadata4}";
-// const FieldNameMapping = "{\r\n  \"metadata\": [\r\n    {\r\n      \"displayLabel\": \"Business Unit\",\r\n      \"internalName\": \"SVPBusinessUnit\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Department\",\r\n      \"internalName\": \"SVPDepartment\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Purpose\",\r\n      \"internalName\": \"SVPMetadata1\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Process\",\r\n      \"internalName\": \"SVPMetadata2\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Area\",\r\n      \"internalName\": \"SVPMetadata3\"\r\n    },\r\n    {\r\n      \"displayLabel\": \"Role\",\r\n      \"internalName\": \"SVPMetadata4\"\r\n    }\r\n  ]\r\n}";
+// const FieldNameMapping = "{'metadata':[{'displayLabel':'Business Unit','internalName':'SVPBusinessUnit'},{'displayLabel':'Department','internalName':'SVPDepartment'},{'displayLabel':'Purpose','internalName':'SVPMetadata1'},{'displayLabel':'Process','internalName':'SVPMetadata2'},{'displayLabel':'Area','internalName':'SVPMetadata3'},{'displayLabel':'Role','internalName':'SVPMetadata4'}]}";
 
 export interface IReportViewerProps {
   description: string;
@@ -34,8 +33,6 @@ export interface IReportViewerProps {
 }
 
 export interface IReportViewerState {
-  // height?: number;
-  // width?: number;
   showSaveFavoriteDialog: boolean;
   showReportDiscussionDialog: boolean;
 }
@@ -61,20 +58,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       showReportDiscussionDialog: false,
     };
   }
-
-  // public static getDerivedStateFromProps(props: IReportViewerProps, state: IReportViewerState) {
-  //   if  (props.state.report &&
-  //         (props.state.report.SVPReportHeight !== state.height || 
-  //          props.state.report.SVPReportWidth !== state.width)
-  //       )
-  //   {
-  //     state.height = props.state.report.SVPReportHeight;
-  //     state.width = props.state.report.SVPReportWidth;
-  //     return state;
-  //   }
-    
-  //   return null;
-  // }
 
   public componentDidMount() {
     const reportId = Utils.getParameterByName("reportId");
@@ -104,9 +87,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     let getReportMetaDataAsString: string;
 
     if(this.props.state.report!=null){
-      //getReportMetadata
       const reportObj = this.props.state.report;
-
       const SVPMetadata = this.props.state.SVPMetadata;
 
       if (SVPMetadata !== undefined && typeof SVPMetadata === 'string') {
@@ -115,7 +96,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       }
     }
 
-    //TODO: SKS
     return (
       <div className={styles.reportViewer}>
         <div id="VizContainer" className={styles.container}>
@@ -126,9 +106,9 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
               title={this.props.state.report.Title}
               lastModified={this.props.state.report.ModifiedFormatted}
               metadata={getReportMetaDataAsString}
-              segment={this.props.state.report.SVPMetadata1} 
-              function={this.props.state.report.SVPMetadata2}
-              frequency={this.props.state.report.SVPMetadata3}
+              //segment={this.props.state.report.SVPMetadata1} 
+              //function={this.props.state.report.SVPMetadata2}
+              //frequency={this.props.state.report.SVPMetadata3}
               likeCount={this.props.state.report.ReportAnalytics.LikeCount.toString()}
               viewCount={this.props.state.report.ReportAnalytics.ViewCount.toString()}
               />
@@ -282,6 +262,9 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
       case "comment":
         this.handleReportDiscussion();
         break;
+      case "learn":
+        this.handleReportLearn();
+        break;
     }
   }
 
@@ -291,6 +274,16 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     if (report) {
       this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportDiscussionDialog(true);
+    }
+  }
+
+  @autobind
+  private handleReportLearn() {
+    const report = this.props.state.report;
+    if (report) {
+      alert("Clicked on Learn Button");
+      //this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
+      //this.setReportDiscussionDialog(true);
     }
   }
 
@@ -400,7 +393,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
    
       return constructAsString;
 
-      return '';
+      //return '';
    }
 
   // @autobind
