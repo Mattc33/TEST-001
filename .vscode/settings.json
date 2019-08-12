@@ -9,6 +9,5 @@
     "**/lib-amd": true,
     "src/**/*.scss.ts": true
   },
-"typescript.tsdk": ".\\node_modules\\typescript\\lib",
-"editor.tabSize": 2
+   "typescript.tsdk": ".\\node_modules\\typescript\\lib",
 }
