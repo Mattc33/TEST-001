@@ -4,7 +4,7 @@ import styles from './SearchResult.module.scss';
 import { PersonaCoin } from 'office-ui-fabric-react/lib/PersonaCoin';
 import * as moment from 'moment';
 import { ISearchResult } from '../../../models/ISearchResult';
-import ResultTile from './ResultTile
+import ResultTile from './ResultTile';
 import { Link } from "office-ui-fabric-react";
 
 export default class SearchResult extends React.Component<ISearchResultProps, {}> {
