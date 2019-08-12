@@ -187,7 +187,11 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     const metaDataTags: JSX.Element[] = reportMetaDataTags.map((eaMetaDataTag: IMetaDataTag) => {
       const { InternalName, DisplayName, DisplayValue } = eaMetaDataTag; // obj destructuring
       return  <div className={resultTileStyles['Tile-MetaTag']}>
-                {DisplayValue}
+                {
+                  (DisplayValue) 
+                    ? <span>{DisplayValue}</span>
+                    : null
+                }
               </div>;
     });
     
@@ -472,57 +476,3 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     });
   }
 }
-
-/*
-  Old Result Tile Render
-*/
-{/* <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
-  <div className="singleCard">
-    
-    <li className="ms-ListItem ms-ListItem--document">
-      <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
-        <span className="ms-ListItem-primaryText">
-          <a className={styles.itemLink} href={reportURL} title={result.Title}>
-            <span className={styles.itemTitle}>{reportTitle}</span>
-          </a>
-        </span>
-        <div className="datamkt-sub">
-          <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-            <a className={styles.itemLink} href={reportURL} style={{display: "block"}}>
-              &nbsp;
-            </a>
-          </div>
-          <div className="datamkt-right">
-            <a className={styles.itemLink} href={reportURL}>
-              <span className="ms-ListItem-secondaryText" title={result.SVPVisualizationDescription}>{reportDesc}</span>
-            </a>
-            <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
-          </div>
-        </div>
-        <div className="datamkt-icons">
-          <span className={styles.likeFaveButtons}>
-            <div className={styles.likeFavContainer}>
-              <span>
-                { this.state.busyFavoriting && this.busyElement }
-                { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
-                { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
-              </span>
-              <span>
-                { this.shareIconElement }
-              </span>
-              { hideLike && 
-                <span>
-                  
-                  { this.state.busyLiking && this.busyElement }
-                  { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
-                  { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
-                </span>
-              }
-            </div>
-          </span>
-        </div>
-        <div className="ms-ListItem-selectionTarget"></div>
-      </div>
-    </li>
-  </div>
-</div> */}
