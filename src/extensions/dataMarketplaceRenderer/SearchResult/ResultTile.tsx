@@ -1,10 +1,15 @@
 import * as React from 'react';
+import styles from './SearchResult.module.scss';
+import resultTileStyles from './ResultTile.module.scss';
+
+// Third Party
 import * as moment from 'moment';
 import { TooltipHost, getId, Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, ActionButton } from 'office-ui-fabric-react';
 import { Logger, LogLevel } from '@pnp/logging';
 import { truncate } from '@microsoft/sp-lodash-subset';
+
+// Interface
 import IResultTileProps from './IResultTileProps';
-import styles from './SearchResult.module.scss';
 import { ISearchResult } from '../../../models/ISearchResult';
 import { ReportActionsService, IFavoriteState } from '../../../services/ReportActionsService/ReportActionsService';
 
@@ -18,6 +23,14 @@ export interface IResultTileState {
   favoriteDescription: string;
   favoriteTitle: string;
 }
+
+interface IMetaDataTag {
+  InternalName: string;
+  DisplayName: string;
+  DisplayValue: string;
+}
+
+interface IMetaDataTags extends Array<IMetaDataTag>{}
 
 export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
   private actionsService: ReportActionsService;
@@ -113,7 +126,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       favoriteId: favorite.favoriteId,
       isLiked: isLiked
     });
-    
   }
 
   @autobind
@@ -126,73 +138,120 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
     const hideLike: boolean = true;
 
-    const reportURL = (this.state.isFavorite)
+    const reportURL: string = (this.state.isFavorite)
       ? `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?favReportId=${this.state.favoriteId}`
       : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
 
-    const reportDesc = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
-    const reportTitle = truncate(result.Title, { 'length': 45, 'separator': ' ' });
+    const reportTitle: string = truncate(result.Title, { 'length': 45, 'separator': ' ' });
+    const reportOwner: string = result.RefinableString05;
+    const reportLastUpdated: string = moment(result.Created).format('llll');
+    const reportThumbnail: string = result.RefinableString04;
+    const reportDesc: string = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
+    /*
+      Suggestion: once metadata is properly defined by the client have them be delivered inside another array of objects 
+      called `MetaDataTags` or something. This way there is no hardcoded mapping.
+    */
+    const reportMetaDataTags: IMetaDataTags = [
+      {
+         'InternalName': 'SVPBusinessUnit',
+         'DisplayName': 'Business Unit',
+         'DisplayValue': result.RefinableString01
+      },
+      {
+         'InternalName': 'SVPDepartment',
+         'DisplayName': 'Department',
+         'DisplayValue': result.RefinableString12
+      },
+      {
+         'InternalName': 'SVPMetadata1',
+         'DisplayName': 'Purpose',
+         'DisplayValue': result.RefinableString07
+      },
+      {
+         'InternalName': 'SVPMetadata2',
+         'DisplayName': 'Process',
+         'DisplayValue': result.RefinableString08
+      },
+      {
+         'InternalName': 'SVPMetadata3',
+         'DisplayName': 'Area',
+         'DisplayValue': result.RefinableString09
+      },
+      {
+         'InternalName': 'SVPMetadata4',
+         'DisplayName': 'Role',
+         'DisplayValue': result.RefinableString10
+      }
+    ];
 
+    const metaDataTags: JSX.Element[] = reportMetaDataTags.map((eaMetaDataTag: IMetaDataTag) => {
+      const { InternalName, DisplayName, DisplayValue } = eaMetaDataTag; // obj destructuring
+      if (DisplayValue) {
+        return <div className={resultTileStyles['Tile-MetaTag']}>{DisplayValue}</div>;
+      } else {
+        return null;
+      }
+    });
+    
     return (
-      <li className={styles.resultItem}>
-        <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
-          <div className="singleCard">
-            
-            <li className="ms-ListItem ms-ListItem--document">
-              <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
-                <span className="ms-ListItem-primaryText">
-                  <a className={styles.itemLink} href={reportURL} title={result.Title}>
-                    <span className={styles.itemTitle}>{reportTitle}</span>
-                  </a>
-                  {/* <TooltipHost content={result.Title} id={this.titleTooltipId} calloutProps={{ gapSpace: 0 }}>
-                    <a className={styles.itemLink} href={reportURL}>
-                      <span className={styles.itemTitle}>{reportTitle}</span>
-                    </a>
-                  </TooltipHost> */}
-                </span>
-                <div className="datamkt-sub">
-                  <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-                    <a className={styles.itemLink} href={reportURL} style={{display: "block"}}>
-                      &nbsp;
-                    </a>
-                  </div>
-                  <div className="datamkt-right">
-                    <a className={styles.itemLink} href={reportURL}>
-                      <span className="ms-ListItem-secondaryText" title={result.SVPVisualizationDescription}>{reportDesc}</span>
-                    </a>
-                      {/* <TooltipHost content={result.SVPVisualizationDescription} id={this.descTooltipId} calloutProps={{ gapSpace: 0 }}>
-                        <span className="ms-ListItem-secondaryText">{reportDesc}</span>
-                      </TooltipHost> */}
-                    <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
-                  </div>
-                </div>
-                <div className="datamkt-icons">
-                  <span className={styles.likeFaveButtons}>
-                    <div className={styles.likeFavContainer}>
-                      <span>
-                        { this.state.busyFavoriting && this.busyElement }
-                        { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
-                        { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
-                      </span>
-                      <span>
-                        { this.shareIconElement }
-                      </span>
-                      { hideLike && 
-                        <span>
-                         
-                          { this.state.busyLiking && this.busyElement }
-                          { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
-                          { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
-                        </span>
-                      }
-                    </div>
-                  </span>
-                </div>
-                <div className="ms-ListItem-selectionTarget"></div>
-              </div>
-            </li>
+      <li className={resultTileStyles['Tile-Container']} >
+        <header className={resultTileStyles['Tile-Header']}>
+          <div className={resultTileStyles['Tile-Title-Container']}>
+            <div className={resultTileStyles['Tile-Header-Title']}>
+              <a href={reportURL}>
+                {reportTitle}
+              </a>
+            </div>
+            <div className={resultTileStyles['Tile-Header-Owner']}>
+              Owner: 
+              { 
+                (reportOwner)
+                    ? <span> {reportOwner}</span>
+                    : <span> No Owner Found</span>
+              }
+            </div>
+            <div className={resultTileStyles['Tile-Header-LastUpdated']}>
+              Last Updated: <span>{reportLastUpdated}</span>
+            </div>
           </div>
-        </div>
+          <aside className={resultTileStyles['Tile-Header-Interactable-Icons-Container']}>
+            <div className={resultTileStyles['Tile-Header-Favorite-Icon']}>
+              <span>
+                { this.state.busyFavoriting && this.busyElement }
+                { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
+                { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
+              </span>
+            </div>
+            <div className={resultTileStyles['Tile-Header-Share-Icon']}>
+              { this.shareIconElement }
+            </div>
+            <div className={resultTileStyles['Tile-Header-Like-Icon']}>
+              { hideLike && 
+                <span>
+                  { this.state.busyLiking && this.busyElement }
+                  { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
+                  { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
+                </span>
+              }
+            </div>
+          </aside>
+        </header>
+
+        <section className={resultTileStyles['Tile-Content']}>
+          <aside className={resultTileStyles['Tile-Content-Thumbnail']}>
+            <a href={reportURL}>
+              <img src={reportThumbnail} alt="" />
+            </a>
+          </aside>
+          <aside className={resultTileStyles['Tile-Content-Info']}>
+            <p className={resultTileStyles['Tile-Content-Description']}>
+              {reportDesc}
+            </p>
+            <div className={resultTileStyles['Tile-Content-Metatags']}>
+              {metaDataTags}
+            </div>
+          </aside>
+        </section>        
         {this.renderFavoriteDialog()}
       </li>
     );
@@ -201,7 +260,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   @autobind
   private renderVizIconImage(result: ISearchResult) {
     let toReturn: JSX.Element;
-
     let imageUrl: string = this.props.result.SPWebUrl;
 
     switch (result.SVPVisualizationTechnology) {

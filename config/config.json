@@ -144,5 +144,4 @@
      "MeetingBookDetailsWebPartStrings": "lib/webparts/meetingBookDetails/loc/{locale}.js",
      "MeetingBookListViewWebPartStrings": "lib/webparts/meetingBookListView/loc/{locale}.js"
    }
- }
- 
+}
