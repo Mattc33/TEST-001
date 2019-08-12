@@ -186,13 +186,11 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
 
     const metaDataTags: JSX.Element[] = reportMetaDataTags.map((eaMetaDataTag: IMetaDataTag) => {
       const { InternalName, DisplayName, DisplayValue } = eaMetaDataTag; // obj destructuring
-      return  <div className={resultTileStyles['Tile-MetaTag']}>
-                {
-                  (DisplayValue) 
-                    ? <span>{DisplayValue}</span>
-                    : null
-                }
-              </div>;
+      if (DisplayValue) {
+        return <div className={resultTileStyles['Tile-MetaTag']}>{DisplayValue}</div>;
+      } else {
+        return null;
+      }
     });
     
     return (
