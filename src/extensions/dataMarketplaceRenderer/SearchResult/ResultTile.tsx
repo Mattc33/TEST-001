@@ -137,20 +137,21 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   @autobind
   private renderResultItem(result: ISearchResult): JSX.Element {
 
-    console.log('incoming result', result);
-
     const hideLike: boolean = true;
 
-    const reportURL = (this.state.isFavorite)
+    const reportURL: string = (this.state.isFavorite)
       ? `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?favReportId=${this.state.favoriteId}`
       : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
 
-
     const reportTitle: string = truncate(result.Title, { 'length': 45, 'separator': ' ' });
     const reportOwner: string = result.RefinableString05;
-    const reportLastUpdated: string = result.Created;
+    const reportLastUpdated: string = moment(result.Created).format('llll');
     const reportThumbnail: string = result.RefinableString04;
     const reportDesc: string = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
+    /*
+      Suggestion: once metadata is properly defined by the client have them be delivered inside another array of objects 
+      called `MetaDataTags` or something. This way there is no hardcoded mapping.
+    */
     const reportMetaDataTags: IMetaDataTags = [
       {
          'InternalName': 'SVPBusinessUnit',
@@ -192,12 +193,13 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     });
     
     return (
-      <li className={resultTileStyles['Tile-Container']}>
-
+      <li className={resultTileStyles['Tile-Container']} >
         <header className={resultTileStyles['Tile-Header']}>
           <div className={resultTileStyles['Tile-Title-Container']}>
             <div className={resultTileStyles['Tile-Header-Title']}>
-              {reportTitle}
+              <a href={reportURL}>
+                {reportTitle}
+              </a>
             </div>
             <div className={resultTileStyles['Tile-Header-Owner']}>
               Owner: 
@@ -212,15 +214,33 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             </div>
           </div>
           <aside className={resultTileStyles['Tile-Header-Interactable-Icons-Container']}>
-            <span className={resultTileStyles['Tile-Header-Favorite-Icon']}>Favorite</span>
-            <span className={resultTileStyles['Tile-Header-Share-Icon']}>Share</span>
-            <span className={resultTileStyles['Tile-Header-Like-Icon']}>Like</span>
+            <div className={resultTileStyles['Tile-Header-Favorite-Icon']}>
+              <span>
+                { this.state.busyFavoriting && this.busyElement }
+                { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
+                { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
+              </span>
+            </div>
+            <div className={resultTileStyles['Tile-Header-Share-Icon']}>
+              { this.shareIconElement }
+            </div>
+            <div className={resultTileStyles['Tile-Header-Like-Icon']}>
+              { hideLike && 
+                <span>
+                  { this.state.busyLiking && this.busyElement }
+                  { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
+                  { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
+                </span>
+              }
+            </div>
           </aside>
         </header>
 
         <section className={resultTileStyles['Tile-Content']}>
           <aside className={resultTileStyles['Tile-Content-Thumbnail']}>
-            <img src={reportThumbnail} alt=""/>
+            <a href={reportURL}>
+              <img src={reportThumbnail} alt="" />
+            </a>
           </aside>
           <aside className={resultTileStyles['Tile-Content-Info']}>
             <p className={resultTileStyles['Tile-Content-Description']}>
@@ -230,58 +250,7 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
               {metaDataTags}
             </div>
           </aside>
-        </section>
-
-        {/* <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
-          <div className="singleCard">
-            
-            <li className="ms-ListItem ms-ListItem--document">
-              <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
-                <span className="ms-ListItem-primaryText">
-                  <a className={styles.itemLink} href={reportURL} title={result.Title}>
-                    <span className={styles.itemTitle}>{reportTitle}</span>
-                  </a>
-                </span>
-                <div className="datamkt-sub">
-                  <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
-                    <a className={styles.itemLink} href={reportURL} style={{display: "block"}}>
-                      &nbsp;
-                    </a>
-                  </div>
-                  <div className="datamkt-right">
-                    <a className={styles.itemLink} href={reportURL}>
-                      <span className="ms-ListItem-secondaryText" title={result.SVPVisualizationDescription}>{reportDesc}</span>
-                    </a>
-                    <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
-                  </div>
-                </div>
-                <div className="datamkt-icons">
-                  <span className={styles.likeFaveButtons}>
-                    <div className={styles.likeFavContainer}>
-                      <span>
-                        { this.state.busyFavoriting && this.busyElement }
-                        { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
-                        { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
-                      </span>
-                      <span>
-                        { this.shareIconElement }
-                      </span>
-                      { hideLike && 
-                        <span>
-                         
-                          { this.state.busyLiking && this.busyElement }
-                          { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
-                          { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
-                        </span>
-                      }
-                    </div>
-                  </span>
-                </div>
-                <div className="ms-ListItem-selectionTarget"></div>
-              </div>
-            </li>
-          </div>
-        </div> */}
+        </section>        
         {this.renderFavoriteDialog()}
       </li>
     );
@@ -290,7 +259,6 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   @autobind
   private renderVizIconImage(result: ISearchResult) {
     let toReturn: JSX.Element;
-
     let imageUrl: string = this.props.result.SPWebUrl;
 
     switch (result.SVPVisualizationTechnology) {
@@ -505,3 +473,57 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     });
   }
 }
+
+/*
+  Old Result Tile Render
+*/
+{/* <div className="ms-Grid-col ms-sm12 ms-md6 ms-lg4 tile-class">
+  <div className="singleCard">
+    
+    <li className="ms-ListItem ms-ListItem--document">
+      <div className={"cardInfo" + result.SVPIsFeatured ? styles.featuredCard : ""}>
+        <span className="ms-ListItem-primaryText">
+          <a className={styles.itemLink} href={reportURL} title={result.Title}>
+            <span className={styles.itemTitle}>{reportTitle}</span>
+          </a>
+        </span>
+        <div className="datamkt-sub">
+          <div className="previewImg datamkt-left" style={{ backgroundImage: `url(${result.SVPVisualizationImage})` }}>
+            <a className={styles.itemLink} href={reportURL} style={{display: "block"}}>
+              &nbsp;
+            </a>
+          </div>
+          <div className="datamkt-right">
+            <a className={styles.itemLink} href={reportURL}>
+              <span className="ms-ListItem-secondaryText" title={result.SVPVisualizationDescription}>{reportDesc}</span>
+            </a>
+            <span className="ms-ListItem-tertiaryText">{this.fmtDateString(result.Created)}</span>
+          </div>
+        </div>
+        <div className="datamkt-icons">
+          <span className={styles.likeFaveButtons}>
+            <div className={styles.likeFavContainer}>
+              <span>
+                { this.state.busyFavoriting && this.busyElement }
+                { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
+                { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
+              </span>
+              <span>
+                { this.shareIconElement }
+              </span>
+              { hideLike && 
+                <span>
+                  
+                  { this.state.busyLiking && this.busyElement }
+                  { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
+                  { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
+                </span>
+              }
+            </div>
+          </span>
+        </div>
+        <div className="ms-ListItem-selectionTarget"></div>
+      </div>
+    </li>
+  </div>
+</div> */}
