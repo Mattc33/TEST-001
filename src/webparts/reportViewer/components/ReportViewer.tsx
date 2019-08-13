@@ -1,27 +1,34 @@
 import * as React from "react";
 import styles from "./ReportViewer.module.scss";
-import {
-  WebPartContext
-} from '@microsoft/sp-webpart-base';
-import { REPORT_VIEWER_PATH } from "../state/IReportViewerState";
-import { ConnectByPath } from "../../../base";
-import { ReportViewerContext } from "../store/ReportViewerStore";
+
+// Third Party
+import { WebPartContext } from '@microsoft/sp-webpart-base';
+
+// Components
 import { 
-  TableauReport, 
-  GenericReport,
-  Toolbar, 
-  IProfileFilter, 
-  FavoriteDialog, 
-  SaveStatus, 
-  ReportDiscussionDialog,
-  ReportHeader
-} from "../../controls";
-import { IReportViewer } from "../state/IReportViewerState";
+   TableauReport, 
+   GenericReport,
+   Toolbar, 
+   IProfileFilter, 
+   FavoriteDialog, 
+   SaveStatus, 
+   ReportDiscussionDialog,
+   ReportHeader,
+   ReportLearnPanel
+ } from "../../controls";
+ import { PowerBIReport } from "../../controls/ReportRenderers/PowerBIReport/PowerBIReport";
+
+// Utils
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { Utils } from "../../../services";
+import { ConnectByPath } from "../../../base";
+import { ReportViewerContext } from "../store/ReportViewerStore";
+import { REPORT_VIEWER_PATH } from "../state/IReportViewerState";
+
+// Interface
+import { IReportViewer } from "../state/IReportViewerState";
 import { IReportItem, IReportParameters, ITableauReportViewerConfig } from "../../../models";
 
-import { PowerBIReport } from "../../controls/ReportRenderers/PowerBIReport/PowerBIReport";
 
 // require("./ReportViewer.SPFix.css");
 // const FieldNameMapping = "{'metadata':[{'displayLabel':'Business Unit','internalName':'SVPBusinessUnit'},{'displayLabel':'Department','internalName':'SVPDepartment'},{'displayLabel':'Purpose','internalName':'SVPMetadata1'},{'displayLabel':'Process','internalName':'SVPMetadata2'},{'displayLabel':'Area','internalName':'SVPMetadata3'},{'displayLabel':'Role','internalName':'SVPMetadata4'}]}";
@@ -150,8 +157,11 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
           }
 
           { // ReportCommentDialog Component and controlling state
-            (!this.props.state.loading && this.state.showReportLearnDialog) &&
-            <div></div>
+            !this.props.state.loading && this.state.showReportLearnDialog &&
+            <ReportLearnPanel
+               richTextReport={this.props.state.report.SVPVisualizationLearning}
+               onCancel={() => this.setReportLearnDialog(false)}
+            />
 
           }
 
@@ -286,13 +296,13 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     }
   }
 
-  private handleReportLearn = (): void => {
+  private handleReportLearn = (): void => { // method that handles learn button drawer
     const report = this.props.state.report;
     console.log('handleReportLearn() is firing');
     if (report) {
-      alert("Clicked on Learn Button: " + report.SVPVisualizationLearning);
+      console.log(report.SVPVisualizationLearning);
       //this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
-      this.setReportDiscussionDialog(true);
+      this.setReportLearnDialog(true);
     }
   }
 
@@ -342,13 +352,11 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     }
   }
 
-  private setReportLearnDialog = (state: boolean): void => {
-     /*
-         if() {
-
-    }
-     */ 
-  }
+   private setReportLearnDialog = (state: boolean): void => { // sets the state of learn drawer on/off
+      if(this.state.showReportLearnDialog !== state) { // if opposite of current state do...
+         this.setState({showReportLearnDialog: state})
+      }
+   }
 
   @autobind
   private getReportMetadata(reportInfo: IReportItem, sortProp: string|string[]): Array<IReportInfo> {
