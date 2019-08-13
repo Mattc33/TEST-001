@@ -15,13 +15,21 @@ const VizListFields = [
     "SVPLastUpdated",
     "SVPVisualizationDescription",
     "SVPVisualizationImage",
-    "SVPMetadata1",          //segment
-    "SVPMetadata2",          //function
-    "SVPMetadata3",          //frequency
+    "SVPIsFeatured",
+    "SVPBusinessUnit",
+    "SVPDepartment",
     "SVPReportHeight",
     "SVPReportWidth",
+    "SVPMetadata1",          //Purpose
+    "SVPMetadata2",          //Process
+    "SVPMetadata3",         //Area
+    "SVPMetadata4",         //Role
+    "SVPVisualizationLearning",
     "Modified",
     "Created",
+    "SVPVisualizationParameters/Id",
+    "SVPVisualizationParameters/SVPParameterName",
+    "SVPVisualizationParameters/SVPParameterValue",
     "SVPVisualizationOwner/Id",
     "SVPVisualizationOwner/Title",
     "SVPVisualizationOwner/EMail"

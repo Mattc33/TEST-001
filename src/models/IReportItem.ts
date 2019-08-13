@@ -31,6 +31,7 @@ export interface IReportItem {
     SVPMetadata1?: string;          //segment
     SVPMetadata2?: string;          //function
     SVPMetadata3?: string;          //frequency
+    SVPMetadata4?: string;          //frequency
     SVPReportHeight?: number;
     SVPReportWidth?: number;
     Modified?: Date;
@@ -51,6 +52,7 @@ export interface IReportItem {
     SVPVisualizationMetadata?: any;
 
     SVPDepartment?: string;
+    SVPVisualizationLearning?:string;
 
     ReportAnalytics?:IReportAnalytics;
 }
