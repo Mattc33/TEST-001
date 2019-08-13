@@ -290,7 +290,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     const report = this.props.state.report;
     console.log('handleReportLearn() is firing');
     if (report) {
-      alert("Clicked on Learn Button");
+      alert("Clicked on Learn Button: " + report.SVPVisualizationLearning);
       //this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportDiscussionDialog(true);
     }
