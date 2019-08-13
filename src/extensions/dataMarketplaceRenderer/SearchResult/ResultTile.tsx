@@ -143,9 +143,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       : `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
 
     const reportTitle: string = truncate(result.Title, { 'length': 45, 'separator': ' ' });
-    const reportOwner: string = result.RefinableString05;
+    const reportOwner: string = result.SVPVisualizationOwner;
     const reportLastUpdated: string = moment(result.Created).format('llll');
-    const reportThumbnail: string = result.RefinableString04;
+    const reportThumbnail: string = result.SVPVisualizationImage;
     const reportDesc: string = truncate(result.SVPVisualizationDescription, { 'length': 80, 'separator': ' ' });
     /*
       Suggestion: once metadata is properly defined by the client have them be delivered inside another array of objects 
@@ -155,32 +155,32 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       {
          'InternalName': 'SVPBusinessUnit',
          'DisplayName': 'Business Unit',
-         'DisplayValue': result.RefinableString01
+         'DisplayValue': result.SVPBusinessUnit
       },
       {
          'InternalName': 'SVPDepartment',
          'DisplayName': 'Department',
-         'DisplayValue': result.RefinableString12
+         'DisplayValue': result.SVPDepartment
       },
       {
          'InternalName': 'SVPMetadata1',
          'DisplayName': 'Purpose',
-         'DisplayValue': result.RefinableString07
+         'DisplayValue': result.SVPMetadata1
       },
       {
          'InternalName': 'SVPMetadata2',
          'DisplayName': 'Process',
-         'DisplayValue': result.RefinableString08
+         'DisplayValue': result.SVPMetadata2
       },
       {
          'InternalName': 'SVPMetadata3',
          'DisplayName': 'Area',
-         'DisplayValue': result.RefinableString09
+         'DisplayValue': result.SVPMetadata3
       },
       {
          'InternalName': 'SVPMetadata4',
          'DisplayName': 'Role',
-         'DisplayValue': result.RefinableString10
+         'DisplayValue': result.SVPMetadata4
       }
     ];
 
