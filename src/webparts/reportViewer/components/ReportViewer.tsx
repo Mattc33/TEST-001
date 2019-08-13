@@ -35,6 +35,7 @@ export interface IReportViewerProps {
 export interface IReportViewerState {
   showSaveFavoriteDialog: boolean;
   showReportDiscussionDialog: boolean;
+  showReportLearnDialog: boolean;
 }
 
 export interface IReportInfo {
@@ -56,6 +57,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     this.state = {  
       showSaveFavoriteDialog: false,
       showReportDiscussionDialog: false,
+      showReportLearnDialog: false
     };
   }
 
@@ -145,6 +147,12 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
               onCancel={() => this.setReportDiscussionDialog(false)}
               score = {this.props.state.sentimentScore}
             />
+          }
+
+          { // ReportCommentDialog Component and controlling state
+            (!this.props.state.loading && this.state.showReportLearnDialog) &&
+            <div></div>
+
           }
 
           {!this.props.state.loading && this.props.state.report &&
@@ -269,21 +277,22 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
-  private handleReportDiscussion() {
+  private handleReportDiscussion() { // method that handles comment drawer
     const report = this.props.state.report;
+    console.log('handleReportDiscussion()');
     if (report) {
       this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportDiscussionDialog(true);
     }
   }
 
-  @autobind
-  private handleReportLearn() {
+  private handleReportLearn = (): void => {
     const report = this.props.state.report;
+    console.log('handleReportLearn() is firing');
     if (report) {
       alert("Clicked on Learn Button");
       //this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
-      //this.setReportDiscussionDialog(true);
+      this.setReportDiscussionDialog(true);
     }
   }
 
@@ -325,12 +334,20 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   }
 
   @autobind
-  private setReportDiscussionDialog(state: boolean) {
+  private setReportDiscussionDialog(state: boolean) { // sets the state of comment drawer on/off
     if (this.state.showReportDiscussionDialog !== state) {
       this.setState({
         showReportDiscussionDialog: state
       });
     }
+  }
+
+  private setReportLearnDialog = (state: boolean): void => {
+     /*
+         if() {
+
+    }
+     */ 
   }
 
   @autobind
