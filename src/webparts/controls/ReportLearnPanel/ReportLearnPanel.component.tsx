@@ -15,10 +15,12 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
 
    public componentDidMount = () => {
       console.log('ReportLearnPanel Fired');
-      console.log(typeof this.props.richTextReport)
+      console.log(typeof this.props.richTextReport);
    }
 
-   // private 
+   private convertStringToJsx = (richTextReport: string): JSX.Element[] => { // returns an arr of jsx.elements
+      return 
+   }
 
    public render = (): JSX.Element => {
       return (
@@ -34,7 +36,7 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
                {this.props.richTextReport}
             </main>
          </Panel>
-      )
+      );
    }
 
 }
