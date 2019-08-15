@@ -1,3 +1,20 @@
 .Learn-Panel-Container {
-   // padding: 20px;
+   display: flex;
+   flex-direction: column;
+
+   .Learn-Panel-Header {
+      color: #398bcc;
+      font-size: .9em;
+      font-weight: 600;
+      align-self: flex-start;
+      
+      .Learn-Panel-Header-Title {
+         margin-right: 5px;
+         color: black;
+      }
+   }
+
+   .Learn-Panel-Content {
+      margin-top: 10px;
+   }
 }

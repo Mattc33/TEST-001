@@ -1,8 +1,10 @@
 export interface IReportLearnPanelProps {
-   richTextReport: string;
+   reportRichText: string;
+   reportTitle: string;
    onCancel(): void;
+   report: any;
 }
 
 export interface IReportLearnPanelState {
-   
+   showLearnPanel: boolean;
 }

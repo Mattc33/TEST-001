@@ -11,30 +11,24 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
 
    public state = {
       showLearnPanel: true
-   }
+   };
 
-   public componentDidMount = () => {
-      console.log('ReportLearnPanel Fired');
-      console.log(typeof this.props.richTextReport)
-   }
-
-   // private 
-
-   public render = (): JSX.Element => {
-      return (
-         <Panel 
-            dir={'rtl'} // direction right to left
-            isOpen={true}
-            type={PanelType.custom}
-            customWidth="600px"
-            onDismiss={this.props.onCancel}
-            closeButtonAriaLabel="Close">
-         >
-            <main className={styles['Learn-Panel-Container']}>
-               {this.props.richTextReport}
-            </main>
-         </Panel>
-      )
-   }
-
+   public render = (): JSX.Element => (
+      <Panel 
+         dir={'rtl'} // direction right to left
+         isOpen={this.state.showLearnPanel}
+         type={PanelType.custom}
+         customWidth="600px"
+         onDismiss={this.props.onCancel}
+         closeButtonAriaLabel="Close"
+      >
+         <main className={styles['Learn-Panel-Container']} dir={'ltr'}>
+            <header className={styles['Learn-Panel-Header']}>
+               ViewPort Learning Panel: 
+               <span className={styles['Learn-Panel-Header-Title']}> {this.props.report.Title}</span>
+            </header>
+            <section className={styles['Learn-Panel-Content']} dangerouslySetInnerHTML={{__html: this.props.reportRichText}} />
+         </main>
+      </Panel>
+   )
 }
