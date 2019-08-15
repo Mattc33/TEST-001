@@ -14,21 +14,21 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
    };
 
    public render = (): JSX.Element => (
-         <Panel 
-            dir={'rtl'} // direction right to left
-            isOpen={this.state.showLearnPanel}
-            type={PanelType.custom}
-            customWidth="600px"
-            onDismiss={this.props.onCancel}
-            closeButtonAriaLabel="Close"
-         >
-            <main className={styles['Learn-Panel-Container']} dir={'ltr'}>
-               <header className={styles['Learn-Panel-Header']}>
-                  ViewPort Learning Panel: 
-                  <span className={styles['Learn-Panel-Header-Title']}> {this.props.report.Title}</span>
-               </header>
-               <section className={styles['Learn-Panel-Content']} dangerouslySetInnerHTML={{__html: this.props.reportRichText}} />
-            </main>
-         </Panel>
+      <Panel 
+         dir={'rtl'} // direction right to left
+         isOpen={this.state.showLearnPanel}
+         type={PanelType.custom}
+         customWidth="600px"
+         onDismiss={this.props.onCancel}
+         closeButtonAriaLabel="Close"
+      >
+         <main className={styles['Learn-Panel-Container']} dir={'ltr'}>
+            <header className={styles['Learn-Panel-Header']}>
+               ViewPort Learning Panel: 
+               <span className={styles['Learn-Panel-Header-Title']}> {this.props.report.Title}</span>
+            </header>
+            <section className={styles['Learn-Panel-Content']} dangerouslySetInnerHTML={{__html: this.props.reportRichText}} />
+         </main>
+      </Panel>
    )
 }
