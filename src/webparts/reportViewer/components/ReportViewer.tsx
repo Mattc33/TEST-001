@@ -352,8 +352,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
    private setReportLearnDialog = (state: boolean): void => { // sets the state of learn drawer on/off
       if(this.state.showReportLearnDialog !== state) { // if opposite of current state do...
-         this.setState({showReportLearnDialog: state})
-      };
+         this.setState({showReportLearnDialog: state});
+      }
    }
 
   @autobind

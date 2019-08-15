@@ -30,5 +30,5 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
                <section className={styles['Learn-Panel-Content']} dangerouslySetInnerHTML={{__html: this.props.reportRichText}} />
             </main>
          </Panel>
-   );
+   )
 }
