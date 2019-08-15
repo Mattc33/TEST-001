@@ -16,9 +16,6 @@ export interface IReportProps {
 
 
 export default class MyFavHome extends React.Component<IReportProps, {}> {
-
-  
-
   public render(): React.ReactElement<IReportProps> {
     const rowStyle = {
       display: 'inline-flex',
