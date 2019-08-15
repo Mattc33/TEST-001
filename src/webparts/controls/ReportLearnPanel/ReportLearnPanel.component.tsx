@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ReportLearnPanel.module.scss';
 
 // Third Party
-import { Panel, PanelType, Layer } from 'office-ui-fabric-react';
+import { Panel, PanelType } from 'office-ui-fabric-react';
 
 // Interface
 import { IReportLearnPanelProps, IReportLearnPanelState } from './ReportLearnPanel.interface';
@@ -11,18 +11,9 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
 
    public state = {
       showLearnPanel: true
-   }
+   };
 
-   public componentDidMount = () => {
-      console.log(this.props.report)
-   }
-
-   private convertStringToJsx = (richTextReport: string): JSX.Element[] => { // returns an arr of jsx.elements
-      return 
-   }
-
-   public render = (): JSX.Element => {
-      return (
+   public render = (): JSX.Element => (
          <Panel 
             dir={'rtl'} // direction right to left
             isOpen={this.state.showLearnPanel}
@@ -36,17 +27,8 @@ export class ReportLearnPanel extends React.Component<IReportLearnPanelProps, IR
                   ViewPort Learning Panel: 
                   <span className={styles['Learn-Panel-Header-Title']}> {this.props.report.Title}</span>
                </header>
-               <section className={styles['Learn-Panel-Content']}>
-                  {this.props.reportRichText}
-               </section>
+               <section className={styles['Learn-Panel-Content']} dangerouslySetInnerHTML={{__html: this.props.reportRichText}} />
             </main>
          </Panel>
-      );
-   }
+   );
 }
-
-/*
-
-<div style={{ fontSize: '18px', fontWeight: 500 }}>: {this.props.discussion.title}</div>
-
-*/

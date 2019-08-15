@@ -88,8 +88,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     }
 
     viewerProps.actions.loadReportData(reportId, favReportId, 700, width);
-
-    console.log(this.props)
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
@@ -103,7 +101,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
       if (SVPMetadata !== undefined && typeof SVPMetadata === 'string') {
          getReportMetaDataAsString = this.getReportMetaDataAsString(this.props.state.SVPMetadata, reportObj);
-         console.log(getReportMetaDataAsString);
+         // console.log(getReportMetaDataAsString);
       }
     }
 
@@ -188,7 +186,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     const report = this.props.state.report;
     let reportComponent: JSX.Element = null;
 
-    console.log("SVPVisualizationTechnology: ", report.SVPVisualizationTechnology);
+   //  console.log("SVPVisualizationTechnology: ", report.SVPVisualizationTechnology);
     switch(report.SVPVisualizationTechnology) {
       case "Tableau":
         reportComponent = <TableauReport
@@ -293,8 +291,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   @autobind
   private handleReportDiscussion() { // method that handles comment drawer
     const report = this.props.state.report;
-   //  console.log('handleReportDiscussion()');
-   //  console.log(report);
     if (report) {
       this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportDiscussionDialog(true);
@@ -303,10 +299,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
 
   private handleReportLearn = (): void => { // method that handles learn button drawer
     const report = this.props.state.report;
-    console.log('handleReportLearn() is firing');
     if (report) {
-      console.log(report.SVPVisualizationLearning);
-      //this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportLearnDialog(true);
     }
   }
@@ -360,7 +353,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
    private setReportLearnDialog = (state: boolean): void => { // sets the state of learn drawer on/off
       if(this.state.showReportLearnDialog !== state) { // if opposite of current state do...
          this.setState({showReportLearnDialog: state})
-      }
+      };
    }
 
   @autobind
