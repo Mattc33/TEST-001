@@ -88,6 +88,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
     }
 
     viewerProps.actions.loadReportData(reportId, favReportId, 700, width);
+
+    console.log(this.props)
   }
 
   public render(): React.ReactElement<IReportViewerProps> {
@@ -159,7 +161,9 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
           { // ReportCommentDialog Component and controlling state
             !this.props.state.loading && this.state.showReportLearnDialog &&
             <ReportLearnPanel
-               richTextReport={this.props.state.report.SVPVisualizationLearning}
+               reportRichText={this.props.state.report.SVPVisualizationLearning}
+               reportTitle={this.props.state.report.Title}
+               report={this.props.state.report}
                onCancel={() => this.setReportLearnDialog(false)}
             />
 
@@ -289,7 +293,8 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
   @autobind
   private handleReportDiscussion() { // method that handles comment drawer
     const report = this.props.state.report;
-    console.log('handleReportDiscussion()');
+   //  console.log('handleReportDiscussion()');
+   //  console.log(report);
     if (report) {
       this.props.state.actions.loadReportDiscussion(report.Id, report.Title, this.props.state.useSentimentService, this.props.state.sentimentServiceAPIKey, this.props.state.sentimentServiceAPIUrl);
       this.setReportDiscussionDialog(true);
