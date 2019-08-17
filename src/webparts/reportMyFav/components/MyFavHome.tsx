@@ -1,8 +1,11 @@
 import * as React from 'react';
 import styles from './MyFavHome.module.scss';
+
+// Third Party
+import { ActionButton, Link } from 'office-ui-fabric-react';
+
+// Interface
 import { IReportFavoriteItem } from "../../../models/IReportItem";
-import { ActionButton } from 'office-ui-fabric-react/lib/Button';
-import { Link } from 'office-ui-fabric-react/lib/Link';
 
 export interface IReportProps {
   key: string;
@@ -14,8 +17,12 @@ export interface IReportProps {
   onRemove(favReport:IReportFavoriteItem);
 }
 
+/*
+   My Favorites on the home page
+*/
 
 export default class MyFavHome extends React.Component<IReportProps, {}> {
+
   public render(): React.ReactElement<IReportProps> {
     const rowStyle = {
       display: 'inline-flex',
@@ -62,11 +69,5 @@ export default class MyFavHome extends React.Component<IReportProps, {}> {
         </div>
       </div>
     );
-  }
-//TODO
-//<IconButton iconProps={{ iconName: 'AreaChart' }} title="View Report" ariaLabel="View Report" onClick={(e) => this.props.onView(this.props.reportItem)}/>
-//<p className={styles.description}>{this.props.reportItem.SVPVisualizationDescription}</p>
-////<button className={styles.button} type="button" onClick={(e) => this.props.onView(this.props.reportItem.Id)}>View</button>
-//<Link  className={styles.button} href={ favReportViewUrl } target="_self">View </Link>
-
+   }
 }

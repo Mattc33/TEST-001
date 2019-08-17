@@ -404,7 +404,7 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
    
       const constructAsString = remapObj
          .map( (eaMetaData, index: number) => {
-            if(index === 0) {
+            if (index === 0) {
                return ` ${eaMetaData.displayLabel}: ${eaMetaData.displayValue} | `;
             }
             else if (index === remapObj.length - 1) {
@@ -415,8 +415,6 @@ export class ReportViewer extends React.Component<IReportViewerProps, IReportVie
          .join(' ');
    
       return constructAsString;
-
-      //return '';
    }
 
   // @autobind

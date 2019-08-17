@@ -4,7 +4,7 @@ import {
 } from '@microsoft/sp-webpart-base';
 import { ReportServiceMock } from "../../services/MockServices/ReportServiceMock";
 import { isTouchSupported } from 'fabric/fabric-impl';
-import ReportMyFavList from "./components/ReportMyFavList";
+import ReportMyFavList from "./components/ReportMyFavList/ReportMyFavList";
 import { IReportFavoriteService } from "../../services/interfaces/IReportFavoriteService";
 import { IReportService } from "../../services/interfaces/IReportService";
 import { ReportFavoriteService } from "../../services/ReportFavoriteService";
