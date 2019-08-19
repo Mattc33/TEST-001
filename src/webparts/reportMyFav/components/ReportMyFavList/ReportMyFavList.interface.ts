@@ -2,6 +2,8 @@ import { IReportFavoriteItem } from '../../../../models/IReportItem';
 
 export interface IReportMyFavProps {
 
+   SVPVisualizationImage: string;
+
    controlHeaderMessage: string;
    siteUrl: string;
    loggedInUserName: string;

@@ -1,9 +1,11 @@
+$Report-Favorite-Container-Width: 350px;
+
 .Report-Favorite-Header {
 
    .Report-Favorite-Header-Title {
       font-size: 2rem;
       letter-spacing: 1px;
-      font-weight: 400;
+      font-weight: 600;
    }
 
    .Report-Favorite-Header-Sub-Title {
@@ -16,19 +18,74 @@
 
 .Report-Favorite-Container {
    display: flex;
+   flex-direction: row;
    flex-wrap: wrap;
    width: 100%;
    height: auto;
    margin-top: 30px;
 
    .Report-Favorite-Item {
-      
+      width: $Report-Favorite-Container-Width;
+      max-width: $Report-Favorite-Container-Width;
+      height: 175px;
+
+      // max-width: 600px;
+      // max-height: 300px;
+
+      margin: 6px;
+      padding: 20px;
+
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+      -webkit-box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+
+      display: flex;
+      flex-direction: column;
+
+      .Report-Favorite-Item-Title {
+         width: 100%;
+         text-decoration: underline;
+         font-size: 1.2rem;
+         font-weight: 400;
+         margin-bottom: 10px;
+      }
+
+      .Report-Favorite-Content {
+         display: flex;
+         flex-direction: row;
+
+         .Report-Favorite-Item-Image {
+            align-self: center;
+            
+            img {
+               min-width: $Report-Favorite-Container-Width / 3;
+               max-width: ($Report-Favorite-Container-Width / 3) + 10px;
+            }
+         }
+
+         .Report-Favorite-Item-Right-Container {
+            margin-left: 10px;
+
+            .Report-Favorite-Item-Last-Updated {
+               color: #808080;
+               font-size: .7rem;
+               margin-bottom: 10px;
+            }
+
+            .Report-Favorite-Item-Description {
+               font-size: .8rem;
+            }
+
+            .Report-Favorite-Item-Interactables {
+
+            }
+         }
+      }
+
+
    }
 }
 
-
-
-// @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 // .homePage {
 //   padding-top: 1em;

@@ -21,6 +21,7 @@ export interface IReportMyFavWebPartProps {
   favReportCount:number;
   visualizationTitle:string;
   visualizationImage:string;
+  SVPVisualizationImage: string;
 }
 
 export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyFavWebPartProps> {
@@ -35,7 +36,8 @@ export default class ReportMyFavWebPart extends BaseClientSideWebPart<IReportMyF
         viewNameLabel: this.properties.viewNameLabel,
         favReportCount: this.properties.favReportCount,
         visualizationTitle: this.properties.visualizationTitle,
-        visualizationImage: this.properties.visualizationImage
+        visualizationImage: this.properties.visualizationImage,
+         SVPVisualizationImage: this.properties.SVPVisualizationImage
       }
     );
 

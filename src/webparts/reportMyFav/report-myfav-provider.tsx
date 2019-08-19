@@ -19,7 +19,7 @@ export interface IReportMyFavProviderProps {
     favReportCount:number;
     visualizationTitle:string;
     visualizationImage:string;
-  
+   SVPVisualizationImage: string;
 }
 
 export interface IReportMyFavProviderState {

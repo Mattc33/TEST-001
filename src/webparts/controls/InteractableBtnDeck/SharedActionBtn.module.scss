@@ -1,0 +1,18 @@
+.SharedStyle {
+   cursor: pointer;
+   margin-left: .1em;
+}
+
+.ItemSelected {
+   @extend .SharedStyle;
+   & * {
+      color: #398bcc;
+   }
+}
+
+.ItemUnselected {
+   @extend .SharedStyle;
+   & * {
+      color: #909090;
+   }
+}

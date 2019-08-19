@@ -7,7 +7,7 @@ import styles from './ReportMyFavList.module.scss';
 
 // Third Party
 // import { escape } from '@microsoft/sp-lodash-subset';
-// import { autobind } from '@uifabric/utilities/lib';
+import { truncate } from '@microsoft/sp-lodash-subset';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react';
 // import { WebPartContext } from '@microsoft/sp-webpart-base';
 
@@ -31,10 +31,11 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
    public componentDidMount = (): void => {
       this.setFavoriteReportToState();
-      console.log(this.props);
+      console.log('log props', this.props);
    }
 
    private setFavoriteReportToState = (): void => { // fetch favorite reports and add to component state
+      // we should check if the array is not empty up here rather than in the component
       const {visualizationTitle, visualizationImage, reportCount} = this.props;
       this.props.myFavReportService
          .getMyFavoriteReports(visualizationTitle, visualizationImage, reportCount)
@@ -62,7 +63,7 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
       let newFavResults = this.state.myFavReportItemsinState.filter(item => item !== e);
       this.setState({myFavReportItemsinState: newFavResults});
 
-      //TODO : Call Real API to Remvoe the Item from List.
+      //TODO : Call Real API to Remove the Item from List.
       this.props.reportActionService.UnfavoriteReport(this.props.siteUrl, e.SVPVisualizationLookupId);
    }
 
@@ -86,24 +87,47 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
                Click on the Favorite icon to remove an item from your saved favorites.
             </div>
          </header>
-         <main className={styles['Report-Favorite-Container']}>
+         <div className={styles['Report-Favorite-Container']}>
             {
                (!this.state.isReportsLoaded) // Handling loading of reports
                   ? <Spinner size={SpinnerSize.large} label="Wait, Pulling Reports..." ariaLive="assertive" />
-                  : (myFavReportItemsinState.length >= 1)  // Handling for no reports found
-                     ? myFavReportItemsinState.map( (eaFavReport: IReportFavoriteItem): JSX.Element => {
-                        return (
-                           <section className={styles['Report-Favorite-Item']}>
-                              Hello
+                  : myFavReportItemsinState.map((eaFavReport: IReportFavoriteItem): JSX.Element => {
+                     console.log(eaFavReport);
+                     const myFavReportItemTitle: string = truncate(eaFavReport.Title, {'length': 45, 'separator': ' '});
+                     return (
+                        <main className={styles['Report-Favorite-Item']}>
+                           <section className={styles['Report-Favorite-Item-Title']}>
+                              {myFavReportItemTitle}
                            </section>
-                        );
-                     })
-                     : <section>No Favorite Reports Found.</section>
+                           <section className={styles['Report-Favorite-Content']}>
+                              <div className={styles['Report-Favorite-Item-Image']}>
+                                 <img src={eaFavReport.SVPVisualizationImage} alt="VSP Visualization Image"/>
+                              </div>
+                              <div className={styles['Report-Favorite-Item-Right-Container']}>
+                                 <div className={styles['Report-Favorite-Item-Last-Updated']}>
+                                    Uploaded {'x'} hours ago 
+                                 </div>
+                                 <div className={styles['Report-Favorite-Item-Description']}>
+                                    {eaFavReport.SVPVisualizationDescription}
+                                 </div>
+                                 <div className={styles['Report-Favorite-Item-Interactables']}>
+                                    {
+                                       // import Interactable Deck here
+                                    }
+                                 </div>
+                              </div>
+                           </section>
+                        </main>
+                     );
+                  })
             }
-         </main>
+         </div>
          </React.Fragment>
       );
    }
+
+
+
 
 //   public render(): React.ReactElement<IReportMyFavProps> {
 //     const style = (this.props.viewName !== "MyFavAllWithImage")
