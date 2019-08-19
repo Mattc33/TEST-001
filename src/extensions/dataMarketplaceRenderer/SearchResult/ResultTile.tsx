@@ -211,7 +211,12 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
               }
             </div>
             <div className={resultTileStyles['Tile-Header-LastUpdated']}>
-              Last Updated: <span>{reportLastUpdated}</span>
+              Last Updated: 
+              {
+               (reportLastUpdated)
+                  ? <span>{reportLastUpdated}</span>
+                  : <span>{'Insert blank last updated text here'}</span>
+              }
             </div>
           </div>
           <aside className={resultTileStyles['Tile-Header-Interactable-Icons-Container']}>
