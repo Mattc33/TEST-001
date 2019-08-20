@@ -95,6 +95,7 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
                      console.log(eaFavReport);
                      const myFavReportItemTitle: string = truncate(eaFavReport.Title, {'length': 30, 'separator': ' '});
+                     const myFavReportItemDescription: string = truncate(eaFavReport.SVPVisualizationDescription, { 'length': 100, 'separator': ' ' });
 
                      return (
                         <main className={styles['Report-Favorite-Item']}>
@@ -109,9 +110,8 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
                                  <img src={eaFavReport.SVPVisualizationImage} alt="VSP Visualization Image"/>
                               </div>
                               <div className={styles['Report-Favorite-Item-Right-Container']}>
-
                                  <div className={styles['Report-Favorite-Item-Description']}>
-                                    {eaFavReport.SVPVisualizationDescription}
+                                    {myFavReportItemDescription}
                                  </div>
                                  <div className={styles['Report-Favorite-Item-Interactables']}>
                                     {
