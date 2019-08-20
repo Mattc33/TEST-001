@@ -4,7 +4,11 @@ import styles from '../SharedActionBtn.module.scss';
 // Third Party
 import { ActionButton } from 'office-ui-fabric-react';
 
-export const ShareIconElement = (props): JSX.Element => (
+interface IShareIconElement {
+   shareReport: () => void;
+}
+
+export const ShareIconElement = (props: IShareIconElement): JSX.Element => (
    <ActionButton
       className={styles.ItemSelected}
       data-automation-id="Share"
@@ -14,4 +18,4 @@ export const ShareIconElement = (props): JSX.Element => (
       onClick={props.shareReport}>
       Share
     </ActionButton>
-)
+);

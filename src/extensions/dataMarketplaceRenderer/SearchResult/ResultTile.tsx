@@ -7,11 +7,13 @@ import * as moment from 'moment';
 import { TooltipHost, getId, Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, ActionButton } from 'office-ui-fabric-react';
 import { Logger, LogLevel } from '@pnp/logging';
 import { truncate } from '@microsoft/sp-lodash-subset';
+import { IsFavoriteIconElement, IsNotFavoriteIconElement, IsLikedIconElement, IsNotLikedIconElement, ShareIconElement } from '../../../webparts/controls/InteractableBtnDeck/InteractableBtnDeck';
+
 
 // Interface
 import IResultTileProps from './IResultTileProps';
 import { ISearchResult } from '../../../models/ISearchResult';
-import { ReportActionsService, IFavoriteState } from '../../../services/ReportActionsService/ReportActionsService';
+import { ReportActionsService, IFavoriteState,  } from '../../../services/ReportActionsService/ReportActionsService';
 
 export interface IResultTileState {
   isFavorite: boolean;
@@ -41,44 +43,19 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
   private selectedStyle = ` ${styles.linkItem} ${styles.itemSelected}`;
   private unselectedStyle = ` ${styles.linkItem} ${styles.itemUnselected}`;
 
-  // <ActionButton data-automation-id="HeartFill" iconProps={{ iconName: 'HeartFill' }} allowDisabledFocus={true} title="Remove Report" onClick={(e) => this.props.onRemove(this.props.reportItem)} >Favorite</ActionButton>
-  // <ActionButton data-automation-id="Share" iconProps={{ iconName: 'Share' }} allowDisabledFocus={true} title="Share Report" onClick={(e) => this.props.onShare(this.props.reportItem)} >Share</ActionButton>
 
-  private isFavoriteIconElement: JSX.Element = (
-    <ActionButton 
-      className={this.selectedStyle} 
-      data-automation-id="HeartFill" 
-      iconProps={{ iconName: 'HeartFill' }} 
-      allowDisabledFocus={true} 
-      title="Remove report from favorite list" 
-      onClick={this.unfavorite}>
-        Favorite
-    </ActionButton>
-  );
 
-  private isNotFavoriteIconElement: JSX.Element = (
-    <ActionButton 
-      className={this.unselectedStyle} 
-      data-automation-id="HeartFill" 
-      iconProps={{ iconName: 'HeartFill' }} 
-      allowDisabledFocus={true} 
-      title="Add report to favorite list" 
-      onClick={this.showFavoriteDialog}>
-        Favorite
-    </ActionButton>
-  );
-
-  private shareIconElement: JSX.Element = (
-    <ActionButton 
-      className={this.selectedStyle} 
-      data-automation-id="Share" 
-      iconProps={{ iconName: 'Share' }} 
-      allowDisabledFocus={true} 
-      title="Share Report" 
-      onClick={this.shareReport}>
-        Share
-    </ActionButton>
-  );
+//   private shareIconElement: JSX.Element = (
+//     <ActionButton 
+//       className={this.selectedStyle} 
+//       data-automation-id="Share" 
+//       iconProps={{ iconName: 'Share' }} 
+//       allowDisabledFocus={true} 
+//       title="Share Report" 
+//       onClick={this.shareReport}>
+//         Share
+//     </ActionButton>
+//   );
 
   private isLikedIconElement: JSX.Element = (
     <span onClick={this.removeLike}>
@@ -223,12 +200,18 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
             <div className={resultTileStyles['Tile-Header-Favorite-Icon']}>
               <span>
                 { this.state.busyFavoriting && this.busyElement }
-                { !this.state.busyFavoriting && this.state.isFavorite && this.isFavoriteIconElement }
-                { !this.state.busyFavoriting && !this.state.isFavorite && this.isNotFavoriteIconElement }
+                { 
+                  !this.state.busyFavoriting && this.state.isFavorite && 
+                     <IsFavoriteIconElement unfavorite={this.unfavorite} /> 
+                }
+                { 
+                   !this.state.busyFavoriting && !this.state.isFavorite && 
+                     <IsNotFavoriteIconElement showFavoriteDialog={this.showFavoriteDialog} /> 
+                }
               </span>
             </div>
             <div className={resultTileStyles['Tile-Header-Share-Icon']}>
-              { this.shareIconElement }
+                   <ShareIconElement shareReport={this.shareReport} />
             </div>
             <div className={resultTileStyles['Tile-Header-Like-Icon']}>
               { hideLike && 

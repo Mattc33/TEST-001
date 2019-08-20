@@ -42,12 +42,22 @@ $Report-Favorite-Container-Width: 350px;
       display: flex;
       flex-direction: column;
 
-      .Report-Favorite-Item-Title {
+      .Report-Favorite-Item-Header {
+         display: flex;
+         flex-direction: column;
          width: 100%;
-         text-decoration: underline;
-         font-size: 1.2rem;
-         font-weight: 400;
          margin-bottom: 10px;
+
+         .Report-Favorite-Item-Title {
+            text-decoration: underline;
+            font-size: 1.2rem;
+            font-weight: 400;
+         }
+
+         .Report-Favorite-Item-Last-Updated {
+            color: #808080;
+            font-size: .7rem;
+         }
       }
 
       .Report-Favorite-Content {
@@ -60,24 +70,19 @@ $Report-Favorite-Container-Width: 350px;
             img {
                min-width: $Report-Favorite-Container-Width / 3;
                max-width: ($Report-Favorite-Container-Width / 3) + 10px;
+               min-height: 100px;
             }
          }
 
          .Report-Favorite-Item-Right-Container {
             margin-left: 10px;
 
-            .Report-Favorite-Item-Last-Updated {
-               color: #808080;
-               font-size: .7rem;
-               margin-bottom: 10px;
-            }
-
             .Report-Favorite-Item-Description {
                font-size: .8rem;
             }
 
             .Report-Favorite-Item-Interactables {
-
+               
             }
          }
       }

@@ -92,21 +92,24 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
                (!this.state.isReportsLoaded) // Handling loading of reports
                   ? <Spinner size={SpinnerSize.large} label="Wait, Pulling Reports..." ariaLive="assertive" />
                   : myFavReportItemsinState.map((eaFavReport: IReportFavoriteItem): JSX.Element => {
+
                      console.log(eaFavReport);
-                     const myFavReportItemTitle: string = truncate(eaFavReport.Title, {'length': 45, 'separator': ' '});
+                     const myFavReportItemTitle: string = truncate(eaFavReport.Title, {'length': 30, 'separator': ' '});
+
                      return (
                         <main className={styles['Report-Favorite-Item']}>
-                           <section className={styles['Report-Favorite-Item-Title']}>
-                              {myFavReportItemTitle}
+                           <section className={styles['Report-Favorite-Item-Header']}>
+                              <div className={styles['Report-Favorite-Item-Title']}>{myFavReportItemTitle}</div>
+                              <div className={styles['Report-Favorite-Item-Last-Updated']}>
+                                 Uploaded {'x'} hours ago
+                              </div>
                            </section>
                            <section className={styles['Report-Favorite-Content']}>
                               <div className={styles['Report-Favorite-Item-Image']}>
                                  <img src={eaFavReport.SVPVisualizationImage} alt="VSP Visualization Image"/>
                               </div>
                               <div className={styles['Report-Favorite-Item-Right-Container']}>
-                                 <div className={styles['Report-Favorite-Item-Last-Updated']}>
-                                    Uploaded {'x'} hours ago 
-                                 </div>
+
                                  <div className={styles['Report-Favorite-Item-Description']}>
                                     {eaFavReport.SVPVisualizationDescription}
                                  </div>

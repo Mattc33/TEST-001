@@ -4,7 +4,15 @@ import styles from '../SharedActionBtn.module.scss';
 // Third Party
 import { ActionButton } from 'office-ui-fabric-react';
 
-export const IsFavoriteIconElement = (props): JSX.Element => (
+interface IIsFavoriteIconElement {
+   unfavorite: () => void;
+}
+
+interface IIsNotFavoriteIconElement {
+   showFavoriteDialog: () => void;
+}
+
+export const IsFavoriteIconElement = (props: IIsFavoriteIconElement): JSX.Element => (
    <ActionButton
       className={styles.ItemSelected}
       data-automation-id="HeartFill"
@@ -15,9 +23,9 @@ export const IsFavoriteIconElement = (props): JSX.Element => (
    >
       Favorite
    </ActionButton>
-)
+);
 
-export const IsNotFavoriteIconElement = (props): JSX.Element => (
+export const IsNotFavoriteIconElement = (props: IIsNotFavoriteIconElement): JSX.Element => (
    <ActionButton
       className={styles.ItemUnselected}
       data-automation-id="HeartFill"
@@ -27,7 +35,7 @@ export const IsNotFavoriteIconElement = (props): JSX.Element => (
       onClick={props.showFavoriteDialog}>
          Favorite
     </ActionButton>
-)
+);
 
 
 
