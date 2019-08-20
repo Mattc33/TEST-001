@@ -4,16 +4,17 @@ import resultTileStyles from './ResultTile.module.scss';
 
 // Third Party
 import * as moment from 'moment';
-import { TooltipHost, getId, Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize, ActionButton } from 'office-ui-fabric-react';
+import { getId, Dialog, DialogFooter, PrimaryButton, DefaultButton, DialogType, autobind, TextField, Spinner, SpinnerSize } from 'office-ui-fabric-react';
 import { Logger, LogLevel } from '@pnp/logging';
 import { truncate } from '@microsoft/sp-lodash-subset';
-import { IsFavoriteIconElement, IsNotFavoriteIconElement, IsLikedIconElement, IsNotLikedIconElement, ShareIconElement } from '../../../webparts/controls/InteractableBtnDeck/InteractableBtnDeck';
 
+// Components
+import { IsFavoriteIconElement, IsNotFavoriteIconElement, IsLikedIconElement, IsNotLikedIconElement, ShareIconElement } from '../../../webparts/controls/InteractableBtnDeck/InteractableBtnDeck.index';
 
 // Interface
 import IResultTileProps from './IResultTileProps';
 import { ISearchResult } from '../../../models/ISearchResult';
-import { ReportActionsService, IFavoriteState,  } from '../../../services/ReportActionsService/ReportActionsService';
+import { ReportActionsService, IFavoriteState } from '../../../services/ReportActionsService/ReportActionsService';
 
 export interface IResultTileState {
   isFavorite: boolean;
@@ -36,40 +37,9 @@ interface IMetaDataTags extends Array<IMetaDataTag>{}
 
 export default class ResultTile extends React.Component<IResultTileProps, IResultTileState> {
   private actionsService: ReportActionsService;
-  private busyElement: JSX.Element = <Spinner size={SpinnerSize.small} />; // <i className="ms-Spinner-circle ms-Spinner--xSmall circle-95"></i>;
+  private busyElement: JSX.Element = <Spinner size={SpinnerSize.small} />;
   private descTooltipId: string;
   private titleTooltipId: string;
-
-  private selectedStyle = ` ${styles.linkItem} ${styles.itemSelected}`;
-  private unselectedStyle = ` ${styles.linkItem} ${styles.itemUnselected}`;
-
-
-
-//   private shareIconElement: JSX.Element = (
-//     <ActionButton 
-//       className={this.selectedStyle} 
-//       data-automation-id="Share" 
-//       iconProps={{ iconName: 'Share' }} 
-//       allowDisabledFocus={true} 
-//       title="Share Report" 
-//       onClick={this.shareReport}>
-//         Share
-//     </ActionButton>
-//   );
-
-  private isLikedIconElement: JSX.Element = (
-    <span onClick={this.removeLike}>
-      <i className={"ms-Icon ms-Icon--LikeSolid" + this.selectedStyle} aria-hidden="true"></i>&nbsp;
-      <span className={styles.itemSelected}>Like</span>
-    </span>
-  );
-
-  private isNotLikedIconElement: JSX.Element = (
-    <span onClick={this.addLike}>
-      <i className={"ms-Icon ms-Icon--Like" + this.unselectedStyle} aria-hidden="true"></i>&nbsp;
-      <span className={styles.itemUnselected}>Like</span>
-    </span>
-  );
 
   constructor(props: IResultTileProps) {
     super(props);
@@ -217,8 +187,12 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
               { hideLike && 
                 <span>
                   { this.state.busyLiking && this.busyElement }
-                  { !this.state.busyLiking && this.state.isLiked && this.isLikedIconElement }
-                  { !this.state.busyLiking && !this.state.isLiked && this.isNotLikedIconElement }
+                  { !this.state.busyLiking && this.state.isLiked && 
+                         <IsLikedIconElement removeLike={this.removeLike} />
+                  }
+                  { !this.state.busyLiking && !this.state.isLiked && 
+                         <IsNotLikedIconElement addLike={this.addLike} />
+                  }
                 </span>
               }
             </div>

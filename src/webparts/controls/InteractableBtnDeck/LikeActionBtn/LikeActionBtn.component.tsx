@@ -1,16 +1,27 @@
 import * as React from 'react';
 import styles from '../SharedActionBtn.module.scss';
 
-export const IsLikedIconElement = (): JSX.Element => (
-   <span onClick={this.removeLike}>
-      <i className={"ms-Icon ms-Icon--LikeSolid" + styles.ItemSelected} aria-hidden="true"></i>&nbsp;
+// Third Party
+import { Icon } from 'office-ui-fabric-react';
+
+interface IIsLikedIconElement {
+   removeLike: () => void;
+}
+
+interface IIsNotLikedIconElement {
+   addLike: () => void;
+}
+
+export const IsLikedIconElement = (props: IIsLikedIconElement): JSX.Element => (
+   <span onClick={props.removeLike}>
+      <Icon iconName='LikeSolid' aria-hidden='true' />&nbsp;
       <span className={styles.ItemSelected}>Like</span>
    </span>
 );
 
-export const IsNotLikedIconElement = (): JSX.Element => (
-   <span onClick={this.addLike}>
-      <i className={"ms-Icon ms-Icon--Like" + styles.ItemUnselected} aria-hidden="true"></i>&nbsp;
+export const IsNotLikedIconElement = (props: IIsNotLikedIconElement): JSX.Element => (
+   <span onClick={props.addLike}>
+      <Icon iconName='Like' aria-hidden='true' />&nbsp;
       <span className={styles.ItemUnselected}>Like</span>
    </span>
 );
