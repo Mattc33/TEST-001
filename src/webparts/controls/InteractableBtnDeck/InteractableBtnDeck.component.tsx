@@ -12,6 +12,7 @@ import { ReportActionsService, IFavoriteState } from '../../../services/ReportAc
 
 // Interfaces
 import { IInteractableBtnDeckProps, IInteractableBtnDeckState } from './InteractableBtnDeck.interface';
+import { ISearchResult } from '../../../models/ISearchResult';
 
 export default class InteractableBtnDeck extends React.Component<IInteractableBtnDeckProps, IInteractableBtnDeckState> {
 
@@ -75,7 +76,54 @@ export default class InteractableBtnDeck extends React.Component<IInteractableBt
       }
    }
 
-   
+   private showFavoriteDialog = () => {
+      this.setState({
+         favoriteDialogHidden: false,
+         favoriteDescription: this.props.result.SVPVisualizationDescription,
+         favoriteTitle: this.props.result.Title
+      });
+   }
+
+   private shareReport = async () => {
+      const result: ISearchResult = this.props.result;
+      const reportURL = `${this.props.result.SPWebUrl}/SitePages/ViewReport.aspx?reportId=${result.ListItemId}`;
+
+      const personName = this.props.currentUser.Title;
+      const subject = `${personName} shared a report: ${result.Title}`;
+      window.location.href = `mailto:?subject=${subject}&body=%0d%0a%0d%0a${reportURL}%0d%0a%0d%0a${result.SVPVisualizationDescription}`;
+   }
+
+   private removeLike = async () => {
+      this.setState({ busyLiking: true });
+      let itemId: number = parseInt(this.props.result.ListItemId);
+      const success: boolean = await this.actionsService.RemoveLike(
+         this.props.result.SPWebUrl,
+         itemId,
+         this.props.currentUser.Id
+      );
+
+      const state = (success)
+         ? { ...this.state, isLiked: false, busyLiking: false }
+         : { ...this.state, busyLiking: false };
+
+      this.setState(state);
+   }
+
+   private addLike = async () => {
+      this.setState({ busyLiking: true });
+      const itemId: number = parseInt(this.props.result.ListItemId);
+      const success: boolean = await this.actionsService.AddLike(
+         this.props.result.SPWebUrl,
+         itemId,
+         this.props.currentUser.Id
+      );
+
+      const state = (success)
+         ? { ...this.state, isLiked: true, busyLiking: false }
+         : { ...this.state, busyLiking: false };
+
+      this.setState(state);
+   }
 
 
 }

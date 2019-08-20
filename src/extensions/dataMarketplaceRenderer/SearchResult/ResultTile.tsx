@@ -73,6 +73,8 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
       favoriteId: favorite.favoriteId,
       isLiked: isLiked
     });
+
+    console.log('log all props <--', this.props);
   }
 
   @autobind
