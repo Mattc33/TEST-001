@@ -7,6 +7,7 @@ export interface IReportMyFavProps {
    controlHeaderMessage: string;
    siteUrl: string;
    loggedInUserName: string;
+   loggedInUserId:number;
    viewName:string;
    myFavReportService: any;
    reportActionService:any;
