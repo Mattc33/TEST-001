@@ -238,19 +238,19 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
    }
 
    private addLike = async (Id: string) => {
-      // this.setState({ busyLiking: true });
-      // const itemId: number = parseInt(Id);
-      // const success: boolean = await this.actionsService.AddLike(
-      //    'https://bigapplesharepoint.sharepoint.com/sites/OneViewDev',
-      //    itemId,
-      //    this.props.currentUser.Id
-      // );
+      this.setState({ busyLiking: true });
+      const itemId: number = parseInt(Id);
+      const success: boolean = await this.actionsService.AddLike(
+         'https://bigapplesharepoint.sharepoint.com/sites/OneViewDev',
+         itemId,
+         this.props.currentUser.Id
+      );
 
-      // const state = (success)
-      //    ? { ...this.state, isLiked: true, busyLiking: false }
-      //    : { ...this.state, busyLiking: false };
+      const state = (success)
+         ? { ...this.state, isLiked: true, busyLiking: false }
+         : { ...this.state, busyLiking: false };
 
-      // this.setState(state);
+      this.setState(state);
    }
 
    private removeLike = async (Id: string) => {

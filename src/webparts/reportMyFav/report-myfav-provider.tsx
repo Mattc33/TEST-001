@@ -57,7 +57,7 @@ export class ReportMyFavProvider extends React.Component<IReportMyFavProviderPro
             <ReportMyFavList
                 {...this.props}
                 controlHeaderMessage = {this.props.headerMessage}
-                siteUrl = {this._siteUrl}
+                siteUrl = {this._siteUrl} // look at this
                 loggedInUserName = {this.props.context.pageContext.user.displayName}
                 viewName = {this.props.viewNameLabel}
                 myFavReportService = {this._IFavReportService}
