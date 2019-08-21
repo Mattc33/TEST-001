@@ -10,6 +10,7 @@ import { truncate } from '@microsoft/sp-lodash-subset';
 
 // Components
 import { IsFavoriteIconElement, IsNotFavoriteIconElement, IsLikedIconElement, IsNotLikedIconElement, ShareIconElement } from '../../../webparts/controls/InteractableBtnDeck/InteractableBtnDeck.index';
+// import InteractableBtnDeck from '../../../webparts/controls/InteractableBtnDeck/InteractableBtnDeck.component';
 
 // Interface
 import IResultTileProps from './IResultTileProps';
@@ -168,13 +169,18 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
               }
             </div>
           </div>
+             {/* 
+             Still some issues to work out for now comment out InteractableBtnDeck
+             <InteractableBtnDeck result={this.props.result} currentUser={this.props.currentUser} /> 
+            
+            */}
           <aside className={resultTileStyles['Tile-Header-Interactable-Icons-Container']}>
             <div className={resultTileStyles['Tile-Header-Favorite-Icon']}>
               <span>
                 { this.state.busyFavoriting && this.busyElement }
                 { 
                   !this.state.busyFavoriting && this.state.isFavorite && 
-                     <IsFavoriteIconElement unfavorite={this.unfavorite} /> 
+                     <IsFavoriteIconElement unfavorite={this.unfavorite} text={'Favorite'}/> 
                 }
                 { 
                    !this.state.busyFavoriting && !this.state.isFavorite && 
@@ -381,14 +387,9 @@ export default class ResultTile extends React.Component<IResultTileProps, IResul
     let itemId: number = parseInt(this.props.result.ListItemId);
     let successItem: any = {};
     try {
+       console.log(this.props.result.SPWebUrl, itemId);
       await this.actionsService.UnfavoriteReport(this.props.result.SPWebUrl, itemId);
-
       successItem = { isFavorite: false };
-
-      // this.setState({
-      //   isFavorite: false,
-      //   busyFavoriting: false
-      // });
     } catch (ex) {
       console.log(`Couldn't unfavorite item ${itemId}.`);
     }

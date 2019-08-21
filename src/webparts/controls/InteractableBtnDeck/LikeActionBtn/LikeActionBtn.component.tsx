@@ -5,11 +5,11 @@ import styles from '../SharedActionBtn.module.scss';
 import { Icon } from 'office-ui-fabric-react';
 
 interface IIsLikedIconElement {
-   removeLike: () => void;
+   removeLike: any;
 }
 
 interface IIsNotLikedIconElement {
-   addLike: () => void;
+   addLike: any;
 }
 
 export const IsLikedIconElement = (props: IIsLikedIconElement): JSX.Element => (

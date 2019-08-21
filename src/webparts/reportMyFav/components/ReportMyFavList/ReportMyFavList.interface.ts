@@ -20,5 +20,45 @@ export interface IReportMyFavState {
 
    myFavReportItemsinState: IReportFavoriteItem[];
    isReportsLoaded: boolean;
+   busyFavoriting: boolean;
+   isFavorite: boolean;
+   busyLiking: boolean;
+   isLiked: boolean;
+
+}
+
+export interface IReportMyFavPageProps {
+
+   props: any;
+   handleClickView: any;
+   handleRemoveFavorite: any;
+   handleClickShare: any;
+   removeLike: any;
+   addLike: any;
+
+}
+
+export interface IReportMyFavPageState {
+
+   myFavReportItemsinState: IReportFavoriteItem[];
+   isReportsLoaded: boolean;
+   busyFavoriting: boolean;
+   isFavorite: boolean;
+   busyLiking: boolean;
+   isLiked: boolean;
+
+}
+
+export interface IReportMyFavHomeProps {
+
+   props: any;
+
+}
+
+export interface IReportMyFavHomeState {
+
+   myFavReportItemsinState: IReportFavoriteItem[];
+   isShowAll: boolean;
+   isReportsLoaded: boolean;
 
 }

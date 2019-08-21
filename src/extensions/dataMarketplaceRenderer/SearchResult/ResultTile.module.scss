@@ -53,7 +53,7 @@
 
     .Tile-Header-Interactable-Icons-Container {
       margin-left: auto;
-      display: flex;
+      display: flex !important;
 
       .Tile-Header-Icon {
         font-size: .9rem;

@@ -1,6 +1,7 @@
 .Tile-Header-Interactable-Icons-Container {
    margin-left: auto;
    display: flex;
+   flex-direction: row;
 
    .Tile-Header-Icon {
       font-size: .9rem;

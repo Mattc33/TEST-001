@@ -2,7 +2,8 @@ import * as React from 'react';
 import styles from './SharedActionBtn.module.scss';
 
 // Third Party
-import { Spinner, SpinnerSize, autobind } from 'office-ui-fabric-react';
+import { Spinner, SpinnerSize, Dialog, DialogFooter, DialogType, PrimaryButton, TextField, DefaultButton } from 'office-ui-fabric-react';
+import { Logger, LogLevel } from '@pnp/logging';
 
 // Components
 import { IsFavoriteIconElement, IsNotFavoriteIconElement, IsLikedIconElement, IsNotLikedIconElement, ShareIconElement } from './InteractableBtnDeck.index';
@@ -23,41 +24,64 @@ export default class InteractableBtnDeck extends React.Component<IInteractableBt
       busyFavoriting: false,
       busyLiking: false,
       isFavorite: false,
-      isLiked: false
-   }
+      isLiked: false,
+      favoriteDialogHidden: false,
+      favoriteDescription: '',
+      favoriteTitle: ''
+   };
 
    public render = () => {
       return (
-         <aside className={styles['Tile-Header-Interactable-Icons-Container']}>
-            <div className={styles['Tile-Header-Favorite-Icon']}>
-               <span>
-                  {this.state.busyFavoriting && this.busyElement}
-                  {
-                     !this.state.busyFavoriting && this.state.isFavorite &&
-                     <IsFavoriteIconElement unfavorite={this.unfavorite} />
-                  }
-                  {
-                     !this.state.busyFavoriting && !this.state.isFavorite &&
-                     <IsNotFavoriteIconElement showFavoriteDialog={this.showFavoriteDialog} />
-                  }
-               </span>
-            </div>
-            <div className={styles['Tile-Header-Share-Icon']}>
-               <ShareIconElement shareReport={this.shareReport} />
-            </div>
-            <div className={styles['Tile-Header-Like-Icon']}>
-               <span>
-                  {this.state.busyLiking && this.busyElement}
-                  {!this.state.busyLiking && this.state.isLiked &&
-                     <IsLikedIconElement removeLike={this.removeLike} />
-                  }
-                  {!this.state.busyLiking && !this.state.isLiked &&
-                     <IsNotLikedIconElement addLike={this.addLike} />
-                  }
-               </span>
-            </div>
-         </aside>
-      )
+            <aside className={styles['Tile-Header-Interactable-Icons-Container']}>
+               <div className={styles['Tile-Header-Favorite-Icon']}>
+                  <span>
+                     {this.state.busyFavoriting && this.busyElement}
+                     {
+                        !this.state.busyFavoriting && this.state.isFavorite &&
+                        <IsFavoriteIconElement unfavorite={this.unfavorite} />
+                     }
+                     {
+                        !this.state.busyFavoriting && !this.state.isFavorite &&
+                        <IsNotFavoriteIconElement showFavoriteDialog={this.showFavoriteDialog} />
+                     }
+                  </span>
+               </div>
+               <div className={styles['Tile-Header-Share-Icon']}>
+                  <ShareIconElement shareReport={this.shareReport} />
+               </div>
+               <div className={styles['Tile-Header-Like-Icon']}>
+                  <span>
+                     {this.state.busyLiking && this.busyElement}
+                     {!this.state.busyLiking && this.state.isLiked &&
+                        <IsLikedIconElement removeLike={this.removeLike} />
+                     }
+                     {!this.state.busyLiking && !this.state.isLiked &&
+                        <IsNotLikedIconElement addLike={this.addLike} />
+                     }
+                  </span>
+               </div>
+               {this.renderFavoriteDialog()}
+            </aside>
+      );
+   }
+
+   private favorite = async () => {
+      this.setState({ busyFavoriting: true });
+      let itemId: number = parseInt(this.props.result.ListItemId);
+      let favorite: IFavoriteState = await this.actionsService.FavoriteReport(
+         this.props.result.SPWebUrl,
+         itemId,
+         this.state.favoriteDescription || "",
+         undefined,
+         undefined,
+         undefined,
+         this.state.favoriteTitle || undefined);
+
+      const state = (favorite && favorite.isFavorite)
+         ? { ...this.state, isFavorite: true, favoriteId: favorite.favoriteId, busyFavoriting: false }
+         : { ...this.state, busyFavoriting: false };
+
+      this.setState(state);
    }
 
    private unfavorite = async () => {
@@ -123,6 +147,80 @@ export default class InteractableBtnDeck extends React.Component<IInteractableBt
          : { ...this.state, busyLiking: false };
 
       this.setState(state);
+   }
+
+   private renderFavoriteDialog = async () => {
+      const subText = (!this.state.busyFavoriting)
+         ? "Enter a custom report title and description."
+         : "";
+
+      return (
+         <Dialog
+            hidden={this.state.favoriteDialogHidden}
+            onDismiss={this.favoriteDialogCanceled}
+            dialogContentProps={{
+               type: DialogType.largeHeader,
+               title: 'Save Favorite',
+               subText: subText //'Enter a custom description. Only you will see this description. Others will see the default description for the visualization.'
+            }}
+            modalProps={{
+               isBlocking: false,
+               containerClassName: 'ms-dialogMainOverride'
+            }}>
+
+            {!this.state.busyFavoriting &&
+               <React.Fragment>
+                  <div><strong>Title:</strong></div>
+                  <TextField placeholder="Enter custom title..."
+                     ariaLabel="Please enter text here" multiline rows={3}
+                     value={this.state.favoriteTitle} onChanged={this.onFavoriteTitleChanged} />
+
+                  <br />
+
+                  <div><strong>Description:</strong></div>
+                  <TextField placeholder="Enter custom description..."
+                     ariaLabel="Please enter text here" multiline rows={4}
+                     value={this.state.favoriteDescription} onChanged={this.onFavoriteDescriptionChanged} />
+               </React.Fragment>
+            }
+
+            {this.state.busyFavoriting &&
+               <Spinner size={SpinnerSize.large} label="Saving report in favorite list, wait..." ariaLive="assertive" />
+            }
+
+            <DialogFooter>
+               <PrimaryButton onClick={this.favoriteDialogSaved} text="Save" />
+               <DefaultButton onClick={this.favoriteDialogCanceled} text="Cancel" />
+            </DialogFooter>
+         </Dialog>
+      );
+   }
+
+   private favoriteDialogCanceled = async () => {
+      Logger.write("Closed the favorite dialog.", LogLevel.Verbose);
+      this.setState({
+         favoriteDialogHidden: true
+      });
+   }
+
+   private onFavoriteTitleChanged = (newValue: string) => {
+      this.setState({
+         favoriteTitle: newValue || ""
+      });
+   }
+
+   private onFavoriteDescriptionChanged = (newValue: string) => {
+      this.setState({
+         favoriteDescription: newValue || ""
+      });
+   }
+
+   private favoriteDialogSaved = async () => {
+      Logger.write(`Saved ${this.state.favoriteDescription} from the favorite dialog.`, LogLevel.Verbose);
+      await this.favorite();
+      this.setState({
+         favoriteDialogHidden: true
+      });
    }
 
 

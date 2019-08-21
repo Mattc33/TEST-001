@@ -5,7 +5,7 @@ import styles from '../SharedActionBtn.module.scss';
 import { ActionButton } from 'office-ui-fabric-react';
 
 interface IShareIconElement {
-   shareReport: () => void;
+   shareReport: any;
 }
 
 export const ShareIconElement = (props: IShareIconElement): JSX.Element => (

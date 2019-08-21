@@ -10,9 +10,29 @@
    }
 }
 
+.SharedStyleSmall {
+   cursor: pointer;
+}
+
+.ItemSelectedSmall {
+   @extend .SharedStyleSmall;
+   & * {
+      color: #398bcc;
+      font-size: .8rem;
+   }
+}
+
 .ItemUnselected {
+   @extend .SharedStyleSmall;
+   & * {
+      color: #909090;
+   }
+}
+
+.ItemUnselectedSmall {
    @extend .SharedStyle;
    & * {
       color: #909090;
+      font-size: .8rem;
    }
 }

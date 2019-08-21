@@ -52,6 +52,11 @@ $Report-Favorite-Container-Width: 350px;
             text-decoration: underline;
             font-size: 1.2rem;
             font-weight: 400;
+            cursor: pointer;
+
+            &:hover {
+               color:#c8c8c8;
+            }
          }
 
          .Report-Favorite-Item-Last-Updated {
@@ -63,33 +68,71 @@ $Report-Favorite-Container-Width: 350px;
       .Report-Favorite-Content {
          display: flex;
          flex-direction: row;
+         height: 100%;
 
          .Report-Favorite-Item-Image {
             align-self: center;
+            height: 100%;
             
             img {
                min-width: $Report-Favorite-Container-Width / 3;
                max-width: ($Report-Favorite-Container-Width / 3) + 10px;
                min-height: 100px;
+               cursor: pointer;
             }
          }
 
          .Report-Favorite-Item-Right-Container {
             margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: 100%;
 
             .Report-Favorite-Item-Description {
                font-size: .8rem;
             }
 
-            .Report-Favorite-Item-Interactables {
-               
+            .Tile-Interactable-Icons-Container {
+               display: flex;
+               flex-direction: row;
+               flex: 1;
+               align-items: flex-end;
+
+               .Tile-Icon {
+                  font-size: .8rem;
+                  align-self: flex-end;
+                  padding-left: 1px;
+                  padding: 0;
+                  margin: 0;
+                  
+                  &:hover {
+                     cursor: pointer;
+                  }
+               }
+
+               .Tile-Favorite-Icon {
+                  @extend .Tile-Icon;
+                  margin-bottom: -10px;
+               }
+
+               .Tile-Share-Icon {
+                  @extend .Tile-Icon;
+                  margin-bottom: -10px;
+               }
+
+               .Tile-Like-Icon {
+                  @extend .Tile-Icon;
+                  margin-left: 8px;
+               }
             }
          }
       }
-
-
    }
 }
+
+
+  
 
 
 // .homePage {
