@@ -195,8 +195,10 @@ export class ReportMyFavHome extends React.Component<IReportMyFavHomeProps, IRep
    private renderQuickFavList = (): any => {
       let myFavReportItems = [...this.state.myFavReportItemsinState];
 
+      console.log(this.state.isShowAll); // this needs to be false first
+
       if (this.state.isShowAll === false && this.state.myFavReportItemsinState.length > 0) {
-         myFavReportItems.slice(0 ,3);
+         myFavReportItems = myFavReportItems.slice(0 ,3);
       } 
       if (this.state.isShowAll === true && this.state.myFavReportItemsinState.length > 0) {
          myFavReportItems = myFavReportItems;
