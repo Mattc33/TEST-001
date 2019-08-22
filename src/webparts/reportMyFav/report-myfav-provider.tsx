@@ -14,71 +14,77 @@ import { SiteUserProps } from '@pnp/sp/src/siteusers';
 import { sp } from "@pnp/sp";
 
 export interface IReportMyFavProviderProps {
-    context: WebPartContext;
-    headerMessage:string;
-    clientLabel:string;
-    viewNameLabel: string;
-    favReportCount:number;
-    visualizationTitle:string;
-    visualizationImage:string;
+   context: WebPartContext;
+   headerMessage:string;
+   clientLabel:string;
+   viewNameLabel: string;
+   favReportCount:number;
+   visualizationTitle:string;
+   visualizationImage:string;
    SVPVisualizationImage: string;
 }
 
 export interface IReportMyFavProviderState {
-    myFavReportItemsinState: IReportFavoriteItem[];
+   myFavReportItemsinState: IReportFavoriteItem[];
+   _currentUserId: number;
 }
 
 //export class ReportRotatorProvider extends React.Component<IReportRotatorProviderProps, IReportRotatorProviderState> {
 
 export class ReportMyFavProvider extends React.Component<IReportMyFavProviderProps,IReportMyFavProviderState> {
-    private _IFavReportService: IReportFavoriteService;
-    private _ReportActionsService: any;
-    //private _IFavReportServiceNew: IReportFavoriteService;
-    private _siteUrl: string;
-    private _currentUser: SiteUserProps;
+   private _IFavReportService: IReportFavoriteService;
+   private _ReportActionsService: any;
+   //private _IFavReportServiceNew: IReportFavoriteService;
+   private _siteUrl: string;
 
-    constructor (props: IReportMyFavProviderProps) {
-        super(props);
-        this.state = { myFavReportItemsinState: []};
+   constructor (props: IReportMyFavProviderProps) {
+      super(props);
+      this.state = { 
+         myFavReportItemsinState: [],
+         _currentUserId: 0
+      };
 
-        //this._IFavReportService = new ReportServiceMock();
-        this._IFavReportService = new ReportFavoriteService(this.props.context);
-        this._ReportActionsService = new ReportActionsService();
-        
+      //this._IFavReportService = new ReportServiceMock();
+      this._IFavReportService = new ReportFavoriteService(this.props.context);
+      this._ReportActionsService = new ReportActionsService();
+   }
 
-    }
+   public async componentDidMount() {
+      await this._getCurrentUser();
+   }
 
+   private async _getCurrentUser(): Promise<void> {
+      const promise = new Promise((resolve, reject) => {
+         resolve(sp.web.currentUser.get<SiteUserProps>());
+      });
 
-    public async componentDidMount() {
-        await this._getCurrentUser();
-    }
+      const result = await promise;
 
-    private async _getCurrentUser(): Promise<void> {
-        this._currentUser = await sp.web.currentUser.get<SiteUserProps>();
-        return Promise.resolve();
-      }
+      this.setState({_currentUserId: result['Id']});
+   }
 
-    public render() : React.ReactElement<IReportMyFavProviderProps> {
+   public render() : React.ReactElement<IReportMyFavProviderProps> {
 
-        
-        this._siteUrl = this.props.context.pageContext.site.absoluteUrl;
+      this._siteUrl = this.props.context.pageContext.site.absoluteUrl;
 
-        return (
-            <ReportMyFavList
-                {...this.props}
-                controlHeaderMessage = {this.props.headerMessage}
-                siteUrl = {this._siteUrl} // look at this
-                loggedInUserName = {this.props.context.pageContext.user.displayName}
-                loggedInUserId = {this._currentUser.Id}
-                viewName = {this.props.viewNameLabel}
-                myFavReportService = {this._IFavReportService}
-                reportActionService ={this._ReportActionsService}
-                reportCount = {this.props.favReportCount}
-                visualizationTitle = {this.props.visualizationTitle}
-                visualizationImage = {this.props.visualizationImage}
+      return (
+         (this.state._currentUserId !== 0) 
+         ? <ReportMyFavList
+               {...this.props}
+               controlHeaderMessage = {this.props.headerMessage}
+               siteUrl = {this._siteUrl}
+               loggedInUserName = {this.props.context.pageContext.user.displayName}
+               loggedInUserId={this.state._currentUserId}
+               viewName = {this.props.viewNameLabel}
+               myFavReportService = {this._IFavReportService}
+               reportActionService ={this._ReportActionsService}
+               reportCount = {this.props.favReportCount}
+               visualizationTitle = {this.props.visualizationTitle}
+               visualizationImage = {this.props.visualizationImage}
             />
-        );
-    }
+         : null
+      );
+   }
 
 
 

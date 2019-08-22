@@ -13,15 +13,15 @@ interface IIsNotLikedIconElement {
 }
 
 export const IsLikedIconElement = (props: IIsLikedIconElement): JSX.Element => (
-   <span onClick={props.removeLike}>
+   <div onClick={props.removeLike} style={{cursor: 'pointer'}}>
       <Icon iconName='LikeSolid' aria-hidden='true' />&nbsp;
       <span className={styles.ItemSelected}>Like</span>
-   </span>
+   </div>
 );
 
 export const IsNotLikedIconElement = (props: IIsNotLikedIconElement): JSX.Element => (
-   <span onClick={props.addLike}>
+   <div onClick={props.addLike} style={{ cursor: 'pointer' }}>
       <Icon iconName='Like' aria-hidden='true' />&nbsp;
       <span className={styles.ItemUnselected}>Like</span>
-   </span>
+   </div>
 );

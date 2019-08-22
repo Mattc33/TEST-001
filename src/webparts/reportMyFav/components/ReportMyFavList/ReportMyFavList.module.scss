@@ -102,12 +102,12 @@ $Report-Favorite-Container-Width: 350px;
                .Tile-Icon {
                   font-size: .8rem;
                   align-self: flex-end;
-                  padding-left: 1px;
                   padding: 0;
                   margin: 0;
                   
                   &:hover {
                      cursor: pointer;
+                     color: #808080;
                   }
                }
 
@@ -118,12 +118,13 @@ $Report-Favorite-Container-Width: 350px;
 
                .Tile-Share-Icon {
                   @extend .Tile-Icon;
+                  margin-left: -3px;
                   margin-bottom: -10px;
                }
 
                .Tile-Like-Icon {
                   @extend .Tile-Icon;
-                  margin-left: 8px;
+                  margin-left: 4px;
                }
             }
          }
