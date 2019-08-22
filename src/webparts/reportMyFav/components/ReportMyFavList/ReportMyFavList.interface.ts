@@ -53,6 +53,9 @@ export interface IReportMyFavPageState {
 export interface IReportMyFavHomeProps {
 
    props: any;
+   handleClickView: any;
+   handleRemoveFavorite: any;
+   handleClickShare: any;
 
 }
 
@@ -61,5 +64,7 @@ export interface IReportMyFavHomeState {
    myFavReportItemsinState: IReportFavoriteItem[];
    isShowAll: boolean;
    isReportsLoaded: boolean;
+   busyFavoriting: boolean;
+   isFavorite: boolean;
 
 }

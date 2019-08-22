@@ -39,7 +39,6 @@ export class ReportMyFavPage extends React.Component<IReportMyFavPageProps, IRep
 
    public componentDidMount = (): void => {
       this.setFavoriteReportToState();
-      console.log(this.props);
    }
 
    private setFavoriteReportToState = (): void => { 
@@ -77,7 +76,7 @@ export class ReportMyFavPage extends React.Component<IReportMyFavPageProps, IRep
                : this.state.myFavReportItemsinState.map((eaFavReport: IReportFavoriteItem): JSX.Element => {
                   const myFavReportItemTitle: string = truncate(eaFavReport.Title, { 'length': 30, 'separator': ' ' });
                   const myFavReportItemDescription: string = truncate(eaFavReport.SVPVisualizationDescription, { 'length': 100, 'separator': ' ' });
-                  console.log(eaFavReport);
+                  
 
                   return (
                      <main className={styles['Report-Favorite-Item']}>
@@ -115,7 +114,7 @@ export class ReportMyFavPage extends React.Component<IReportMyFavPageProps, IRep
                                           <IsFavoriteIconElement
                                              unfavorite={() => this.handleRemoveFavorites(eaFavReport.Id, eaFavReport.SVPVisualizationLookupId)}
                                              size={'small'}
-                                             text={'Favorite'}
+                                             text={'Favorited'}
                                           />
                                        }
                                     </span>
@@ -158,15 +157,26 @@ export class ReportMyFavPage extends React.Component<IReportMyFavPageProps, IRep
 */
 export class ReportMyFavHome extends React.Component<IReportMyFavHomeProps, IReportMyFavHomeState> {
 
+   private busyElement: JSX.Element = <Spinner size={SpinnerSize.small} />;
+
    public state = {
       myFavReportItemsinState: [],
       isShowAll: false,
-      isReportsLoaded: false
+      isReportsLoaded: false,
+      busyFavoriting: false,
+      isFavorite: true
    };
 
    public componentDidMount = (): void => {
       this.setFavoriteReportToState();
       console.log(this.props);
+   }
+
+   private handleRemoveFavorites = (Id: string, SVPVisualizationLookupId: number) => {
+      const newFavResults = this.state.myFavReportItemsinState.filter(eaResult => eaResult.Id !== Id);
+      this.setState({ myFavReportItemsinState: newFavResults });
+
+      this.props.handleRemoveFavorite(SVPVisualizationLookupId);
    }
 
    private setFavoriteReportToState = (): void => {
@@ -178,17 +188,84 @@ export class ReportMyFavHome extends React.Component<IReportMyFavHomeProps, IRep
          });
    }
 
+   private toggleViewAll = (): void => {
+      this.setState({isShowAll: !this.state.isShowAll});
+   }
+
+   private renderQuickFavList = (): any => {
+      let myFavReportItems = [...this.state.myFavReportItemsinState];
+
+      if (this.state.isShowAll === false && this.state.myFavReportItemsinState.length > 0) {
+         myFavReportItems.slice(0 ,3);
+      } 
+      if (this.state.isShowAll === true && this.state.myFavReportItemsinState.length > 0) {
+         myFavReportItems = myFavReportItems;
+      }
+
+      console.log(myFavReportItems);
+
+      // map and return arr of jsx elements
+      const myFavReportItemsList = myFavReportItems.map((eaFavReport: IReportFavoriteItem): JSX.Element => {
+         return (
+            <main className={styles['Report-Favorite-Home-Tile-Container']}>
+               <section className={styles['Report-Favorite-Home-Tile-Image']}>
+                  <img src="" alt=""/>
+               </section>
+               <section className={styles['Report-Favorite-Home-Tile-Content']}>
+                  <div className={styles['Report-Favorite-Home-Tile-Title']}>
+                     {eaFavReport.Title}
+                  </div>
+                  <div className={styles['Report-Favorite-Home-Tile-Updated']}>
+                     Uploaded {'x'} hours ago
+                  </div>
+                  <div className={styles['Report-Favorite-Home-Tile-Interactables']}>
+                     <aside className={styles['Tile-Interactable-Icons-Container']}>
+                        <div className={styles['Tile-Favorite-Icon']}>
+                           <span>
+                              {this.state.busyFavoriting && this.busyElement}
+                              {
+                                 !this.state.busyFavoriting && this.state.isFavorite &&
+                                 <IsFavoriteIconElement
+                                    unfavorite={() => this.handleRemoveFavorites(eaFavReport.Id, eaFavReport.SVPVisualizationLookupId)}
+                                    size={'small'}
+                                    text={'Favorited'}
+                                 />
+                              }
+                           </span>
+                        </div>
+                        <div className={styles['Tile-Share-Icon']}>
+                           <ShareIconElement shareReport={this.props.handleClickShare} />
+                        </div>
+                     </aside>
+                  </div>
+               </section>
+            </main>
+         );
+      });
+
+      return myFavReportItemsList;
+   }
+
    public render = () => (
       <main className={styles['Report-Favorite-Home-Container']}>
          <header className={styles['Report-Favorite-Home-Header']}>
             <div className={styles['Report-Favorite-Home-Title']}>
                {'Quick Favorites'}
             </div>
-            <div className={styles['Report-Favorite-Home-View-All']}>
-               {'view all'}
+            <div className={styles['Report-Favorite-Home-View-All']}
+               onClick={this.toggleViewAll}
+            >
+               {
+                  ( !this.state.isShowAll )
+                     ? 'view all'
+                     : 'collaspe'
+               }
             </div>
          </header>
          <section className={styles['Report-Favorite-Home-Content']}>
+            {
+               this.renderQuickFavList()
+            }
          </section>
       </main>
    )
@@ -289,7 +366,12 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
             />;
             break;
          case '':
-            loadThisView = <div>Hi</div>;
+            loadThisView = <ReportMyFavHome 
+               props={this.props}
+               handleClickView={this.handleClickView}
+               handleRemoveFavorite={(SVPVisualizationLookupId: number) => this.handleRemoveFavorite(SVPVisualizationLookupId)}
+               handleClickShare={this.handleClickShare}
+            />;
             break;
       }
 
@@ -298,6 +380,3 @@ export default class ReportMyFavList extends React.Component<IReportMyFavProps, 
 
    public render = (): JSX.Element => ( this.renderMyFavReports() );
 }
-
-
-

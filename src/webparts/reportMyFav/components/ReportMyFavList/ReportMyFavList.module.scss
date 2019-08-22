@@ -124,9 +124,65 @@ $Report-Favorite-Container-Width: 350px;
 
                .Tile-Like-Icon {
                   @extend .Tile-Icon;
-                  margin-left: 4px;
+                  margin-left: 8px;
                }
             }
+         }
+      }
+   }
+}
+
+.Report-Favorite-Home-Container {
+   display: flex;
+   flex-direction: column;
+   padding-top: 1em;
+   border: 1px solid #f6f6f6;
+   background-color: rgba(255, 255, 255, 1);
+   -webkit-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+   -moz-box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+   box-shadow: 5px 5px 5px -7px rgba(102,102,102,1);
+
+   .Report-Favorite-Home-Header {
+      display: flex;
+      margin: 0px 10px;
+      padding: 0px 10px 10px 10px;
+      border-bottom: 1px solid lightgray;
+      align-content: center;
+
+      justify-content: space-between;
+
+      .Report-Favorite-Home-Title {
+         font-size: 1.3rem;
+      }
+
+      .Report-Favorite-Home-View-All {
+         margin-top: 5px;
+         color: #398bcc;
+         text-decoration: underline;
+      }
+   }
+
+   .Report-Favorite-Home-Tile-Container {
+      display: flex;
+      flex-direction: column;
+      padding: 0px 10px;
+
+      .Report-Favorite-Home-Tile-Image {
+
+      }  
+      
+      .Report-Favorite-Home-Tile-Content {
+
+         .Report-Favorite-Home-Tile-Title {
+
+         }
+
+         .Report-Favorite-Home-Tile-Updated {
+
+         }
+
+         .Report-Favorite-Home-Tile-Interactables {
+
          }
       }
    }
