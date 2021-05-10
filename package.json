@@ -53,7 +53,7 @@
     "handlebars": "^4.0.12",
     "handlebars-helpers": "^0.8.4",
     "immutability-helper": "2.4.0",
-    "lodash": "4.17.11",
+    "lodash": "4.17.21",
     "normalizr": "^3.3.0",
     "office-ui-fabric-react": "6.127.0",
     "pdfobject": "^2.1.1",
