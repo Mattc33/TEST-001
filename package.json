@@ -75,7 +75,7 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
-    "swiper": "4.4.2",
+    "swiper": "6.5.1",
     "ts-dot-prop": "^1.4.0",
     "video.js": "^7.3.0",
     "why-did-you-update": "^1.0.6"
