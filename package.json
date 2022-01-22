@@ -105,7 +105,7 @@
     "gulp-token-replace": "^1.1.2",
     "gulp-util": "^3.0.8",
     "inquirer": "^6.2.1",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^3.1.1",
     "node-sp-auth": "^2.5.7",
     "phantomjs-prebuilt": "^2.1.16",
     "powerbi-report-component": "^1.1.3",
